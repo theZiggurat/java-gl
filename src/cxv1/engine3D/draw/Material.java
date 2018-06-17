@@ -10,12 +10,14 @@ public class Material {
     private Vector4f specularColor;
     private float reflectance;
     private Texture texture;
+    boolean isTextured;
 
     public Material(){
         this.ambientColor = DEFAULT_COLOR;
         this.diffuseColor = DEFAULT_COLOR;
         this.specularColor = DEFAULT_COLOR;
         this.texture = null;
+        isTextured = false;
         this.reflectance = 0;
     }
 
@@ -48,7 +50,7 @@ public class Material {
     public float getReflectance() { return reflectance; }
     public void setReflectance(float reflectance) { this.reflectance = reflectance; }
     public Texture getTexture() { return texture; }
-    public void setTexture(Texture texture) { this.texture = texture; }
-    public boolean isTextured(){return this.texture != null;}
+    public void setTexture(Texture texture) { this.texture = texture; isTextured = true; }
+    public boolean isTextured(){return isTextured;}
 
 }

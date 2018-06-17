@@ -1,9 +1,11 @@
+
 package cxv1.engine3D.entity;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import cxv1.engine3D.draw.Material;
+import cxv1.engine3D.draw.MaterialManager;
 import cxv1.engine3D.draw.Mesh;
 import cxv1.engine3D.draw.Texture;
 import cxv1.engine3D.util.Utils;
@@ -83,8 +85,8 @@ public class TextEntity extends FixedObjectEntity{
         float[] posArr = Utils.listToArray(positions);
         float[] textCoordsArr = Utils.listToArray(textCoords);
         int[] indicesArr = indices.stream().mapToInt(i -> i).toArray();
-        Mesh mesh = new Mesh("text", posArr, textCoordsArr, indicesArr, normals);
-        mesh.setMaterial(new Material(texture));
+        Mesh mesh = new Mesh("text", posArr, textCoordsArr, indicesArr, normals,
+                MaterialManager.generateDefaultMaterial(texture));
         return mesh;
     }
 
@@ -94,8 +96,8 @@ public class TextEntity extends FixedObjectEntity{
 
     public void setText(String text){
         this.text = text;
-        Texture texture = this.getMesh().getMaterial().getTexture();
-        this.getMesh().deleteBuffers();
+        Texture texture = this.getMesh().getMaterial(0).getTexture();
+        this.getMesh().cleanup();
         this.setMesh(buildText(texture, cols, rows));
     }
 

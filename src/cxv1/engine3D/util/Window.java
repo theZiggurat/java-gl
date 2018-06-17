@@ -57,7 +57,6 @@ public class Window {
                         (vidmode.height() - height)/2);
 
         glfwMakeContextCurrent(windowHandle);
-        System.out.print("Context: "+glfwGetCurrentContext());
 
         if(isVsync()){
             glfwSwapInterval(1);
@@ -65,7 +64,7 @@ public class Window {
 
         glfwShowWindow(windowHandle);
         GL.createCapabilities();
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0f, 0f, 0f, 0.0f);
 
         glEnable(GL_DEPTH_TEST);
 

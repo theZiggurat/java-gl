@@ -144,15 +144,16 @@ public class Renderer {
 
         sceneShader.setUniform("texture_sampler", 0);
         for(Entity e: entities){
-            Mesh mesh = e.getMesh();
+
+            // null checking on entity and mesh
+            if(e == null){continue;}
+            if(e.getMesh() == null){continue;}
 
             // model view matrix for this mesh
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(e, viewMatrix);
             sceneShader.setUniform("modelViewMatrix", modelViewMatrix);
 
-            // send color data to GPU
-            sceneShader.setUniform("material", mesh.getMaterial());
-            mesh.render();
+            e.getMesh().render(sceneShader);
         }
 
         sceneShader.unbind();
@@ -238,9 +239,10 @@ public class Renderer {
 
             Matrix4f projModelMatrix = transformation.getOrthoModelMatrix(entity, ortho);
             hudShader.setUniform("orthoMatrix", ortho);
-            hudShader.setUniform("color", entity.getMesh().getMaterial().getAmbientColor());
+            hudShader.setUniform("color", entity.getMesh().
+                    getMaterial(0).getAmbientColor());
 
-            mesh.render();
+            mesh.render(sceneShader);
         }
         hudShader.unbind();
     }

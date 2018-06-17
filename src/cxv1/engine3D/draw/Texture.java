@@ -13,7 +13,8 @@ public class Texture {
 
     public Texture(String fileName) throws Exception {
 
-        PNGDecoder decoder = new PNGDecoder(Texture.class.getResourceAsStream(fileName));
+        PNGDecoder decoder = new PNGDecoder(Texture.class.getResourceAsStream(
+                "/res/textures/"+fileName));
 
         this.width = decoder.getWidth();
         this.height = decoder.getHeight();

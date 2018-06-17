@@ -3,13 +3,12 @@ package game;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
-import static org.lwjgl.opengl.GL11.*;
 
 import cxv1.engine3D.GameLogic;
 import cxv1.engine3D.draw.Renderer;
 import cxv1.engine3D.draw.lighting.*;
 import cxv1.engine3D.entity.FixedObjectEntity;
-import cxv1.engine3D.util.OBJLoader;
+import cxv1.engine3D.util.loaders.OBJLoader;
 import cxv1.engine3D.util.Window;
 import cxv1.engine3D.draw.Camera;
 import cxv1.engine3D.draw.Material;
@@ -61,31 +60,18 @@ public class TutGameLogic implements GameLogic {
         try{renderer.init();}
         catch(Exception e){e.printStackTrace();}
 
-        cube = new FixedObjectEntity(OBJLoader.loadMesh("cube", "res/models/cube.obj"));
-        cube.getMesh().setMaterial(new Material(
-                new Texture("/res/textures/grassblock.png"), 1f));
-        cube.setPos(0, -2, -2);
-
-        bunny = new FixedObjectEntity(OBJLoader.loadMesh("bunny", "res/models/bunny.obj"));
-        bunny.setPos(-10, -2, -2);
-        bunny.getMesh().setMaterial(new Material(
-                new Vector4f(0f, 1f, .5f, 0f), 1f
-        ));
-
-
-        terrain = new FixedObjectEntity(OBJLoader.loadMesh("testObj", "res/models/haus_big.obj"));
-        terrain.getMesh().setMaterial(
-                new Material(new Vector4f(1f, 1f, 1f, 1f), 1f));
-        terrain.setPos(0,-4, 0);
-        terrain.setScale(.005f);
-
-        // initialize entities
-        entities = new Entity[]{cube, terrain, bunny};
+        Entity car = new FixedObjectEntity(OBJLoader.loadMesh("Lamborghini", "Avent.obj"));
+        car.setPos(10, 0, 20);
+        car.setScale(2);
+        Entity bus = new FixedObjectEntity(OBJLoader.loadMesh("Bus", "bus.obj"));
+        Entity face = new FixedObjectEntity(OBJLoader.loadMesh("face", "face.obj"));
+        bus.setPos(new Vector3f(0,0,10));
+        entities = new Entity[]{car, bus, face};
 
         // initialized light
         sceneLight = generateLights();
 
-        Hud = new HUD("144");
+        Hud = new HUD("Hello friendo how are you doing today you littlebitch son");
 
         // lock cursor inside window and hide
         glfwSetInputMode(window.getHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -103,7 +89,7 @@ public class TutGameLogic implements GameLogic {
         t++;
 
         //light.setPosition(new Vector3f((float) (10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005))));
-        cube.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
+        //cube.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
 
         // HANDLE PLAYER MOVEMENT
         camera.movePosition(cameraHandle.x * CAMERA_POS_STEP,
@@ -157,22 +143,25 @@ public class TutGameLogic implements GameLogic {
 
     public SceneLight generateLights(){
         SceneLight sceneLight = new SceneLight();
-        sceneLight.setAmbientLight(new Vector3f(0.3f, 0.3f, 0.3f));
+        sceneLight.setAmbientLight(new Vector3f(.5f, 0f, .5f));
 
         PointLight masterLight = new PointLight(new Vector3f(1,1,1), new Vector3f(1,1,1),
                 1.0f, new PointLight.Attenuation(0,0,1));
 
         sceneLight.setPointLights(new PointLight[]{
-                new PointLight(masterLight, new Vector3f(20,0,0)),
-                new PointLight(masterLight, new Vector3f(0,0,0)),
-                new PointLight(masterLight, new Vector3f(20,0,0)),
+                new PointLight(masterLight, new Vector3f(0,0.5f,0)),
+                new PointLight(masterLight, new Vector3f(0,3,0)),
+                new PointLight(masterLight, new Vector3f(0,10,5)),
                 new PointLight(masterLight, new Vector3f(20,0,0)),
                 new PointLight(masterLight, new Vector3f(20,0,0)),
         });
 
         sceneLight.setSpotLights(new SpotLight[]{});
 
-        sceneLight.setSun(new Sun(0));
+        Sun sun = new Sun(90);
+        sun.setIntensity(8);
+
+        sceneLight.setSun(new Sun(90));
         return sceneLight;
     }
 
