@@ -40,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/OBJLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-238">
-              <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+              <caret line="94" selection-start-line="94" selection-end-line="94" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#6250#6251#0" expanded="true" />
@@ -62,8 +62,8 @@
       <file leaf-file-name="Mesh.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Mesh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="106" column="53" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+            <state relative-caret-position="411">
+              <caret line="100" selection-start-line="100" selection-end-line="101" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/ShaderUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="418">
-              <caret line="132" column="47" lean-forward="true" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
+              <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3831#3832#0" expanded="true" />
@@ -107,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="858">
-              <caret line="67" column="60" lean-forward="true" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
+              <caret line="67" column="60" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,6 +142,9 @@
       <find>createP</find>
       <find>glVerte</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -214,6 +217,7 @@
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -225,93 +229,6 @@
             <path>
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
               <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-              <item name="draw" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-              <item name="draw" type="462c0819:PsiDirectoryNode" />
-              <item name="lighting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-              <item name="input" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="fonts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
@@ -452,12 +369,12 @@
       <updated>1528784007835</updated>
       <workItem from="1528784010793" duration="8428000" />
       <workItem from="1528950417588" duration="24252000" />
-      <workItem from="1529036565152" duration="104411000" />
+      <workItem from="1529036565152" duration="104936000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137091000" />
+    <option name="totallyTimeSpent" value="137616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
@@ -469,11 +386,11 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50104386" side_tool="true" weight="0.22103004" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.22103004" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895614" visible="true" weight="0.22103004" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -890,7 +807,7 @@
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="858">
-          <caret line="67" column="60" lean-forward="true" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
+          <caret line="67" column="60" selection-start-line="67" selection-start-column="60" selection-end-line="67" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -924,7 +841,7 @@
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/ShaderUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
-          <caret line="132" column="47" lean-forward="true" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
+          <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3831#3832#0" expanded="true" />
@@ -946,7 +863,7 @@
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/OBJLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-238">
-          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#6250#6251#0" expanded="true" />
@@ -957,8 +874,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Mesh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="106" column="53" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+        <state relative-caret-position="411">
+          <caret line="100" selection-start-line="100" selection-end-line="101" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -982,7 +899,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited />
+          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
