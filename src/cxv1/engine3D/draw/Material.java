@@ -39,6 +39,7 @@ public class Material {
 
     public Material(Texture texture) {
         this(DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, texture, 0);
+        this.isTextured = true;
     }
 
     public Vector4f getAmbientColor() { return ambientColor; }

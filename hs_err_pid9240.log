@@ -83,9 +83,9 @@ C  0x0000000002e08c67
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 j  org.lwjgl.opengl.GL11.nglDrawElements(IIIJ)V+0
 j  org.lwjgl.opengl.GL11.glDrawElements(IIIJ)V+4
-j  cxv1.engine3D.draw.Mesh.render()V+52
-j  cxv1.engine3D.draw.Renderer.renderScene(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;)V+147
-j  cxv1.engine3D.draw.Renderer.render(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;Lcxv1/engine3D/draw/Hud;)V+35
+j  cxv1.engine3D.draw.mesh.Mesh3D.render()V+52
+j  cxv1.engine3D.draw.sceneRenderer.renderScene(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;)V+147
+j  cxv1.engine3D.draw.sceneRenderer.render(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;Lcxv1/engine3D/draw/Hud;)V+35
 j  game.TutGameLogic.render(Lcxv1/engine3D/util/Window;D)V+28
 j  cxv1.engine3D.GameEngine.render()V+13
 j  cxv1.engine3D.GameEngine.loop()V+138

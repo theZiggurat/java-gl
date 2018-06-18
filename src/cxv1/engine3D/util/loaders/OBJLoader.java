@@ -2,7 +2,7 @@ package cxv1.engine3D.util.loaders;
 
 import cxv1.engine3D.draw.Material;
 import cxv1.engine3D.draw.MaterialManager;
-import cxv1.engine3D.draw.Mesh;
+import cxv1.engine3D.draw.mesh.Mesh3D;
 import cxv1.engine3D.util.Utils;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -19,12 +19,12 @@ public class OBJLoader {
         #TODO
      */
 
-    public static Mesh loadMesh(String id, String filename) throws Exception {
+    public static Mesh3D loadMesh(String id, String filename) throws Exception {
         List<String> meshLines;
         try {
             meshLines = Utils.readAllLines("res/models/" + filename);
         }   catch(Exception e){
-            System.err.println("Mesh " + filename + " not found");
+            System.err.println("Mesh3D " + filename + " not found");
             return null;
         }
         List<Vector3f> vertices = new ArrayList<>();
@@ -95,14 +95,18 @@ public class OBJLoader {
 
             }
         }
+        if(materialManager.getMaterialCount()==0){
+            materialManager.setMaterial(0, new Material());
+        }
+
         return reorderLists(id, vertices, textures, normals, faces, materialManager);
     }
 
 
 
     // Convert the lists into arrays usable by the mesh constructor, then return the mesh
-    private static Mesh reorderLists(String id, List<Vector3f> posList, List<Vector2f> textCoordList,
-                     List<Vector3f> normList, List<Face> facesList, MaterialManager materialManager){
+    private static Mesh3D reorderLists(String id, List<Vector3f> posList, List<Vector2f> textCoordList,
+                                       List<Vector3f> normList, List<Face> facesList, MaterialManager materialManager){
 
         List<Integer> indices = new ArrayList<>();
 
@@ -130,7 +134,7 @@ public class OBJLoader {
         // finally, convert indices list to array
         int [] indicesArr = new int[indices.size()];
         indicesArr = indices.stream().mapToInt((Integer v) -> v).toArray();
-        return new Mesh(id, posArr, texCoordArr, indicesArr, normArr, materialManager);
+        return new Mesh3D(id, posArr, texCoordArr, indicesArr, normArr, materialManager);
     }
 
     private static void processFaceVertex(IndexGroup indices,

@@ -55,6 +55,5 @@ public class Texture {
         return height;
     }
 
-    public void bind(){glBindTexture(GL_TEXTURE_2D, id);}
     public int getId(){return id;}
 }

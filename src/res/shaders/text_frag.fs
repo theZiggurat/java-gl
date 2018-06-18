@@ -1,7 +1,7 @@
 #version 330
 
 in vec2 outTextureCoord;
-in vec3 textPos;
+in vec2 textPos;
 
 out vec4 fragColor;
 
