@@ -4,6 +4,8 @@ import cxv1.engine3D.draw.lighting.DirectionalLight;
 import cxv1.engine3D.draw.lighting.SceneLight;
 import cxv1.engine3D.draw.lighting.SpotLight;
 import cxv1.engine3D.draw.mesh.Mesh3D;
+import cxv1.engine3D.entity.SkyBox;
+import cxv1.engine3D.enviorment.Scene;
 import cxv1.engine3D.util.ShaderUtil;
 import cxv1.engine3D.util.Transformation;
 import cxv1.engine3D.util.Utils;
@@ -32,8 +34,11 @@ public class sceneRenderer {
     private Transformation transformation;
     private float specularPower;
 
+    // LIGHT AFFECTTED
     private ShaderUtil sceneShader;
-    private ShaderUtil hudShader;
+
+    // SKYBOX SHADER
+    private ShaderUtil skyBoxShader;
 
     // PUBLIC METHODS AND CONSTRUCTORS ----------------------------------------------------//
 
@@ -47,7 +52,7 @@ public class sceneRenderer {
      */
     public void init() throws Exception {
         setupSceneShader();
-        setupHudShader();
+        setupSkyboxShader();
     }
 
     /*
@@ -55,24 +60,10 @@ public class sceneRenderer {
      */
     public void cleanup(){
         if(sceneShader != null){ sceneShader.cleanup(); }
-        if(hudShader != null){ hudShader.cleanup(); }
 
         glDisableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
-    }
-
-    public void render(Window window, Camera camera, Entity[] entities, SceneLight sceneLight){
-        clear();
-
-        // check for window resize
-        if ( window.isResized() ) {
-            glViewport(0, 0, window.getWidth(), window.getHeight());
-            window.setResized(false);
-        }
-
-        // render scene and hud
-        renderScene(window, camera, entities, sceneLight);
     }
 
     /*
@@ -109,25 +100,49 @@ public class sceneRenderer {
     }
 
     /*
-        HUD Shader
+        Skybox Shader
      */
-    private void setupHudShader() throws Exception {
-        hudShader = new ShaderUtil();
-        hudShader.createVertexShader(Utils.loadResource("/res/shaders/text_vert.vs"));
-        hudShader.createFragmentShader(Utils.loadResource("/res/shaders/text_frag.fs"));
-        hudShader.link();
+    private void setupSkyboxShader() throws Exception {
+        skyBoxShader = new ShaderUtil();
+        skyBoxShader.createVertexShader(Utils.loadResource("/res/shaders/sky_vert.vs"));
+        skyBoxShader.createFragmentShader(Utils.loadResource("/res/shaders/sky_frag.fs"));
+        skyBoxShader.link();
 
-        hudShader.createUniform("orthoMatrix");
-        hudShader.createUniform("color");
+        skyBoxShader.createUniform("modelViewMatrix");
+        skyBoxShader.createUniform("projectionMatrix");
+        skyBoxShader.createUniform("texture_sampler");
+        skyBoxShader.createUniform("ambientLight");
     }
 
     // RENDER METHODS ------------------------------------------------------------------//
+
+
+    /*
+        Main render call
+     */
+    public void render(Window window, Camera camera, Scene scene){
+        clear();
+
+        // check for window resize
+        if ( window.isResized() ) {
+            glViewport(0, 0, window.getWidth(), window.getHeight());
+            window.setResized(false);
+        }
+
+        // render scene
+        renderScene(window, camera, scene);
+
+        // render skybox
+        renderSkyBox(window, camera, scene);
+
+
+    }
 
     /*
         Combines all renderScene methods into one call
         @param window, camera, entities, and sceneLight
      */
-    private void renderScene(Window window, Camera camera, Entity[] entities, SceneLight sceneLight){
+    private void renderScene(Window window, Camera camera, Scene scene){
         sceneShader.bind();
 
         // create projection for render
@@ -139,10 +154,10 @@ public class sceneRenderer {
         Matrix4f viewMatrix = transformation.getViewMatrix(camera);
 
         // lighting
-        renderLights(viewMatrix, sceneLight);
+        renderLights(viewMatrix, scene.getSceneLight());
 
         sceneShader.setUniform("texture_sampler", 0);
-        for(Entity e: entities){
+        for(Entity e: scene.getEntities()){
 
             // null checking on entity and mesh
             if(e == null){continue;}
@@ -156,6 +171,28 @@ public class sceneRenderer {
         }
 
         sceneShader.unbind();
+    }
+
+    private void renderSkyBox(Window window, Camera camera, Scene scene){
+        skyBoxShader.bind();
+
+        skyBoxShader.setUniform("texture_sampler", 0);
+
+        Matrix4f projectionMatrix = transformation.getProjectionMatrix(
+            FOV, window.getWidth(), window.getHeight(), Z_NEAR, Z_FAR);
+        skyBoxShader.setUniform("projectionMatrix", projectionMatrix);
+        SkyBox skyBox = scene.getSkyBox();
+        Matrix4f viewMatrix = transformation.getViewMatrix(camera);
+        viewMatrix.m30(0);
+        viewMatrix.m31(0);
+        viewMatrix.m32(0);
+        Matrix4f modelViewMatrix = transformation.getModelViewMatrix(skyBox, viewMatrix);
+        skyBoxShader.setUniform("modelViewMatrix", modelViewMatrix);
+        skyBoxShader.setUniform("ambientLight", scene.getSceneLight().getAmbientLight());
+
+        scene.getSkyBox().getMesh().render();
+
+        skyBoxShader.unbind();
     }
 
     /*

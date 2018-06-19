@@ -7,7 +7,10 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 import cxv1.engine3D.GameLogic;
 import cxv1.engine3D.draw.sceneRenderer;
 import cxv1.engine3D.draw.lighting.*;
+import cxv1.engine3D.entity.SkyBox;
 import cxv1.engine3D.entity.StaticEntity;
+import cxv1.engine3D.entity.Terrain;
+import cxv1.engine3D.enviorment.Scene;
 import cxv1.engine3D.util.loaders.OBJLoader;
 import cxv1.engine3D.util.Window;
 import cxv1.engine3D.draw.Camera;
@@ -35,6 +38,8 @@ public class TutGameLogic implements GameLogic {
     private SceneLight sceneLight;
     State state;
 
+    Scene scene;
+
     Entity car, bunny, terrain, face;
 
     private static final float CAMERA_POS_STEP = 0.05f;
@@ -57,19 +62,33 @@ public class TutGameLogic implements GameLogic {
             sceneRenderer.init();}
         catch(Exception e){e.printStackTrace();}
 
+        Terrain terrain = new Terrain(1, 1000, -.01f, .01f,
+                "heightMap.png", "grass.png", 100);
+
+        SkyBox skyBox = new SkyBox("skybox.obj", "skybox.png");
+        skyBox.setScale(100f);
+
         car = new StaticEntity(OBJLoader.loadMesh("Lamborghini", "Avent.obj"));
         car.setPos(10, 0, 20);
         car.setScale(2);
         //Entity bus = new StaticEntity(OBJLoader.loadMesh("Bus", "bus.obj"));
-        face = new StaticEntity(OBJLoader.loadMesh("face", "face.obj"));
+        face = new StaticEntity(OBJLoader.loadMesh("M4A1", "M4A1.obj"));
         //bus.setPos(new Vector3f(0,0,10));
         entities = new Entity[]{face, car};
 
         // initialized light
         sceneLight = generateLights();
 
+        scene = new Scene();
+        //scene.setEntities(entities);
+        scene.setSceneLight(sceneLight);
+        scene.setSkyBox(skyBox);
+        scene.setEntities(terrain.getEntities());
+
         // lock cursor inside window and hide
         glfwSetInputMode(window.getHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        glBegin();
     }
 
     float t = 0;
@@ -84,7 +103,7 @@ public class TutGameLogic implements GameLogic {
         t++;
 
         //light.setPosition(new Vector3f((float) (10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005))));
-        //cube.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
+        //face.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
 
         // HANDLE PLAYER MOVEMENT
         camera.movePosition(cameraHandle.x * CAMERA_POS_STEP,
@@ -123,7 +142,7 @@ public class TutGameLogic implements GameLogic {
 
         //Hud.setStatusText(String.valueOf(FPS));
         // send entity meshes to sceneRenderer
-        sceneRenderer.render(window, camera, entities, sceneLight);
+        sceneRenderer.render(window, camera, scene);
     }
 
     @Override
@@ -159,6 +178,7 @@ public class TutGameLogic implements GameLogic {
         sceneLight.setSun(sun);
         return sceneLight;
     }
+
 
 
 

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static cxv1.engine3D.util.loaders.TextureLoader.loadTexture;
+
 public class MTLLoader {
 
     // Parses materials from .mtl file and returns hashmap:
@@ -77,7 +79,7 @@ public class MTLLoader {
                     break;
                 case "map_Kd": // set texture of material
                     try {
-                        Texture texture = new Texture(tokens[1]);
+                        Texture texture = loadTexture(tokens[1]);
                         currentMaterial.setTexture(texture);
                     } catch(Exception e){
                         System.err.println("Texture "+tokens[1]+" could not be loaded.");

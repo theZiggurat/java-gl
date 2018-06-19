@@ -67,6 +67,8 @@ public class Window {
         glClearColor(0f, 0f, 0f, 0.0f);
 
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
 
         glLineWidth(1);
     }

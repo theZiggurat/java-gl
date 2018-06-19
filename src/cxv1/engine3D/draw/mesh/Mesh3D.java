@@ -112,7 +112,7 @@ public class Mesh3D implements Mesh{
             // activate material
             sceneShader.setUniform("material", materialManager.getMaterial(i));
 
-            if(i == materialManager.getMaterialCount()){
+            if(i == materialManager.getMaterialCount()-1){
                 glDrawElements(GL_TRIANGLES, getVertexCount() - (materialManager.getTriIndex(i)*3),
                         GL_UNSIGNED_INT, materialManager.getTriIndex(i)*3*4);
             } else {
@@ -120,6 +120,27 @@ public class Mesh3D implements Mesh{
                         GL_UNSIGNED_INT, materialManager.getTriIndex(i)*3*4);
             }
         }
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    public void render(){
+
+        glBindVertexArray(getVaoId());
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+
+        if(materialManager.getMaterial(0).isTextured()){
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(0).getTexture().getId());
+        }
+
+        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

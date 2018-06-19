@@ -35,6 +35,7 @@ public class Material {
 
     public Material(Texture texture, float reflectance) {
         this(DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR, texture, reflectance);
+        this.isTextured = true;
     }
 
     public Material(Texture texture) {

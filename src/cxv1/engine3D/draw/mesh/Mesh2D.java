@@ -13,6 +13,7 @@ public class Mesh2D implements Mesh{
     private int vaoId;
     private final List<Integer> vboList;
     private String id;
+    private float scale;
 
     public Mesh2D(String id, float[] positions, float[] textureCoords,
                   int[] indices, Texture texture){
@@ -22,9 +23,8 @@ public class Mesh2D implements Mesh{
 
     }
 
-    public void render(ShaderUtil shaderUtil){
-
-    }
+    public void render(ShaderUtil shaderUtil){}
+    public void render(){}
 
     public int getVaoId(){
         return vaoId;

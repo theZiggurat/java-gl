@@ -14,8 +14,11 @@ import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 public interface Mesh {
 
     void render(ShaderUtil shader);
+    void render();
     List<Integer> getVboList();
     int getVaoId();
+
+
 
     default void cleanup(){
         glDisableVertexAttribArray(0);
