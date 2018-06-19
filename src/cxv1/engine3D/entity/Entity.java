@@ -1,19 +1,19 @@
 package cxv1.engine3D.entity;
 
-import cxv1.engine3D.draw.Mesh;
+import cxv1.engine3D.draw.mesh.Mesh;
 import org.joml.Vector3f;
 
 public interface Entity {
 
-    public void cleanup();
-    public Mesh getMesh();
-    public Vector3f getPos();
-    public Vector3f getRot();
-    public float getScale();
-    public void setPos(Vector3f pos);
-    public void setPos(float x, float y, float z);
-    public void setRot(Vector3f rot);
-    public void setRot(float x, float y, float z);
-    public void setScale(float scale);
+    void cleanup();
+    Mesh getMesh();
+    Vector3f getPos();
+    Vector3f getRot();
+    float getScale();
+    void setPos(Vector3f pos);
+    void setPos(float x, float y, float z);
+    void setRot(Vector3f rot);
+    void setRot(float x, float y, float z);
+    void setScale(float scale);
 
 }

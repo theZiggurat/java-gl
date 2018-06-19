@@ -1,0 +1,16 @@
+// GL NOTES
+
+// NOTE 1:
+
+    ## Render part of VBO with glDrawElements():
+
+    The fourth argument specifies a pointer offset to the data in bytes.
+    Since the index buffer is an integer, the offset must be multiplied by 4.
+    Also, since the buffer is grouped as Vec3, the offset must be a multiple of 3.
+
+    Example ->
+
+        // draw first half
+        glDrawElements(*, getDivisibleBy3(getVertexCount()/2), *, 0);
+        // draw second half
+        glDrawElements(*, getVertexCount(), *, getDivisibleBy3(getVertexCount()/2)*4);

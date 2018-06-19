@@ -83,9 +83,9 @@ C  0x0000000002e08c67
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 j  org.lwjgl.opengl.GL11.nglDrawElements(IIIJ)V+0
 j  org.lwjgl.opengl.GL11.glDrawElements(IIIJ)V+4
-j  cxv1.engine3D.draw.Mesh.render()V+52
-j  cxv1.engine3D.draw.Renderer.renderScene(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;)V+147
-j  cxv1.engine3D.draw.Renderer.render(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;Lcxv1/engine3D/draw/Hud;)V+35
+j  cxv1.engine3D.draw.mesh.Mesh3D.render()V+52
+j  cxv1.engine3D.draw.sceneRenderer.renderScene(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;)V+147
+j  cxv1.engine3D.draw.sceneRenderer.render(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;Lcxv1/engine3D/draw/Hud;)V+35
 j  game.TutGameLogic.render(Lcxv1/engine3D/util/Window;D)V+28
 j  cxv1.engine3D.GameEngine.render()V+13
 j  cxv1.engine3D.GameEngine.loop()V+138
@@ -260,9 +260,9 @@ Heap after GC invocations=6 (full 0):
 
 Deoptimization events (10 events):
 Event: 2.396 Thread 0x000000001eb99000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x000000000321dc34 method=sun.misc.FloatingDecimal.parseFloat(Ljava/lang/String;)F @ 4
-Event: 2.511 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003216bc8 method=cxv1.engine3D.util.OBJLoader$Face.parseIndex(Ljava/lang/String;)Lcxv1/engine3D/util/OBJLoader$IndexGroup; @ 48
-Event: 2.564 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000322ef3c method=cxv1.engine3D.util.OBJLoader.processFaceVertex(Lcxv1/engine3D/util/OBJLoader$IndexGroup;Ljava/util/List;Ljava/util/List;Ljava/util/List;[F[F)V @ 22
-Event: 2.564 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003221674 method=cxv1.engine3D.util.OBJLoader.processFaceVertex(Lcxv1/engine3D/util/OBJLoader$IndexGroup;Ljava/util/List;Ljava/util/List;Ljava/util/List;[F[F)V @ 22
+Event: 2.511 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003216bc8 method=cxv1.engine3D.util.loaders.OBJLoader$Face.parseIndex(Ljava/lang/String;)Lcxv1/engine3D/util/OBJLoader$IndexGroup; @ 48
+Event: 2.564 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000000000322ef3c method=cxv1.engine3D.util.loaders.OBJLoader.processFaceVertex(Lcxv1/engine3D/util/OBJLoader$IndexGroup;Ljava/util/List;Ljava/util/List;Ljava/util/List;[F[F)V @ 22
+Event: 2.564 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003221674 method=cxv1.engine3D.util.loaders.OBJLoader.processFaceVertex(Lcxv1/engine3D/util/OBJLoader$IndexGroup;Ljava/util/List;Ljava/util/List;Ljava/util/List;[F[F)V @ 22
 Event: 2.572 Thread 0x000000001eb99000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003212c4c method=java.util.ArrayList$ArrayListSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V @ 87
 Event: 2.596 Thread 0x000000001eb99000 Uncommon trap: reason=predicate action=maybe_recompile pc=0x00000000032401b4 method=java.util.ArrayList$ArrayListSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V @ 90
 Event: 2.596 Thread 0x000000001eb99000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x0000000003222330 method=java.util.stream.ReferencePipeline$4$1.accept(Ljava/lang/Object;)V @ 12

@@ -14,10 +14,12 @@ public class Sun {
 
     private float timeOfDay;
     private float sunAngle;
+    private float intensity;
 
     DirectionalLight light;
 
     public Sun(float initial_angle){
+        intensity = DEFAULT_INTENSITY;
         this.sunAngle = initial_angle;
         light = new DirectionalLight(DEFAULT_COLOR, DEFAULT_DIRECTION, DEFAULT_INTENSITY);
     }
@@ -34,15 +36,26 @@ public class Sun {
         return light;
     }
 
+    // to be invoked on every game update using state.getSunTimer()
     public void updateLight(double time){
 
         light.getDirection().x = (float) Math.sin(timeToRadians(time));
         light.getDirection().y = (float) Math.cos(timeToRadians(time));
 
-        light.setIntensity(Math.max(DEFAULT_INTENSITY * (float) Math.sin(timeToRadians(time)),0));
+        light.setIntensity(Math.max(intensity * (float) Math.cos(timeToRadians(time)),0));
+    }
+
+    public float getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(float intensity) {
+        this.intensity = intensity;
     }
 
     public static float timeToRadians(double time){
         return (float) Math.toRadians(360*time/State.SECONDS_IN_DAY);
     }
+
 }
+

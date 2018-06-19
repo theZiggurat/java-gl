@@ -22,7 +22,7 @@ public class Utils {
     public static List<String> readAllLines(String fileName) throws Exception {
         List<String> list = new ArrayList<>();
         InputStream is = Utils.class.getClassLoader().getResourceAsStream(fileName);
-        //System.out.println(is == null ? "1":"0");
+        System.out.println(is != null ? fileName+" loaded":fileName+" failed");
         InputStreamReader in = new InputStreamReader(is);
         try (BufferedReader br = new BufferedReader(in)) {
             String line;

@@ -11,35 +11,19 @@ public class Texture {
     private final int id;
     private int width, height;
 
-    public Texture(String fileName) throws Exception {
-
-        PNGDecoder decoder = new PNGDecoder(Texture.class.getResourceAsStream(fileName));
-
-        this.width = decoder.getWidth();
-        this.height = decoder.getHeight();
-
-        // 4 bytes per pixel
-        ByteBuffer buffer = ByteBuffer.allocateDirect(4*decoder.getWidth()*decoder.getHeight());
-        decoder.decode(buffer, decoder.getWidth()*4, Format.RGBA);
-        buffer.flip();
-
-        int id = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, id);
-
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, decoder.getWidth(), decoder.getHeight(),
-                0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-
-        glGenerateMipmap(GL_TEXTURE_2D);
+    // initialize empty texture
+    public Texture(int id) {
         this.id = id;
+        width = 0;
+        height = 0;
     }
 
-    public Texture(int id){
-        this.id = id;
+    public void setWidth(int width){
+        this.width = width;
+    }
+
+    public void setHeight(int height){
+        this.height = height;
     }
 
     public void cleanup(){
@@ -54,6 +38,5 @@ public class Texture {
         return height;
     }
 
-    public void bind(){glBindTexture(GL_TEXTURE_2D, id);}
     public int getId(){return id;}
 }

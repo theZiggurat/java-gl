@@ -3,23 +3,22 @@ package game;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
-import static org.lwjgl.opengl.GL11.*;
 
 import cxv1.engine3D.GameLogic;
-import cxv1.engine3D.draw.Renderer;
+import cxv1.engine3D.draw.sceneRenderer;
 import cxv1.engine3D.draw.lighting.*;
-import cxv1.engine3D.entity.FixedObjectEntity;
-import cxv1.engine3D.util.OBJLoader;
+import cxv1.engine3D.entity.SkyBox;
+import cxv1.engine3D.entity.StaticEntity;
+import cxv1.engine3D.entity.Terrain;
+import cxv1.engine3D.enviorment.Scene;
+import cxv1.engine3D.util.loaders.OBJLoader;
 import cxv1.engine3D.util.Window;
 import cxv1.engine3D.draw.Camera;
-import cxv1.engine3D.draw.Material;
-import cxv1.engine3D.draw.Texture;
 import cxv1.engine3D.input.MouseInput;
 import cxv1.engine3D.entity.Entity;
 import cxv1.engine3D.util.State;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 /*
     TutorialGameLogic is the implementation of
@@ -29,9 +28,8 @@ public class TutGameLogic implements GameLogic {
     private static
 
     Entity[] entities;
-    private HUD Hud;
 
-    private final Renderer renderer;
+    private final sceneRenderer sceneRenderer;
 
     Camera camera;
     Vector3f cameraHandle;
@@ -40,13 +38,15 @@ public class TutGameLogic implements GameLogic {
     private SceneLight sceneLight;
     State state;
 
-    Entity cube, bunny, terrain;
+    Scene scene;
+
+    Entity car, bunny, terrain, face;
 
     private static final float CAMERA_POS_STEP = 0.05f;
     private static final float MOUSE_SENS = 0.15f;
 
     public TutGameLogic(){
-        renderer = new Renderer();
+        sceneRenderer = new sceneRenderer();
         camera = new Camera();
         cameraHandle = new Vector3f(0,0,0);
         state = new State();
@@ -57,38 +57,38 @@ public class TutGameLogic implements GameLogic {
 
         state.init();
 
-        // initialize renderer
-        try{renderer.init();}
+        // initialize sceneRenderer
+        try{
+            sceneRenderer.init();}
         catch(Exception e){e.printStackTrace();}
 
-        cube = new FixedObjectEntity(OBJLoader.loadMesh("cube", "res/models/cube.obj"));
-        cube.getMesh().setMaterial(new Material(
-                new Texture("/res/textures/grassblock.png"), 1f));
-        cube.setPos(0, -2, -2);
+        Terrain terrain = new Terrain(1, 1000, -.01f, .01f,
+                "heightMap.png", "grass.png", 100);
 
-        bunny = new FixedObjectEntity(OBJLoader.loadMesh("bunny", "res/models/bunny.obj"));
-        bunny.setPos(-10, -2, -2);
-        bunny.getMesh().setMaterial(new Material(
-                new Vector4f(0f, 1f, .5f, 0f), 1f
-        ));
+        SkyBox skyBox = new SkyBox("skybox.obj", "skybox.png");
+        skyBox.setScale(100f);
 
-
-        terrain = new FixedObjectEntity(OBJLoader.loadMesh("testObj", "res/models/haus_big.obj"));
-        terrain.getMesh().setMaterial(
-                new Material(new Vector4f(1f, 1f, 1f, 1f), 1f));
-        terrain.setPos(0,-4, 0);
-        terrain.setScale(.005f);
-
-        // initialize entities
-        entities = new Entity[]{cube, terrain, bunny};
+        car = new StaticEntity(OBJLoader.loadMesh("Lamborghini", "Avent.obj"));
+        car.setPos(10, 0, 20);
+        car.setScale(2);
+        //Entity bus = new StaticEntity(OBJLoader.loadMesh("Bus", "bus.obj"));
+        face = new StaticEntity(OBJLoader.loadMesh("M4A1", "M4A1.obj"));
+        //bus.setPos(new Vector3f(0,0,10));
+        entities = new Entity[]{face, car};
 
         // initialized light
         sceneLight = generateLights();
 
-        Hud = new HUD("144");
+        scene = new Scene();
+        //scene.setEntities(entities);
+        scene.setSceneLight(sceneLight);
+        scene.setSkyBox(skyBox);
+        scene.setEntities(terrain.getEntities());
 
         // lock cursor inside window and hide
         glfwSetInputMode(window.getHandle(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        glBegin();
     }
 
     float t = 0;
@@ -103,7 +103,7 @@ public class TutGameLogic implements GameLogic {
         t++;
 
         //light.setPosition(new Vector3f((float) (10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005))));
-        cube.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
+        //face.setPos((float)(10*-Math.sin(t*.005)), 10,(float) (10*-Math.cos(t*.005)));
 
         // HANDLE PLAYER MOVEMENT
         camera.movePosition(cameraHandle.x * CAMERA_POS_STEP,
@@ -139,15 +139,15 @@ public class TutGameLogic implements GameLogic {
 
     @Override
     public void render(Window window,  double FPS){
-        Hud.updateSize(window);
+
         //Hud.setStatusText(String.valueOf(FPS));
-        // send entity meshes to renderer
-        renderer.render(window, camera, entities, sceneLight, Hud);
+        // send entity meshes to sceneRenderer
+        sceneRenderer.render(window, camera, scene);
     }
 
     @Override
     public void cleanup(){
-        renderer.cleanup();
+        sceneRenderer.cleanup();
         //for(Entity e: entities){e.cleanup();}
     }
 
@@ -157,24 +157,28 @@ public class TutGameLogic implements GameLogic {
 
     public SceneLight generateLights(){
         SceneLight sceneLight = new SceneLight();
-        sceneLight.setAmbientLight(new Vector3f(0.3f, 0.3f, 0.3f));
+        sceneLight.setAmbientLight(new Vector3f(.5f, .5f, .5f));
 
         PointLight masterLight = new PointLight(new Vector3f(1,1,1), new Vector3f(1,1,1),
                 1.0f, new PointLight.Attenuation(0,0,1));
 
         sceneLight.setPointLights(new PointLight[]{
-                new PointLight(masterLight, new Vector3f(20,0,0)),
-                new PointLight(masterLight, new Vector3f(0,0,0)),
-                new PointLight(masterLight, new Vector3f(20,0,0)),
+                new PointLight(masterLight, new Vector3f(0,0.5f,0)),
+                new PointLight(masterLight, new Vector3f(0,3,0)),
+                new PointLight(masterLight, new Vector3f(0,10,5)),
                 new PointLight(masterLight, new Vector3f(20,0,0)),
                 new PointLight(masterLight, new Vector3f(20,0,0)),
         });
 
         sceneLight.setSpotLights(new SpotLight[]{});
 
-        sceneLight.setSun(new Sun(0));
+        Sun sun = new Sun(90);
+        sun.setIntensity(2);
+
+        sceneLight.setSun(sun);
         return sceneLight;
     }
+
 
 
 
