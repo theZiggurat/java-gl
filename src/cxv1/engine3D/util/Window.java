@@ -34,7 +34,7 @@ public class Window {
         glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-        windowHandle = glfwCreateWindow(width, height, title, NULL, NULL);
+        windowHandle = glfwCreateWindow(width, height, title, 0, NULL);
         if(windowHandle == NULL){
             throw new RuntimeException("Failed to create GLFW window");
         }

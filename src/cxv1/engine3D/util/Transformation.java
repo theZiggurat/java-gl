@@ -24,7 +24,8 @@ public class Transformation {
 
         viewMatrix.identity();
         viewMatrix.rotate((float)Math.toRadians(rot.x), new Vector3f(1, 0, 0))
-                .rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0));
+                .rotate((float)Math.toRadians(rot.y), new Vector3f(0, 1, 0))
+                .rotate((float)Math.toRadians(rot.z), new Vector3f(0,0,1));
 
         viewMatrix.translate(-pos.x, -pos.y, -pos.z);
         return viewMatrix;

@@ -13,6 +13,7 @@ public class State {
     private double sunTimer;
 
     private int days;
+    private double interval;
 
     public State(){
         this.physicsMultiplier = DEFAULT_PHYSICS_MULTIPLIER;
@@ -25,12 +26,14 @@ public class State {
     }
 
     public void init(){
+        interval = 0;
         days = 0;
         physicsTimer = 0;
         sunTimer = 0;
     }
 
     public void update(double interval){
+        this.interval = interval;
 
         sunTimer += interval * sunSpeedMultiplier;
         physicsTimer += interval * physicsMultiplier;
@@ -43,6 +46,14 @@ public class State {
         if(physicsTimer >= SECONDS_IN_DAY){
             physicsTimer = 0;
         }
+    }
+
+    public double getInterval() {
+        return interval;
+    }
+
+    public void setInterval(double interval) {
+        this.interval = interval;
     }
 
     public float getPhysicsMultiplier() {

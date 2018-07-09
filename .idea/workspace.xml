@@ -5,53 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/graph/Line.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TGAReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TextureLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/models/skybox.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/sky_frag.fs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/sky_vert.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cxv1/engine3D/entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/shaders/terrainfragment.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/shaders/terrainvertex.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/textures/skybox_sucks.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/Material.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/Material.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/Texture.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/Texture.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh2D.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh2D.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/TestMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/lighting/Sun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/lighting/Sun.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/HeightMapMesh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/HeightMapMesh.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh3D.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/mesh/Mesh3D.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/sceneRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/draw/sceneRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/entity/SkyBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/entity/SkyBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/Window.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/loaders/MTLLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/loaders/MTLLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/entity/Terrain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/entity/Terrain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/enviorment/Scene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/enviorment/Scene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/input/MouseInput.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/input/MouseInput.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/cxv1/engine3D/util/State.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/game/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/game/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/game/TutGameLogic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/game/TutGameLogic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/models/face.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/models/haus_big.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_bk.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_dn.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_ft.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_lf.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_rt.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/skybox/hw_ruins/ruins_up.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/textures/hw_ruins.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/GameLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/TestMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/input/MouseInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/input/MouseInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/util/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/MTLLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/MTLLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/game/TutGameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/TutGameLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/models/face.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/models/haus_big.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_bk.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_dn.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_ft.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_lf.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_rt.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/skybox/hw_ruins/ruins_up.tga" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/textures/hw_ruins.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/textures/skybox.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,13 +46,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/LWJGL_test$Main__1_.ic" NAME="Main (1) Coverage Results" MODIFIED="1530985829815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>game.*</FILTER>
+    </SUITE>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/Main.java">
+      <file leaf-file-name="sceneRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="310">
+              <caret line="217" column="37" selection-start-line="217" selection-start-column="37" selection-end-line="217" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Transformation.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="27" column="72" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,56 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DirectionalLight.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/DirectionalLight.java">
+      <file leaf-file-name="Terrain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PointLight.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/PointLight.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpotLight.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/SpotLight.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SceneLight.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/SceneLight.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sun.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-136">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mesh.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="405">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,20 +86,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TutGameLogic.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/game/TutGameLogic.java">
+      <file leaf-file-name="vertex.vs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/res/shaders/vertex.vs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="187">
+              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Line.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/graph/Line.java">
+      <file leaf-file-name="fragment.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/res/shaders/fragment.fs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+            <state relative-caret-position="1524">
+              <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SkyBox.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -153,15 +116,67 @@
       <file leaf-file-name="HeightMapMesh.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2448">
-              <caret line="154" column="17" lean-forward="true" selection-start-line="153" selection-start-column="33" selection-end-line="154" selection-end-column="17" />
+            <state relative-caret-position="549">
+              <caret line="212" selection-start-line="212" selection-end-line="212" />
               <folding>
-                <element signature="e#6060#6061#0" expanded="true" />
-                <element signature="e#6087#6088#0" expanded="true" />
-                <element signature="e#2011#2012#0" expanded="true" />
-                <element signature="e#2053#2054#0" expanded="true" />
-                <element signature="e#2092#2093#0" expanded="true" />
-                <element signature="e#2134#2135#0" expanded="true" />
+                <element signature="e#7190#7191#0" expanded="true" />
+                <element signature="e#7217#7218#0" expanded="true" />
+                <element signature="e#7256#7257#0" expanded="true" />
+                <element signature="e#7298#7299#0" expanded="true" />
+                <element signature="e#7337#7338#0" expanded="true" />
+                <element signature="e#7379#7380#0" expanded="true" />
+                <element signature="e#7409#7410#0" expanded="true" />
+                <element signature="e#7436#7437#0" expanded="true" />
+                <element signature="e#7475#7476#0" expanded="true" />
+                <element signature="e#7507#7508#0" expanded="true" />
+                <element signature="e#7537#7538#0" expanded="true" />
+                <element signature="e#7564#7565#0" expanded="true" />
+                <element signature="e#7603#7604#0" expanded="true" />
+                <element signature="e#7635#7636#0" expanded="true" />
+                <element signature="e#7677#7678#0" expanded="true" />
+                <element signature="e#7713#7714#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Camera.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="23" lean-forward="true" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sky_frag.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_frag.fs">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="749">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4379#4380#0" expanded="true" />
+                <element signature="e#4408#4409#0" expanded="true" />
+                <element signature="e#4452#4453#0" expanded="true" />
+                <element signature="e#4488#4489#0" expanded="true" />
+                <element signature="e#4674#4675#0" expanded="true" />
+                <element signature="e#4700#4701#0" expanded="true" />
+                <element signature="e#4754#4755#0" expanded="true" />
+                <element signature="e#4784#4785#0" expanded="true" />
+                <element signature="e#4816#4817#0" expanded="true" />
+                <element signature="e#4842#4843#0" expanded="true" />
+                <element signature="e#4882#4883#0" expanded="true" />
+                <element signature="e#4912#4913#0" expanded="true" />
+                <element signature="e#4946#4947#0" expanded="true" />
+                <element signature="e#4974#4975#0" expanded="true" />
+                <element signature="e#5018#5019#0" expanded="true" />
+                <element signature="e#5052#5053#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -192,26 +207,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/game/Renderer.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/Window.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/Hud.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/SceneLight.java" />
-        <option value="$PROJECT_DIR$/src/res/shaders/fragment.fs" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/GameLogic.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/PointLight.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/ShaderUtil.java" />
-        <option value="$PROJECT_DIR$/GL_notes" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/OBJLoader.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/MTLLoader.java" />
         <option value="$PROJECT_DIR$/src/res/materials/cube.mtl" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/TestMain.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java" />
         <option value="$PROJECT_DIR$/src/res/models/face.obj" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/MaterialManager.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/Utils.java" />
@@ -227,7 +235,6 @@
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/Entity.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/TextEntity.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/PNGLoader.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java" />
         <option value="$PROJECT_DIR$/src/res/shaders/sky_frag.fs" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TGAReader.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/Texture.java" />
@@ -240,13 +247,26 @@
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java" />
         <option value="$PROJECT_DIR$/src/res/models/skybox.obj" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMehs.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java" />
-        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java" />
-        <option value="$PROJECT_DIR$/src/game/TutGameLogic.java" />
         <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/graph/Line.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/input/MouseInput.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java" />
+        <option value="$PROJECT_DIR$/src/res/shaders/terrainvertex.vs" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java" />
+        <option value="$PROJECT_DIR$/src/res/shaders/terrainfragment.fs" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/TerrainEntity.java" />
+        <option value="$PROJECT_DIR$/src/game/Main.java" />
+        <option value="$PROJECT_DIR$/src/res/shaders/fragment.fs" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/State.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/GameLogic.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java" />
+        <option value="$PROJECT_DIR$/src/game/TutGameLogic.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java" />
+        <option value="$PROJECT_DIR$/src/cxv1/engine3D/entity/Player.java" />
       </list>
     </option>
   </component>
@@ -260,9 +280,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1104" />
-    <option name="height" value="1047" />
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -270,6 +291,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,6 +319,85 @@
             </path>
             <path>
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="draw" type="462c0819:PsiDirectoryNode" />
+              <item name="graph" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="draw" type="462c0819:PsiDirectoryNode" />
+              <item name="lighting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="draw" type="462c0819:PsiDirectoryNode" />
+              <item name="mesh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="enviorment" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="input" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine3D" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="loaders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="game" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
@@ -305,7 +406,6 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -441,8 +541,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.test" />
         <item itemvalue="Application.TestMain" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.test" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -460,11 +561,13 @@
       <workItem from="1528784010793" duration="8428000" />
       <workItem from="1528950417588" duration="24252000" />
       <workItem from="1529036565152" duration="125721000" />
+      <workItem from="1529947104419" duration="7125000" />
+      <workItem from="1530500094146" duration="40146000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="200032000" />
+    <option name="totallyTimeSpent" value="256643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -472,55 +575,33 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="5" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32725322" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32624868" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50104386" side_tool="true" weight="0.22103004" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5015625" side_tool="true" visible="true" weight="0.19341126" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895614" visible="true" weight="0.24442083" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4984375" visible="true" weight="0.19341126" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.50065875" side_tool="true" weight="0.2875" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1234375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11770833" />
       <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.18025751" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.18172157" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="right" id="Debug" order="9" visible="true" weight="0.15572916" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info id="Designer" order="3" />
+      <window_info active="true" anchor="right" id="Debug" order="9" sideWeight="0.49934125" visible="true" weight="0.34114584" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Debug" order="9" weight="0.28759894" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="5" />
-      <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49895614" visible="true" weight="0.27575108" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.18240343" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50104386" side_tool="true" weight="0.22103004" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32725322" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11807388" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,487 +614,87 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/TestMain.java</url>
-          <line>10</line>
-          <properties />
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/MTLLoader.java</url>
-          <line>81</line>
-          <properties />
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/OBJLoader.java</url>
-          <line>44</line>
-          <properties />
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java</url>
-          <line>241</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/OBJLoader.java</url>
-          <line>97</line>
-          <properties />
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java</url>
-          <line>14</line>
-          <properties />
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java</url>
-          <line>159</line>
-          <properties />
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java</url>
-          <line>30</line>
+          <line>209</line>
           <properties />
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java</url>
-          <line>71</line>
-          <properties />
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/game/TutGameLogic.java</url>
-          <line>85</line>
-          <properties />
-          <option name="timeStamp" value="53" />
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java</url>
-          <line>114</line>
+          <url>file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Player.java</url>
+          <line>61</line>
           <properties />
-          <option name="timeStamp" value="54" />
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="55" />
+      <option name="time" value="76" />
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="getHeight(new Vector3f(-30,0,30.8f))" language="JAVA" />
+        <watch expression="getHeight(new Vector3f(27f,-8,3.33f))" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>getHeight(new Vector3f(-30,0,30.8f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>materials.</expression-string>
+        <expression-string>getHeight(new Vector3f(27f,-8,0.4f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,0.3f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,0.2f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,0.1f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,0f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,3.32f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,3.33f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,3.72f))</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>getHeight(new Vector3f(27f,-8,3.71f))</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Hud.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="34" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/TextEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="95" column="4" lean-forward="true" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
-          <folding>
-            <element signature="e#3106#3107#0" expanded="true" />
-            <element signature="e#3127#3128#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/HUD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#804#805#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#908#909#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
-            <element signature="e#983#984#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/MaterialManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1330#1331#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/joml-1.9.9.jar!/org/joml/Vector4f.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/PNGLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="35" column="40" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_frag.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/skybox/hw_ruins/hw_ruins.shader">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="uml://JAVA/">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement />
-          <nodes>
-            <node x="" y="">com</node>
-            <node x="" y="">res</node>
-            <node x="" y="">de</node>
-            <node x="" y="">netscape</node>
-            <node x="" y="">oracle</node>
-            <node x="" y="">org</node>
-            <node x="" y="">game.TutGameLogic</node>
-            <node x="" y="">cxv1.engine3D</node>
-            <node x="" y="">resources</node>
-            <node x="" y="">sun</node>
-            <node x="" y="">jquery</node>
-            <node x="" y="">META-INF</node>
-            <node x="" y="">jdk</node>
-            <node x="" y="">groovyjarjarasm</node>
-            <node x="" y="">java</node>
-            <node x="" y="">groovy</node>
-            <node x="" y="">javax</node>
-            <node x="" y="">groovyjarjarcommonscli</node>
-            <node x="" y="">javafx</node>
-            <node x="" y="">game.Main</node>
-            <node x="" y="">groovyjarjarantlr</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="262.5" y="251.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/cxv1.engine3D.draw.mesh.Mesh">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>cxv1.engine3D.draw.mesh.Mesh</OriginalElement>
-          <nodes>
-            <node x="7.0" y="0.0">cxv1.engine3D.draw.mesh.Mesh</node>
-            <node x="0.0" y="79.0">cxv1.engine3D.draw.mesh.Mesh3D</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="cxv1.engine3D.draw.mesh.Mesh3D" target="cxv1.engine3D.draw.mesh.Mesh">
-              <point x="0.0" y="-14.5" />
-              <point x="0.0" y="14.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="1.0" x="-24.0" y="-101.5" />
-          <SelectedNodes>
-            <node>cxv1.engine3D.draw.mesh.Mesh3D</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/library.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TGAReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-59">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#576#577#0" expanded="true" />
-            <element signature="e#645#646#0" expanded="true" />
-            <element signature="e#696#697#0" expanded="true" />
-            <element signature="e#765#766#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/OBJLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="101" selection-start-line="101" selection-end-line="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/textures/ruins_bk.tga">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/MTLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/models/model-triangulated.obj">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_vert.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Material.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="45" column="62" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
-          <folding>
-            <element signature="e#1001#1002#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/textures/hw_ruins.zip">
-      <provider selected="true" editor-type-id="apk-viewer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/models/skybox.obj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="90" column="23" selection-start-line="90" selection-start-column="23" selection-end-line="90" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMehs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="23" lean-forward="true" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TextureLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#425#426#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lwjgl-opengl/lwjgl-opengl-sources.jar!/org/lwjgl/opengl/GL11.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="1891" selection-start-line="1891" selection-end-line="1891" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/textures/heightMap.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/TestMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Texture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/ShaderUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="206" selection-start-line="206" selection-end-line="206" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3831#3832#0" expanded="true" />
-            <element signature="e#3899#3900#0" expanded="true" />
-            <element signature="e#7689#7690#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="169" selection-start-line="169" selection-end-line="169" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="114" column="56" selection-start-line="114" selection-start-column="56" selection-end-line="114" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/PNGDecoder.jar!/de/matthiasmann/twl/utils/PNGDecoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="189" selection-start-line="189" selection-end-line="189" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#1135#1136#0" expanded="true" />
-            <element signature="e#1166#1167#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/textures/mountains512.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/StaticEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="70" column="8" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/DirectionalLight.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1035,56 +716,407 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/SceneLight.java">
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/graph/Line.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/input/MouseInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="56" column="77" selection-start-line="56" selection-start-column="77" selection-end-line="56" selection-end-column="77" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/Sun.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="10" column="76" selection-start-line="10" selection-start-column="76" selection-end-line="10" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh.java">
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="272">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java">
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh2D.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2448">
-          <caret line="154" column="17" lean-forward="true" selection-start-line="153" selection-start-column="33" selection-end-line="154" selection-end-column="17" />
+        <state relative-caret-position="459">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TGAReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
           <folding>
-            <element signature="e#6060#6061#0" expanded="true" />
-            <element signature="e#6087#6088#0" expanded="true" />
-            <element signature="e#2011#2012#0" expanded="true" />
-            <element signature="e#2053#2054#0" expanded="true" />
-            <element signature="e#2092#2093#0" expanded="true" />
-            <element signature="e#2134#2135#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainvertex.vs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/Mesh3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-704">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/lighting/SceneLight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#392#393#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/lwjgl-opengl/lwjgl-opengl-sources.jar!/org/lwjgl/opengl/GL20.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="1031" selection-start-line="1031" selection-end-line="1031" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/ShaderUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="91" selection-start-line="91" selection-end-line="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3364#3365#0" expanded="true" />
+            <element signature="e#3415#3416#0" expanded="true" />
+            <element signature="e#3503#3504#0" expanded="true" />
+            <element signature="e#3557#3558#0" expanded="true" />
+            <element signature="e#3831#3832#0" expanded="true" />
+            <element signature="e#3899#3900#0" expanded="true" />
+            <element signature="e#7689#7690#0" expanded="true" />
+            <element signature="e#7728#7729#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/textures/grass.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/textures/grass2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/textures/heightMap.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/textures/height.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/textures/stone.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/PNGDecoder.jar!/de/matthiasmann/twl/utils/PNGDecoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+          <folding>
+            <element signature="e#2475#2476#0" expanded="true" />
+            <element signature="e#2504#2505#0" expanded="true" />
+            <element signature="e#2537#2538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/loaders/TextureLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainfragment.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="45" column="11" lean-forward="true" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/StaticEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/TerrainEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/TestMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/text_frag.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/TextEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="86" column="48" selection-start-line="86" selection-start-column="48" selection-end-line="86" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3791">
+          <caret line="242" selection-start-line="242" selection-end-line="242" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Mesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="106" column="90" selection-start-line="106" selection-start-column="90" selection-end-line="106" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Texture.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" column="27" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Material.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/joml-1.9.9.jar!/org/joml/Vector3f.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="e#896#897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/enviorment/Scene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="52" column="32" selection-start-line="52" selection-start-column="32" selection-end-line="52" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/State.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="43" lean-forward="true" selection-start-line="45" selection-start-column="43" selection-end-line="45" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Timer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/GameLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="100" lean-forward="true" selection-start-line="100" selection-end-line="100" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/TutGameLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="364">
+          <caret line="122" column="8" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/graph/Line.java">
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/SkyBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        <state relative-caret-position="204">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_frag.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/vertex.vs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/fragment.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1524">
+          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/sceneRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="217" column="37" selection-start-line="217" selection-start-column="37" selection-end-line="217" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/mesh/HeightMapMesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="212" selection-start-line="212" selection-end-line="212" />
+          <folding>
+            <element signature="e#7190#7191#0" expanded="true" />
+            <element signature="e#7217#7218#0" expanded="true" />
+            <element signature="e#7256#7257#0" expanded="true" />
+            <element signature="e#7298#7299#0" expanded="true" />
+            <element signature="e#7337#7338#0" expanded="true" />
+            <element signature="e#7379#7380#0" expanded="true" />
+            <element signature="e#7409#7410#0" expanded="true" />
+            <element signature="e#7436#7437#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7507#7508#0" expanded="true" />
+            <element signature="e#7537#7538#0" expanded="true" />
+            <element signature="e#7564#7565#0" expanded="true" />
+            <element signature="e#7603#7604#0" expanded="true" />
+            <element signature="e#7635#7636#0" expanded="true" />
+            <element signature="e#7677#7678#0" expanded="true" />
+            <element signature="e#7713#7714#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Terrain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/draw/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="23" lean-forward="true" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/util/Transformation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="27" column="72" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cxv1/engine3D/entity/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="749">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4379#4380#0" expanded="true" />
+            <element signature="e#4408#4409#0" expanded="true" />
+            <element signature="e#4452#4453#0" expanded="true" />
+            <element signature="e#4488#4489#0" expanded="true" />
+            <element signature="e#4674#4675#0" expanded="true" />
+            <element signature="e#4700#4701#0" expanded="true" />
+            <element signature="e#4754#4755#0" expanded="true" />
+            <element signature="e#4784#4785#0" expanded="true" />
+            <element signature="e#4816#4817#0" expanded="true" />
+            <element signature="e#4842#4843#0" expanded="true" />
+            <element signature="e#4882#4883#0" expanded="true" />
+            <element signature="e#4912#4913#0" expanded="true" />
+            <element signature="e#4946#4947#0" expanded="true" />
+            <element signature="e#4974#4975#0" expanded="true" />
+            <element signature="e#5018#5019#0" expanded="true" />
+            <element signature="e#5052#5053#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -16,6 +16,7 @@ import static org.lwjgl.opengl.GL30.*;
 import cxv1.engine3D.draw.Material;
 import cxv1.engine3D.draw.MaterialManager;
 import cxv1.engine3D.draw.Texture;
+import cxv1.engine3D.entity.Terrain;
 import cxv1.engine3D.util.ShaderUtil;
 import org.lwjgl.system.MemoryUtil;
 
@@ -139,6 +140,26 @@ public class Mesh3D implements Mesh{
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(0).getTexture().getId());
         }
+
+        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        glDisableVertexAttribArray(2);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    public void render(Terrain terrain){
+        glBindVertexArray(getVaoId());
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, terrain.getGrass().getId());
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, terrain.getStone().getId());
 
         glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
 

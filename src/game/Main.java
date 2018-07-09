@@ -6,6 +6,7 @@ import cxv1.engine3D.GameLogic;
 public class Main {
 
     public static void main(String [] args){
+
         try {
             boolean vsync = false;
             TutGameLogic logic_mgr = new TutGameLogic();
@@ -15,8 +16,6 @@ public class Main {
             e.printStackTrace();
             System.exit(-1);
         }
+
     }
-
-
-
 }

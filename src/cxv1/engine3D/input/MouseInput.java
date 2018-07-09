@@ -14,6 +14,9 @@ public class MouseInput {
     private boolean leftButtonPressed = false;
     private boolean rightButtonPressed = false;
 
+    private boolean leanLeft = false;
+    private boolean leanRight = false;
+
     public MouseInput(){
         prev = new Vector2d(0,0);
         curr = new Vector2d(0,0);
@@ -33,14 +36,25 @@ public class MouseInput {
             leftButtonPressed = button == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS;
             rightButtonPressed = button == GLFW_MOUSE_BUTTON_2 && action == GLFW_PRESS;
         });
+        if(window.isKeyPressed(GLFW_KEY_Q)){
+            leanLeft = true;
+        } else {
+            leanLeft = false;
+        }
+
+        if(window.isKeyPressed(GLFW_KEY_E)){
+            leanRight = true;
+        } else {
+            leanRight = false;
+        }
     }
 
     public void input(){
         displacement.x = 0;
         displacement.y = 0;
 
-            if(curr.x - prev.x !=0){ displacement.y = (float) (curr.x - prev.x);}
-            if(curr.y - prev.y !=0){ displacement.x = (float) (curr.y - prev.y);}
+        if(curr.x - prev.x !=0){ displacement.y = (float) (curr.x - prev.x);}
+        if(curr.y - prev.y !=0){ displacement.x = (float) (curr.y - prev.y);}
 
 
         prev.x = curr.x;
@@ -51,4 +65,11 @@ public class MouseInput {
     public boolean isRightPressed(){return rightButtonPressed;}
     public boolean isLeftPressed(){return leftButtonPressed;}
 
+    public boolean isLeanLeft() {
+        return leanLeft;
+    }
+
+    public boolean isLeanRight() {
+        return leanRight;
+    }
 }

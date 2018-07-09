@@ -3,6 +3,7 @@ package cxv1.engine3D.draw.mesh;
 import cxv1.engine3D.draw.Material;
 import cxv1.engine3D.draw.MaterialManager;
 import cxv1.engine3D.draw.Texture;
+import cxv1.engine3D.entity.Player;
 import cxv1.engine3D.util.Utils;
 import cxv1.engine3D.util.loaders.TextureLoader;
 import de.matthiasmann.twl.utils.PNGDecoder;
@@ -16,24 +17,27 @@ public class HeightMapMesh {
 
     private static final int MAX_COLOR = 255*255*255;
     private static final float STARTX = -.05f;
-    private static final float STARTZ = -.05f;
-    private int height = 0, width = 0;
+    private static final float STARTZ = -.1f;
     private float minY, maxY;
+    private float[][] terrainHeight;
+    private int width, height;
+
+    private float incx, incz;
 
     private Mesh3D mesh;
 
     public HeightMapMesh (float minY, float maxY, String heightMapFile,
-                  String textureFile, int textInc) throws Exception{
+                  int textInc) throws Exception{
 
         this.maxY = maxY;
         this.minY = minY;
 
-        Texture texture = TextureLoader.loadTexture(textureFile);
-
         ByteBuffer buf = getMap(heightMapFile);
 
-        float incx = getXLength()/(width-1);
-        float incz = getZLength()/(height-1);
+        incx = getXLength()/(width-1);
+        incz = getZLength()/(height-1);
+
+        terrainHeight = new float[height][width];
 
         List<Float> posList = new ArrayList<>();
         List<Float> textureCoords = new ArrayList<>();
@@ -44,9 +48,13 @@ public class HeightMapMesh {
 
                 //System.out.println(row + " " + col);
 
+                float elevation = getHeight(col, row, width, buf);
+
                 posList.add(STARTX + col*incx);
-                posList.add(getHeight(col, row, width, buf));
+                posList.add(elevation);
                 posList.add(STARTZ + row*incz);
+
+                terrainHeight[row][col] = elevation;
 
                 textureCoords.add((float) textInc * (float) col / (float) width);
                 textureCoords.add((float) textInc * (float) row / (float) height);
@@ -70,7 +78,7 @@ public class HeightMapMesh {
         float[] normalsArr = calcNormals(posArr, width, height);
         MaterialManager mats = new MaterialManager();
         this.mesh = new Mesh3D("terrrain", posArr, textCoordsArr, indicesArr, normalsArr, mats);
-        this.mesh.setMaterial(new Material(texture, 1.0f));
+        this.mesh.setMaterial(new Material());
 
     }
 
@@ -173,6 +181,39 @@ public class HeightMapMesh {
         return this.minY + Math.abs(this.maxY - this.minY) * ((float) argb/ (float) MAX_COLOR);
     }
 
+    public float getHeight(Vector3f pos){
+        Vector3f location = new Vector3f(pos);
+
+        location.mul(0.001f);
+
+        float x = ((location.x - STARTX)/incx)%width;
+        float z = ((location.z - STARTZ)/incz)%height;
+
+        /*while(x<0){
+            x+=width;
+        }
+        while(z<0){
+            z+=height;
+        }*/
+
+        // linear interpolation
+
+        int lowX = (int)x;
+        int highX = lowX+1;
+        int lowZ = (int)z;
+        int highZ = lowZ+1;
+
+        if(highX>=width||highZ>=height){
+            return terrainHeight[lowX][lowZ];
+        }
+
+        float r1 = ((highX-x)*terrainHeight[lowZ][lowX])+((x-lowX)*terrainHeight[highZ][lowX]);
+        float r2 = ((highX-x)*terrainHeight[lowZ][highX])+((x-lowX)*terrainHeight[highZ][highX]);
+
+        return ((highZ-z)*r1)+((z-lowZ)*r2)*1000f;
+       // return terrainHeight[lowZ][lowX]*1000f;
+    }
+
     public Mesh3D getMesh(){
         return mesh;
     }
@@ -185,4 +226,23 @@ public class HeightMapMesh {
         return Math.abs(-STARTZ*2);
     }
 
+    public float getIncx() {
+        return incx;
+    }
+
+    public void setIncx(float incx) {
+        this.incx = incx;
+    }
+
+    public float getIncz() {
+        return incz;
+    }
+
+    public void setIncz(float incz) {
+        this.incz = incz;
+    }
+
+    public float[][] getTerrainHeight(){
+        return terrainHeight;
+    }
 }

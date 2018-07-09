@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Sun {
 
-    private static final Vector3f DEFAULT_DIRECTION = new Vector3f(0f, 0f, 0f);
+    private static final Vector3f DEFAULT_DIRECTION = new Vector3f(1f, 1f, 1f);
     private static final Vector3f DEFAULT_COLOR = new Vector3f(1f, 1f, 1f);
     private static final float DEFAULT_INTENSITY = 1f;
 
@@ -39,10 +39,10 @@ public class Sun {
     // to be invoked on every game update using state.getSunTimer()
     public void updateLight(double time){
 
-        light.getDirection().x = (float) Math.sin(timeToRadians(time));
-        light.getDirection().y = (float) Math.cos(timeToRadians(time));
+        //light.getDirection().x = (float) Math.sin(timeToRadians(time));
+        //light.getDirection().y = (float) Math.cos(timeToRadians(time));
 
-        light.setIntensity(Math.max(intensity * (float) Math.cos(timeToRadians(time)),0));
+        //light.setIntensity(Math.max(intensity * (float) Math.cos(timeToRadians(time)),0));
     }
 
     public float getIntensity() {
