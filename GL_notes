@@ -14,3 +14,14 @@
         glDrawElements(*, getDivisibleBy3(getVertexCount()/2), *, 0);
         // draw second half
         glDrawElements(*, getVertexCount(), *, getDivisibleBy3(getVertexCount()/2)*4);
+
+    ## MTL File cheat sheet
+
+        Color reflectivity (VEC3):
+        - ambient (Ka, map_Ka) -> (1-tex.alpha) * material.ambient + tex.alpha * tex.ambient;
+        - diffuse (Kd, map_Kd) -> (1-tex.alpha) * material.diffuse + tex.alpha * tex.diffuse;
+        - specular (Ks, map_Ks) -> (1-tex.alpha) * material.specular + tex.alpha * tex.specular;
+
+        Other values (f):
+        - specular exponent (Ns) (0-1000f)
+        - illumination (illum) (0-2f)

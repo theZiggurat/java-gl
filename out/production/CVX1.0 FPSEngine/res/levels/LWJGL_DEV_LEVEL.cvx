@@ -1,0 +1,24 @@
+#    SCENE_NAME
+name LWJGL_DEV_LEVEL
+#
+#   NAME FILENAME X   Y  Z  SCALE
+
+obj bus bus.obj -10 -5 -10 2
+obj car Avent.obj 10 -3.5 20 2
+obj dragon dragon.obj 0 0 0 3
+#
+#        R  G  B
+ambient .8 .8 .8
+#
+#      OBJFILE    TEXFILE    SCALE
+#skybox skybox.obj skybox.png 1000
+#
+#   INIT_ANGLE INTENSTIY
+sun 180       0
+#
+#     COLOR POS INTENSITY ATTENTUATION
+point 1 0 0 0 0 0   20       0 0 1
+point 0 1 0 11 -10 19   20       0 0 1
+#
+#   BLOCKS SCALE MIN MAX HEIGHTMAP GRASSTEX STONETEX TEXINC
+#terr 5 1000 -.02 .02 height.png grass2.png stone.png 15

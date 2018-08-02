@@ -23,7 +23,7 @@ public class GameEngine implements Runnable {
         window = new Window(title, width, height, vsync);
         this.logic_mgr = logic_mgr;
         timer = new Timer();
-        mouseInput = new MouseInput();
+        mouseInput = MouseInput.getInstance();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class GameEngine implements Runnable {
                 toOne -= 1;
                 CURRENT_FPS = frameCounter;
                 frameCounter = 0;
-                System.out.println("FPS: " + CURRENT_FPS +"  TIME: "+logic_mgr.getState().getRelativeSunTimer());
+                //System.out.println("FPS: " + CURRENT_FPS +"  TIME: "+logic_mgr.getState().getRelativeSunTimer());
             }
 
             timer.mark();

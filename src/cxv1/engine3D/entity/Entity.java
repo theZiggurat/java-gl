@@ -15,5 +15,6 @@ public interface Entity {
     void setRot(Vector3f rot);
     void setRot(float x, float y, float z);
     void setScale(float scale);
+    void debug();
 
 }

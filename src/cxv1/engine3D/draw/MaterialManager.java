@@ -23,16 +23,6 @@ public class MaterialManager {
     }
 
     // Creates material manager with one material
-    // texture & default values for the rest of the lighting components
-
-    // Used in HUD rendering
-    public static MaterialManager generateDefaultMaterial(Texture texture){
-        MaterialManager ret = new MaterialManager();
-        ret.setMaterial(0, new Material(texture));
-        return ret;
-    }
-
-    // Creates material manager with one material
     // all material components default
 
     // Used in MTLLoader exception handling

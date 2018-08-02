@@ -2,10 +2,7 @@ package cxv1.engine3D.draw.mesh;
 
 import cxv1.engine3D.draw.Material;
 import cxv1.engine3D.draw.MaterialManager;
-import cxv1.engine3D.draw.Texture;
-import cxv1.engine3D.entity.Player;
 import cxv1.engine3D.util.Utils;
-import cxv1.engine3D.util.loaders.TextureLoader;
 import de.matthiasmann.twl.utils.PNGDecoder;
 import org.joml.Vector3f;
 
@@ -54,7 +51,7 @@ public class HeightMapMesh {
                 posList.add(elevation);
                 posList.add(STARTZ + row*incz);
 
-                terrainHeight[row][col] = elevation;
+                terrainHeight[col][row] = elevation;
 
                 textureCoords.add((float) textInc * (float) col / (float) width);
                 textureCoords.add((float) textInc * (float) row / (float) height);
@@ -189,12 +186,12 @@ public class HeightMapMesh {
         float x = ((location.x - STARTX)/incx)%width;
         float z = ((location.z - STARTZ)/incz)%height;
 
-        /*while(x<0){
+        while(x<0){
             x+=width;
         }
         while(z<0){
             z+=height;
-        }*/
+        }
 
         // linear interpolation
 
@@ -207,11 +204,10 @@ public class HeightMapMesh {
             return terrainHeight[lowX][lowZ];
         }
 
-        float r1 = ((highX-x)*terrainHeight[lowZ][lowX])+((x-lowX)*terrainHeight[highZ][lowX]);
-        float r2 = ((highX-x)*terrainHeight[lowZ][highX])+((x-lowX)*terrainHeight[highZ][highX]);
+        float r1 = ((highX-x)*terrainHeight[lowX][lowZ])+((x-lowX)*terrainHeight[highX][lowZ]);
+        float r2 = ((highX-x)*terrainHeight[lowX][highZ])+((x-lowX)*terrainHeight[highX][highZ]);
 
-        return ((highZ-z)*r1)+((z-lowZ)*r2)*1000f;
-       // return terrainHeight[lowZ][lowX]*1000f;
+        return (((highZ-z)*r1)+((z-lowZ)*r2));
     }
 
     public Mesh3D getMesh(){

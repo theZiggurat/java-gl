@@ -1,6 +1,7 @@
 package cxv1.engine3D.draw.mesh;
 
 import cxv1.engine3D.draw.Texture;
+import cxv1.engine3D.entity.Terrain;
 import cxv1.engine3D.util.ShaderUtil;
 
 import java.nio.FloatBuffer;
@@ -25,6 +26,7 @@ public class Mesh2D implements Mesh{
 
     public void render(ShaderUtil shaderUtil){}
     public void render(){}
+    public void render(Terrain terrain){}
 
     public int getVaoId(){
         return vaoId;

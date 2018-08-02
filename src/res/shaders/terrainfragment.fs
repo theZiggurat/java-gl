@@ -45,11 +45,12 @@ struct DirectionalLight
 
 uniform sampler2D texture_sampler_grass;
 uniform sampler2D texture_sampler_stone;
+
 uniform vec3 ambientLight;
-uniform float specularPower;
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 uniform DirectionalLight directionalLight;
+uniform float specularPower;
 
 vec4 ambientC;
 vec4 diffuseC;
@@ -57,16 +58,16 @@ vec4 speculrC;
 
 void setupColors(vec2 textureCoord)
 {
-    float stoneComp, grassComp;
+    float grassComp;
 
-    grassComp = abs(dot(normalize(cliffShear), UP))/4;
-    stoneComp = 1-grassComp;
+    grassComp = abs(dot(normalize(cliffShear), UP))/1.2;
 
-    //ambientC = texture(texture_sampler_grass,textureCoord);
-    //ambientC = texture(texture_sampler_stone,textureCoord);
-    ambientC = (grassComp*vec4(0.1294117647,0.58823529411,0.16470588235,1)) + (stoneComp*vec4(0.15294117647, 0.26666666666, 0.13725490196, 1));//texture(texture_sampler_grass, textureCoord);//*vec4(1,1,1,0);
-    diffuseC = texture(texture_sampler_stone, textureCoord);
-    speculrC = texture(texture_sampler_grass, textureCoord);
+    vec4 grassColor = texture(texture_sampler_grass, textureCoord);
+    vec4 stoneColor = texture(texture_sampler_stone, textureCoord);
+
+    ambientC = mix(stoneColor,grassColor, grassComp);
+    diffuseC = ambientC;
+    speculrC = ambientC;
 }
 
 vec4 calcLightColor(vec3 light_color, float light_intensity, vec3 position, vec3 to_light_dir, vec3 normal)
@@ -119,9 +120,10 @@ vec4 calcSpotLight(SpotLight light, vec3 position, vec3 normal)
     return color;
 }
 
-vec4 calcDirectionalLight(DirectionalLight light, vec3 position, vec3 normal)
+vec4 calcDirectionalLight(DirectionalLight directionalLight, vec3 position, vec3 normal)
 {
-    return calcLightColor(light.color, light.intensity, position, normalize(light.direction), normal);
+    return calcLightColor(directionalLight.color, directionalLight.intensity,
+                        position, normalize(directionalLight.direction), normal);
 }
 
 void main()
@@ -140,5 +142,6 @@ void main()
         }
     }
 
-    fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecularComp;
+    fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecularComp +
+                (0.000001f*specularPower);
 }

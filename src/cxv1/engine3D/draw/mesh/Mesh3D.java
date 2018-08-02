@@ -105,9 +105,14 @@ public class Mesh3D implements Mesh{
             // loads texture from material
 
             // activate texture
-            if(materialManager.getMaterial(i).isTextured()){
+            if(materialManager.getMaterial(i).isDiffuseMapped()){
                 glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(i).getTexture().getId());
+                glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(i).getDiffuseMap().getId());
+            }
+
+            if(materialManager.getMaterial(i).isNormalMapped()){
+                glActiveTexture(GL_TEXTURE0+1);
+                glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(i).getNormalMap().getId());
             }
 
             // activate material
@@ -131,37 +136,22 @@ public class Mesh3D implements Mesh{
 
     public void render(){
 
-        glBindVertexArray(getVaoId());
-        glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
-        glEnableVertexAttribArray(2);
-
-        if(materialManager.getMaterial(0).isTextured()){
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, materialManager.getMaterial(0).getTexture().getId());
-        }
-
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
-
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(2);
-        glBindVertexArray(0);
-        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     public void render(Terrain terrain){
+
         glBindVertexArray(getVaoId());
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
 
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0+terrain.getGrass().getId());
         glBindTexture(GL_TEXTURE_2D, terrain.getGrass().getId());
-        glActiveTexture(GL_TEXTURE1);
+        glActiveTexture(GL_TEXTURE0+terrain.getStone().getId());
         glBindTexture(GL_TEXTURE_2D, terrain.getStone().getId());
 
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, getVertexCount(),
+                GL_UNSIGNED_INT, 0);
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

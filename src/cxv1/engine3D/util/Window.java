@@ -31,7 +31,7 @@ public class Window {
             throw new IllegalStateException("Unable to initialize GLFW");
         }
 
-        glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+        glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
         windowHandle = glfwCreateWindow(width, height, title, 0, NULL);
@@ -64,7 +64,7 @@ public class Window {
 
         glfwShowWindow(windowHandle);
         GL.createCapabilities();
-        glClearColor(0f, 0f, 0f, 0.0f);
+        glClearColor(.4f, .4f, .4f, 1f);
 
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);

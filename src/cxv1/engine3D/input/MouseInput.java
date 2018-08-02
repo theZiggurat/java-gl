@@ -7,9 +7,9 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class MouseInput {
 
-    private final Vector2d prev;
-    private final Vector2d curr;
-    private final Vector2f displacement;
+    private Vector2d prev;
+    private Vector2d curr;
+    private Vector2f displacement;
     private boolean inWindow = false;
     private boolean leftButtonPressed = false;
     private boolean rightButtonPressed = false;
@@ -17,13 +17,21 @@ public class MouseInput {
     private boolean leanLeft = false;
     private boolean leanRight = false;
 
-    public MouseInput(){
-        prev = new Vector2d(0,0);
-        curr = new Vector2d(0,0);
-        displacement = new Vector2f();
+    private static MouseInput instance = null;
+
+    public static MouseInput getInstance(){
+        if(instance == null){
+            instance = new MouseInput();
+        }
+        return instance;
     }
 
     public void init(Window window){
+
+        this.prev = new Vector2d(0,0);
+        this.curr = new Vector2d(0,0);
+        this.displacement = new Vector2f();
+
         glfwSetCursorPosCallback(window.getHandle(), (windowHandle, x, y) -> {
             curr.x = x;
             curr.y = y;

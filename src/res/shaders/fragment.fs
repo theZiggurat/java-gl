@@ -6,6 +6,7 @@ const int MAX_SPOT_LIGHTS = 5;
 in vec2 outTextureCoord;
 in vec3 lightVertexNormal;
 in vec3 lightVertexPos;
+in mat4 outModelViewMatrix;
 
 out vec4 fragColor;
 
@@ -45,10 +46,14 @@ struct Material
     vec4 diffuse;
     vec4 specular;
     int hasTexture;
+    int hasNormalMap;
+    float transparency;
     float reflectance;
 };
 
 uniform sampler2D texture_sampler;
+uniform sampler2D normal_sampler;
+
 uniform vec3 ambientLight;
 uniform float specularPower;
 uniform Material material;
@@ -74,6 +79,16 @@ void setupColors(Material material, vec2 textureCoord)
         diffuseC = material.diffuse;
         speculrC = material.specular;
     }
+}
+
+vec3 calcNormal(Material material, vec3 normal, vec2 text_coord, mat4 modelViewMatrix){
+    vec3 ret = normal;
+    if(material.hasNormalMap == 1){
+        ret = texture(normal_sampler, text_coord).rgb;
+        ret = normalize(ret * 2 - 1);
+        ret = normalize(modelViewMatrix * vec4(ret, 0.0f)).xyz;
+    }
+    return ret;
 }
 
 vec4 calcLightColor(vec3 light_color, float light_intensity, vec3 position, vec3 to_light_dir, vec3 normal)
@@ -135,17 +150,19 @@ void main()
 {
     setupColors(material, outTextureCoord);
 
-    vec4 diffuseSpecularComp = calcDirectionalLight(directionalLight, lightVertexPos, lightVertexNormal);
+    vec3 currNormal = calcNormal(material, lightVertexNormal, outTextureCoord, outModelViewMatrix);
+
+    vec4 diffuseSpecularComp = calcDirectionalLight(directionalLight, lightVertexPos, currNormal);
     for(int i = 0; i<MAX_POINT_LIGHTS; i++){
         if(pointLights[i].intensity>0){
-            diffuseSpecularComp += calcPointLight(pointLights[i], lightVertexPos, lightVertexNormal);
+            diffuseSpecularComp += calcPointLight(pointLights[i], lightVertexPos, currNormal);
         }
     }
     for(int i = 0; i<MAX_SPOT_LIGHTS; i++){
-        if(spotLights[i].point.intensity > 0){
-            diffuseSpecularComp += calcSpotLight(spotLights[i], lightVertexPos, lightVertexNormal);
+        if(spotLights[i].point.intensity>0){
+            diffuseSpecularComp += calcSpotLight(spotLights[i], lightVertexPos, currNormal);
         }
     }
 
-    fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecularComp;
+    fragColor = ambientC * vec4(ambientLight, 1.0f) + diffuseSpecularComp;
 }

@@ -3,6 +3,7 @@ package cxv1.engine3D.entity;
 import cxv1.engine3D.draw.Texture;
 import cxv1.engine3D.draw.mesh.HeightMapMesh;
 import cxv1.engine3D.util.ShaderUtil;
+import cxv1.engine3D.util.loaders.ImageLoader;
 import cxv1.engine3D.util.loaders.TextureLoader;
 import cxv1.engine3D.util.Transformation;
 import org.joml.Matrix4f;
@@ -10,20 +11,29 @@ import org.joml.Vector3f;
 
 public class Terrain {
 
-    private final Entity[] entities;
+    private Entity[] entities;
     private int blocksPerRow;
     Texture grass, stone;
     private HeightMapMesh og;
 
-    public Terrain(int blocksPerRow, float scale, float minY, float maxY,
+    float scale;
+
+    public Terrain(){
+
+    }
+
+    public void init(int blocksPerRow, float scale, float minY, float maxY,
            String heightMapFile, String grassTexture, String stoneTexture, int textInc) throws Exception {
+
         this.blocksPerRow = blocksPerRow;
         entities = new Entity[blocksPerRow*blocksPerRow];
 
+        this.scale = scale;
+
         og = new HeightMapMesh(minY, maxY, heightMapFile, textInc);
 
-        grass = TextureLoader.loadTexture(grassTexture);
-        stone = TextureLoader.loadTexture(stoneTexture);
+        grass = ImageLoader.loadImage(grassTexture);
+        stone = ImageLoader.loadImage(stoneTexture);
 
         for(int row = 0; row < blocksPerRow; row++){
             for(int col = 0; col < blocksPerRow; col++){
@@ -44,14 +54,13 @@ public class Terrain {
             for(int col = 0; col < blocksPerRow; col++) {
                 Matrix4f modelViewMatrix = transformation.getModelViewMatrix(entities[row*blocksPerRow+col], viewMatrix);
                 terrainShader.setUniform("modelViewMatrix", modelViewMatrix);
-                entities[row*blocksPerRow+col].getMesh().render();
+                entities[row*blocksPerRow+col].getMesh().render(this);
             }
         }
     }
 
-    public float getHeight(Vector3f pos){
-
-        return og.getHeight(pos);
+    public float getHeight(Vector3f pos, float playerHeight){
+        return (og.getHeight(pos)*scale)+playerHeight;
     }
 
     public Entity[] getEntities(){

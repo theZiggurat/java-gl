@@ -96,7 +96,7 @@ public class ShaderUtil {
 
     // matrix4 uniform
     public void setUniform(String name, Matrix4f matrix){
-
+        if(uniforms.get(name)==null){ return; }
         try(MemoryStack stack = MemoryStack.stackPush()){
             FloatBuffer fb = stack.mallocFloat(16);
             matrix.get(fb);
@@ -106,21 +106,25 @@ public class ShaderUtil {
 
     // single int uniform (i)
     public void setUniform(String name, int id){
+        if(uniforms.get(name)==null){ return; }
         glUniform1i(uniforms.get(name), id);
     }
 
     // single float uniform (f)
     public void setUniform(String name, float value) {
+        if(uniforms.get(name)==null){ return; }
         glUniform1f(uniforms.get(name), value);
     }
 
     // vec4 uniform (<x,y,z,w>)
-    public void setUniform(String uniformName, Vector4f value) {
-        glUniform4f(uniforms.get(uniformName), value.x, value.y, value.z, value.w);
+    public void setUniform(String name, Vector4f value) {
+        if(uniforms.get(name)==null){ return; }
+        glUniform4f(uniforms.get(name), value.x, value.y, value.z, value.w);
     }
 
     // vec3 uniform (<x,y,z>)
     public void setUniform(String name, Vector3f vec){
+        if(uniforms.get(name)==null){ return; }
         glUniform3f(uniforms.get(name), vec.x, vec.y, vec.z);
     }
 
@@ -191,12 +195,15 @@ public class ShaderUtil {
         createUniform(uniformName + ".diffuse");
         createUniform(uniformName + ".specular");
         createUniform(uniformName + ".hasTexture");
+        createUniform(uniformName + ".hasNormalMap");
         createUniform(uniformName + ".reflectance");
     }   public void setUniform(String uniformName, Material material) {
         setUniform(uniformName + ".ambient", material.getAmbientColor());
         setUniform(uniformName + ".diffuse", material.getDiffuseColor());
         setUniform(uniformName + ".specular", material.getSpecularColor());
-        setUniform(uniformName + ".hasTexture", material.isTextured() ? 1 : 0);
+        setUniform(uniformName + ".hasTexture", material.isDiffuseMapped() ? 1 : 0);
+        setUniform(uniformName + ".hasNormalMap", material.isNormalMapped() ? 1 : 0);
+        setUniform(uniformName + ".transparency", material.getTransparency());
         setUniform(uniformName + ".reflectance", material.getReflectance());
     }
 

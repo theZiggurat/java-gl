@@ -4,7 +4,7 @@ import cxv1.engine3D.draw.mesh.Mesh;
 import cxv1.engine3D.draw.mesh.Mesh3D;
 import org.joml.Vector3f;
 
-public class StaticEntity implements Entity{
+public class StaticEntity implements Entity {
 
     private Mesh3D mesh3D;
     private Vector3f pos, rot;
@@ -33,5 +33,16 @@ public class StaticEntity implements Entity{
     public void setRot(Vector3f rot){this.rot = rot;}
     public void setRot(float x, float y, float z){ rot.x = x; rot.y = y; rot.z = z; }
     public void setScale(float scale){this.scale = scale;}
+
+    public void debug(){
+        System.out.println("PlayerPos: "
+                + getPos().x + " "
+                + getPos().y + " "
+                + getPos().z);
+        System.out.println("PlayerRot: "
+                + getRot().x + " "
+                + getRot().y + " "
+                + getRot().z);
+    }
 
 }

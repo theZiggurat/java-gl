@@ -85,9 +85,17 @@ public class OBJLoader {
                     break;
 
                 case "f": // faces
-                    Face face = new Face(tokens[1], tokens[2], tokens[3]);
-                    faces.add(face);
+
+                    Face tri_face = new Face(tokens[1], tokens[2], tokens[3]);
+                    faces.add(tri_face);
                     faceIndex++;
+
+                    if(tokens.length == 5){ // quad -> tri conversion
+                        Face quad_patch = new Face(tokens[1], tokens[3], tokens[4]);
+                        faces.add(quad_patch);
+                        faceIndex++;
+                    }
+
                     break;
 
                 default:

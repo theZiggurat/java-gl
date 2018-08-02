@@ -18,6 +18,12 @@ public class Texture {
         height = 0;
     }
 
+    public Texture(int id, int _width, int _height) {
+        this.id = id;
+        this.width = _width;
+        this.height = _height;
+    }
+
     public void setWidth(int width){
         this.width = width;
     }

@@ -3,16 +3,30 @@ package cxv1.engine3D.draw.lighting;
 import com.sun.javafx.scene.traversal.Direction;
 import org.joml.Vector3f;
 
+import java.awt.*;
+
 public class SceneLight {
 
     private Vector3f ambientLight;
     private PointLight[] pointLights;
     private SpotLight[] spotLights;
-    private DirectionalLight directionalLight;
     private Sun sun;
+
+    public SceneLight(){
+        pointLights = new PointLight[5];
+        spotLights = new SpotLight[5];
+    }
 
     public Vector3f getAmbientLight() {
         return ambientLight;
+    }
+
+    public void addPointLight(PointLight pointLight){
+        for(int i = 0; i<5; i++){
+            if(pointLights[i] == null|| i == 4){
+                pointLights[i] = pointLight;
+            }
+        }
     }
 
     public void setAmbientLight(Vector3f ambientLight) {
@@ -41,13 +55,5 @@ public class SceneLight {
 
     public void setSun(Sun sun) {
         this.sun = sun;
-    }
-
-    public DirectionalLight getDirectionalLight() {
-        return directionalLight;
-    }
-
-    public void setDirectionalLight(DirectionalLight directionalLight) {
-        this.directionalLight = directionalLight;
     }
 }

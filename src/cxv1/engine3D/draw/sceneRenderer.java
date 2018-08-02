@@ -1,10 +1,13 @@
 package cxv1.engine3D.draw;
 
+import com.sun.istack.internal.NotNull;
 import cxv1.engine3D.draw.lighting.DirectionalLight;
 import cxv1.engine3D.draw.lighting.SceneLight;
 import cxv1.engine3D.draw.lighting.SpotLight;
 import cxv1.engine3D.draw.mesh.Mesh;
 import cxv1.engine3D.draw.mesh.Mesh3D;
+import cxv1.engine3D.entity.CVXController;
+import cxv1.engine3D.entity.CameraEntity;
 import cxv1.engine3D.entity.SkyBox;
 import cxv1.engine3D.enviorment.Scene;
 import cxv1.engine3D.util.ShaderUtil;
@@ -18,6 +21,8 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 
+import javax.lang.model.type.PrimitiveType;
+
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -29,9 +34,9 @@ public class sceneRenderer {
     public static final int MAX_POINT_LIGHT = 5;
     public static final int MAX_SPOT_LIGHT = 5;
 
-    private float FOV = (float) Math.toRadians(90); // default val
-    private static final float Z_NEAR = 0.01f;
-    private static final float Z_FAR  = 1000.0f;
+    private float FOV = (float) Math.toRadians(85); // default val
+    private static final float Z_NEAR = .1f;
+    private static final float Z_FAR  = 10000.0f;
     private Transformation transformation;
     private float specularPower;
 
@@ -108,17 +113,25 @@ public class sceneRenderer {
         sceneShader.createDirectionLightUniform("directionalLight");
     }
 
+    /*
+        Terrain Shader
+     */
     private void setupTerrainShader() throws Exception{
+
         terrainShader = new ShaderUtil();
         terrainShader.createVertexShader(Utils.loadResource("/res/shaders/terrainvertex.vs"));
         terrainShader.createFragmentShader(Utils.loadResource("/res/shaders/terrainfragment.fs"));
         terrainShader.link();
 
+        // vertex shader uniforms
+
         terrainShader.createUniform("projectionMatrix");
         terrainShader.createUniform("modelViewMatrix");
+
+        // fragment shader uniforms
+
         terrainShader.createUniform("texture_sampler_grass");
         terrainShader.createUniform("texture_sampler_stone");
-
         terrainShader.createUniform("specularPower");
         terrainShader.createUniform("ambientLight");
         terrainShader.createPointLightsUniform("pointLights", MAX_POINT_LIGHT);
@@ -127,7 +140,7 @@ public class sceneRenderer {
     }
 
     /*
-        Skybox Shader
+        Sky-box Shader
      */
     private void setupSkyboxShader() throws Exception {
         skyBoxShader = new ShaderUtil();
@@ -147,7 +160,8 @@ public class sceneRenderer {
     /*
         Main render call
      */
-    public void render(Window window, Camera camera, Scene scene){
+    public void render(Window window, CameraEntity perspective, Scene scene){
+
         clear();
 
         // check for window resize
@@ -156,15 +170,15 @@ public class sceneRenderer {
             window.setResized(false);
         }
 
-        // render scene
-        renderScene(window, camera, scene);
+        renderScene(window, perspective.getCamera(), scene);
 
-        renderTerrain(window, camera, scene);
+        if(scene.getTerrain() != null) {
+            renderTerrain(window, perspective.getCamera(), scene);
+        }
 
-
-
-        // render skybox
-        renderSkyBox(window, camera, scene);
+        if(scene.getSkyBox() != null) {
+            renderSkyBox(window, perspective.getCamera(), scene);
+        }
 
     }
 
@@ -172,7 +186,7 @@ public class sceneRenderer {
         Combines all renderScene methods into one call
         @param window, camera, entities, and sceneLight
      */
-    private void renderScene(Window window, Camera camera, Scene scene){
+    private void renderScene( Window window, Camera camera, Scene scene){
 
         sceneShader.bind();
 
@@ -189,8 +203,9 @@ public class sceneRenderer {
         renderLights(viewMatrix, scene.getSceneLight(), sceneShader);
 
         sceneShader.setUniform("texture_sampler", 0);
+        sceneShader.setUniform("normal_sampler", 1);
 
-        for(Entity e: scene.getEntities()){
+        for(Entity e: scene.getEntities().values()){
 
             // null checking on entity and mesh
             if(e == null){continue;}
@@ -261,13 +276,17 @@ public class sceneRenderer {
         PointLight[] pointLights = sceneLight.getPointLights();
         int numLights = pointLights != null ? pointLights.length : 0;
         for(int i = 0; i < numLights; i++){
-            renderPointLight(viewMatrix, shader, pointLights[i], i);
+            if(pointLights[i] != null) {
+                renderPointLight(viewMatrix, shader, pointLights[i], i);
+            }
         }
 
         SpotLight[] spotLights = sceneLight.getSpotLights();
         numLights = spotLights != null ? spotLights.length : 0;
         for(int i = 0; i < numLights; i++){
-            renderSpotLight(viewMatrix, shader, spotLights[i], i);
+            if(spotLights[i] != null) {
+                renderSpotLight(viewMatrix, shader, spotLights[i], i);
+            }
         }
 
         renderDirectionalLight(viewMatrix, shader, sceneLight.getSun().getLight());

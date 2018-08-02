@@ -15,7 +15,17 @@ public class State {
     private int days;
     private double interval;
 
-    public State(){
+    private static State instance;
+
+    public static State getInstance(){
+        if(instance == null){
+            instance = new State();
+            instance.init();
+        }
+        return instance;
+    }
+
+    private State(){
         this.physicsMultiplier = DEFAULT_PHYSICS_MULTIPLIER;
         this.sunSpeedMultiplier = DEFAULT_SUN_SPEED_MODIFIER;
     }

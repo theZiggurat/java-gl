@@ -2,9 +2,11 @@ package cxv1.engine3D.util.loaders;
 
 import cxv1.engine3D.draw.Texture;
 import de.matthiasmann.twl.utils.PNGDecoder;
+import sun.misc.IOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;

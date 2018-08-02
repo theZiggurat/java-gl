@@ -1,5 +1,6 @@
 package cxv1.engine3D.draw.mesh;
 
+import cxv1.engine3D.entity.Terrain;
 import cxv1.engine3D.util.ShaderUtil;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface Mesh {
 
     void render(ShaderUtil shader);
     void render();
+    void render(Terrain terrain);
     List<Integer> getVboList();
     int getVaoId();
 
