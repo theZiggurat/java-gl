@@ -68,7 +68,7 @@ public class ShaderUtil {
     }
 
     /*
-        Must be launcehd after creating shaders
+        Must be launched after creating shaders
      */
     public void link() throws Exception{
         glLinkProgram(programId);

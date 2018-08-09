@@ -86,7 +86,7 @@ j  org.lwjgl.opengl.GL11.glDrawElements(IIIJ)V+4
 j  Mesh3D.render()V+52
 j  sceneRenderer.renderScene(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;)V+147
 j  sceneRenderer.render(Lcxv1/engine3D/util/Window;Lcxv1/engine3D/draw/Camera;[Lcxv1/engine3D/entity/Entity;Lcxv1/engine3D/draw/lighting/SceneLight;Lcxv1/engine3D/draw/Hud;)V+35
-j  game.TutGameLogic.render(Lcxv1/engine3D/util/Window;D)V+28
+j  v1.engine.game.TutGameLogic.render(Lcxv1/engine3D/util/Window;D)V+28
 j  GameEngine.render()V+13
 j  GameEngine.loop()V+138
 j  GameEngine.run()V+5
@@ -374,7 +374,7 @@ Dynamic libraries:
 
 VM Arguments:
 jvm_args: -javaagent:F:\IDE\IntelliJ IDEA 2018.1.2\lib\idea_rt.jar=57405:F:\IDE\IntelliJ IDEA 2018.1.2\bin -Dfile.encoding=UTF-8 
-java_command: game.Main
+java_command: v1.engine.game.Main
 java_class_path (initial): C:\Program Files\Java\jdk1.8.0_171\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_171\jre\lib\rt.jar;F:\Java\Workspace\LWJGL_test\out\production\LWJGL_test;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl-javadoc.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl-sources.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl-natives-linux.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl-natives-macos.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl\lwjgl-natives-windows.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl-assimp\lwjgl-assimp.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl-assimp\lwjgl-assimp-javadoc.jar;F:\Java\Workspace\LWJGL_test\libs\lwjgl-assimp\lwjgl-assimp-sources.jar;F:\Java\Workspace\LWJGL_te
 Launcher Type: SUN_STANDARD
 

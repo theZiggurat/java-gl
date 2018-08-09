@@ -1,9 +1,9 @@
 package v1.engine;
 
-import v2.engine.system.MouseInput;
+import v2.engine.system.InputCore;
 import v1.engine.util.Timer;
 import v1.engine.util.Window;
-import game.TutGameLogic;
+import v1.engine.game.TutGameLogic;
 
 public class GameEngine implements Runnable {
 
@@ -14,7 +14,7 @@ public class GameEngine implements Runnable {
     private final Thread gameLoopThread;
     private final Timer timer;
     private final TutGameLogic logic_mgr;
-    private final MouseInput mouseInput;
+    private final InputCore mouseInput;
 
 
     public GameEngine(String title, int width, int height,
@@ -24,7 +24,7 @@ public class GameEngine implements Runnable {
         window = new Window(title, width, height, vsync);
         this.logic_mgr = logic_mgr;
         timer = new Timer();
-        mouseInput = MouseInput.getInstance();
+        mouseInput = InputCore.getInstance();
 
     }
 
@@ -43,7 +43,7 @@ public class GameEngine implements Runnable {
     protected void init() throws Exception{
         window.init();
         timer.init();
-        mouseInput.init();
+        mouseInput.init(window);
         logic_mgr.init();
     }
 

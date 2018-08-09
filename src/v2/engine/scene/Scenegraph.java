@@ -23,22 +23,22 @@ public class Scenegraph extends Node {
     @Override
     public void update(){
         super.update();
-        opaqueObjects.update();
-        transparentObjects.update();
+//        opaqueObjects.update();
+//        transparentObjects.update();
     }
 
     @Override
     public void render(){
         super.render();
-        opaqueObjects.render();
-        transparentObjects.render();
+//        opaqueObjects.render();
+//        transparentObjects.render();
     }
 
     @Override
     public void cleanup(){
         super.cleanup();
-        opaqueObjects.cleanup();
-        transparentObjects.cleanup();
+//        opaqueObjects.cleanup();
+//        transparentObjects.cleanup();
     }
 
 

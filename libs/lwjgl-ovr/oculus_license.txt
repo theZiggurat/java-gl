@@ -54,8 +54,8 @@ party software unless otherwise noted.
 derived exclusively from the RIFT SDK by you; provided, however, that RIFT SDK 
 Derivatives do not include the Developer Content (engines, utilities, applications, 
 content, games or demos) which may be developed using the RIFT SDK.  By way of example 
-a mobile application or game or demo that is developed using the RIFT SDK would not 
-be a RIFT SDK Derivative , nor would a utility or tool set in a pre-existing game 
+a mobile application or v1.engine.game or demo that is developed using the RIFT SDK would not
+be a RIFT SDK Derivative , nor would a utility or tool set in a pre-existing v1.engine.game
 engine that is adapted to work with the RIFT SDK be a RIFT SDK Derivative. 
 By way of example, but not limitation, a RIFT SDK Derivative is or would be: either (i) 
 an adaptation of a utility or piece of code from the RIFT SDK to improve efficiency; 

@@ -2,7 +2,7 @@ package v1.engine.entity;
 
 import v1.engine.draw.Camera;
 import v1.engine.enviorment.Scene;
-import v2.engine.system.MouseInput;
+import v2.engine.system.InputCore;
 import v1.engine.util.State;
 import v1.engine.util.Window;
 import org.joml.Vector2f;
@@ -91,9 +91,9 @@ public class FPSControllerEntity extends CameraEntity{
     }
 
     private void handleMouse(){
-        MouseInput input = MouseInput.getInstance();
+        InputCore input = InputCore.getInstance();
 
-        Vector2f rotation = input.getDisplacement();
+        Vector2f rotation = new Vector2f((float)input.getDisplacement().x, (float)input.getDisplacement().y);
         getCamera().moveRotation(rotation.x * MOUSE_SENS,
                 rotation.y * MOUSE_SENS,
                 0);

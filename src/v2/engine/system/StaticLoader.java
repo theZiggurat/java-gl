@@ -1,8 +1,6 @@
-package v1.engine.util.loaders;
+package v2.engine.system;
 
-import v1.engine.draw.Texture;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,15 +12,19 @@ import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengles.GLES20.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glTexImage2D;
 import static org.lwjgl.stb.STBImage.*;
+import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 
-public class ImageLoader {
+public class StaticLoader {
 
-    public static Texture loadImage(String filename){
+    /**
+     * Utility for loading image bytebuffers.
+     * @param filename image path with format "res/image/*"
+     * @return flipped byte buffer with image data
+     */
+    public static ByteBuffer loadImage(String filename){
 
         ByteBuffer buffer;
 
@@ -52,64 +54,54 @@ public class ImageLoader {
             throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
         }
 
-        int width = w.get(0);
-        int height = h.get(0);
-        int comp = c.get(0);
+        return image;
+    }
 
-        int id = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, id);
+    /**
+     * Utility for loading string resources
+     * @param filePath image path with format "res/*"
+     * @return String resource
+     * @throws Exception if path is not found
+     */
+    public static String loadResource(String filePath) throws Exception {
+        String result;
 
-        glTexParameteri(GL11.GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL11.GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        try (
+            InputStream in = StaticLoader.class.getResourceAsStream(filePath);
+            Scanner scanner = new Scanner(in, "UTF-8"))
 
-        if(comp == 3){
-            if((width&3)!=0){
-                glPixelStorei(GL_UNPACK_ALIGNMENT, 2-(width&1));
-            }
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0,
-                    GL_RGB, GL_UNSIGNED_BYTE, image);
-        } else {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0,
-                    GL_RGBA, GL_UNSIGNED_BYTE, image);
-        }
+        { result = scanner.useDelimiter("\\A").next(); }
 
-
-        //stbi_image_free(image);
-
-        Texture texture = new Texture(id, width, height);
-
-        return texture;
+        return result;
     }
 
     public static ByteBuffer ioResourceToBuffer(String filename, int bufferSize) throws IOException {
 
         ByteBuffer buffer;
-
-
         Path path = Paths.get(filename);
+
         if(Files.isReadable(path)){
             try(SeekableByteChannel channel = Files.newByteChannel(path)){
                 buffer = BufferUtils.createByteBuffer((int)channel.size()+1);
             }
-        } else{
+        }
+        else {
             try (
-                InputStream is = ImageLoader.class.getClassLoader().getResourceAsStream("res/textures/"+filename);
+                InputStream is = StaticLoader.class.getClassLoader().getResourceAsStream(filename);
                 ReadableByteChannel rbc = Channels.newChannel(is)
             ){
                 buffer = BufferUtils.createByteBuffer(bufferSize);
-
-                while(true){
+                while (true) {
                     int bytes = rbc.read(buffer);
-                    if(bytes == -1){ // end of stream
-                        break;
-                    }
 
-                    if(buffer.remaining() == 0){
-                        buffer = resizeBuffer(buffer, buffer.capacity()*2);
+                    if (bytes == -1)
+                        break;
+                    if (buffer.remaining() == 0)
+                        buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+
                     }
                 }
             }
-        }
 
         buffer.flip();
         return buffer;

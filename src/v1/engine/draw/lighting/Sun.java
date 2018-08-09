@@ -34,7 +34,7 @@ public class Sun {
         return light;
     }
 
-    // to be invoked on every game update using state.getSunTimer()
+    // to be invoked on every v1.engine.game update using state.getSunTimer()
     public void updateLight(double time){
 
         light.getDirection().x = (float) Math.sin(timeToRadians(time));

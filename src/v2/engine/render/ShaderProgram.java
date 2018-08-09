@@ -5,8 +5,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
-import v1.engine.util.Utils;
 import v2.engine.scene.ModuleNode;
+import v2.engine.system.StaticLoader;
 
 import java.nio.FloatBuffer;
 import java.util.HashMap;
@@ -48,7 +48,7 @@ public class ShaderProgram {
 
     protected int createShader(String shaderPath, int shaderType) throws Exception {
 
-        String shaderCode = Utils.loadResource(shaderPath);
+        String shaderCode = StaticLoader.loadResource(shaderPath);
 
         int shaderId = glCreateShader(shaderType);
 

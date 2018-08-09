@@ -22,7 +22,7 @@ public class RenderModule extends Module {
 
         shader.bind();
         shader.updateUniforms(getParent());
-        mesh.render();
+        //mesh.render();
         shader.unbind();
 
     }

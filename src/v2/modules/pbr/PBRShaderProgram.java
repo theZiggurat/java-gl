@@ -25,7 +25,6 @@ public class PBRShaderProgram extends ShaderProgram {
 
         PBRMaterial material = (PBRMaterial) group.getModules().get(ModuleType.MATERIAL);
 
-        setUniform
     }
 
 }
