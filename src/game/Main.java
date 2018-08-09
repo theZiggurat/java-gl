@@ -1,7 +1,6 @@
 package game;
 
-import cxv1.engine3D.GameEngine;
-import cxv1.engine3D.GameLogic;
+import v1.engine.GameEngine;
 
 public class Main {
 

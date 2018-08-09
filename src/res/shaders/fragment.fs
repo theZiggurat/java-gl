@@ -3,6 +3,16 @@
 const int MAX_POINT_LIGHTS = 5;
 const int MAX_SPOT_LIGHTS = 5;
 
+const int DIFFUSE = 0;
+const int AMBIENT = 1;
+const int SPECULAR = 2;
+const int EMISSIVE = 3;
+const int NORMAL = 4;
+const int SPECULAR_EXPONENT = 5;
+const int OPTICAL_DENSITY = 6;
+const int DISSOLVE = 7;
+const int PARAMETER_TYPES = 8;
+
 in vec2 outTextureCoord;
 in vec3 lightVertexNormal;
 in vec3 lightVertexPos;
@@ -40,23 +50,30 @@ struct DirectionalLight
     float intensity;
 };
 
-struct Material
+struct MaterialParameter
 {
-    vec4 ambient;
-    vec4 diffuse;
-    vec4 specular;
-    int hasTexture;
-    int hasNormalMap;
-    float transparency;
-    float reflectance;
+    vec4 v_data;
+    float f_data;
 };
 
-uniform sampler2D texture_sampler;
+struct Material
+{
+    int texture_avalible[PARAMETER_TYPES];
+    int illuminationModel;
+};
+
+uniform sampler2D diffuse_sampler;
+uniform sampler2D ambient_sampler;
+uniform sampler2D specular_sampler;
+uniform sampler2D emissive_sampler;
 uniform sampler2D normal_sampler;
+uniform sampler2D specular_exponent_sampler;
+uniform sampler2D optical_density_sampler;
+uniform sampler2D dissolve_sampler;
 
 uniform vec3 ambientLight;
-uniform float specularPower;
 uniform Material material;
+uniform MaterialParameter parameters[PARAMETER_TYPES];
 uniform PointLight pointLights[MAX_POINT_LIGHTS];
 uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 uniform DirectionalLight directionalLight;
@@ -64,26 +81,54 @@ uniform DirectionalLight directionalLight;
 vec4 ambientC;
 vec4 diffuseC;
 vec4 speculrC;
+vec4 emissiveC;
+
+float specularExponentC;
+float opticalC;
+float dissolveC;
 
 void setupColors(Material material, vec2 textureCoord)
 {
-    if (material.hasTexture == 1)
-    {
-        ambientC = texture(texture_sampler, textureCoord);
-        diffuseC = ambientC;
-        speculrC = ambientC;
-    }
-    else
-    {
-        ambientC = material.ambient;
-        diffuseC = material.diffuse;
-        speculrC = material.specular;
-    }
+    // diffuse
+    if (material.texture_avalible[DIFFUSE] == 1)
+        diffuseC = texture(diffuse_sampler, textureCoord);
+    else diffuseC = parameters[DIFFUSE].v_data;
+
+    // ambient
+    if (material.texture_avalible[AMBIENT] == 1)
+        ambientC = texture(ambient_sampler, textureCoord);
+    else ambientC = parameters[AMBIENT].v_data;
+
+    // specular
+    if (material.texture_avalible[SPECULAR] == 1)
+        speculrC = texture(specular_sampler, textureCoord);
+    else speculrC = parameters[SPECULAR].v_data;
+
+    // emissive
+    if(material.texture_avalible[EMISSIVE] == 1)
+      emissiveC = texture(emissive_sampler, textureCoord);
+    else  emissiveC = parameters[EMISSIVE].v_data;
+
+    // specular exponent
+    if(material.texture_avalible[SPECULAR_EXPONENT] == 1)
+        specularExponentC = texture(specular_exponent_sampler, textureCoord).r;
+    else  specularExponentC = parameters[EMISSIVE].f_data;
+
+    // optical density
+    if(material.texture_avalible[OPTICAL_DENSITY] == 1)
+        opticalC = texture(optical_density_sampler, textureCoord).r;
+    else  opticalC = parameters[OPTICAL_DENSITY].f_data;
+
+    // dissolve
+    if(material.texture_avalible[DISSOLVE] == 1)
+        dissolveC = texture(dissolve_sampler, textureCoord).r;
+    else  dissolveC = parameters[DISSOLVE].f_data;
+
 }
 
 vec3 calcNormal(Material material, vec3 normal, vec2 text_coord, mat4 modelViewMatrix){
     vec3 ret = normal;
-    if(material.hasNormalMap == 1){
+    if(material.texture_avalible[NORMAL] == 1){
         ret = texture(normal_sampler, text_coord).rgb;
         ret = normalize(ret * 2 - 1);
         ret = normalize(modelViewMatrix * vec4(ret, 0.0f)).xyz;
@@ -105,8 +150,8 @@ vec4 calcLightColor(vec3 light_color, float light_intensity, vec3 position, vec3
     vec3 from_light_dir = -to_light_dir;
     vec3 reflected_light = normalize(reflect(from_light_dir , normal));
     float specularFactor = max( dot(camera_direction, reflected_light), 0.0);
-    specularFactor = pow(specularFactor, specularPower);
-    specColor = speculrC * light_intensity  * specularFactor * material.reflectance * vec4(light_color, 1.0);
+    specularFactor = pow(specularFactor, parameters[SPECULAR_EXPONENT].f_data);
+    specColor = speculrC * light_intensity  * specularFactor * vec4(light_color, 1f); // reflect map also here
 
     return (diffuseColor + specColor);
 }

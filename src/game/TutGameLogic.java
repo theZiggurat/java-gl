@@ -1,21 +1,17 @@
 package game;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
-import cxv1.engine3D.GameLogic;
-import cxv1.engine3D.draw.sceneRenderer;
-import cxv1.engine3D.draw.lighting.*;
-import cxv1.engine3D.entity.*;
-import cxv1.engine3D.enviorment.Scene;
-import cxv1.engine3D.util.loaders.OBJLoader;
-import cxv1.engine3D.util.Window;
-import cxv1.engine3D.draw.Camera;
-import cxv1.engine3D.input.MouseInput;
-import cxv1.engine3D.util.State;
-import cxv1.engine3D.util.loaders.SceneLoader;
-import org.joml.Vector2f;
+import v1.engine.GameLogic;
+import v1.engine.draw.sceneRenderer;
+import v1.engine.entity.CameraEntity;
+import v1.engine.entity.FPSControllerEntity;
+import v1.engine.entity.PanControllerEntity;
+import v1.engine.enviorment.Scene;
+import v1.engine.util.Window;
+import v2.engine.system.MouseInput;
+import v1.engine.util.State;
+import v1.engine.util.loaders.SceneLoader;
 import org.joml.Vector3f;
 
 /*
@@ -45,7 +41,7 @@ public class TutGameLogic implements GameLogic {
     }
 
     @Override
-    public void init(Window window) throws Exception {
+    public void init() throws Exception {
 
         // initialize sceneRenderer
         try{
@@ -69,7 +65,7 @@ public class TutGameLogic implements GameLogic {
     public void update(double interval, Window window, MouseInput mouseInput) {
 
         State.getInstance().update(interval);
-        //sceneLight.getSun().updateLight(state.getSunTimer());
+        scene.getSceneLight().getSun().updateLight(State.getInstance().getSunTimer()*20);
 
         if(t == 144){
             t = 0;

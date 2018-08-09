@@ -66,28 +66,29 @@ void setupColors(vec2 textureCoord)
     vec4 stoneColor = texture(texture_sampler_stone, textureCoord);
 
     ambientC = mix(stoneColor,grassColor, grassComp);
-    diffuseC = ambientC;
-    speculrC = ambientC;
+    diffuseC = vec4(1,1,1,1);
+    speculrC = vec4(1,1,1,1);
 }
 
 vec4 calcLightColor(vec3 light_color, float light_intensity, vec3 position, vec3 to_light_dir, vec3 normal)
 {
-    vec4 diffuseColor = vec4(0, 0, 0, 0);
-    vec4 specColor = vec4(0, 0, 0, 0);
+    vec4 diffuseColor = vec4(0, 1, 0, 0);
+    vec4 specColor = vec4(1, 0, 0, 0);
 
     // Diffuse Light
     float diffuseFactor = max(dot(normal, to_light_dir), 0.0);
     diffuseColor = diffuseC * vec4(light_color, 1.0) * light_intensity * diffuseFactor;
 
     // Specular Light
+
     vec3 camera_direction = normalize(-position);
     vec3 from_light_dir = -to_light_dir;
     vec3 reflected_light = normalize(reflect(from_light_dir , normal));
-    float specularFactor = max( dot(camera_direction, reflected_light), 0.0);
+    float specularFactor = max( dot(camera_direction, reflected_light), 1.0);
     specularFactor = pow(specularFactor, specularPower);
     specColor = speculrC * light_intensity  * specularFactor *  vec4(light_color, 1.0);
 
-    return (diffuseColor + specColor);
+    return diffuseColor + specColor;
 }
 
 vec4 calcPointLight(PointLight light, vec3 position, vec3 normal)
@@ -100,7 +101,7 @@ vec4 calcPointLight(PointLight light, vec3 position, vec3 normal)
     float distance = length(light_direction);
     float attenuationInv = light.att.constant + light.att.linear * distance +
         light.att.exponent * distance * distance;
-    return light_color / attenuationInv;
+    return abs(light_color / attenuationInv);
 }
 
 vec4 calcSpotLight(SpotLight light, vec3 position, vec3 normal)
@@ -117,7 +118,7 @@ vec4 calcSpotLight(SpotLight light, vec3 position, vec3 normal)
         color = calcPointLight(light.point, position, normal);
         color *= (1.0 - (1.0 - spot_alfa)/(1.0 - light.cutoff));
     }
-    return color;
+    return abs(color);
 }
 
 vec4 calcDirectionalLight(DirectionalLight directionalLight, vec3 position, vec3 normal)
@@ -131,7 +132,7 @@ void main()
     setupColors(outTextureCoord);
 
     vec4 diffuseSpecularComp = calcDirectionalLight(directionalLight, lightVertexPos, lightVertexNormal);
-    for(int i = 0; i<MAX_POINT_LIGHTS; i++){
+    /*for(int i = 0; i<MAX_POINT_LIGHTS; i++){
         if(pointLights[i].intensity>0){
             diffuseSpecularComp += calcPointLight(pointLights[i], lightVertexPos, lightVertexNormal);
         }
@@ -140,8 +141,14 @@ void main()
         if(spotLights[i].point.intensity > 0){
             diffuseSpecularComp += calcSpotLight(spotLights[i], lightVertexPos, lightVertexNormal);
         }
-    }
+    }*/
 
-    fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecularComp +
-                (0.000001f*specularPower);
+    /*fragColor = ambientC * vec4(ambientLight, 1) + diffuseSpecularComp +
+                (0.000001f*specularPower);*/
+
+     fragColor = ambientC * vec4(ambientLight, 1f)+diffuseSpecularComp;
+                                 //(0.000001f*specularPower);
+                                 //dot(lightVertexNormal, normalize(-lightVertexPos));
+
+     //fragColor = vec4(fragColor.xyz ,1f);
 }
