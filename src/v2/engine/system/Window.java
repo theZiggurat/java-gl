@@ -66,24 +66,27 @@ public class Window {
                 (vidmode.width() - width)/2,
                 (vidmode.height() - height)/2);
 
+
+
         glfwMakeContextCurrent(handle);
-
-        glfwShowWindow(handle);
         GL.createCapabilities();
-        glClearColor(.4f, .4f, .4f, 1f);
+        glfwShowWindow(handle);
 
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
+        glClearColor(0,0,0, 1f);
 
-        glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
-        glLineWidth(1);
+       glEnable(GL_DEPTH_TEST);
+       glEnable(GL_CULL_FACE);
+       glCullFace(GL_BACK);
+       glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
-        setIcon("res/images/icon.png");
+       glLineWidth(1);
+
+       setIcon("res/images/icon.png");
     }
 
     public void update(){
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwSwapBuffers(handle);
         glfwPollEvents();
     }

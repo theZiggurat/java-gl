@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// aids in use of splitting meshes for seperate render
+// aids in use of splitting meshes for seperate buffer
 // used for .obj files with more than one material
 public class MaterialManager {
 

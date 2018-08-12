@@ -1,9 +1,12 @@
 package v2.engine.system;
 
 import org.lwjgl.BufferUtils;
+import v2.engine.buffer.GLTexture;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.channels.Channels;
@@ -12,8 +15,11 @@ import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 
@@ -40,13 +46,7 @@ public class StaticLoader {
 
         if(!stbi_info_from_memory(buffer, w, h, c)){
             throw new RuntimeException("Failed to read image info: " + stbi_failure_reason());
-        }
-
-        System.out.println("Image name: " + filename);
-        System.out.println("Image width: " + w.get(0));
-        System.out.println("Image height: " + h.get(0));
-        System.out.println("Image components: " + c.get(0));
-        System.out.println("Image HDR: " + stbi_is_hdr_from_memory(buffer));
+        };
 
         ByteBuffer image = stbi_load_from_memory(buffer, w, h, c, 0);
 
@@ -54,7 +54,59 @@ public class StaticLoader {
             throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
         }
 
+        System.out.println("Image loaded :" + filename + "(" + w.get(0) + "," + h.get(0) + ")");
+
         return image;
+    }
+
+    /**
+     * Utility for loading texture to openGL directly
+     * @param filename image path with format "res/image/*"
+     * @return texture object with width, height, and handle
+     */
+    public static GLTexture loadTexture(String filename){
+
+        ByteBuffer buffer;
+
+        try{
+            buffer = ioResourceToBuffer(filename, 128*128);
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
+
+        IntBuffer w = BufferUtils.createIntBuffer(1);
+        IntBuffer h = BufferUtils.createIntBuffer(1);
+        IntBuffer c = BufferUtils.createIntBuffer(1);
+
+        if(!stbi_info_from_memory(buffer, w, h, c)){
+            throw new RuntimeException("Failed to read image info: " + stbi_failure_reason());
+        }
+
+        ByteBuffer image = stbi_load_from_memory(buffer, w, h, c, 0);
+
+        if(image == null){
+            throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
+        }
+
+        int id = glGenTextures();
+        glBindTexture(GL_TEXTURE_2D, id);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        if (c.get(0) == 3) {
+            if ((w.get(0) & 3) != 0) {
+                glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w.get(0) & 1));
+            }
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        } else {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+        }
+
+        stbi_image_free(image);
+
+        GLTexture ret = new GLTexture(w.get(0), h.get(0), id);
+
+        System.out.println("Texture " + id + " loaded: " + filename + " (" + w.get(0) + "," + h.get(0) + ")");
+
+        return ret;
     }
 
     /**
@@ -67,15 +119,34 @@ public class StaticLoader {
         String result;
 
         try (
-            InputStream in = StaticLoader.class.getResourceAsStream(filePath);
+            InputStream in = StaticLoader.class.getResourceAsStream("/"+filePath);
             Scanner scanner = new Scanner(in, "UTF-8"))
 
         { result = scanner.useDelimiter("\\A").next(); }
 
+
+        System.out.println("Resouce loaded: " + filePath);
         return result;
     }
 
-    public static ByteBuffer ioResourceToBuffer(String filename, int bufferSize) throws IOException {
+    /**
+     * `
+     * @param fileName  path with format "res/*"
+     * @return List of strings that compose the file
+     * @throws Exception file not found
+     */
+    public static List<String> readAllLines(String fileName) throws Exception {
+        List<String> list = new ArrayList<>();
+        InputStream is = StaticLoader.class.getClassLoader().getResourceAsStream(fileName);
+        InputStreamReader in = new InputStreamReader(is);
+        try (BufferedReader br = new BufferedReader(in)) {
+            String line;
+            while ((line = br.readLine()) != null) { list.add(line); }
+        }
+        return list;
+    }
+
+    private static ByteBuffer ioResourceToBuffer(String filename, int bufferSize) throws IOException {
 
         ByteBuffer buffer;
         Path path = Paths.get(filename);
@@ -113,4 +184,6 @@ public class StaticLoader {
         newBuffer.put(buffer);
         return newBuffer;
     }
+
+
 }

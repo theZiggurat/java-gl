@@ -75,7 +75,7 @@ public class sceneRenderer {
     }
 
     /*
-        Clear render buffer
+        Clear buffer buffer
      */
     public void clear(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -161,7 +161,7 @@ public class sceneRenderer {
 
 
     /*
-        Main render call
+        Main buffer call
      */
     public void render(Window window, CameraEntity perspective, Scene scene){
 
@@ -193,7 +193,7 @@ public class sceneRenderer {
 
         sceneShader.bind();
 
-        // create projection for render
+        // create projection for buffer
         Matrix4f projectionMatrix = transformation.getProjectionMatrix(
                 FOV, window.getWidth(), window.getHeight(), Z_NEAR, Z_FAR);
         sceneShader.setUniform("projectionMatrix", projectionMatrix);
@@ -275,7 +275,7 @@ public class sceneRenderer {
     }
 
     /*
-        Combines all light render methods to one call
+        Combines all light buffer methods to one call
      */
     private void renderLights(Matrix4f viewMatrix, SceneLight sceneLight, ShaderUtil shader){
 

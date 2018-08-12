@@ -33,6 +33,7 @@ public class ModuleNode extends Node {
     }
 
     public void addModule(ModuleType type, Module module){
+        module.setParent(this);
         modules.put(type, module);
     }
 

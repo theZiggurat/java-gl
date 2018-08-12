@@ -26,7 +26,8 @@ public class InputCore {
     @Getter @Setter private Vector2d cursorPos;
     @Getter private Vector2d displacement;
 
-    private boolean lockCursor;
+    @Getter private boolean lockCursor;
+    @Getter @Setter Vector2d lockCursorPos;
 
     private static InputCore instance = null;
     public static InputCore getInstance(){
@@ -47,8 +48,8 @@ public class InputCore {
 
     public void init(Window window){
 
-        this.prevPos = new Vector2d(0,0);
-        this.cursorPos = new Vector2d(0,0);
+        this.prevPos = new Vector2d();
+        this.cursorPos = new Vector2d();
         this.displacement = new Vector2d();
 
         /** Mouse position Callback */
@@ -73,13 +74,16 @@ public class InputCore {
         glfwSetMouseButtonCallback (
                 window.getHandle(), (windowHandle, button, action, mods) -> {
 
-            if(button == 2 && action == GLFW_PRESS) {
+
+            if(button == 1 && action == GLFW_PRESS) {
                 lockCursor = true;
+                lockCursorPos = new Vector2d(cursorPos);
                 glfwSetInputMode(windowHandle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
             }
-            else if(button == 2 && action == GLFW_RELEASE) {
+            else if(button == 1 && action == GLFW_RELEASE) {
                 lockCursor = false;
                 glfwSetInputMode(windowHandle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                glfwSetCursorPos(windowHandle, lockCursorPos.x, lockCursorPos.y);
             }
 
             if(action == GLFW_PRESS){
@@ -97,17 +101,40 @@ public class InputCore {
         });
     }
 
+    public boolean isKeyHeld(int keycode){
+        return heldKeys.contains(keycode);
+    }
+
+    public boolean isKeyPressed(int keycode){
+        return pressedKeys.contains(keycode);
+    }
+
+    public boolean isKeyReleased(int keycode){
+        return releasedKeys.contains(keycode);
+    }
+
+    public boolean isButtonHeld(int keycode){
+        return heldButtons.contains(keycode);
+    }
+
+    public boolean isButtonPressed(int keycode){
+        return pressedButtons.contains(keycode);
+    }
+
+    public boolean isButtonReleased(int keycode){
+        return releasedButtons.contains(keycode);
+    }
+
     public void update(){
 
         /** update displacement vector */
 
-        if(!lockCursor){
-            prevPos.x = cursorPos.x;
-            prevPos.y = cursorPos.y;
+        displacement.x = cursorPos.x - prevPos.x;
+        displacement.y = cursorPos.y - prevPos.y;
 
-            cursorPos.x += displacement.x;
-            cursorPos.y += displacement.y;
-        }
+        prevPos.x = cursorPos.x;
+        prevPos.y = cursorPos.y;
+
 
         /** update key maps */
 

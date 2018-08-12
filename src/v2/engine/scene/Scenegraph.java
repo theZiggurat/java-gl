@@ -6,10 +6,6 @@ import lombok.Setter;
 
 public class Scenegraph extends Node {
 
-    @Getter
-    private Node opaqueObjects;
-    @Getter
-    private Node transparentObjects;
 
     private static Scenegraph instance;
 
@@ -23,22 +19,19 @@ public class Scenegraph extends Node {
     @Override
     public void update(){
         super.update();
-//        opaqueObjects.update();
-//        transparentObjects.update();
     }
 
+    /**
+     * Renders entire scenegraph. Called from renderEngine
+     */
     @Override
     public void render(){
         super.render();
-//        opaqueObjects.render();
-//        transparentObjects.render();
     }
 
     @Override
     public void cleanup(){
         super.cleanup();
-//        opaqueObjects.cleanup();
-//        transparentObjects.cleanup();
     }
 
 

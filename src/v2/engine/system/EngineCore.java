@@ -109,7 +109,7 @@ public class EngineCore implements Runnable {
         timer.mark();
 
         /* update input */
-         input.update();
+        input.update();
 
         /* call update code from interface */
         engineInterface.update(interval);
@@ -117,8 +117,8 @@ public class EngineCore implements Runnable {
     }
 
     protected void render(){
-        renderEngine.render();
         window.update();
+        renderEngine.render();
     }
 
     void cleanup(){

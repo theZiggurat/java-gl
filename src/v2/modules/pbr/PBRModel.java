@@ -1,6 +1,6 @@
 package v2.modules.pbr;
 
-import v2.engine.render.MeshVBO;
+import v2.engine.buffer.MeshVBO;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
 import v2.engine.scene.RenderModule;
@@ -25,6 +25,7 @@ public class PBRModel extends ModuleNode {
     }
 
     public void render(){
+        PBRShaderProgram.getInstance().updateUniforms(this);
         super.render();
     }
 }
