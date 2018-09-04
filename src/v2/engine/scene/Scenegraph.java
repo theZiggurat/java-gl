@@ -3,6 +3,9 @@ package v2.engine.scene;
 import javafx.scene.Scene;
 import lombok.Getter;
 import lombok.Setter;
+import v2.modules.pbr.PBRModel;
+
+import java.util.List;
 
 public class Scenegraph extends Node {
 

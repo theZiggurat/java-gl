@@ -17,27 +17,15 @@ public class EngineCore implements Runnable {
     @Getter private final EngineInterface engineInterface;
     @Getter private final InputCore input;
 
-    public static EngineCore instance;
-
-    public static EngineCore getInstance(){
-        if(instance == null){
-            System.err.println("No engine instance found.");
-            System.exit(1);
-        }
-        return instance;
-    }
-
-    public EngineCore(String title, int width, int height,
-                      boolean vsync, EngineInterface engineInterface) {
+    public EngineCore(EngineInterface engineInterface) {
 
         this.gameLoopThread = new Thread(this, "ENGINE_0");
-        this.window = new Window(title, width, height);
+        this.window = Window.getInstance();
         this.engineInterface = engineInterface;
         this.timer = new Timer();
         this.renderEngine = RenderEngine.getInstance();
         this.input = InputCore.getInstance();
         this.currentFPS = 0;
-        instance = this;
     }
 
     @Override
@@ -113,6 +101,7 @@ public class EngineCore implements Runnable {
 
         /* call update code from interface */
         engineInterface.update(interval);
+        window.setTitle(currentFPS, RenderEngine.getInstance().getMainCamera());
 
     }
 

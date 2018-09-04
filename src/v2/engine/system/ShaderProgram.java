@@ -5,12 +5,15 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
+import v2.engine.gldata.TextureObject;
 import v2.engine.scene.ModuleNode;
 
 import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 import static org.lwjgl.opengl.GL43.GL_COMPUTE_SHADER;
@@ -33,7 +36,7 @@ public class ShaderProgram {
     }
 
     /**
-     *  Bind shaderprogram to openGL buffer pipeline
+     *  Bind shaderprogram to openGL gldata pipeline
      */
     public void bind(){
         glUseProgram(programId);
@@ -216,9 +219,18 @@ public class ShaderProgram {
         }
     }
 
+    /**
+     * Calls glActiveTexture with arg GL_TEXTURE0 + index
+     * @param index of texture
+     */
+    public void activeTexture(int index){
+        glActiveTexture(GL_TEXTURE0 + index);
+    }
+
     // UPDATE INTERFACE //
 
     public void updateUniforms(ModuleNode moduleNode){}
+    public void updateUniforms(TextureObject textureObject){}
 
 
 

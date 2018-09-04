@@ -74,7 +74,7 @@ public class HeightMapMesh {
         float[] normalsArr = calcNormals(posArr, width, height);
         MaterialManager mats = new MaterialManager();
         this.mesh = new Mesh3D("terrrain", posArr, textCoordsArr, indicesArr, normalsArr, mats);
-        //this.mesh.setMaterial(new Material());
+        //this.javadata.setMaterial(new Material());
 
     }
 

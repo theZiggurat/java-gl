@@ -1,30 +1,47 @@
-package v1.engine.util.loaders;
+package v2.engine.javadata;
 
-import v1.engine.draw.Material;
-import v1.engine.draw.MaterialManager;
-import v1.engine.draw.mesh.Mesh3D;
-import v1.engine.util.Utils;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import v2.engine.system.StaticLoader;
 
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class OBJLoader {
+@AllArgsConstructor
+public class MeshData {
 
-    /*
-        Class for loading in .obj files
-        #TODO
-     */
+    @Setter @Getter private float positions[];
+    @Setter @Getter private float uv[];
+    @Setter @Getter private float normals[];
+    @Setter @Getter private int indices[];
 
-    public static Mesh3D loadMesh(String id, String filename) throws Exception {
+    public FloatBuffer posBuffer(){
+        return StaticBuffer.floatBuffer(positions);
+    }
+
+    public FloatBuffer uvBuffer(){
+        return StaticBuffer.floatBuffer(uv);
+    }
+
+    public FloatBuffer normalBuffer(){
+        return StaticBuffer.floatBuffer(normals);
+    }
+
+    public IntBuffer indexBuffer(){
+        return StaticBuffer.intBuffer(indices);
+    }
+
+    public static MeshData loadMesh(String filename) {
         List<String> meshLines;
         try {
-            meshLines = Utils.readAllLines("res/models/" + filename);
+            meshLines = StaticLoader.readAllLines(filename);
         }   catch(Exception e){
-            System.err.println("Mesh3D " + filename + " not found");
+            System.err.println("Mesh " + filename + " not found");
             return null;
         }
         List<Vector3f> vertices = new ArrayList<>();
@@ -32,32 +49,15 @@ public class OBJLoader {
         List<Vector3f> normals = new ArrayList<>();
         List<Face> faces = new ArrayList<>();
 
-        MaterialManager materialManager = new MaterialManager();
-        Map<String, Material> parsedMaterials = new HashMap<>();
-        boolean useMaterial = false;
-        int faceIndex = 0;
-
         for(String line: meshLines){
             String[] tokens = line.split("\\s+");
 
             switch(tokens[0]){
 
-                case"mtllib": // parse materials from file
-                    if(!useMaterial) {
-                        useMaterial = true;
-                        parsedMaterials = MTLLoader.loadMaterials(tokens[1]);
-
-                        if(parsedMaterials == null){
-                            useMaterial = false;
-                        }
-                    }
+                case"mtllib":
                     break;
 
-                case"usemtl": // map material to current face index
-                    if(useMaterial) {
-                        materialManager.setMaterial(faceIndex,
-                                parsedMaterials.get(tokens[1]));
-                    }
+                case"usemtl":
                     break;
 
                 case"v": // geometrix vertex
@@ -70,8 +70,8 @@ public class OBJLoader {
 
                 case"vt": // texture coord
                     Vector2f vec2 = new Vector2f(
-                            Float.parseFloat(tokens[1])-1,
-                            Float.parseFloat(tokens[2])-1);
+                            Float.parseFloat(tokens[1]),
+                            Float.parseFloat(tokens[2]));
                     textures.add(vec2);
                     break;
 
@@ -87,12 +87,10 @@ public class OBJLoader {
 
                     Face tri_face = new Face(tokens[1], tokens[2], tokens[3]);
                     faces.add(tri_face);
-                    faceIndex++;
 
                     if(tokens.length == 5){ // quad -> tri conversion
                         Face quad_patch = new Face(tokens[1], tokens[3], tokens[4]);
                         faces.add(quad_patch);
-                        faceIndex++;
                     }
 
                     break;
@@ -102,18 +100,25 @@ public class OBJLoader {
 
             }
         }
-        if(materialManager.getMaterialCount()==0){
-            materialManager.setMaterial(0, new Material("__defMat"));
-        }
-
-        return reorderLists(id, vertices, textures, normals, faces, materialManager);
+       try {
+           return reorderLists(vertices, textures, normals, faces);
+       } finally {
+            System.out.println("Model loaded: " + filename);
+       }
     }
 
 
-
-    // Convert the lists into arrays usable by the javadata constructor, then return the javadata
-    private static Mesh3D reorderLists(String id, List<Vector3f> posList, List<Vector2f> textCoordList,
-                                       List<Vector3f> normList, List<Face> facesList, MaterialManager materialManager){
+    /**
+     * From face data in obj file, constructs indices list that will comprise of
+     * the javadata.
+     * @param posList list of 3d coords
+     * @param textCoordList list of uv coords
+     * @param normList list of normal vectors
+     * @param facesList list of face objects (3 indices)
+     * @return
+     */
+    private static MeshData reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
+                                       List<Vector3f> normList, List<Face> facesList){
 
         List<Integer> indices = new ArrayList<>();
 
@@ -139,14 +144,15 @@ public class OBJLoader {
         }
 
         // finally, convert indices list to array
-        int [] indicesArr = new int[indices.size()];
+        int [] indicesArr;
         indicesArr = indices.stream().mapToInt((Integer v) -> v).toArray();
-        return new Mesh3D(id, posArr, texCoordArr, indicesArr, normArr, materialManager);
+
+        return new MeshData(posArr, texCoordArr, normArr, indicesArr);
     }
 
     private static void processFaceVertex(IndexGroup indices,
-                        List<Vector2f> textureCoordList, List<Vector3f> normList,
-                        List<Integer> indicesList, float[] textureCoordArr, float[] normArr){
+                                          List<Vector2f> textureCoordList, List<Vector3f> normList,
+                                          List<Integer> indicesList, float[] textureCoordArr, float[] normArr){
 
         int posIndex = indices.indexPos;
         indicesList.add(posIndex);
@@ -212,6 +218,5 @@ public class OBJLoader {
             indexVecNorm = NO_VAL;
         }
     }
-
 
 }

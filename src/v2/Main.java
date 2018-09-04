@@ -5,13 +5,14 @@ import v2.instances.PBRTest;
 
 import java.lang.annotation.Native;
 
+import static org.lwjgl.opengl.GL30.glGenFramebuffers;
+
 public class Main {
 
     public static void main(String... args){
         try {
             PBRTest engineInterface = new PBRTest();
-            EngineCore engine = new EngineCore(
-                    "LWJGL Engine", 1280, 720, false, engineInterface);
+            EngineCore engine = new EngineCore(engineInterface);
             engine.start();
         } catch(Exception e){
             e.printStackTrace();

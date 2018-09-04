@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -60,12 +61,17 @@ public class Camera {
         if(input.isKeyHeld(GLFW_KEY_D)){
             position.add(getRight().mul(-.05f));
         }
+        if(input.isButtonPressed(0)) { // left click
+            float ssx = (float) (2 * (input.getCursorPos().x/ Window.getInstance().getWidth()) - 1);
+            float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.getInstance().getHeight())));
+
+        }
 
     }
 
     public Matrix4f getProjectionMatrix() {
-        float apectRatio = (float) EngineCore.getInstance().getWindow().getWidth() /
-                (float) EngineCore.getInstance().getWindow().getHeight();
+        float apectRatio = (float) Window.getInstance().getWidth() /
+                (float) Window.getInstance().getHeight();
         Matrix4f ret = new Matrix4f();
         ret.identity();
         ret.perspective((float)Math.toRadians(FOV), apectRatio, ZNEAR, ZFAR);

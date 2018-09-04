@@ -9,19 +9,22 @@ import java.util.HashSet;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+
+/**
+ * Responsible for handling window input callbacks for convienent retrieval
+ */
 public class InputCore {
 
-    @Getter private HashSet<Integer> pressedButtons;
-    @Getter private HashSet<Integer> heldButtons;
-    @Getter private HashSet<Integer> releasedButtons;
+    private HashSet<Integer> pressedButtons;
+    private HashSet<Integer> heldButtons;
+    private HashSet<Integer> releasedButtons;
 
-    @Getter private HashSet<Integer> pressedKeys;
-    @Getter private HashSet<Integer> heldKeys;
-    @Getter private HashSet<Integer> releasedKeys;
+    private HashSet<Integer> pressedKeys;
+    private HashSet<Integer> heldKeys;
+    private HashSet<Integer> releasedKeys;
 
     @Getter private float scrollAmount;
 
-    /** holds previous frame's cursor position for comparison */
     private Vector2d prevPos;
     @Getter @Setter private Vector2d cursorPos;
     @Getter private Vector2d displacement;
@@ -46,6 +49,10 @@ public class InputCore {
         releasedKeys = new HashSet<>();
     }
 
+    /**
+     * Initializes callbacks
+     * @param window to make callbacks from
+     */
     public void init(Window window){
 
         this.prevPos = new Vector2d();
@@ -101,30 +108,63 @@ public class InputCore {
         });
     }
 
+    /**
+     * Returns true for GLFW keycode of any key hold this update
+     * @param keycode GLFW keycode
+     * @return boolean held or not
+     */
     public boolean isKeyHeld(int keycode){
         return heldKeys.contains(keycode);
     }
 
+    /**
+     * Returns true for GLFW keycode of any key pressed this update
+     * @param keycode GLFW keycode (key)
+     * @return boolean pressed or not
+     */
     public boolean isKeyPressed(int keycode){
         return pressedKeys.contains(keycode);
     }
 
+    /**
+     * Returns true for GLFW keycode of any key released this update
+     * @param keycode GLFW keycode (key)
+     * @return boolean released or not
+     */
     public boolean isKeyReleased(int keycode){
         return releasedKeys.contains(keycode);
     }
 
+    /**
+     * Returns true for GLFW keycode of any button hold this update
+     * @param keycode GLFW keycode (buttons)
+     * @return boolean held or not
+     */
     public boolean isButtonHeld(int keycode){
         return heldButtons.contains(keycode);
     }
 
+    /**
+     * Returns true for GLFW keycode of any button pressed this update
+     * @param keycode GLFW keycode (buttons)
+     * @return boolean pressed or not
+     */
     public boolean isButtonPressed(int keycode){
         return pressedButtons.contains(keycode);
     }
 
+    /**
+     * Returns true for GLFW keycode of any button released this update
+     * @param keycode GLFW keycode (buttons)
+     * @return boolean released or not
+     */
     public boolean isButtonReleased(int keycode){
         return releasedButtons.contains(keycode);
     }
 
+    /**
+     * Clears the key and button maps and updates displacement vectors
+     */
     public void update(){
 
         /** update displacement vector */
@@ -146,7 +186,6 @@ public class InputCore {
 
         /** reset scroll displacement */
         scrollAmount = 0;
-
     }
 
 }

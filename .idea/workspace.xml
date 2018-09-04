@@ -1,55 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="CVX1.0 FPSEngine:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/src/v1/engine/entity/Terrain.java" line="1" />
     <bookmark url="file://$PROJECT_DIR$/src/res/shaders/terrainfragment.fs" line="90" />
-    <bookmark url="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java" line="26" />
+    <bookmark url="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java" line="27" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/res/models/quad.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/buffer/GLTexture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/buffer/StaticBuffer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/mesh/QuickMesh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" afterDir="false" />
+    <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="Troubleshooting framebuffer write">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid9240.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/models/quad.obj" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/models/quad.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_fragment.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/render/FrameBufferObject$Attatchment.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/render/FrameBufferObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/render/MeshVBO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/render/ShaderProgram.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/ModuleNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/ModuleNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/buffer/FrameBufferObject$Attatchment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/buffer/FrameBufferObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/buffer/GLTexture.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/buffer/MeshVBO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/buffer/StaticBuffer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/mesh/MeshData$Face.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/mesh/MeshData$IndexGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/mesh/MeshData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/mesh/QuickMesh.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Node.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/RenderModule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/RenderModule.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Scenegraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Scenegraph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/Camera.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/Camera.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineCore$Timer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineCore$Timer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineCore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineCore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/EngineInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/InputCore.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/InputCore.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/RenderEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/RenderEngine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/ShaderProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/ShaderProgram.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/StaticLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/StaticLoader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/instances/PBRTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/instances/PBRTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRMaterial.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRMaterial.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRShaderProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRShaderProgram.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/models/quad.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/models/quad.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v1/engine/draw/MaterialManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/engine/draw/MaterialManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/engine/draw/mesh/HeightMapMesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/engine/draw/mesh/HeightMapMesh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v1/engine/draw/sceneRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/engine/draw/sceneRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/engine/util/loaders/OBJLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/engine/util/loaders/OBJLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v1/engine/util/loaders/TGAReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v1/engine/util/loaders/TGAReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/render/FrameBufferObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/buffer/FrameBufferObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/render/MeshVBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/buffer/MeshVBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/render/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/buffer/FrameBufferObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/buffer/GLTexture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/buffer/MeshVBO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/buffer/StaticBuffer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/mesh/QuickMesh.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/EngineCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/EngineCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/EngineInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/EngineInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/InputCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/InputCore.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" afterDir="false" />
@@ -73,119 +86,13 @@
   <component name="CoverageViewManager">
     <option name="myFlattenPackages" value="true" />
   </component>
-  <component name="DockManager">
-    <window id="2">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="fragment.fs" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/res/shaders/fragment.fs">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="2941">
-                    <caret line="173" column="49" selection-start-line="173" selection-start-column="49" selection-end-line="173" selection-end-column="49" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="OBJLoader.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/util/loaders/OBJLoader.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="3094">
-                    <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="sceneRenderer.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/sceneRenderer.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="918">
-                    <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="terrainvertex.vs" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainvertex.vs">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="374">
-                    <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/util/Window.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="510">
-                    <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="Transformation.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/util/Transformation.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="357">
-                    <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="30" selection-end-column="26" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="Mesh3D.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/mesh/Mesh3D.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="646">
-                    <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/Camera.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="68">
-                    <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="ShaderUtil.java" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/src/v1/engine/util/ShaderUtil.java">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="799">
-                    <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-                    <folding>
-                      <element signature="imports" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="terrainfragment.fs" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainfragment.fs">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1751">
-                    <caret line="103" column="10" selection-start-line="103" selection-start-column="10" selection-end-line="103" selection-end-column="10" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
+      <file leaf-file-name="DeferredFBO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/v2/modules/deferred/DeferredFBO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+            <state relative-caret-position="194">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -193,78 +100,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MeshData.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java">
+      <file leaf-file-name="TextureObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/TextureObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="72" selection-start-line="72" selection-end-line="72" />
-              <folding>
-                <element signature="e#689#690#0" expanded="true" />
-                <element signature="e#740#741#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MeshVBO.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/v2/engine/buffer/MeshVBO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="54" column="79" selection-start-line="54" selection-start-column="79" selection-end-line="54" selection-end-column="79" />
+            <state relative-caret-position="408">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#653#654#0" expanded="true" />
+                <element signature="e#700#701#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputCore.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/engine/system/InputCore.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="77" selection-start-line="77" selection-end-line="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PBRTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pbr_fragment.fs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="83" selection-start-line="83" selection-end-line="83" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PBRMaterial.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRMaterial.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -272,12 +117,10 @@
       <file leaf-file-name="PBRModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="493">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
-                <element signature="e#560#561#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -286,10 +129,59 @@
       <file leaf-file-name="PBRShaderProgram.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+            <state relative-caret-position="12">
+              <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
+              <folding>
+                <element signature="method#getInstance#0;class#PBRShaderProgram#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pbr_fragment.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CVX1_0_FPSEngine_jar.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/artifacts/CVX1_0_FPSEngine_jar.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="scratch.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="FSShaderProgram.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/v2/modules/deferred/FSShaderProgram.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FrameBufferObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/FrameBufferObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#556#557#0" expanded="true" />
+                <element signature="e#596#597#0" expanded="true" />
+                <element signature="e#621#622#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+                <element signature="e#896#897#0" expanded="true" />
+                <element signature="e#933#934#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -328,9 +220,11 @@
       <find>null</find>
       <find>glEnableVertexAttribArray</find>
       <find>Utils.</find>
+      <find>EngineCore.getInstance().getWindow()</find>
     </findStrings>
     <replaceStrings>
       <replace>break</replace>
+      <replace>Window.getInstance()</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -344,23 +238,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/NodeComponent.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/ModuleNodeType.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/pbr/PBRModel.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/pbr/PBRShaderProgram.java" />
-        <option value="$PROJECT_DIR$/src/v2/modules/PBRModel.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/render/MeshVBO.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/ModuleType.java" />
-        <option value="$PROJECT_DIR$/src/game/PBRGameLogic.java" />
-        <option value="$PROJECT_DIR$/src/v1/engine/input/MouseInput.java" />
-        <option value="$PROJECT_DIR$/src/game/TutGameLogic.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/CoreInput.java" />
-        <option value="$PROJECT_DIR$/src/v1/engine/util/Window.java" />
-        <option value="$PROJECT_DIR$/src/v1/engine/GameEngine.java" />
-        <option value="$PROJECT_DIR$/src/v1/engine/util/ShaderUtil.java" />
-        <option value="$PROJECT_DIR$/src/v1/engine/util/loaders/ImageLoader.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/Timer.java" />
         <option value="$PROJECT_DIR$/src/v1/engine/entity/FPSControllerEntity.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/Module.java" />
         <option value="$PROJECT_DIR$/src/v1/engine/util/Utils.java" />
@@ -372,29 +249,46 @@
         <option value="$PROJECT_DIR$/src/v2/engine/mesh/QuickMesh.java" />
         <option value="$PROJECT_DIR$/src/v1/engine/draw/Camera.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/buffer/GLTexture.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" />
         <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRMaterial.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/system/EngineInterface.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" />
         <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java" />
-        <option value="$PROJECT_DIR$/src/res/models/quad.obj" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/Node.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/EngineCore.java" />
-        <option value="$PROJECT_DIR$/src/v2/Main.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" />
         <option value="$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/InputCore.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/Window.java" />
-        <option value="$PROJECT_DIR$/src/v2/instances/PBRTest.java" />
-        <option value="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" />
-        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/Camera.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/buffer/MeshVBO.java" />
+        <option value="$PROJECT_DIR$/src/res/models/sphere.obj" />
+        <option value="$PROJECT_DIR$/src/v2/engine/gldata/VertexBufferObject.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/InputCore.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/gldata/FrameBuffer.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/deferred/FSQuad.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRRenderer.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/gldata/TextureObject.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/javadata/StaticBuffer.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/scene/Node.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/Config.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/Camera.java" />
+        <option value="$PROJECT_DIR$/src/v2/Main.java" />
+        <option value="$PROJECT_DIR$/src/res/shaders/fullscreen_vertex.vs" />
+        <option value="$PROJECT_DIR$/src/res/shaders/fullscreen_fragment.fs" />
+        <option value="$PROJECT_DIR$/src/res/models/quad.obj" />
+        <option value="$PROJECT_DIR$/src/v2/modules/deferred/FSShaderProgram.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/gldata/FrameBufferObject.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRFrameBufferObject.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/deferred/PBRFrameBufferObject.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/deferred/DeferredFBO.java" />
+        <option value="$PROJECT_DIR$/src/v2/instances/PBRTest.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredRenderer.java" />
+        <option value="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/EngineCore.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/Window.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" />
       </list>
     </option>
   </component>
@@ -408,9 +302,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="421" />
-    <option name="width" value="1467" />
-    <option name="height" value="1039" />
+    <option name="x" value="305" />
+    <option name="width" value="1215" />
+    <option name="height" value="860" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -418,8 +312,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -427,103 +320,12 @@
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
               <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="buffer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="mesh" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="scene" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="engine" type="462c0819:PsiDirectoryNode" />
-              <item name="system" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="instances" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="v2" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="pbr" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -537,15 +339,15 @@
     <property name="LombokPluginIS_RUNTIME_PATCH_Enabled" value="true" />
     <property name="LombokPluginIS_THIRD_PARTY_Enabled" value="true" />
     <property name="LombokPluginIS_VAL_Enabled" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://F:/Java/Workspace/LWJGL_test/src/cxv1/engine3D/draw/MaterialManager.java" />
+    <property name="SearchEverywhereHistoryKey" value="res/images/woodframe/normal.png&#9;FILE&#9;file://F:/Java/Workspace/LWJGL_test/src/res/images/woodframe/normal.png" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="XML" />
     <property name="last.edited.regexp" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/v1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/artifacts/CVX1_0_FPSEngine_jar" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15527344" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
@@ -718,47 +520,49 @@
       <workItem from="1533659895495" duration="4247000" />
       <workItem from="1533677609104" duration="40566000" />
       <workItem from="1533840477162" duration="76986000" />
-      <workItem from="1534115963430" duration="344000" />
+      <workItem from="1534115963430" duration="7743000" />
+      <workItem from="1534602102736" duration="19760000" />
+      <workItem from="1534956003436" duration="7631000" />
+      <workItem from="1535590464420" duration="10514000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="504523000" />
+    <option name="totallyTimeSpent" value="549827000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="421" y="0" width="1467" height="1039" extended-state="0" />
-    <editor active="true" />
+    <frame x="305" y="0" width="1215" height="860" extended-state="0" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="TODO" order="4" />
+      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.48091602" weight="0.31866953" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.49448344" side_tool="true" weight="0.2725322" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50542116" side_tool="true" visible="true" weight="0.38120806" />
+      <window_info anchor="right" x="0" y="0" width="253" height="847" id="Documentation" order="11" sideWeight="0.5010846" side_tool="true" visible="true" weight="0.30358633" />
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="5" show_stripe_button="false" />
-      <window_info anchor="right" id="Run" order="11" sideWeight="0.48701298" weight="0.321847" />
       <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Run" order="10" sideWeight="0.4945788" visible="true" weight="0.38120806" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.499226" weight="0.32939914" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16126809" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1943286" />
       <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49690402" weight="0.17918456" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Debug" order="10" sideWeight="0.51406926" weight="0.30392832" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.48091602" weight="0.31926408" />
+      <window_info anchor="right" id="Debug" order="10" sideWeight="0.4989154" visible="true" weight="0.30358633" />
       <window_info anchor="bottom" id="Inspection" order="3" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" x="0" y="0" width="221" height="847" id="Documentation" order="12" sideWeight="0.512987" side_tool="true" visible="true" weight="0.321847" />
       <window_info anchor="bottom" id="Cvs" order="2" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="0" sideWeight="0.47234678" side_tool="true" weight="0.4012036" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49690402" weight="0.18025751" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -767,32 +571,68 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Troubleshooting framebuffer write" />
+    <option name="LAST_COMMIT_MESSAGE" value="Troubleshooting framebuffer write" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java</url>
+          <url>file://$PROJECT_DIR$/src/v2/engine/javadata/MeshData.java</url>
           <line>72</line>
           <properties />
           <option name="timeStamp" value="139" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/v2/engine/system/Camera.java</url>
-          <line>39</line>
+          <line>40</line>
           <properties />
           <option name="timeStamp" value="144" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/v2/engine/system/InputCore.java</url>
-          <line>77</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="146" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/v2/instances/PBRTest.java</url>
+          <line>43</line>
+          <properties />
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/v2/instances/PBRTest.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/v2/modules/deferred/FSQuad.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="158" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/v2/engine/gldata/FrameBufferObject.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java</url>
+          <line>13</line>
+          <properties class="v2.modules.pbr.PBRShaderProgram" method="getInstance">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="161" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="147" />
+      <option name="time" value="162" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -917,253 +757,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainfragment.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" column="10" selection-start-line="103" selection-start-column="10" selection-end-line="103" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/ShaderUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lombok.jar!/lombok/Getter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/buffer/FrameBufferObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lwjgl/lwjgl-sources.jar!/org/lwjgl/system/APIUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/buffer/StaticBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lwjgl/lwjgl-sources.jar!/org/lwjgl/system/MemoryUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="667" column="55" selection-start-line="667" selection-start-column="55" selection-end-line="667" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lwjgl-opengl/lwjgl-opengl-sources.jar!/org/lwjgl/opengl/GL15.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="426" selection-start-line="426" selection-end-line="426" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/mesh/Mesh3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/EngineInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/sceneRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="74" column="5" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/loaders/OBJLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3094">
-          <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="192" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_vert.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/text_vert.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/fragment.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="49" selection-start-line="173" selection-start-column="49" selection-end-line="173" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Module.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="16" column="32" lean-forward="true" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/lwjgl-opengl/lwjgl-opengl-sources.jar!/org/lwjgl/opengl/GL11.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="1890" selection-start-line="1890" selection-end-line="1890" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#989#990#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/models/quad.obj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="13" lean-forward="true" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/joml-1.9.9.jar!/org/joml/Vector2f.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/buffer/GLTexture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="92" column="73" lean-forward="true" selection-start-line="92" selection-start-column="73" selection-end-line="92" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainfragment.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1751">
-          <caret line="103" column="10" selection-start-line="103" selection-start-column="10" selection-end-line="103" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/draw/Texture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/terrainvertex.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/Transformation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="30" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/v1/engine/GameLogic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1192,61 +785,208 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java">
+    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/ShaderUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="867">
+          <caret line="51" column="7" lean-forward="true" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/EngineCore.java">
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="408">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/javadata/MeshData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="865">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+          <folding>
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/models/sphere.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515545">
+          <caret line="30593" column="19" selection-start-line="30593" selection-start-column="19" selection-end-line="30593" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/v2/engine/system/InputCore.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        <state relative-caret-position="-1958">
+          <caret line="21" column="41" lean-forward="true" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v1/engine/util/ShaderUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/FrameBufferObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+        <state relative-caret-position="329">
+          <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#519#520#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/javadata/StaticBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-447">
+          <caret line="65" column="103" selection-start-line="65" selection-start-column="103" selection-end-line="65" selection-end-column="103" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/joml-1.9.9.jar!/org/joml/Vector3f.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Transform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1294#1295#0" expanded="true" />
+            <element signature="e#1351#1352#0" expanded="true" />
+            <element signature="e#1479#1480#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
+            <element signature="e#1565#1566#0" expanded="true" />
+            <element signature="e#1627#1628#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/lwjgl/lwjgl-sources.jar!/org/lwjgl/system/MemoryAccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="180" selection-start-line="180" selection-end-line="180" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/lwjgl/lwjgl-sources.jar!/org/lwjgl/system/MemoryUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="662" column="53" selection-start-line="662" selection-start-column="53" selection-end-line="662" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/lwjgl-opengl/lwjgl-opengl-sources.jar!/org/lwjgl/opengl/GL30.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9379">
+          <caret line="1692" column="5" lean-forward="true" selection-start-line="1692" selection-start-column="5" selection-end-line="1692" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/EngineInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GL_notes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/VertexBufferObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/sky_frag.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/fragment.fs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="26" column="60" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="164">
+          <caret line="173" column="49" selection-start-line="173" selection-start-column="49" selection-end-line="173" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs">
+    <entry file="file://$PROJECT_DIR$/src/res/models/quad.obj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+        <state relative-caret-position="238">
+          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/deferred/FSQuad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="20" lean-forward="true" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
@@ -1257,58 +997,174 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#560#561#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/fullscreen_fragment.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/fullscreen_vertex.vs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/EngineCore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="103" column="78" selection-start-line="103" selection-start-column="78" selection-end-line="103" selection-end-column="78" />
+          <folding>
+            <element signature="e#1374#1375#0" expanded="true" />
+            <element signature="e#1412#1413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2899#2900#0" expanded="true" />
+            <element signature="e#2951#2952#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="985">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="46" column="19" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/FrameBufferObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#556#557#0" expanded="true" />
+            <element signature="e#596#597#0" expanded="true" />
+            <element signature="e#621#622#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#896#897#0" expanded="true" />
+            <element signature="e#933#934#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/deferred/DeferredFBO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/deferred/FSShaderProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/gldata/TextureObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#653#654#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+        <state relative-caret-position="12">
+          <caret line="22" column="16" lean-forward="true" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#getInstance#0;class#PBRShaderProgram#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
+    <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="255">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/mesh/MeshData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="e#689#690#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/buffer/MeshVBO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="54" column="79" selection-start-line="54" selection-start-column="79" selection-end-line="54" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/META-INF/MANIFEST.MF">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/artifacts/CVX1_0_FPSEngine_jar.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
@@ -1316,10 +1172,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>CVX1.0 FPSEngine:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

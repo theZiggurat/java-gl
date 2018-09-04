@@ -1,7 +1,7 @@
 package v2.engine.system;
 
 import org.lwjgl.BufferUtils;
-import v2.engine.buffer.GLTexture;
+import v2.engine.gldata.TextureObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class StaticLoader {
     /**
      * Utility for loading image bytebuffers.
      * @param filename image path with format "res/image/*"
-     * @return flipped byte buffer with image data
+     * @return flipped byte gldata with image data
      */
     public static ByteBuffer loadImage(String filename){
 
@@ -64,7 +64,7 @@ public class StaticLoader {
      * @param filename image path with format "res/image/*"
      * @return texture object with width, height, and handle
      */
-    public static GLTexture loadTexture(String filename){
+    public static TextureObject loadTexture(String filename){
 
         ByteBuffer buffer;
 
@@ -102,7 +102,7 @@ public class StaticLoader {
 
         stbi_image_free(image);
 
-        GLTexture ret = new GLTexture(w.get(0), h.get(0), id);
+        TextureObject ret = new TextureObject(GL_TEXTURE_2D, w.get(0), h.get(0), id);
 
         System.out.println("Texture " + id + " loaded: " + filename + " (" + w.get(0) + "," + h.get(0) + ")");
 

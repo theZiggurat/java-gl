@@ -1,11 +1,11 @@
 package v2.instances;
 
-import v2.engine.buffer.GLTexture;
-import v2.engine.buffer.MeshVBO;
-import v2.engine.mesh.MeshData;
+import org.joml.Vector3f;
+import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.VertexBufferObject;
+import v2.engine.javadata.MeshData;
 import v2.engine.scene.Node;
 import v2.engine.scene.Scenegraph;
-import v2.engine.system.Camera;
 import v2.engine.system.EngineInterface;
 import v2.engine.system.RenderEngine;
 import v2.engine.system.StaticLoader;
@@ -15,23 +15,25 @@ import v2.modules.pbr.PBRModel;
 public class PBRTest implements EngineInterface {
 
     private Scenegraph scene;
+    Node object;
 
     @Override
     public void init(){
 
-        MeshVBO mesh;
+        VertexBufferObject mesh;
 
-        GLTexture albedo = StaticLoader.loadTexture(
-                "res/images/woodframe/albedo.png");
+        TextureObject albedo = StaticLoader.loadTexture(
+                "res/images/woodframe/normal.png");
 
-        mesh = new MeshVBO(MeshData.loadMesh("res/models/bus.obj"));
+        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/sphere.obj"));
 
         PBRMaterial material = new PBRMaterial(albedo);
 
         PBRModel model = new PBRModel(mesh, material);
+        model.scale(10);
 
         scene = RenderEngine.getInstance().getScenegraph();
-        Node object = new Node();
+        object = new Node();
         object.addChild(model);
         scene.addChild(object);
 
@@ -39,6 +41,8 @@ public class PBRTest implements EngineInterface {
 
     @Override
     public void update(double duration) {
+        object.getWorldTransform().setTranslation(object.getWorldTransform().getTranslation().add(new Vector3f(0,0f, .01f)));
+
     }
 
     @Override

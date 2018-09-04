@@ -75,7 +75,7 @@ public class sceneRenderer {
     }
 
     /*
-        Clear buffer buffer
+        Clear gldata gldata
      */
     public void clear(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -161,7 +161,7 @@ public class sceneRenderer {
 
 
     /*
-        Main buffer call
+        Main gldata call
      */
     public void render(Window window, CameraEntity perspective, Scene scene){
 
@@ -193,7 +193,7 @@ public class sceneRenderer {
 
         sceneShader.bind();
 
-        // create projection for buffer
+        // create projection for gldata
         Matrix4f projectionMatrix = transformation.getProjectionMatrix(
                 FOV, window.getWidth(), window.getHeight(), Z_NEAR, Z_FAR);
         sceneShader.setUniform("projectionMatrix", projectionMatrix);
@@ -216,11 +216,11 @@ public class sceneRenderer {
 
         for(Entity e: scene.getEntities().values()){
 
-            // null checking on entity and mesh
+            // null checking on entity and javadata
             if(e == null){continue;}
             if(e.getMesh() == null){continue;}
 
-            // model view matrix for this mesh
+            // model view matrix for this javadata
             Matrix4f modelViewMatrix = transformation.getModelViewMatrix(e, viewMatrix);
             sceneShader.setUniform("modelViewMatrix", modelViewMatrix);
 
@@ -275,7 +275,7 @@ public class sceneRenderer {
     }
 
     /*
-        Combines all light buffer methods to one call
+        Combines all light gldata methods to one call
      */
     private void renderLights(Matrix4f viewMatrix, SceneLight sceneLight, ShaderUtil shader){
 

@@ -33,14 +33,14 @@ public final class TGAReader {
     public static int [] read(byte [] buffer, Order order) throws IOException {
 
         // header
-//		int idFieldLength = buffer[0] & 0xFF;
-//		int colormapType = buffer[1] & 0xFF;
+//		int idFieldLength = gldata[0] & 0xFF;
+//		int colormapType = gldata[1] & 0xFF;
         int type = buffer[2] & 0xFF;
         int colormapOrigin = (buffer[3] & 0xFF) | (buffer[4] & 0xFF) << 8;
         int colormapLength = (buffer[5] & 0xFF) | (buffer[6] & 0xFF) << 8;
         int colormapDepth = buffer[7] & 0xFF;
-//		int originX = (buffer[8] & 0xFF) | (buffer[9] & 0xFF) << 8; // unsupported
-//		int originY = (buffer[10] & 0xFF) | (buffer[11] & 0xFF) << 8; // unsupported
+//		int originX = (gldata[8] & 0xFF) | (gldata[9] & 0xFF) << 8; // unsupported
+//		int originY = (gldata[10] & 0xFF) | (gldata[11] & 0xFF) << 8; // unsupported
         int width = getWidth(buffer);
         int height = getHeight(buffer);
         int depth = buffer[16] & 0xFF;
