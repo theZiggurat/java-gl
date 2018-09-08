@@ -10,7 +10,7 @@ import v2.modules.deferred.DeferredFBO;
 import v2.modules.deferred.FSQuad;
 import v2.modules.pbr.PBRDeferredRenderer;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_ENTER;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderEngine {
@@ -38,17 +38,15 @@ public class RenderEngine {
         mainCamera = new Camera();
     }
 
-    TextureObject texture;
-    TextureObject curr;
-
     public void init(){
         Window window = Window.getInstance();
         scenegraph.update();
         deferredFBO = new DeferredFBO(window.getWidth(), window.getHeight(),1);
         deferredRenderer = new PBRDeferredRenderer();
         quad = new FSQuad();
-        texture = StaticLoader.loadTexture("res/images/woodframe/normal.png");
     }
+
+    TextureObject currTexture;
 
     public void render(){
 
@@ -56,7 +54,11 @@ public class RenderEngine {
 
         mainCamera.update();
 
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        deferredFBO.bind();
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        deferredFBO.unbind();
 
         if(Window.getInstance().isResized()){
             glViewport(0,0, Window.getInstance().getWidth(),
@@ -64,17 +66,24 @@ public class RenderEngine {
             Window.getInstance().setResized(false);
         }
 
+
+
         deferredFBO.bind();
         scenegraph.render();
         deferredFBO.unbind();
 
-        if(InputCore.getInstance().isKeyHeld(GLFW_KEY_ENTER)){
-            curr = deferredFBO.getAlbedo();
+
+         if (InputCore.getInstance().isKeyHeld(GLFW_KEY_2)){
+            quad.setScreenTexture(deferredFBO.getPosition());
+        } else if (InputCore.getInstance().isKeyHeld(GLFW_KEY_3)){
+            quad.setScreenTexture(deferredFBO.getNormal());
         } else {
-            curr = texture;
+            quad.setScreenTexture(deferredFBO.getAlbedo());
         }
 
-        quad.setScreenTexture(curr);
+
+
+
         quad.render();
 
 

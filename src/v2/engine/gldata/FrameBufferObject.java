@@ -1,10 +1,10 @@
 package v2.engine.gldata;
 
 import java.nio.IntBuffer;
-import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glDrawBuffer;
+import static org.lwjgl.opengl.GL11.glGetError;
 import static org.lwjgl.opengl.GL20.glDrawBuffers;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS;
@@ -12,6 +12,8 @@ import static org.lwjgl.opengl.GL32.GL_TEXTURE_2D_MULTISAMPLE;
 import static org.lwjgl.opengl.GL32.glFramebufferTexture;
 
 public class FrameBufferObject {
+
+    // Class credited to Fynn Flugge of Oreon Engine - GLFramebuffer
 
     private int id;
 
@@ -28,7 +30,7 @@ public class FrameBufferObject {
     }
 
     public void setDrawBuffer(int i){
-        glDrawBuffer(GL_COLOR_ATTACHMENT0 + i);
+        glDrawBuffer(i);
     }
 
     public void setDrawBuffer(IntBuffer buffer){
@@ -40,7 +42,7 @@ public class FrameBufferObject {
     }
 
     public void createColorTextureAttachment(int textureId, int index) {
-        glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index,
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index,
                 GL_TEXTURE_2D, textureId, 0);
     }
 
@@ -50,7 +52,7 @@ public class FrameBufferObject {
     }
 
     /**
-     * checks for errors. shamelessly stolen from oreon engine by Fynn Flugge
+     * checks for errors
      */
     public void checkStatus()
     {

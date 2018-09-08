@@ -89,20 +89,22 @@ public class StaticLoader {
         }
 
         int id = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, id);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        TextureObject ret = new TextureObject(GL_TEXTURE_2D, w.get(0), h.get(0), id);
+        ret.bilinearFilter();
         if (c.get(0) == 3) {
             if ((w.get(0) & 3) != 0) {
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w.get(0) & 1));
             }
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            ret.allocateImage2D(GL_RGB, GL_RGB, image);
+            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         } else {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+            ret.allocateImage2D(GL_RGBA, GL_RGBA, image);
+            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
         }
 
         stbi_image_free(image);
 
-        TextureObject ret = new TextureObject(GL_TEXTURE_2D, w.get(0), h.get(0), id);
+
 
         System.out.println("Texture " + id + " loaded: " + filename + " (" + w.get(0) + "," + h.get(0) + ")");
 

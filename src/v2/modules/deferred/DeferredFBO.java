@@ -20,45 +20,51 @@ public class DeferredFBO extends FrameBufferObject {
 
         super();
 
-//        position = new TextureObject(
-//                GL_TEXTURE_2D, width, height, samples)
-//                .allocateImage2D(GL_RGBA32F, GL_RGBA);
+        position = new TextureObject(
+                GL_TEXTURE_2D, width, height)
+                .allocateImage2D(GL_RGBA32F, GL_RGBA)
+                .bilinearFilter();
 
         albedo = new TextureObject(
-            GL_TEXTURE_2D, width, height, samples)
-                .allocateImage2D(GL_RGBA16F, GL_RGBA);
+            GL_TEXTURE_2D, width, height)
+                .allocateImage2D(GL_RGBA16F, GL_RGBA)
+                .bilinearFilter();
 
-//        normal = new TextureObject(
-//            GL_TEXTURE_2D, width, height, samples)
-//                .allocateImage2D(GL_RGBA32F, GL_RGBA);
-//
+        normal = new TextureObject(
+            GL_TEXTURE_2D, width, height)
+                .allocateImage2D(GL_RGBA32F, GL_RGBA)
+                .bilinearFilter();
+
 //         metalness = new TextureObject(
 //                GL_TEXTURE_2D, width, height, samples)
-//                .allocateImage2D(GL_R, GL_R);
+//                .allocateImage2D(GL_R, GL_R)
+//                .bilinearFilter();
 //
 //        roughness = new TextureObject(
 //                GL_TEXTURE_2D, width, height, samples)
-//                .allocateImage2D(GL_R, GL_R);
-//
-//        depth = new TextureObject(
-//                GL_TEXTURE_2D, width, height, samples)
-//                .allocateImage2D(GL_DEPTH_COMPONENT32F, GL_DEPTH_COMPONENT);
+//                .allocateImage2D(GL_R, GL_R)
+//                .bilinearFilter();
 
-        IntBuffer drawBuffers = BufferUtils.createIntBuffer(1);
+        depth = new TextureObject(
+                GL_TEXTURE_2D, width, height)
+                .allocateDepth()
+                .bilinearFilter();
+
+        IntBuffer drawBuffers = BufferUtils.createIntBuffer(3);
         drawBuffers.put(GL_COLOR_ATTACHMENT0);
-//        drawBuffers.put(GL_COLOR_ATTACHMENT1);
-//        drawBuffers.put(GL_COLOR_ATTACHMENT2);
+        drawBuffers.put(GL_COLOR_ATTACHMENT1);
+        drawBuffers.put(GL_COLOR_ATTACHMENT2);
 //        drawBuffers.put(GL_COLOR_ATTACHMENT3);
 //        drawBuffers.put(GL_COLOR_ATTACHMENT4);
         drawBuffers.flip();
 
         bind();
-//        createColorTextureAttachment(getPosition().getId(), 0);
-//        createColorTextureAttachment(getNormal().getId(), 1);
-        createColorTextureAttachment(getAlbedo().getId(), 0);
+        createColorTextureAttachment(getPosition().getId(), 0);
+        createColorTextureAttachment(getNormal().getId(), 1);
+        createColorTextureAttachment(getAlbedo().getId(), 2);
 //        createColorTextureAttachment(getMetalness().getId(), 3);
 //        createColorTextureAttachment(getRoughness().getId(), 4);
-        //createDepthTextureAttatchment(getDepth().getId());
+        createDepthTextureAttatchment(getDepth().getId());
         setDrawBuffer(drawBuffers);
         checkStatus();
         unbind();

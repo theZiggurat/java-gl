@@ -23,14 +23,14 @@ public class PBRTest implements EngineInterface {
         VertexBufferObject mesh;
 
         TextureObject albedo = StaticLoader.loadTexture(
-                "res/images/woodframe/normal.png");
+                "res/textures/bus_d.png")
+                .bilinearFilter();
 
-        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/sphere.obj"));
+        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/M4A1.obj"));
 
         PBRMaterial material = new PBRMaterial(albedo);
 
         PBRModel model = new PBRModel(mesh, material);
-        model.scale(10);
 
         scene = RenderEngine.getInstance().getScenegraph();
         object = new Node();

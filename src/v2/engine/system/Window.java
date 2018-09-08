@@ -85,16 +85,16 @@ public class Window {
         glfwShowWindow(handle);
 
         glClearColor(0,0,0, 1f);
+        glFrontFace(GL_CCW);
 
-
-//       glEnable(GL_DEPTH_TEST);
-//       glEnable(GL_CULL_FACE);
-//       glCullFace(GL_BACK);
+       glEnable(GL_DEPTH_TEST);
+       glEnable(GL_CULL_FACE);
+       glCullFace(GL_BACK);
        //glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
        glLineWidth(1);
 
-       setIcon("res/images/icon.png");
+       //setIcon("res/images/icon.png");
     }
 
     public void update(){
@@ -133,7 +133,8 @@ public class Window {
         spec_title = title.concat(" | " +
                 new DecimalFormat("#.0").format(FPS) + " FPS | " +
                 "Camera: " + camera.getPosition().toString(new DecimalFormat("#.0")) +
-                " | Looking: " + camera.getForward().toString(new DecimalFormat("0.000")));
+                " | Looking: " + camera.getForward().toString(new DecimalFormat("0.000")) +
+                " | FOV: " + camera.getFOV());
     }
 
 }

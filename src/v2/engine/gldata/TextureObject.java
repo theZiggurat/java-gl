@@ -7,6 +7,9 @@ import lombok.Getter;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT24;
+import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT32;
+import static org.lwjgl.opengl.GL14.GL_DEPTH_TEXTURE_MODE;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 @Getter @AllArgsConstructor
@@ -64,7 +67,7 @@ public class TextureObject {
     public TextureObject allocateImage2D(int internalFormat, int format){
         bind();
         glTexImage2D(type, 0, internalFormat, width, height,
-                0, format, GL_FLOAT, (ByteBuffer) null);
+                0, format, GL_UNSIGNED_BYTE, (ByteBuffer) null);
         unbind();
         return this;
     }
@@ -72,7 +75,15 @@ public class TextureObject {
     public TextureObject allocateImage2D(int internalFormat, int format, ByteBuffer buffer){
         bind();
         glTexImage2D(type, 0, internalFormat, width, height,
-                0, format, GL_FLOAT, buffer);
+                0, format, GL_UNSIGNED_BYTE, buffer);
+        unbind();
+        return this;
+    }
+
+    public TextureObject allocateDepth(){
+        bind();
+        glTexImage2D(type, 0, GL_DEPTH_COMPONENT32, width, height,
+                0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
         unbind();
         return this;
     }
