@@ -23,14 +23,31 @@ public class PBRTest implements EngineInterface {
         VertexBufferObject mesh;
 
         TextureObject albedo = StaticLoader.loadTexture(
-                "res/textures/bus_d.png")
+                "res/images/paintchip/albedo.png")
                 .bilinearFilter();
 
-        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/M4A1.obj"));
+        TextureObject normal = StaticLoader.loadTexture(
+                "res/images/paintchip/normal.png")
+                .bilinearFilter();
 
-        PBRMaterial material = new PBRMaterial(albedo);
+        TextureObject roughness = StaticLoader.loadTexture(
+                "res/images/paintchip/rough.png")
+                .bilinearFilter();
+
+        TextureObject metal = StaticLoader.loadTexture(
+                "res/images/paintchip/metal.png")
+                .bilinearFilter();
+
+        TextureObject ao = StaticLoader.loadTexture(
+                "res/images/paintchip/ao.png")
+                .bilinearFilter();
+
+        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/teapot.obj"));
+
+        PBRMaterial material = new PBRMaterial(albedo, normal, roughness, metal, ao);
 
         PBRModel model = new PBRModel(mesh, material);
+        model.scale(30f);
 
         scene = RenderEngine.getInstance().getScenegraph();
         object = new Node();

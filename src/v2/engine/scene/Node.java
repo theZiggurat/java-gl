@@ -59,7 +59,7 @@ public class Node {
     }
 
     public void scale(float scale) {
-        worldTransform.setScaling(new Vector3f(scale));
+        worldTransform.setScaling(new Vector3f(scale, scale, scale));
     }
 
 }

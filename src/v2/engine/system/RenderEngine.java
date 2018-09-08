@@ -1,14 +1,13 @@
 package v2.engine.system;
 
-import jdk.internal.util.xml.impl.Input;
 import lombok.Getter;
 import lombok.Setter;
-import v2.engine.gldata.FrameBufferObject;
 import v2.engine.gldata.TextureObject;
 import v2.engine.scene.Scenegraph;
 import v2.modules.deferred.DeferredFBO;
 import v2.modules.deferred.FSQuad;
-import v2.modules.pbr.PBRDeferredRenderer;
+import v2.modules.pbr.PBRDeferredShaderProgram;
+import v2.modules.pbr.PBRShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -19,7 +18,9 @@ public class RenderEngine {
 
     private DeferredFBO deferredFBO;
 
-    private PBRDeferredRenderer deferredRenderer;
+    private TextureObject sceneTexture;
+    private ShaderProgram lightingShader;
+
     private FSQuad quad;
 
     @Setter @Getter private Camera mainCamera;
@@ -42,15 +43,17 @@ public class RenderEngine {
         Window window = Window.getInstance();
         scenegraph.update();
         deferredFBO = new DeferredFBO(window.getWidth(), window.getHeight(),1);
-        deferredRenderer = new PBRDeferredRenderer();
+        lightingShader = new PBRDeferredShaderProgram();
         quad = new FSQuad();
+        currTexture = deferredFBO.getAlbedo();
+        sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
+                .allocateImage2D(GL_RGBA16, GL_RGBA)
+                .bilinearFilter();
     }
 
     TextureObject currTexture;
 
     public void render(){
-
-
 
         mainCamera.update();
 
@@ -73,17 +76,22 @@ public class RenderEngine {
         deferredFBO.unbind();
 
 
-         if (InputCore.getInstance().isKeyHeld(GLFW_KEY_2)){
-            quad.setScreenTexture(deferredFBO.getPosition());
-        } else if (InputCore.getInstance().isKeyHeld(GLFW_KEY_3)){
-            quad.setScreenTexture(deferredFBO.getNormal());
-        } else {
-            quad.setScreenTexture(deferredFBO.getAlbedo());
+
+        if (InputCore.getInstance().isKeyPressed(GLFW_KEY_1)) {
+            currTexture = deferredFBO.getAlbedo();
+        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_2)){
+            currTexture = deferredFBO.getNormal();
+        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_3)){
+            currTexture = deferredFBO.getMetalness();
+        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_4)){
+            currTexture = deferredFBO.getRoughness();
+        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_5)){
+            currTexture = deferredFBO.getDepth();
+        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_0)){
+            currTexture = sceneTexture;
         }
 
-
-
-
+        quad.setScreenTexture(currTexture);
         quad.render();
 
 

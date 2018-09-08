@@ -7,9 +7,7 @@ import lombok.Getter;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT24;
 import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT32;
-import static org.lwjgl.opengl.GL14.GL_DEPTH_TEXTURE_MODE;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 @Getter @AllArgsConstructor

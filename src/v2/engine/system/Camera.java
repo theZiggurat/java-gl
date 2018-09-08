@@ -6,6 +6,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.util.function.Function;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Camera {
@@ -13,6 +15,11 @@ public class Camera {
     private final Vector3f ABS_UP = new Vector3f(0,1,0);
 
     @Setter @Getter private double FOV;
+
+    @Getter Function<Integer, Float> speedMod =
+            ( e -> ((float)Math.exp(-e))*0.5f );
+
+    @Getter @Setter private int speedLevel = 0;
 
     @Getter private final float ZNEAR = .1f;
     @Getter private final float ZFAR = 10000;
@@ -47,25 +54,32 @@ public class Camera {
             getPosition().add(getRight().mul((float)input.getDisplacement().x * -.05f));
         }
 
-        FOV += input.getScrollAmount();
-
-        if(input.isKeyHeld(GLFW_KEY_W)){
-            position.add(getForward().mul(.05f));
-        }
-        if(input.isKeyHeld(GLFW_KEY_S)){
-            position.add(getForward().mul(-.05f));
-        }
-        if(input.isKeyHeld(GLFW_KEY_A)){
-            position.add(getRight().mul(.05f));
-        }
-        if(input.isKeyHeld(GLFW_KEY_D)){
-            position.add(getRight().mul(-.05f));
-        }
         if(input.isButtonPressed(0)) { // left click
             float ssx = (float) (2 * (input.getCursorPos().x/ Window.getInstance().getWidth()) - 1);
             float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.getInstance().getHeight())));
-
         }
+
+        if(input.isKeyPressed(GLFW_KEY_MINUS)){
+            speedLevel--;
+        } else if (input.isKeyPressed(GLFW_KEY_EQUAL)){
+            speedLevel++;
+        }
+
+        FOV += input.getScrollAmount();
+
+        if(input.isKeyHeld(GLFW_KEY_W)){
+            position.add(getForward().mul(speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_S)){
+            position.add(getForward().mul(-speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_A)){
+            position.add(getRight().mul(speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_D)){
+            position.add(getRight().mul(-speedMod.apply(speedLevel)));
+        }
+
 
     }
 

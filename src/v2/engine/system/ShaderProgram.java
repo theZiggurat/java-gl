@@ -231,6 +231,9 @@ public class ShaderProgram {
 
     public void updateUniforms(ModuleNode moduleNode){}
     public void updateUniforms(TextureObject textureObject){}
+    public void updateUniforms(TextureObject albedo, TextureObject position, TextureObject normal,
+           TextureObject metal, TextureObject rough, TextureObject depth,
+                               TextureObject scene){}
 
 
 
