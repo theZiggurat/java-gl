@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 import java.util.function.Function;
 
@@ -19,9 +18,9 @@ public class Camera {
     @Getter Function<Integer, Float> speedMod =
             ( e -> ((float)Math.exp(-e))*0.5f );
 
-    @Getter @Setter private int speedLevel = 0;
+    @Getter @Setter private int speedLevel = 4;
 
-    @Getter private final float ZNEAR = .1f;
+    @Getter private final float ZNEAR = .01f;
     @Getter private final float ZFAR = 10000;
 
     @Setter @Getter private Vector3f position;
@@ -42,7 +41,7 @@ public class Camera {
     }
 
     public void update(){
-        InputCore input = InputCore.getInstance();
+        InputCore input = InputCore.instance();
 
         if(input.isButtonHeld(1)){ // right click
             getRotation().add((float)input.getDisplacement().y * mouseSens,
@@ -50,13 +49,13 @@ public class Camera {
         }
 
         if(input.isButtonHeld(2)){ // middle click
-            getPosition().add(getUp().mul((float)input.getDisplacement().y * .05f));
-            getPosition().add(getRight().mul((float)input.getDisplacement().x * -.05f));
+            getPosition().add(getUp().mul((float)input.getDisplacement().y * .05f*speedMod.apply(speedLevel-2)));
+            getPosition().add(getRight().mul((float)input.getDisplacement().x * -.05f*speedMod.apply(speedLevel-2)));
         }
 
         if(input.isButtonPressed(0)) { // left click
-            float ssx = (float) (2 * (input.getCursorPos().x/ Window.getInstance().getWidth()) - 1);
-            float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.getInstance().getHeight())));
+            float ssx = (float) (2 * (input.getCursorPos().x/ Window.instance().getWidth()) - 1);
+            float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.instance().getHeight())));
         }
 
         if(input.isKeyPressed(GLFW_KEY_MINUS)){
@@ -84,8 +83,8 @@ public class Camera {
     }
 
     public Matrix4f getProjectionMatrix() {
-        float apectRatio = (float) Window.getInstance().getWidth() /
-                (float) Window.getInstance().getHeight();
+        float apectRatio = (float) Window.instance().getWidth() /
+                (float) Window.instance().getHeight();
         Matrix4f ret = new Matrix4f();
         ret.identity();
         ret.perspective((float)Math.toRadians(FOV), apectRatio, ZNEAR, ZFAR);

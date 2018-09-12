@@ -132,14 +132,14 @@ void main()
     setupColors(outTextureCoord);
 
     vec4 diffuseSpecularComp = calcDirectionalLight(directionalLight, lightVertexPos, lightVertexNormal);
-    /*for(int i = 0; i<MAX_POINT_LIGHTS; i++){
-        if(pointLights[i].intensity>0){
-            diffuseSpecularComp += calcPointLight(pointLights[i], lightVertexPos, lightVertexNormal);
+    /*for(int instance = 0; instance<MAX_POINT_LIGHTS; instance++){
+        if(pointLights[instance].intensity>0){
+            diffuseSpecularComp += calcPointLight(pointLights[instance], lightVertexPos, lightVertexNormal);
         }
     }
-    for(int i = 0; i<MAX_SPOT_LIGHTS; i++){
-        if(spotLights[i].point.intensity > 0){
-            diffuseSpecularComp += calcSpotLight(spotLights[i], lightVertexPos, lightVertexNormal);
+    for(int instance = 0; instance<MAX_SPOT_LIGHTS; instance++){
+        if(spotLights[instance].point.intensity > 0){
+            diffuseSpecularComp += calcSpotLight(spotLights[instance], lightVertexPos, lightVertexNormal);
         }
     }*/
 

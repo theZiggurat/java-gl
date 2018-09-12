@@ -23,9 +23,8 @@ public class TextureObject {
         this(GL_TEXTURE_2D, width, height);
     }
 
-    public TextureObject bind(){
+    public void bind(){
         glBindTexture(GL_TEXTURE_2D, id);
-        return this;
     }
 
     public void unbind(){
@@ -35,6 +34,14 @@ public class TextureObject {
     public void cleanup(){
         unbind();
         glDeleteTextures(id);
+    }
+
+    public TextureObject wrap(){
+        bind();
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        unbind();
+        return this;
     }
 
     public TextureObject nofilter(){
@@ -65,7 +72,7 @@ public class TextureObject {
     public TextureObject allocateImage2D(int internalFormat, int format){
         bind();
         glTexImage2D(type, 0, internalFormat, width, height,
-                0, format, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+                0, format, GL_FLOAT, (ByteBuffer) null);
         unbind();
         return this;
     }
@@ -84,5 +91,9 @@ public class TextureObject {
                 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
         unbind();
         return this;
+    }
+
+    public static TextureObject emptyTexture(){
+        return new TextureObject(GL_TEXTURE_2D,0,0,0);
     }
 }

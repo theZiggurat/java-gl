@@ -4,7 +4,6 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glDrawBuffer;
-import static org.lwjgl.opengl.GL11.glGetError;
 import static org.lwjgl.opengl.GL20.glDrawBuffers;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS;
@@ -13,18 +12,31 @@ import static org.lwjgl.opengl.GL32.glFramebufferTexture;
 
 public class FrameBufferObject {
 
-    // Class credited to Fynn Flugge of Oreon Engine - GLFramebuffer
+    /** Class credited to Fynn Flugge of Oreon Engine - GLFramebuffer
+     *
+     */
 
+    /** Framebuffer ID **/
     private int id;
 
+    /**
+     * Generates new openGL framebuffer with glGenFramebuffers
+     */
     public FrameBufferObject(){
         id = glGenFramebuffers();
     }
 
+    /**
+     * Binds this framebuffer. A binded framebuffer will be used in
+     * all subsequent glDraw calls.
+     */
     public void bind(){
         glBindFramebuffer(GL_FRAMEBUFFER, id);
     }
 
+    /**
+     * Unbinds any currently binded framebuffer
+     */
     public void unbind(){
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
@@ -33,14 +45,30 @@ public class FrameBufferObject {
         glDrawBuffer(i);
     }
 
+    /**
+     * Dicates how framebuffer draws with intbuffer that contains
+     * {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, ... , GL_COLOR_ATTACHMENTn}
+     * for n framebuffer color attachments
+     * @param buffer int buffer with color attachments
+     */
     public void setDrawBuffer(IntBuffer buffer){
         glDrawBuffers(buffer);
     }
 
+    /**
+     * Must be used subsequently with an empty texture modified with allocateDepth()
+     * @param textureId texture with depth allocation
+     */
     public void createDepthTextureAttatchment(int textureId){
         glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureId, 0);
     }
 
+    /**
+     * Must be used subsequently with an empty texture modified with allocateImage2D
+     * with valid openGL color texture format
+     * @param textureId of empty image texture
+     * @param index index in glsl shader ex: | layout (location = index) out vec4 image_name; |
+     */
     public void createColorTextureAttachment(int textureId, int index) {
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index,
                 GL_TEXTURE_2D, textureId, 0);
@@ -52,7 +80,7 @@ public class FrameBufferObject {
     }
 
     /**
-     * checks for errors
+     * Checks all openGL framebuffer errors
      */
     public void checkStatus()
     {

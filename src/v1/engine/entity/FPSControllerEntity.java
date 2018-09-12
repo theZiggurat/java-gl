@@ -91,7 +91,7 @@ public class FPSControllerEntity extends CameraEntity{
     }
 
     private void handleMouse(){
-        InputCore input = InputCore.getInstance();
+        InputCore input = InputCore.instance();
 
         Vector2f rotation = new Vector2f((float)input.getDisplacement().x, (float)input.getDisplacement().y);
         getCamera().moveRotation(rotation.x * MOUSE_SENS,

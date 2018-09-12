@@ -27,6 +27,13 @@ public class ModuleNode extends Node {
         super.render();
     }
 
+    public void renderWireframe(){
+        if(modules.containsKey(ModuleType.RENDER_MODULE)){
+            modules.get(ModuleType.RENDER_MODULE).renderWireframe();
+        }
+        super.render();
+    }
+
     public void cleanup(){
         super.cleanup();
         modules.values().forEach(e->e.cleanup());

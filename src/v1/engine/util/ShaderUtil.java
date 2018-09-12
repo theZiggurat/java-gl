@@ -107,7 +107,7 @@ public class ShaderUtil {
         }
     }
 
-    // single int uniform (i)
+    // single int uniform (instance)
     public void setUniform(String name, int id){
         if(uniforms.get(name)==null){ return; }
         glUniform1i(uniforms.get(name), id);

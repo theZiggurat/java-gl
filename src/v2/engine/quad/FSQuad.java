@@ -1,4 +1,4 @@
-package v2.modules.deferred;
+package v2.engine.quad;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,8 @@ import v2.engine.gldata.TextureObject;
 import v2.engine.gldata.VertexBufferObject;
 import v2.engine.javadata.MeshData;
 import v2.engine.system.ShaderProgram;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class FSQuad {
 
@@ -19,6 +21,7 @@ public class FSQuad {
     }
 
     public void render(){
+        glPolygonMode(GL_FRONT, GL_FILL);
         fsShader.bind();
         fsShader.updateUniforms(screenTexture);
         quad.render();

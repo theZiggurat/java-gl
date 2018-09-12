@@ -1,6 +1,5 @@
 package v2.engine.system;
 
-import lombok.Getter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -17,11 +16,14 @@ import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL32.GL_GEOMETRY_SHADER;
 import static org.lwjgl.opengl.GL43.GL_COMPUTE_SHADER;
+import static org.lwjgl.opengl.GL43.glDispatchCompute;
+import static org.lwjgl.opengl.GL42.glBindImageTexture;
 
 public class ShaderProgram {
 
     private final int programId;
-    private int vertexShader, fragmentShader, geometryShader, computeShader;
+    private int vertexShader = -1, fragmentShader = -1,
+            geometryShader = -1, computeShader = -1;
 
     private final Map<String, Integer> uniforms;
 
@@ -36,7 +38,29 @@ public class ShaderProgram {
     }
 
     /**
-     *  Bind shaderprogram to openGL gldata pipeline
+     *  From Khronos doc:
+     *  glUseProgram installs the program object specified by
+     *  program as part of current rendering state. One or
+     *  more executables are created in a program object by
+     *  successfully attaching shader objects to it with
+     *  glAttachShader, successfully compiling the shader
+     *  objects with glCompileShader, and successfully
+     *  linking the program object with glLinkProgram.
+     *
+     * A program object will contain an executable that will
+     * run on the vertex processor if it contains one or more
+     * shader objects of type GL_VERTEX_SHADER that have been
+     * successfully compiled and linked. A program object will
+     * contain an executable that will run on the geometry
+     * processor if it contains one or more shader objects
+     * of type GL_GEOMETRY_SHADER that have been successfully
+     * compiled and linked. Similarly, a program object will
+     * contain an executable that will run on the fragment
+     * processor if it contains one or more shader objects
+     * of type GL_FRAGMENT_SHADER that have been successfully
+     * compiled and linked.
+     *
+     * https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUseProgram.xhtml
      */
     public void bind(){
         glUseProgram(programId);
@@ -68,6 +92,15 @@ public class ShaderProgram {
 
     }
 
+    /**
+     * From Khronos doc:
+     * glDeleteProgram frees the memory and invalidates
+     * the name associated with the program object specified
+     * by program. This command effectively undoes the effects
+     * of a call to glCreateProgram.
+     *
+     * https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDeleteProgram.xhtml
+     */
     public void cleanup(){
         unbind();
         if(programId !=0){
@@ -76,15 +109,44 @@ public class ShaderProgram {
     }
 
     /**
+     * Dispatches compute shader if created/linked
+     * @param groupX group size x
+     * @param groupY group size y
+     */
+    public void compute(int groupX, int groupY){
+        if(computeShader != -1){
+            bind();
+            glDispatchCompute(Window.instance().getWidth()/groupX,
+                    Window.instance().getHeight()/groupY, 1);
+        }
+    }
+
+    /**
+     * Binds image for shader. They are imported in the shader with:
+     * layout (binding = *index*, *format*) uniform *access* image2D __;
+     * @param index index in shader | layout (binding = index)
+     * @param textureID accessed by texture.getId()
+     * @param access GL_READ_ONLY, GL_WRITE_ONLY, GL_READ_WRITE
+     * @param format GL_RGBA16F, GL_RGBA32F, GL_RED, etc.
+     */
+    public void bindImage(int index, int textureID, int access, int format){
+        bind();
+        glBindImageTexture(index, textureID, 0, false,
+                0, access, format);
+        unbind();
+    }
+
+
+    /**
      * Vertex Shader
      * @param shaderPath  path of shader code in "/res/shaders/*"
-     * @throws Exception  if shader is not found
+     * @throws Error if shader is not found
      */
     public void createVertexShader(String shaderPath) {
         try{
             vertexShader = createShader(shaderPath, GL_VERTEX_SHADER);
         } catch(Exception e) {
-            System.err.println("Could not create shader: " + shaderPath);
+            System.err.println("Could not create vertex shader: " + shaderPath);
             e.printStackTrace();
         }
     }
@@ -92,13 +154,13 @@ public class ShaderProgram {
     /**
      * Fragment Shader
      * @param shaderPath  path of shader code in "/res/shaders/*"
-     * @throws Exception  if shader is not found
+     * @throws Error if shader is not found
      */
     public void createFragmentShader(String shaderPath) {
         try {
             fragmentShader = createShader(shaderPath, GL_FRAGMENT_SHADER);
         } catch(Exception e){
-            System.err.println("Could not create shader: " + shaderPath);
+            System.err.println("Could not create fragment shader: " + shaderPath);
             e.printStackTrace();
         }
     }
@@ -106,19 +168,29 @@ public class ShaderProgram {
     /**
      * Geometry Shader
      * @param shaderPath  path of shader code in "/res/shaders/*"
-     * @throws Exception  if shader is not found
+     * @throws Error if shader is not found
      */
-    public void createGeometryShader(String shaderPath) throws Exception {
-        geometryShader = createShader(shaderPath, GL_GEOMETRY_SHADER);
+    public void createGeometryShader(String shaderPath) {
+        try {
+            geometryShader = createShader(shaderPath, GL_GEOMETRY_SHADER);
+        } catch (Exception e) {
+            System.err.println("Could not create geometry shader: " + shaderPath);
+            e.printStackTrace();
+        }
     }
 
     /**
      * Compute Shader
      * @param shaderPath  path of shader code in "/res/shaders/*"
-     * @throws Exception  if shader is not found
+     * @throws Error if shader is not found
      */
-    public void createComputeShader(String shaderPath) throws Exception {
-        computeShader = createShader(shaderPath, GL_COMPUTE_SHADER);
+    public void createComputeShader(String shaderPath) {
+        try {
+            computeShader = createShader(shaderPath, GL_COMPUTE_SHADER);
+        } catch(Exception e) {
+            System.err.println("Could not create compute shader: " + shaderPath);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -166,7 +238,7 @@ public class ShaderProgram {
     // PRIMITIVE UNIFORM TYPES //
 
     /**
-     * single int uniform (i)
+     * single int uniform (instance)
      * @param name uniform name registered from addUniform
      * @param value  int data
      */
@@ -227,7 +299,7 @@ public class ShaderProgram {
         glActiveTexture(GL_TEXTURE0 + index);
     }
 
-    // UPDATE INTERFACE //
+    /** UPDATE INTERFACE **/
 
     public void updateUniforms(ModuleNode moduleNode){}
     public void updateUniforms(TextureObject textureObject){}

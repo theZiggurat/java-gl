@@ -1,4 +1,4 @@
-package v2.modules.deferred;
+package v2.modules.pbr;
 
 import lombok.Getter;
 import org.lwjgl.BufferUtils;
@@ -29,11 +29,11 @@ import static org.lwjgl.opengles.GLES30.GL_RGBA32F;
  */
 
 @Getter
-public class DeferredFBO extends FrameBufferObject {
+public class PBRFrameBufferObject extends FrameBufferObject {
 
     TextureObject position, albedo, normal, metalness, roughness, depth;
 
-    public DeferredFBO(int width, int height, int samples){
+    public PBRFrameBufferObject(int width, int height, int samples){
 
         super();
 
@@ -54,12 +54,12 @@ public class DeferredFBO extends FrameBufferObject {
 
         metalness = new TextureObject(
                 GL_TEXTURE_2D, width, height)
-                .allocateImage2D(GL_RED, GL_RED)
+                .allocateImage2D(GL_R16F, GL_RED)
                 .bilinearFilter();
 
         roughness = new TextureObject(
                 GL_TEXTURE_2D, width, height)
-                .allocateImage2D(GL_RED, GL_RED)
+                .allocateImage2D(GL_R16F, GL_RED)
                 .bilinearFilter();
 
         depth = new TextureObject(

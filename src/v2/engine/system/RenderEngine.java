@@ -4,19 +4,19 @@ import lombok.Getter;
 import lombok.Setter;
 import v2.engine.gldata.TextureObject;
 import v2.engine.scene.Scenegraph;
-import v2.modules.deferred.DeferredFBO;
-import v2.modules.deferred.FSQuad;
+import v2.modules.pbr.PBRFrameBufferObject;
+import v2.engine.quad.FSQuad;
 import v2.modules.pbr.PBRDeferredShaderProgram;
-import v2.modules.pbr.PBRShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL30.GL_RGBA16F;
 
 public class RenderEngine {
 
     @Getter private Scenegraph scenegraph;
 
-    private DeferredFBO deferredFBO;
+    private PBRFrameBufferObject PBRFrameBufferObject;
 
     private TextureObject sceneTexture;
     private ShaderProgram lightingShader;
@@ -27,7 +27,7 @@ public class RenderEngine {
 
     public static RenderEngine instance = null;
 
-    public static RenderEngine getInstance(){
+    public static RenderEngine instance(){
         if(instance == null){
             instance = new RenderEngine();
         }
@@ -40,14 +40,14 @@ public class RenderEngine {
     }
 
     public void init(){
-        Window window = Window.getInstance();
+        Window window = Window.instance();
         scenegraph.update();
-        deferredFBO = new DeferredFBO(window.getWidth(), window.getHeight(),1);
+        PBRFrameBufferObject = new PBRFrameBufferObject(window.getWidth(), window.getHeight(),1);
         lightingShader = new PBRDeferredShaderProgram();
         quad = new FSQuad();
-        currTexture = deferredFBO.getAlbedo();
+        currTexture = PBRFrameBufferObject.getAlbedo();
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
-                .allocateImage2D(GL_RGBA16, GL_RGBA)
+                .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
     }
 
@@ -59,36 +59,49 @@ public class RenderEngine {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        deferredFBO.bind();
+        PBRFrameBufferObject.bind();
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        deferredFBO.unbind();
+        PBRFrameBufferObject.unbind();
 
-        if(Window.getInstance().isResized()){
-            glViewport(0,0, Window.getInstance().getWidth(),
-                    Window.getInstance().getHeight());
-            Window.getInstance().setResized(false);
+        if(Window.instance().isResized()){
+            glViewport(0,0, Window.instance().getWidth(),
+                    Window.instance().getHeight());
+            Window.instance().setResized(false);
         }
 
 
 
-        deferredFBO.bind();
-        scenegraph.render();
-        deferredFBO.unbind();
+        PBRFrameBufferObject.bind();
+        if(InputCore.instance().isKeyHeld(GLFW_KEY_DELETE)){
+            scenegraph.renderWireframe();
+        } else {
+            scenegraph.render();
+        }
+        PBRFrameBufferObject.unbind();
+
+        lightingShader.updateUniforms(PBRFrameBufferObject.getAlbedo(),
+                PBRFrameBufferObject.getPosition(), PBRFrameBufferObject.getNormal(),
+                PBRFrameBufferObject.getMetalness(), PBRFrameBufferObject.getRoughness(),
+                PBRFrameBufferObject.getDepth(), sceneTexture);
+
+        lightingShader.compute(16,16);
 
 
 
-        if (InputCore.getInstance().isKeyPressed(GLFW_KEY_1)) {
-            currTexture = deferredFBO.getAlbedo();
-        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_2)){
-            currTexture = deferredFBO.getNormal();
-        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_3)){
-            currTexture = deferredFBO.getMetalness();
-        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_4)){
-            currTexture = deferredFBO.getRoughness();
-        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_5)){
-            currTexture = deferredFBO.getDepth();
-        } else if (InputCore.getInstance().isKeyPressed(GLFW_KEY_0)){
+        if (InputCore.instance().isKeyPressed(GLFW_KEY_2)) {
+            currTexture = PBRFrameBufferObject.getAlbedo();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_3)){
+            currTexture = PBRFrameBufferObject.getNormal();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_4)){
+            currTexture = PBRFrameBufferObject.getMetalness();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_5)){
+            currTexture = PBRFrameBufferObject.getRoughness();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_7)){
+            currTexture = PBRFrameBufferObject.getDepth();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_1)){
             currTexture = sceneTexture;
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_6)){
+            currTexture = PBRFrameBufferObject.getPosition();
         }
 
         quad.setScreenTexture(currTexture);

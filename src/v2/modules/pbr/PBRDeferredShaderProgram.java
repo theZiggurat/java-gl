@@ -1,37 +1,42 @@
 package v2.modules.pbr;
 
+import org.joml.Vector3f;
 import v2.engine.gldata.TextureObject;
+import v2.engine.system.RenderEngine;
 import v2.engine.system.ShaderProgram;
 
-import static org.lwjgl.opengl.GL13.*;
+import static org.lwjgl.opengl.GL15.GL_READ_ONLY;
+import static org.lwjgl.opengl.GL15.GL_WRITE_ONLY;
+import static org.lwjgl.opengl.GL30.*;
 
-public class PBRDeferredShaderProgram extends ShaderProgram {
+public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     public PBRDeferredShaderProgram(){
+        super();
+
+        createComputeShader("res/shaders/pbr_deferred_lighting_comp.cs");
+        link();
+
+        addUniform("cameraPos");
+
+       // addUniform("light_dir");
 
     }
 
     public void updateUniforms(TextureObject albedo, TextureObject position, TextureObject normal,
        TextureObject metal, TextureObject rough, TextureObject depth, TextureObject scene){
 
-        glActiveTexture(GL_TEXTURE0);
-        position.bind();
-        setUniform("positionMap", 0);
+        bind();
+        bindImage(0, albedo.getId(), GL_READ_ONLY, GL_RGBA16F);
+        bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
+        bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
+        bindImage(3, metal.getId(), GL_READ_ONLY, GL_R16F);
+        bindImage(4, rough.getId(), GL_READ_ONLY, GL_R16F);
+        bindImage(5, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
 
-        glActiveTexture(GL_TEXTURE1);
-        normal.bind();
-        setUniform("normalMap", 1);
+        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getPosition());
+       // setUniform("light_dir", new Vector3f(0,-1,0));
+        unbind();
 
-        glActiveTexture(GL_TEXTURE2);
-        rough.bind();
-        setUniform("roughnessMap", 2);
-
-        glActiveTexture(GL_TEXTURE3);
-        metal.bind();
-        setUniform("metalMap", 3);
-
-        glActiveTexture(GL_TEXTURE4);
-        //.bind();
-        setUniform("aoMap", 4);
     }
 }

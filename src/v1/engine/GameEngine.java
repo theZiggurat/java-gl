@@ -24,7 +24,7 @@ public class GameEngine implements Runnable {
         window = new Window(title, width, height, vsync);
         this.logic_mgr = logic_mgr;
         timer = new Timer();
-        mouseInput = InputCore.getInstance();
+        mouseInput = InputCore.instance();
 
     }
 

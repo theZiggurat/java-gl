@@ -1,14 +1,22 @@
 package v2.modules.pbr;
 
+import org.joml.Vector3f;
 import v2.engine.system.Camera;
 import v2.engine.system.RenderEngine;
 import v2.engine.system.ShaderProgram;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
 
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.glBindTexture;
 import static org.lwjgl.opengl.GL13.*;
 
 public class PBRShaderProgram extends ShaderProgram {
+
+    /**
+     * -Buffers uv-maps from object tangent space to screen space
+     * Renders texture maps from objec
+     */
 
     private static PBRShaderProgram instance = null;
 
@@ -25,24 +33,27 @@ public class PBRShaderProgram extends ShaderProgram {
 
         createVertexShader("res/shaders/pbr_vertex.vs");
         createFragmentShader("res/shaders/pbr_fragment.fs");
+        //createGeometryShader("res/shaders/pbr_geometry.gs");
         link();
 
         addUniform("albedoMap");
         addUniform("normalMap");
         addUniform("roughnessMap");
         addUniform("metalMap");
-        addUniform("aoMap");
 
-        addUniform("modelViewMatrix");
+        addUniform("modelMatrix");
+        addUniform("viewMatrix");
         addUniform("projectionMatrix");
         //addUniform("invViewMatrix");
+
+        //addUniform("randomVec");
 
     }
 
     @Override
     public void updateUniforms(ModuleNode group){
 
-        Camera camera = RenderEngine.getInstance().getMainCamera();
+        Camera camera = RenderEngine.instance().getMainCamera();
 
         PBRMaterial material = (PBRMaterial) group.getModules().
                                 get(ModuleType.MATERIAL);
@@ -63,13 +74,12 @@ public class PBRShaderProgram extends ShaderProgram {
         material.getMetallicMap().bind();
         setUniform("metalMap", 3);
 
-        glActiveTexture(GL_TEXTURE4);
-        material.getAoMap().bind();
-        setUniform("aoMap", 4);
+        //setUniform("randomVec", new Vector3f(1).normalize());
 
         setUniform("projectionMatrix", camera.getProjectionMatrix());
-        setUniform("modelViewMatrix", group.getWorldTransform().getModelMatrix().mul(camera.getViewMatrix()));
-        //setUniform("invViewMatrix",group.getWorldTransform().getModelMatrix().mul(camera.getViewMatrix()).invert() );
+        setUniform("modelMatrix", group.getWorldTransform().getModelMatrix());
+        setUniform("viewMatrix", camera.getViewMatrix());
+        setUniform("invViewMatrix",group.getWorldTransform().getModelMatrix().mul(camera.getViewMatrix()).invert() );
     }
 
 }

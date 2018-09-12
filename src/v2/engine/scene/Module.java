@@ -10,6 +10,7 @@ public class Module {
 
     public void update(){}
     public void render(){}
+    public void renderWireframe(){}
     public void cleanup(){}
 
 

@@ -20,11 +20,11 @@ public class EngineCore implements Runnable {
     public EngineCore(EngineInterface engineInterface) {
 
         this.gameLoopThread = new Thread(this, "ENGINE_0");
-        this.window = Window.getInstance();
+        this.window = Window.instance();
         this.engineInterface = engineInterface;
         this.timer = new Timer();
-        this.renderEngine = RenderEngine.getInstance();
-        this.input = InputCore.getInstance();
+        this.renderEngine = RenderEngine.instance();
+        this.input = InputCore.instance();
         this.currentFPS = 0;
     }
 
@@ -101,7 +101,7 @@ public class EngineCore implements Runnable {
 
         /* call update code from interface */
         engineInterface.update(interval);
-        window.setTitle(currentFPS, RenderEngine.getInstance().getMainCamera());
+        window.setTitle(currentFPS, RenderEngine.instance().getMainCamera());
 
     }
 

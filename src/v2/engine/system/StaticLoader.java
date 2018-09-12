@@ -97,6 +97,8 @@ public class StaticLoader {
             }
             ret.allocateImage2D(GL_RGB, GL_RGB, image);
             //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        } else if (c.get(0) == 1){
+            ret.allocateImage2D(GL_RED, GL_RED, image);
         } else {
             ret.allocateImage2D(GL_RGBA, GL_RGBA, image);
             //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);

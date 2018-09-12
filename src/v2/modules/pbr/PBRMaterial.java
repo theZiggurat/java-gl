@@ -11,6 +11,7 @@ public class PBRMaterial extends Module {
 
     @Setter
     @Getter
+
     TextureObject albedoMap, normalMap, roughnessMap, metallicMap, aoMap;
 
 }

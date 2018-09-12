@@ -25,7 +25,7 @@ public class Window {
 
     private static Window instance;
 
-    public static Window getInstance(){
+    public static Window instance(){
         if(instance == null){
             instance = new Window();
         }
@@ -33,9 +33,9 @@ public class Window {
     }
 
     public Window(){
-        this.title = Config.getInstance().getWindowName();
-        this.height = Config.getInstance().getHeight();
-        this.width = Config.getInstance().getWidth();
+        this.title = Config.instance().getWindowName();
+        this.height = Config.instance().getHeight();
+        this.width = Config.instance().getWidth();
         spec_title = title;
     }
 

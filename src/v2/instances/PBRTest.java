@@ -1,15 +1,10 @@
 package v2.instances;
 
 import org.joml.Vector3f;
-import v2.engine.gldata.TextureObject;
-import v2.engine.gldata.VertexBufferObject;
-import v2.engine.javadata.MeshData;
 import v2.engine.scene.Node;
 import v2.engine.scene.Scenegraph;
 import v2.engine.system.EngineInterface;
 import v2.engine.system.RenderEngine;
-import v2.engine.system.StaticLoader;
-import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
 
 public class PBRTest implements EngineInterface {
@@ -17,48 +12,49 @@ public class PBRTest implements EngineInterface {
     private Scenegraph scene;
     Node object;
 
+    PBRModel model, model2;
+
     @Override
     public void init(){
 
-        VertexBufferObject mesh;
+//        model = PBRModel.quickModel("res/models/M4A1.obj",
+//                "res/images/streakmetal/", "albedo.png", null,
+//                "rough.png", "metal.png");
 
-        TextureObject albedo = StaticLoader.loadTexture(
-                "res/images/paintchip/albedo.png")
-                .bilinearFilter();
+//        model = PBRModel.quickModel("res/models/barrels.obj",
+//                "res/images/barrel2/", "albedo.png", "normal.png",
+//                "rough.png", "metal.png");
 
-        TextureObject normal = StaticLoader.loadTexture(
-                "res/images/paintchip/normal.png")
-                .bilinearFilter();
+        model = PBRModel.quickModel("res/models/nightstand.obj",
+        "res/images/nightstand/", "albedo.png", "normal.png",
+                "rough.png", "metal.png");
+        model.scale(5f);
+        model.getWorldTransform().setTranslation(new Vector3f(0,1,0));
 
-        TextureObject roughness = StaticLoader.loadTexture(
-                "res/images/paintchip/rough.png")
-                .bilinearFilter();
+//        model2 = PBRModel.quickModel("res/models/quad.obj",
+//                "res/images/nightstand/", "albedo.png", "normal.png",
+//                "rough.png", "metal.png");
+//        model2.scale(10f);
 
-        TextureObject metal = StaticLoader.loadTexture(
-                "res/images/paintchip/metal.png")
-                .bilinearFilter();
 
-        TextureObject ao = StaticLoader.loadTexture(
-                "res/images/paintchip/ao.png")
-                .bilinearFilter();
 
-        mesh = new VertexBufferObject(MeshData.loadMesh("res/models/teapot.obj"));
-
-        PBRMaterial material = new PBRMaterial(albedo, normal, roughness, metal, ao);
-
-        PBRModel model = new PBRModel(mesh, material);
-        model.scale(30f);
-
-        scene = RenderEngine.getInstance().getScenegraph();
+        scene = RenderEngine.instance().getScenegraph();
         object = new Node();
         object.addChild(model);
+        //object.addChild(model2);
         scene.addChild(object);
 
     }
 
+    double time = 0;
+
     @Override
     public void update(double duration) {
-        object.getWorldTransform().setTranslation(object.getWorldTransform().getTranslation().add(new Vector3f(0,0f, .01f)));
+        time+= duration;
+
+        model.getWorldTransform().setRotation(new Vector3f(
+                0, (float) time/140 * 1000, 0
+        ));
 
     }
 

@@ -33,7 +33,7 @@ public class InputCore {
     @Getter @Setter Vector2d lockCursorPos;
 
     private static InputCore instance = null;
-    public static InputCore getInstance(){
+    public static InputCore instance(){
         if(instance == null){
             instance = new InputCore();
         }

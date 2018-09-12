@@ -9,9 +9,11 @@ public class Config {
     private String windowName;
     private boolean vsync;
 
+    private int multisamples;
+
     private static Config instance;
 
-    public static Config getInstance(){
+    public static Config instance(){
         if(instance == null){
             instance = new Config();
         }
@@ -19,6 +21,7 @@ public class Config {
     }
 
     public Config(){
+        multisamples = 4;
         width = 1280;
         height = 720;
         windowName = "LWJGLTest";

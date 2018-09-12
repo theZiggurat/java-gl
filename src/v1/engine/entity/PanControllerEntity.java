@@ -27,7 +27,7 @@ public class PanControllerEntity extends CameraEntity{
     }
 
     private void handleMouse(){
-        InputCore mouse = InputCore.getInstance();
+        InputCore mouse = InputCore.instance();
 
         if(mouse.isRightPressed()){
 

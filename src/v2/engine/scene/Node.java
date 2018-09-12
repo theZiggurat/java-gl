@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.joml.Vector3f;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Node {
@@ -37,6 +39,11 @@ public class Node {
         children.add(child);
     }
 
+    public void addChildren(Node... children){
+        getChildren().addAll(Arrays.asList(children));
+        Arrays.stream(children).forEach(e -> e.setParent(this));
+    }
+
     public void update() {
         if (parent != null) {
             getWorldTransform().setRotation(getWorldTransform().getRotation().add(getParent().getWorldTransform().getRotation()));
@@ -48,6 +55,9 @@ public class Node {
 
     public void render() {
         children.forEach(child -> child.render());
+    }
+    public void renderWireframe() {
+        children.forEach(child -> child.renderWireframe());
     }
 
     public void cleanup() {
