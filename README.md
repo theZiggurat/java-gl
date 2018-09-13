@@ -40,4 +40,6 @@ WIP features:
 Future features:
   * Screen space reflections
   * Runtime material editing
+  * Water/Ocean generation
+  * Terrain generation
 
