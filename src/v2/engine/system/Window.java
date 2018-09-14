@@ -84,7 +84,7 @@ public class Window {
         GL.createCapabilities();
         glfwShowWindow(handle);
 
-        glClearColor(.2f,.2f,.1f, 1f);
+        glClearColor(0f,0f,0f, 1f);
         glFrontFace(GL_CCW);
 
        glEnable(GL_DEPTH_TEST);

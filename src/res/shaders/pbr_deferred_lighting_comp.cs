@@ -11,7 +11,7 @@ layout (binding = 5) uniform writeonly image2D scene;
 
 uniform vec3 cameraPos;
 
-const vec3 light_dir = vec3(.5,1,0);
+uniform vec3 light_dir;
 
 const float PI = 3.14159265359;
 
@@ -89,17 +89,17 @@ void main(){
     vec3 specular     = numerator / max(denominator, 0.01);
 
     float NdotL = max(dot(N, L), 0.0);
-    Lo += (kD * albedo.xyz / PI )*4* NdotL;
-    Lo +=  specular*4;
+    Lo += (kD * albedo.xyz / PI + specular)*2* NdotL;
 
-    vec3 ambient = vec3(.03) * albedo.xyz;
+    vec3 ambient = vec3(0.05) * albedo.rgb;
     vec3 color = Lo + ambient;
+
 
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
 
-    if(length(position) == 0){
-        color = vec3(.2, .2, .1);
+    if(length(normal) == 0){
+        color = vec3(0, .1, .15);
     }
 
     imageStore(scene, coord, vec4(color, 1));

@@ -6,6 +6,7 @@ import v2.engine.scene.Scenegraph;
 import v2.engine.system.EngineInterface;
 import v2.engine.system.InputCore;
 import v2.engine.system.RenderEngine;
+import v2.modules.pbr.PBRDeferredShaderProgram;
 import v2.modules.pbr.PBRModel;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_R;
@@ -15,7 +16,7 @@ public class PBRTest implements EngineInterface {
     private Scenegraph scene;
     Node object;
 
-    PBRModel model, model2;
+    PBRModel model, model2, model3, model4;
 
     @Override
     public void init(){
@@ -35,15 +36,25 @@ public class PBRTest implements EngineInterface {
 //        model.getWorldTransform().setTranslation(new Vector3f(0,1,0));
 
         model2 = PBRModel.quickModel("res/models/thing.obj",
-                "res/images/plastic_squares/", "albedo.png", null,
+                "res/images/wood_floor/", "albedo.png", "normal.png",
                 "rough.png", "metal.png");
-        model2.translate(0,0,10).scaleTo(2);
+        model2.translate(0,0,10).scaleTo(.5f);
+
+        model3 = PBRModel.quickModel("res/models/thing.obj",
+                "res/images/plastic_squares/", "albedo.png", "normal.png",
+                "rough.png", "metal.png");
+        model3.translate(200,0,10).scaleTo(.5f);
+
+        model4 = PBRModel.quickModel("res/models/dice.obj",
+                "res/images/dice_worn/", "albedo.png", "normal.png",
+                "rough.png", "metal.png");
+        model4.translate(-200,0,10).scaleTo(5f);
 
 
         scene = RenderEngine.instance().getScenegraph();
         object = new Node();
         //object.addChild(model);
-        object.addChild(model2);
+        object.addChildren(model2, model3, model4);
         scene.addChild(object);
 
     }
@@ -53,10 +64,9 @@ public class PBRTest implements EngineInterface {
     @Override
     public void update(double duration) {
 
-
         if(InputCore.instance().isKeyHeld(GLFW_KEY_R)) {
-            model2.rotateTo(new Vector3f(
-                    0, (float) time / 40 * 1000, 0
+            object.rotate(new Vector3f(
+                    0, (float) duration * 25, 0
             ));
             time += duration;
         }

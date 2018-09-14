@@ -18,16 +18,16 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         link();
 
         addUniform("cameraPos");
-
-       // addUniform("light_dir");
+        addUniform("light_dir");
 
     }
 
     public void render(TextureObject albedo, TextureObject position, TextureObject normal,
-       TextureObject metal, TextureObject rough, TextureObject depth, TextureObject scene){
+       TextureObject metal, TextureObject rough, TextureObject depth, TextureObject scene, Vector3f lightDir){
 
         bind();
         setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
+        setUniform("light_dir", lightDir);
         bindImage(0, albedo.getId(), GL_READ_ONLY, GL_RGBA16F);
         bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);

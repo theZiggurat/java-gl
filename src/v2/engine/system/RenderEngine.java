@@ -2,6 +2,7 @@ package v2.engine.system;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.joml.Vector3f;
 import v2.engine.gldata.TextureObject;
 import v2.engine.scene.Scenegraph;
 import v2.modules.pbr.PBRFrameBufferObject;
@@ -24,6 +25,8 @@ public class RenderEngine {
     private FSQuad quad;
 
     @Setter @Getter private Camera mainCamera;
+
+    public static Vector3f lightDir;
 
     public static RenderEngine instance = null;
 
@@ -49,11 +52,18 @@ public class RenderEngine {
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
+        lightDir = new Vector3f(1,0,0);
     }
 
     TextureObject currTexture;
 
+    int time;
+
     public void render(){
+
+        time ++;
+
+        lightDir = new Vector3f((float)Math.sin((double)time/1440), 0, (float)Math.cos((double)time/1440));
 
         mainCamera.update();
 
@@ -82,7 +92,7 @@ public class RenderEngine {
         lightingPass.render(PBRFrameBufferObject.getAlbedo(),
                 PBRFrameBufferObject.getPosition(), PBRFrameBufferObject.getNormal(),
                 PBRFrameBufferObject.getMetalness(), PBRFrameBufferObject.getRoughness(),
-                PBRFrameBufferObject.getDepth(), sceneTexture);
+                PBRFrameBufferObject.getDepth(), sceneTexture, lightDir);
 
 
 

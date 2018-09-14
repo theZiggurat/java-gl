@@ -23,6 +23,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL21.GL_SRGB8;
 import static org.lwjgl.opengl.GL21.GL_SRGB8_ALPHA8;
 import static org.lwjgl.opengl.GL30.GL_RGB16F;
+import static org.lwjgl.opengl.GL30.GL_RGBA16F;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 
@@ -104,6 +105,7 @@ public class StaticLoader {
             ret.allocateImage2D(GL_RED, GL_RED, image);
         } else {
             ret.allocateImage2D(GL_SRGB8_ALPHA8, GL_RGBA, image);
+            //ret.allocateImage2D(GL_RGBA16F, GL_RGBA, image);
             //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
         }
 

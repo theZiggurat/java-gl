@@ -40,6 +40,7 @@ public class PBRModel extends ModuleNode {
                 texturePath + roughnessFile)
                 .bilinearFilter().wrap();
 
+
         TextureObject metal = StaticLoader.loadTexture(
                 texturePath + metalFile)
                 .bilinearFilter().wrap();
