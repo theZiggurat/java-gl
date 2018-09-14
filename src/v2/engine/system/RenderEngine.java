@@ -10,6 +10,7 @@ import v2.modules.pbr.PBRDeferredShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL21.GL_SRGB8_ALPHA8;
 import static org.lwjgl.opengl.GL30.GL_RGBA16F;
 
 public class RenderEngine {

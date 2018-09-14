@@ -2,14 +2,21 @@ package v2.engine.scene;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-public class Transform {
+public class Transform <T extends Transform> {
 
-    @Getter @Setter private Vector3f translation;
-    @Getter @Setter private Vector3f rotation;
-    @Getter @Setter private Vector3f scaling;
+    /**
+     * Any class that inherets this class will get the following functions:
+     *  * Position, rotation, and scaling in space
+     *  * Chainable methods to change place and orientation
+     *  * Model and view matrix creation
+     */
+
+    /** Data fields **/
+    @Setter protected Vector3f translation;
+    @Setter protected Vector3f rotation;
+    @Setter protected Vector3f scaling;
 
     public Transform(){
         translation = new Vector3f(0,0,0);
@@ -17,13 +24,80 @@ public class Transform {
         scaling = new Vector3f(1,1,1);
     }
 
-    public Matrix4f getModelMatrix(){
-        Matrix4f ret = new Matrix4f();
-        ret.identity().translate(getTranslation())
-                .rotateX((float)Math.toRadians(-rotation.x))
-                .rotateY((float)Math.toRadians(-rotation.y))
-                .rotateZ((float)Math.toRadians(-rotation.z))
-                .scale(getScaling());
-        return ret;
+
+    /** TRANSLATION **/      /** -------------------------------------------- **/
+
+    public <T extends Transform> T translate(Vector3f translation){
+        setTranslation(getTranslation().add(translation));
+        return (T) this;
     }
+
+    public <T extends  Transform> T translate(float x, float y, float z){
+        return translate(new Vector3f(x,y,z));
+    }
+
+    public <T extends Transform> T translateTo(Vector3f position){
+        translation = new Vector3f(position);
+        return (T) this;
+    }
+
+    public <T extends Transform> T translateTo(float x, float y, float z){
+        return translateTo(new Vector3f(x, y, z));
+    }
+
+    public Vector3f getTranslation(){
+        return new Vector3f(getTranslation());
+    }
+
+    /** ROTATION **/      /** -------------------------------------------- **/
+
+    public <T extends Transform> T rotate(Vector3f rotation){
+        setRotation(getRotation().add(rotation));
+        return (T) this;
+    }
+
+    public <T extends Transform> T rotate(float i, float j, float k){
+        return rotate(new Vector3f(i, j, k));
+    }
+
+    public <T extends Transform>T rotateTo(Vector3f f){
+        setRotation(new Vector3f(f));
+        return (T) this;
+    }
+
+    public <T extends Transform>T rotateTo(float i, float j, float k){
+        return rotateTo(new Vector3f(i, j, k));
+    }
+    public <T extends Transform>T rotateAround(Vector3f axis, double degrees){
+        return (T) this;
+    }
+
+    public Vector3f getRotation(){
+        return new Vector3f(getTranslation());
+    }
+
+    /** Scaling **/      /** -------------------------------------------- **/
+
+    public <T extends Transform> T scale(Vector3f scalar){
+        setScaling(getScaling().mul(scalar));
+        return (T) this;
+    }
+
+    public <T extends Transform> T scale(float mx, float my, float mz){
+        return scale(new Vector3f(mx, my, mz));
+    }
+
+    public <T extends Transform> T scaleTo(Vector3f scaleFactor){
+        setScaling(scaleFactor);
+        return (T) this;
+    }
+
+    public <T extends Transform> T scaleTo(float x, float y, float z){
+        return scaleTo(new Vector3f(x, y, z));
+    }
+
+    public Vector3f getScaling(){
+        return new Vector3f(scaling);
+    }
+
 }

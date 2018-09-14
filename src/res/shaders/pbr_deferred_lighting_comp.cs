@@ -11,7 +11,7 @@ layout (binding = 5) uniform writeonly image2D scene;
 
 uniform vec3 cameraPos;
 
-const vec3 light_dir = vec3(-1,0,0);
+const vec3 light_dir = vec3(.5,1,0);
 
 const float PI = 3.14159265359;
 
@@ -66,12 +66,12 @@ void main(){
 
 
     vec3 N = normalize(normal);
-    vec3 V = normalize(cameraPos - position);
+    vec3 V = normalize(-cameraPos + position);
 
     vec3 F0 = vec3(.01);
     F0 = mix(F0, albedo.rgb, metal);
 
-    vec3 L = normalize(-light_dir);
+    vec3 L = normalize(light_dir);
     vec3 H = normalize(V+L);
 
     float NDF = DistributionGGX(N, H, rough);
@@ -84,12 +84,13 @@ void main(){
     vec3 kD = vec3(1.0) - kS;
     kD *= 1.0 - metal;
 
-    vec3 numerator    = NDF * G * F;
-    float denominator = 4.0 * max(dot(N, V), 0) * max(dot(N, L), 0);
-    vec3 specular     = numerator / max(denominator, 0.3);
+    vec3 numerator    =  NDF*G* F;
+    float denominator = 4* max(dot(N, V), 0) * max(dot(N, L), 0);
+    vec3 specular     = numerator / max(denominator, 0.01);
 
     float NdotL = max(dot(N, L), 0.0);
-    Lo += (kD * albedo.xyz / PI + specular)*4* NdotL;
+    Lo += (kD * albedo.xyz / PI )*4* NdotL;
+    Lo +=  specular*4;
 
     vec3 ambient = vec3(.03) * albedo.xyz;
     vec3 color = Lo + ambient;

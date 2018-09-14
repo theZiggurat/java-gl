@@ -2,30 +2,22 @@ package v2.engine.scene;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.joml.Vector3f;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class Node {
+public class Node<T> extends Transform<T> {
 
     @Getter
     @Setter
     private Node parent;
     @Getter
     private List<Node> children;
-    @Getter
-    @Setter
-    private Transform worldTransform;
-    @Getter
-    @Setter
-    private Transform localTransform;
 
     public Node() {
-        this.worldTransform = new Transform();
-        this.localTransform = new Transform();
+        super();
         this.children = new ArrayList<>();
     }
 
@@ -34,21 +26,34 @@ public class Node {
         this.parent = _parent;
     }
 
+    public Matrix4f getModelMatrix(){
+        Matrix4f ret = new Matrix4f();
+        ret.identity().translate(getTranslation())
+                .rotateX((float)Math.toRadians(-rotation.x))
+                .rotateY((float)Math.toRadians(-rotation.y))
+                .rotateZ((float)Math.toRadians(-rotation.z))
+                .scale(getScaling());
+        return ret;
+    }
+
     public void addChild(Node child) {
-        child.setParent(this);
+        this.setSubobject(this);
         children.add(child);
     }
 
     public void addChildren(Node... children){
         getChildren().addAll(Arrays.asList(children));
-        Arrays.stream(children).forEach(e -> e.setParent(this));
+        Arrays.stream(children).forEach(e -> this.setSubobject(this));
     }
 
     public void update() {
         if (parent != null) {
-            getWorldTransform().setRotation(getWorldTransform().getRotation().add(getParent().getWorldTransform().getRotation()));
-            getWorldTransform().setTranslation(getWorldTransform().getTranslation().add(getParent().getWorldTransform().getTranslation()));
-            getWorldTransform().setScaling(getWorldTransform().getScaling().mul(getParent().getWorldTransform().getScaling()));
+//            getWorldTransform().setRotation(getWorldTransform().getRotation().add(getParent().getWorldTransform().getRotation()));
+//            getWorldTransform().setTranslation(getWorldTransform().getTranslation().add(getParent().getWorldTransform().getTranslation()));
+//            getWorldTransform().setScaling(getWorldTransform().getScaling().mul(getParent().getWorldTransform().getScaling()));
+              scaleTo(getScaling().add(parent.getScaling()));
+              rotateTo(getRotation().add(parent.getRotation()));
+              translateTo(getTranslation().add(parent.getTranslation()));
         }
         children.forEach(child -> child.update());
     }
@@ -56,20 +61,13 @@ public class Node {
     public void render() {
         children.forEach(child -> child.render());
     }
+
     public void renderWireframe() {
         children.forEach(child -> child.renderWireframe());
     }
 
     public void cleanup() {
         children.forEach(child -> child.cleanup());
-    }
-
-    public void scale(Vector3f scale) {
-        worldTransform.setScaling(scale);
-    }
-
-    public void scale(float scale) {
-        worldTransform.setScaling(new Vector3f(scale, scale, scale));
     }
 
 }

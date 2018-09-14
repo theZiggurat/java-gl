@@ -4,53 +4,51 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import v2.engine.scene.Transform;
 
 import java.util.function.Function;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Camera {
+public class Camera extends Transform<Camera> {
 
     private final Vector3f ABS_UP = new Vector3f(0,1,0);
 
+    @Getter @Setter Function<Integer, Float> speedMod = (
+                 e -> ( (float) Math.exp(-e) ) * 0.5f
+            );
+
     @Setter @Getter private double FOV;
-
-    @Getter Function<Integer, Float> speedMod =
-            ( e -> ((float)Math.exp(-e))*0.5f );
-
-    @Getter @Setter private int speedLevel = 4;
-
+    @Getter @Setter private int speedLevel = 0;
     @Getter private final float ZNEAR = .01f;
     @Getter private final float ZFAR = 10000;
-
-    @Setter @Getter private Vector3f position;
-    @Setter @Getter private Vector3f rotation;
-
     @Setter @Getter private float mouseSens = 0.3f;
 
 
     public Camera(){
-        setPosition(new Vector3f(0,0,-2));
+        super();
+        setSubobject(this);
+        setTranslation(new Vector3f(0,0,-10));
         setRotation(new Vector3f(0,180,0));
         FOV = 85;
     }
 
     public Camera(Vector3f position){
-        this.position = position;
-
+        this();
+        translateTo(position);
     }
 
     public void update(){
         InputCore input = InputCore.instance();
 
         if(input.isButtonHeld(1)){ // right click
-            getRotation().add((float)input.getDisplacement().y * mouseSens,
+            rotate((float)input.getDisplacement().y * mouseSens,
                     (float)input.getDisplacement().x * mouseSens,  0);
         }
 
         if(input.isButtonHeld(2)){ // middle click
-            getPosition().add(getUp().mul((float)input.getDisplacement().y * .05f*speedMod.apply(speedLevel-2)));
-            getPosition().add(getRight().mul((float)input.getDisplacement().x * -.05f*speedMod.apply(speedLevel-2)));
+            translate(getUp().mul((float)input.getDisplacement().y * .05f * speedMod.apply(speedLevel-2)));
+            translate(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
         }
 
         if(input.isButtonPressed(0)) { // left click
@@ -67,16 +65,16 @@ public class Camera {
         FOV += input.getScrollAmount();
 
         if(input.isKeyHeld(GLFW_KEY_W)){
-            position.add(getForward().mul(speedMod.apply(speedLevel)));
+            translate(getForward().mul(speedMod.apply(speedLevel)));
         }
         if(input.isKeyHeld(GLFW_KEY_S)){
-            position.add(getForward().mul(-speedMod.apply(speedLevel)));
+            translate(getForward().mul(-speedMod.apply(speedLevel)));
         }
         if(input.isKeyHeld(GLFW_KEY_A)){
-            position.add(getRight().mul(speedMod.apply(speedLevel)));
+            translate(getRight().mul(speedMod.apply(speedLevel)));
         }
         if(input.isKeyHeld(GLFW_KEY_D)){
-            position.add(getRight().mul(-speedMod.apply(speedLevel)));
+            translate(getRight().mul(-speedMod.apply(speedLevel)));
         }
 
 
@@ -98,7 +96,7 @@ public class Camera {
                 .rotate((float)Math.toRadians(rotation.y), new Vector3f(0, 1, 0))
                 .rotate((float)Math.toRadians(rotation.z), new Vector3f(0,0,1));
 
-        ret.translate(-position.x, -position.y, -position.z);
+        ret.translate(getTranslation().mul(-1));
         return ret;
     }
 

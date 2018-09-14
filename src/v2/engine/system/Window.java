@@ -84,12 +84,12 @@ public class Window {
         GL.createCapabilities();
         glfwShowWindow(handle);
 
-        glClearColor(0,0,0, 1f);
+        glClearColor(.2f,.2f,.1f, 1f);
         glFrontFace(GL_CCW);
 
        glEnable(GL_DEPTH_TEST);
-       glEnable(GL_CULL_FACE);
-       glCullFace(GL_BACK);
+//       glEnable(GL_CULL_FACE);
+//       glCullFace(GL_BACK);
        //glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
        glLineWidth(1);

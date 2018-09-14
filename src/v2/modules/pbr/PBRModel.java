@@ -54,6 +54,7 @@ public class PBRModel extends ModuleNode {
     public PBRModel(VertexBufferObject mesh, PBRMaterial material){
 
         super();
+        setSubobject(this);
 
         RenderModule renderer = new RenderModule(
                 PBRShaderProgram.getInstance(), mesh);

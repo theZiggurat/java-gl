@@ -77,9 +77,9 @@ public class PBRShaderProgram extends ShaderProgram {
         //setUniform("randomVec", new Vector3f(1).normalize());
 
         setUniform("projectionMatrix", camera.getProjectionMatrix());
-        setUniform("modelMatrix", group.getWorldTransform().getModelMatrix());
+        setUniform("modelMatrix", group.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
-        setUniform("invViewMatrix",group.getWorldTransform().getModelMatrix().mul(camera.getViewMatrix()).invert() );
+        setUniform("invViewMatrix",group.getModelMatrix().mul(camera.getViewMatrix()).invert() );
     }
 
 }
