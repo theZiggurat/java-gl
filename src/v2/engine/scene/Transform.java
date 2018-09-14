@@ -46,7 +46,7 @@ public class Transform <T extends Transform> {
     }
 
     public Vector3f getTranslation(){
-        return new Vector3f(getTranslation());
+        return new Vector3f(translation);
     }
 
     /** ROTATION **/      /** -------------------------------------------- **/
@@ -73,7 +73,7 @@ public class Transform <T extends Transform> {
     }
 
     public Vector3f getRotation(){
-        return new Vector3f(getTranslation());
+        return new Vector3f(rotation);
     }
 
     /** Scaling **/      /** -------------------------------------------- **/
@@ -87,13 +87,21 @@ public class Transform <T extends Transform> {
         return scale(new Vector3f(mx, my, mz));
     }
 
-    public <T extends Transform> T scaleTo(Vector3f scaleFactor){
+    public <T extends Transform> T scale(float s){
+        return scale(s,s,s);
+    }
+
+    public <T extends Transform<T>> T scaleTo(Vector3f scaleFactor){
         setScaling(scaleFactor);
         return (T) this;
     }
 
-    public <T extends Transform> T scaleTo(float x, float y, float z){
+    public <T extends Transform<T>> T scaleTo(float x, float y, float z){
         return scaleTo(new Vector3f(x, y, z));
+    }
+
+    public <T extends Transform<T>> T scaleTo(float s){
+        return scaleTo(s,s,s);
     }
 
     public Vector3f getScaling(){

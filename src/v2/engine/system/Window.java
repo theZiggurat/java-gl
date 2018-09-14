@@ -132,7 +132,7 @@ public class Window {
     public void setTitle(double FPS, Camera camera){
         spec_title = title.concat(" | " +
                 new DecimalFormat("#.0").format(FPS) + " FPS | " +
-                "Camera: " + camera.getPosition().toString(new DecimalFormat("#.0")) +
+                "Camera: " + camera.getTranslation().toString(new DecimalFormat("#.0")) +
                 " | Looking: " + camera.getForward().toString(new DecimalFormat("0.000")) +
                 " | FOV: " + camera.getFOV());
     }

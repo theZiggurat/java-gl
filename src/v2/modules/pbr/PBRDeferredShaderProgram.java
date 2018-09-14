@@ -34,7 +34,7 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         bindImage(4, rough.getId(), GL_READ_ONLY, GL_R16F);
         bindImage(5, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
 
-        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getPosition());
+        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
        // setUniform("light_dir", new Vector3f(0,-1,0));
         unbind();
 

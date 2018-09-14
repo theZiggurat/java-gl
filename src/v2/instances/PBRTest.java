@@ -37,7 +37,7 @@ public class PBRTest implements EngineInterface {
         model2 = PBRModel.quickModel("res/models/thing.obj",
                 "res/images/plastic_squares/", "albedo.png", null,
                 "rough.png", "metal.png");
-
+        model2.translate(0,0,10).scaleTo(2);
 
 
         scene = RenderEngine.instance().getScenegraph();
@@ -55,7 +55,7 @@ public class PBRTest implements EngineInterface {
 
 
         if(InputCore.instance().isKeyHeld(GLFW_KEY_R)) {
-            model2.getWorldTransform().setRotation(new Vector3f(
+            model2.rotateTo(new Vector3f(
                     0, (float) time / 40 * 1000, 0
             ));
             time += duration;

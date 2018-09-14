@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Node<T> extends Transform<T> {
+public class Node extends Transform<Node> {
 
     @Getter
     @Setter
@@ -37,13 +37,13 @@ public class Node<T> extends Transform<T> {
     }
 
     public void addChild(Node child) {
-        this.setSubobject(this);
+        child.setParent(this);
         children.add(child);
     }
 
     public void addChildren(Node... children){
         getChildren().addAll(Arrays.asList(children));
-        Arrays.stream(children).forEach(e -> this.setSubobject(this));
+        Arrays.stream(children).forEach(e -> e.setParent(this));
     }
 
     public void update() {

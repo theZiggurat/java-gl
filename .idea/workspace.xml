@@ -13,23 +13,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="Troubleshooting framebuffer write">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/images/grass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/models/quad.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/models/quad.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/fullscreen_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/fullscreen_fragment.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_deferred_lighting_comp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_deferred_lighting_comp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/quad/FSQuad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/quad/FSQuad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Transform.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/scene/Transform.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/Scenegraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Window.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,8 +44,8 @@
       <file leaf-file-name="PBRDeferredShaderProgram.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="603">
-              <caret line="36" column="71" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+            <state relative-caret-position="612">
+              <caret line="36" column="88" selection-start-line="36" selection-start-column="88" selection-end-line="36" selection-end-column="88" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,8 +56,8 @@
       <file leaf-file-name="PBRTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+            <state relative-caret-position="549">
+              <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Window.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+            <state relative-caret-position="635">
+              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,8 +80,8 @@
       <file leaf-file-name="PBRModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
-              <caret line="55" column="16" lean-forward="true" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+            <state relative-caret-position="462">
+              <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -97,16 +89,16 @@
       <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Node.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-73">
-              <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+            <state relative-caret-position="-343">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1948#1949#0" expanded="true" />
-                <element signature="e#2005#2006#0" expanded="true" />
-                <element signature="e#2042#2043#0" expanded="true" />
-                <element signature="e#2108#2109#0" expanded="true" />
-                <element signature="e#2137#2138#0" expanded="true" />
-                <element signature="e#2195#2196#0" expanded="true" />
+                <element signature="e#1909#1910#0" expanded="true" />
+                <element signature="e#1966#1967#0" expanded="true" />
+                <element signature="e#2003#2004#0" expanded="true" />
+                <element signature="e#2069#2070#0" expanded="true" />
+                <element signature="e#2098#2099#0" expanded="true" />
+                <element signature="e#2156#2157#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,8 +107,8 @@
       <file leaf-file-name="Camera.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+            <state relative-caret-position="-1034">
+              <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -136,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Transform.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Transform.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Transform.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+            <state relative-caret-position="544">
+              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
               <folding>
                 <element signature="e#1513#1514#0" expanded="true" />
                 <element signature="e#1566#1567#0" expanded="true" />
@@ -158,8 +150,12 @@
                 <element signature="e#2154#2155#0" expanded="true" />
                 <element signature="e#2326#2327#0" expanded="true" />
                 <element signature="e#2347#2348#0" expanded="true" />
+                <element signature="e#2624#2625#0" expanded="true" />
+                <element signature="e#2654#2655#0" expanded="true" />
                 <element signature="e#2947#2948#0" expanded="true" />
                 <element signature="e#2968#2969#0" expanded="true" />
+                <element signature="e#2888#2889#0" expanded="true" />
+                <element signature="e#2919#2920#0" expanded="true" />
                 <element signature="e#3213#3214#0" expanded="true" />
                 <element signature="e#3256#3257#0" expanded="true" />
               </folding>
@@ -271,7 +267,6 @@
         <option value="$PROJECT_DIR$/src/v2/engine/scene/Module.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/ModuleNode.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/RenderModule.java" />
-        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/javadata/MeshData.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/quad/FSQuad.java" />
         <option value="$PROJECT_DIR$/src/res/shaders/pbr_vertex.vs" />
@@ -279,14 +274,15 @@
         <option value="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" />
         <option value="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/Window.java" />
         <option value="$PROJECT_DIR$/src/res/shaders/pbr_deferred_lighting_comp.cs" />
-        <option value="$PROJECT_DIR$/src/v2/engine/system/Camera.java" />
         <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" />
-        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/Window.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" />
         <option value="$PROJECT_DIR$/src/v2/engine/scene/Node.java" />
-        <option value="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" />
         <option value="$PROJECT_DIR$/src/v2/instances/PBRTest.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/system/Camera.java" />
+        <option value="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" />
+        <option value="$PROJECT_DIR$/src/v2/engine/scene/Transform.java" />
       </list>
     </option>
   </component>
@@ -332,42 +328,13 @@
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
               <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
               <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="levels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="materials" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LWJGL_test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LWJGL_test" type="b2602c69:ProjectViewProjectNode" />
@@ -654,20 +621,19 @@
       <workItem from="1536631844777" duration="1418000" />
       <workItem from="1536673774421" duration="27671000" />
       <workItem from="1536852944375" duration="638000" />
-      <workItem from="1536874244620" duration="14403000" />
+      <workItem from="1536874244620" duration="16401000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="652454000" />
+    <option name="totallyTimeSpent" value="654452000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="561" y="0" width="1366" height="1047" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="TODO" order="4" />
-      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.4770355" visible="true" weight="0.29935622" />
+      <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.4770355" weight="0.29935622" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
@@ -676,7 +642,7 @@
       <window_info anchor="bottom" id="Database Changes" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="Run" order="12" sideWeight="0.49276596" visible="true" weight="0.30074075" />
-      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.499226" weight="0.32939914" />
+      <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.499226" weight="0.18776824" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1725926" />
@@ -721,7 +687,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/v2/engine/system/Camera.java</url>
-          <line>44</line>
+          <line>43</line>
           <properties />
           <option name="timeStamp" value="144" />
         </line-breakpoint>
@@ -1200,16 +1166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1314">
@@ -1227,27 +1183,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="55" column="16" lean-forward="true" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="36" column="71" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="71" />
+        <state relative-caret-position="635">
+          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="88" selection-start-line="36" selection-start-column="88" selection-end-line="36" selection-end-column="88" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-343">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1909#1910#0" expanded="true" />
+            <element signature="e#1966#1967#0" expanded="true" />
+            <element signature="e#2003#2004#0" expanded="true" />
+            <element signature="e#2069#2070#0" expanded="true" />
+            <element signature="e#2098#2099#0" expanded="true" />
+            <element signature="e#2156#2157#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="45" column="32" lean-forward="true" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Camera.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1034">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Transform.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="31" column="24" lean-forward="true" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+        <state relative-caret-position="544">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
           <folding>
             <element signature="e#1513#1514#0" expanded="true" />
             <element signature="e#1566#1567#0" expanded="true" />
@@ -1265,46 +1267,14 @@
             <element signature="e#2154#2155#0" expanded="true" />
             <element signature="e#2326#2327#0" expanded="true" />
             <element signature="e#2347#2348#0" expanded="true" />
+            <element signature="e#2624#2625#0" expanded="true" />
+            <element signature="e#2654#2655#0" expanded="true" />
             <element signature="e#2947#2948#0" expanded="true" />
             <element signature="e#2968#2969#0" expanded="true" />
+            <element signature="e#2888#2889#0" expanded="true" />
+            <element signature="e#2919#2920#0" expanded="true" />
             <element signature="e#3213#3214#0" expanded="true" />
             <element signature="e#3256#3257#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/scene/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1948#1949#0" expanded="true" />
-            <element signature="e#2005#2006#0" expanded="true" />
-            <element signature="e#2042#2043#0" expanded="true" />
-            <element signature="e#2108#2109#0" expanded="true" />
-            <element signature="e#2137#2138#0" expanded="true" />
-            <element signature="e#2195#2196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/v2/engine/system/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="86" column="32" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

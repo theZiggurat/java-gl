@@ -27,7 +27,6 @@ public class Camera extends Transform<Camera> {
 
     public Camera(){
         super();
-        setSubobject(this);
         setTranslation(new Vector3f(0,0,-10));
         setRotation(new Vector3f(0,180,0));
         FOV = 85;
