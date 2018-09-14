@@ -23,20 +23,18 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     }
 
-    public void updateUniforms(TextureObject albedo, TextureObject position, TextureObject normal,
+    public void render(TextureObject albedo, TextureObject position, TextureObject normal,
        TextureObject metal, TextureObject rough, TextureObject depth, TextureObject scene){
 
         bind();
+        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
         bindImage(0, albedo.getId(), GL_READ_ONLY, GL_RGBA16F);
         bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(3, metal.getId(), GL_READ_ONLY, GL_R16F);
         bindImage(4, rough.getId(), GL_READ_ONLY, GL_R16F);
         bindImage(5, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
-
-        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
-       // setUniform("light_dir", new Vector3f(0,-1,0));
+        compute(16,16);
         unbind();
-
     }
 }

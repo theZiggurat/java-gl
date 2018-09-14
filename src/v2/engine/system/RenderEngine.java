@@ -10,7 +10,6 @@ import v2.modules.pbr.PBRDeferredShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL21.GL_SRGB8_ALPHA8;
 import static org.lwjgl.opengl.GL30.GL_RGBA16F;
 
 public class RenderEngine {
@@ -20,7 +19,7 @@ public class RenderEngine {
     private PBRFrameBufferObject PBRFrameBufferObject;
 
     private TextureObject sceneTexture;
-    private ShaderProgram lightingShader;
+    private PBRDeferredShaderProgram lightingPass;
 
     private FSQuad quad;
 
@@ -44,7 +43,7 @@ public class RenderEngine {
         Window window = Window.instance();
         scenegraph.update();
         PBRFrameBufferObject = new PBRFrameBufferObject(window.getWidth(), window.getHeight(),1);
-        lightingShader = new PBRDeferredShaderProgram();
+        lightingPass = new PBRDeferredShaderProgram();
         quad = new FSQuad();
         currTexture = PBRFrameBufferObject.getAlbedo();
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
@@ -80,12 +79,10 @@ public class RenderEngine {
         }
         PBRFrameBufferObject.unbind();
 
-        lightingShader.updateUniforms(PBRFrameBufferObject.getAlbedo(),
+        lightingPass.render(PBRFrameBufferObject.getAlbedo(),
                 PBRFrameBufferObject.getPosition(), PBRFrameBufferObject.getNormal(),
                 PBRFrameBufferObject.getMetalness(), PBRFrameBufferObject.getRoughness(),
                 PBRFrameBufferObject.getDepth(), sceneTexture);
-
-        lightingShader.compute(16,16);
 
 
 

@@ -66,7 +66,7 @@ void main(){
 
 
     vec3 N = normalize(normal);
-    vec3 V = normalize(-cameraPos + position);
+    vec3 V = normalize(cameraPos - position);
 
     vec3 F0 = vec3(.01);
     F0 = mix(F0, albedo.rgb, metal);
@@ -97,6 +97,10 @@ void main(){
 
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
+
+    if(length(position) == 0){
+        color = vec3(.2, .2, .1);
+    }
 
     imageStore(scene, coord, vec4(color, 1));
 

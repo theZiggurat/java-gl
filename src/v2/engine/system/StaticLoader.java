@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL21.GL_SRGB8;
+import static org.lwjgl.opengl.GL21.GL_SRGB8_ALPHA8;
+import static org.lwjgl.opengl.GL30.GL_RGB16F;
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 
@@ -95,12 +98,12 @@ public class StaticLoader {
             if ((w.get(0) & 3) != 0) {
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w.get(0) & 1));
             }
-            ret.allocateImage2D(GL_RGB, GL_RGB, image);
+            ret.allocateImage2D(GL_RGB16F, GL_RGB, image);
             //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         } else if (c.get(0) == 1){
             ret.allocateImage2D(GL_RED, GL_RED, image);
         } else {
-            ret.allocateImage2D(GL_RGBA8, GL_RGBA, image);
+            ret.allocateImage2D(GL_SRGB8_ALPHA8, GL_RGBA, image);
             //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
         }
 

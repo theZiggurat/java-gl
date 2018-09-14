@@ -130,10 +130,8 @@ public class ShaderProgram {
      * @param format GL_RGBA16F, GL_RGBA32F, GL_RED, etc.
      */
     public void bindImage(int index, int textureID, int access, int format){
-        bind();
         glBindImageTexture(index, textureID, 0, false,
                 0, access, format);
-        unbind();
     }
 
 
