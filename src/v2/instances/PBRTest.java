@@ -41,20 +41,20 @@ public class PBRTest implements EngineInterface {
         model2.translate(0,0,10).scaleTo(.5f);
 
         model3 = PBRModel.quickModel("res/models/thing.obj",
-                "res/images/plastic_squares/", "albedo.png", "normal.png",
+                "res/images/chipped_paint/", "albedo.png", "normal.png",
                 "rough.png", "metal.png");
         model3.translate(200,0,10).scaleTo(.5f);
 
-        model4 = PBRModel.quickModel("res/models/dice.obj",
-                "res/images/dice_worn/", "albedo.png", "normal.png",
-                "rough.png", "metal.png");
-        model4.translate(-200,0,10).scaleTo(5f);
+//        model4 = PBRModel.quickModel("res/models/m16.obj",
+//                "res/images/streaked_metal/", "albedo.png", null,
+//                "rough.png", "metal.png");
+//        model4.translate(-200,0,10).scaleTo(5f);
 
 
         scene = RenderEngine.instance().getScenegraph();
         object = new Node();
         //object.addChild(model);
-        object.addChildren(model2, model3, model4);
+        object.addChildren(model2, model3);
         scene.addChild(object);
 
     }

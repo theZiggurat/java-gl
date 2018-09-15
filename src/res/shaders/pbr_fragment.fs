@@ -27,7 +27,7 @@ void main(){
 
     /* TBN METHOD */
     vec3 norm_sample = texture(normalMap, vs.uv).rgb;
-    if(length(norm_sample) == 0){
+    if(length(norm_sample) <1){
         norm_vbo = vec4(normalize(vs.norm),1.0);
     } else {
         vec3 tangent   = normalize(randomVec - vs.norm * dot(randomVec, vs.norm));

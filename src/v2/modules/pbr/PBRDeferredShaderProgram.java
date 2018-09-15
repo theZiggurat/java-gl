@@ -18,7 +18,7 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         link();
 
         addUniform("cameraPos");
-        addUniform("light_dir");
+        addUniform("lightDir");
 
     }
 
@@ -27,7 +27,7 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
 
         bind();
         setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
-        setUniform("light_dir", lightDir);
+        setUniform("lightDir", lightDir);
         bindImage(0, albedo.getId(), GL_READ_ONLY, GL_RGBA16F);
         bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
