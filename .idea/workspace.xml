@@ -11,40 +11,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/v2/instances/PBRTest.java" line="32" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="Troubleshooting framebuffer write">
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/noise_comp.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/res/shaders/ssao_comp.glsl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/v2/engine/rand/NoiseShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_deferred_lighting_comp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_deferred_lighting_comp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/res/shaders/pbr_fragment.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/gldata/TextureObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/gldata/TextureObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData$Face.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData$Face.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData$IndexGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData$IndexGroup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/MeshData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/StaticBuffer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/javadata/StaticBuffer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/ShaderProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/ShaderProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/StaticLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/engine/system/StaticLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRFrameBufferObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/pbr/PBRFrameBufferObject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/post/ssao/SSAOShaderProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CVX1.0 FPSEngine/v2/modules/post/ssao/SSAOShaderProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/models/quad.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/models/quad.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_deferred_lighting_comp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_deferred_lighting_comp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/shaders/pbr_fragment.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/gldata/TextureObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/gldata/TextureObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/javadata/MeshData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/javadata/MeshData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/javadata/StaticBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/javadata/StaticBuffer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/ShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/StaticLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/engine/system/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/engine/system/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/instances/PBRTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRDeferredShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRFrameBufferObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRFrameBufferObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/pbr/PBRShaderProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/v2/modules/post/ssao/SSAOShaderProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/v2/modules/post/ssao/SSAOShaderProgram.java" afterDir="false" />
-    </list>
+    <list default="true" id="4aeecd90-6cf1-41cc-b819-f6c46ffd6ce5" name="Default" comment="Troubleshooting framebuffer write" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -72,7 +39,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RenderEngine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RenderEngine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/v2/engine/system/RenderEngine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-339">
@@ -100,15 +67,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="813">
               <caret line="52" column="1" lean-forward="true" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pbr_geometry.gs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/res/shaders/pbr_geometry.gs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" selection-start-column="12" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -163,6 +121,16 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -283,7 +251,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="179" />
     <option name="y" value="47" />
     <option name="width" value="1400" />
@@ -634,16 +602,15 @@
       <workItem from="1537111514993" duration="5010000" />
       <workItem from="1537138189793" duration="1556000" />
       <workItem from="1537150270099" duration="12435000" />
-      <workItem from="1537378412834" duration="3908000" />
+      <workItem from="1537378412834" duration="4165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="693750000" />
+    <option name="totallyTimeSpent" value="694007000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="bottom" id="TODO" order="4" />
@@ -654,12 +621,12 @@
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50723404" side_tool="true" weight="0.31545064" />
       <window_info anchor="right" id="Maven Projects" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="5" show_stripe_button="false" />
-      <window_info active="true" anchor="right" id="Run" order="11" sideWeight="0.4925532" visible="true" weight="0.2979744" />
+      <window_info anchor="right" id="Run" order="11" sideWeight="0.4925532" visible="true" weight="0.2979744" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Terminal" order="6" sideWeight="0.499226" weight="0.18776824" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -914,13 +881,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7344">
-          <caret line="432" selection-start-line="432" selection-end-line="432" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1547">
@@ -1284,6 +1244,14 @@
             <element signature="e#3815#3816#0" expanded="true" />
             <element signature="e#3851#3852#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
