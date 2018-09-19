@@ -1,5 +1,6 @@
 # LWJGL Engine - V2
 OpenGL 3D engine using LWJGL (mostly GLFW and openGL java bindings). Purely for self teaching and interest.
+A visual demo of the engine in its current state is [here (youtube)].
 
 Very good references for learning openGL and LWJGL:
   * [Oreon Engine] by Fynn Flügge - Massive help with java class structuring and learning about compute shaders
@@ -54,3 +55,4 @@ Future features:
 [Oreon Engine]: https://github.com/oreonengine/oreon-engine/tree/2fa7843fd09898723833d0d998e56f62ff537775
 [Learn OpenGL]: https://learnopengl.com/Introduction
 [LWJGL Gitbook]: https://github.com/lwjglgamedev/lwjglbook
+[here (youtube)]: https://www.youtube.com/watch?v=jU0Dm78wGI0&feature=youtu.be

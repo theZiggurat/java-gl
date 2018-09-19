@@ -10,8 +10,8 @@ layout (binding = 4, r16f) uniform readonly image2D rough_image;
 layout (binding = 5, r16f) uniform readonly image2D ao_image;
 layout (binding = 6) uniform writeonly image2D scene;
 
-uniform vec3 camera_Pos;
-uniform vec3 light_Dir;
+uniform vec3 cameraPos;
+uniform vec3 lightDir;
 
 const float PI = 3.14159265359;
 
@@ -64,12 +64,12 @@ void main(){
     float rough = imageLoad(rough_image, coord).r;
 
     vec3 N = normalize(normal);
-    vec3 V = normalize(camera_Pos - position);
+    vec3 V = normalize(cameraPos - position);
 
     vec3 F0 = vec3(.03);
     F0 = mix(F0, albedo.rgb, metal);
 
-    vec3 L = normalize(light_Dir);
+    vec3 L = normalize(lightDir);
     vec3 H = normalize(V+L);
 
     float NDF = DistributionGGX(N, H, rough);
