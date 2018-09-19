@@ -7,10 +7,11 @@ layout (binding = 1, rgba32f) uniform readonly image2D position_image;
 layout (binding = 2, rgba32f) uniform readonly image2D normal_image;
 layout (binding = 3, r16f) uniform readonly image2D metal_image;
 layout (binding = 4, r16f) uniform readonly image2D rough_image;
-layout (binding = 5) uniform writeonly image2D scene;
+layout (binding = 5, r16f) uniform readonly image2D ao_image;
+layout (binding = 6) uniform writeonly image2D scene;
 
-uniform vec3 cameraPos;
-uniform vec3 lightDir;
+uniform vec3 camera_Pos;
+uniform vec3 light_Dir;
 
 const float PI = 3.14159265359;
 
@@ -63,12 +64,12 @@ void main(){
     float rough = imageLoad(rough_image, coord).r;
 
     vec3 N = normalize(normal);
-    vec3 V = normalize(cameraPos - position);
+    vec3 V = normalize(camera_Pos - position);
 
     vec3 F0 = vec3(.03);
     F0 = mix(F0, albedo.rgb, metal);
 
-    vec3 L = normalize(lightDir);
+    vec3 L = normalize(light_Dir);
     vec3 H = normalize(V+L);
 
     float NDF = DistributionGGX(N, H, rough);
@@ -81,12 +82,14 @@ void main(){
     vec3 kD = vec3(1.0) - kS;
     kD *= 1.0 - metal;
 
-    vec3 numerator    =  NDF*G* F;
-    float denominator = 4* max(dot(N, V), 0) * max(dot(N, L), 0);
+    float NdotL = max(dot(N, L), 0.0);
+
+    vec3 numerator    =  G*NDF*F;
+    //float denominator = 4* max(dot(N, V), 0) * NdotL;
+    float denominator = NdotL;
     vec3 specular     = numerator / max(denominator, 0.01);
 
-    float NdotL = max(dot(N, L), 0.0);
-    Lo += (kD * albedo.rgb / PI + specular)*2* NdotL;
+    Lo += (kD * albedo.rgb / PI + specular)* NdotL;
 
     vec3 ambient = vec3(.03) * albedo.rgb;
     vec3 color = Lo + ambient;
@@ -95,9 +98,9 @@ void main(){
     color = color / (color + vec3(1.0));
     color = pow(color, vec3(1.0/2.2));
 
-//    if(length(normal) == 0){
-//        color = vec3(0, .1, .15);
-//    }
+    if(length(normal) == 0){
+        color = vec3(.1, .1, .15);
+    }
 
     imageStore(scene, coord, vec4(color, 1));
 

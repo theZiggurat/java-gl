@@ -74,6 +74,10 @@ public class PBRShaderProgram extends ShaderProgram {
         material.getMetallicMap().bind();
         setUniform("metalMap", 3);
 
+        glActiveTexture(GL_TEXTURE4);
+        material.getAoMap().bind();
+        setUniform("aoMap", 4);
+
         //setUniform("randomVec", new Vector3f(1).normalize());
 
         setUniform("projectionMatrix", camera.getProjectionMatrix());

@@ -9,6 +9,7 @@ import v2.engine.system.RenderEngine;
 import v2.modules.pbr.PBRDeferredShaderProgram;
 import v2.modules.pbr.PBRModel;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_R;
 
 public class PBRTest implements EngineInterface {
@@ -35,15 +36,28 @@ public class PBRTest implements EngineInterface {
 //        model.scale(5f);
 //        model.getWorldTransform().setTranslation(new Vector3f(0,1,0));
 
-        model2 = PBRModel.quickModel("res/models/thing.obj",
+        model2 = PBRModel.quickModel("res/models/quad.obj",
                 "res/images/wood_floor/", "albedo.png", "normal.png",
-                "rough.png", "metal.png");
-        model2.translate(0,0,10).scaleTo(.5f);
+                "rough.png", "metal.png", "ao.png", false);
+        model2.translate(0,0,1).scaleTo(2f);
 
-        model3 = PBRModel.quickModel("res/models/thing.obj",
+        model3 = PBRModel.quickModel("res/models/quad.obj",
                 "res/images/chipped_paint/", "albedo.png", "normal.png",
-                "rough.png", "metal.png");
-        model3.translate(200,0,10).scaleTo(.5f);
+                "rough.png", "metal.png", "ao.png", false);
+        model3.translateTo(5,0,1).scaleTo(2f);
+        model4 = PBRModel.quickModel("res/models/quad.obj",
+                "res/images/tiled_stone/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", "ao.png", false);
+        model4.translateTo(10,0,1).scaleTo(2f);
+        model = PBRModel.quickModel("res/models/quad.obj",
+                "res/images/plastic_squares/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", null, false);
+        model.translateTo(-5,0,1).scaleTo(2f);
+
+//        model3 = PBRModel.quickModel("res/models/doublebarrel.obj",
+//                "res/images/gun/", "albedo.jpg", "glnormal.jpg",
+//                "rough.jpg", "metal.jpg", null, false);
+//        model3.translate(200,0,10).scaleTo(20f);
 
 //        model4 = PBRModel.quickModel("res/models/m16.obj",
 //                "res/images/streaked_metal/", "albedo.png", null,
@@ -54,7 +68,7 @@ public class PBRTest implements EngineInterface {
         scene = RenderEngine.instance().getScenegraph();
         object = new Node();
         //object.addChild(model);
-        object.addChildren(model2, model3);
+        object.addChildren(model, model4, model3, model2);
         scene.addChild(object);
 
     }
@@ -65,10 +79,11 @@ public class PBRTest implements EngineInterface {
     public void update(double duration) {
 
         if(InputCore.instance().isKeyHeld(GLFW_KEY_R)) {
-            object.rotate(new Vector3f(
-                    0, (float) duration * 25, 0
-            ));
-            time += duration;
+            if(InputCore.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
+                RenderEngine.instance().getLightDir().rotateY(-(float)duration*.1f);
+            } else {
+                RenderEngine.instance().getLightDir().rotateY((float) duration*.1f);
+            }
         }
 
     }

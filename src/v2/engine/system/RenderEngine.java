@@ -8,6 +8,7 @@ import v2.engine.scene.Scenegraph;
 import v2.modules.pbr.PBRFrameBufferObject;
 import v2.engine.quad.FSQuad;
 import v2.modules.pbr.PBRDeferredShaderProgram;
+import v2.modules.post.ssao.SSAOShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -17,16 +18,17 @@ public class RenderEngine {
 
     @Getter private Scenegraph scenegraph;
 
-    private PBRFrameBufferObject PBRFrameBufferObject;
+    private PBRFrameBufferObject pbrFBO;
 
     private TextureObject sceneTexture;
     private PBRDeferredShaderProgram lightingPass;
+    private SSAOShaderProgram ssaoPass;
 
     private FSQuad quad;
 
     @Setter @Getter private Camera mainCamera;
 
-    public static Vector3f lightDir;
+    @Getter @Setter private Vector3f lightDir;
 
     public static RenderEngine instance = null;
 
@@ -45,33 +47,28 @@ public class RenderEngine {
     public void init(){
         Window window = Window.instance();
         scenegraph.update();
-        PBRFrameBufferObject = new PBRFrameBufferObject(window.getWidth(), window.getHeight(),1);
+        pbrFBO = new PBRFrameBufferObject(window.getWidth(), window.getHeight(),1);
         lightingPass = new PBRDeferredShaderProgram();
+        ssaoPass = new SSAOShaderProgram();
         quad = new FSQuad();
-        currTexture = PBRFrameBufferObject.getAlbedo();
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
+        currTexture = sceneTexture;
         lightDir = new Vector3f(1,0,0);
     }
 
     TextureObject currTexture;
 
-    int time;
-
     public void render(){
-
-        time ++;
-
-        lightDir = new Vector3f((float)Math.sin((double)time/1440), 0, (float)Math.cos((double)time/1440));
 
         mainCamera.update();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        PBRFrameBufferObject.bind();
+        pbrFBO.bind();
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        PBRFrameBufferObject.unbind();
+        pbrFBO.unbind();
 
         if(Window.instance().isResized()){
             glViewport(0,0, Window.instance().getWidth(),
@@ -81,35 +78,41 @@ public class RenderEngine {
 
 
 
-        PBRFrameBufferObject.bind();
+        pbrFBO.bind();
         if(InputCore.instance().isKeyHeld(GLFW_KEY_DELETE)){
             scenegraph.renderWireframe();
         } else {
             scenegraph.render();
         }
-        PBRFrameBufferObject.unbind();
+        pbrFBO.unbind();
 
-        lightingPass.render(PBRFrameBufferObject.getAlbedo(),
-                PBRFrameBufferObject.getPosition(), PBRFrameBufferObject.getNormal(),
-                PBRFrameBufferObject.getMetalness(), PBRFrameBufferObject.getRoughness(),
-                PBRFrameBufferObject.getDepth(), sceneTexture, lightDir);
+        ssaoPass.compute(pbrFBO.getPosition(), pbrFBO.getNormal());
+
+
+
+        lightingPass.compute(pbrFBO.getAlbedo(),
+                pbrFBO.getPosition(), pbrFBO.getNormal(),
+                pbrFBO.getMetalness(), pbrFBO.getRoughness(),
+                ssaoPass.getTargetTexture(), sceneTexture, lightDir);
 
 
 
         if (InputCore.instance().isKeyPressed(GLFW_KEY_2)) {
-            currTexture = PBRFrameBufferObject.getAlbedo();
+            currTexture = pbrFBO.getAlbedo();
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_3)){
-            currTexture = PBRFrameBufferObject.getNormal();
+            currTexture = pbrFBO.getNormal();
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_4)){
-            currTexture = PBRFrameBufferObject.getMetalness();
+            currTexture = pbrFBO.getMetalness();
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_5)){
-            currTexture = PBRFrameBufferObject.getRoughness();
+            currTexture = pbrFBO.getRoughness();
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_7)){
-            currTexture = PBRFrameBufferObject.getDepth();
+            currTexture = pbrFBO.getDepth();
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_1)){
             currTexture = sceneTexture;
         } else if (InputCore.instance().isKeyPressed(GLFW_KEY_6)){
-            currTexture = PBRFrameBufferObject.getPosition();
+            currTexture = pbrFBO.getPosition();
+        } else if (InputCore.instance().isKeyPressed(GLFW_KEY_8)){
+            currTexture = ssaoPass.getTargetTexture();
         }
 
         quad.setScreenTexture(currTexture);

@@ -2,12 +2,16 @@ package v2.engine.gldata;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import v2.engine.javadata.StaticBuffer;
+import v2.engine.rand.RandomKernel;
+import v2.engine.system.StaticLoader;
 
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT32;
+import static org.lwjgl.opengl.GL30.GL_RGB16F;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 @Getter @AllArgsConstructor
@@ -96,4 +100,5 @@ public class TextureObject {
     public static TextureObject emptyTexture(){
         return new TextureObject(GL_TEXTURE_2D,0,0,0);
     }
+
 }

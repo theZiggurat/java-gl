@@ -1,6 +1,7 @@
 package v2.engine.system;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
@@ -109,7 +110,7 @@ public class ShaderProgram {
     }
 
     /**
-     * Dispatches compute shader if created/linked
+     * Dispatches compute shader if created/linked. Default size is window resolution
      * @param groupX group size x
      * @param groupY group size y
      */
@@ -118,6 +119,20 @@ public class ShaderProgram {
             bind();
             glDispatchCompute(Window.instance().getWidth()/groupX,
                     Window.instance().getHeight()/groupY, 1);
+        }
+    }
+
+    /**
+     * Dispatches compute shader is created/linked. Custom size
+     * @param groupX group size x
+     * @param groupY group size y
+     * @param sizeX total size x
+     * @param sizeY total size y
+     */
+    public void compute(int groupX, int groupY, int sizeX, int sizeY){
+        if(computeShader != -1){
+            bind();
+            glDispatchCompute(sizeX/groupX, sizeY/groupY, 1);
         }
     }
 
@@ -241,7 +256,7 @@ public class ShaderProgram {
      * @param value  int data
      */
     public void setUniform(String name, int value){
-        if(uniforms.get(name)==null){ return; }
+        if(uniforms.get(name)==null) return;
         glUniform1i(uniforms.get(name), value);
     }
 
@@ -251,7 +266,7 @@ public class ShaderProgram {
      * @param value float data
      */
     public void setUniform(String name, float value) {
-        if(uniforms.get(name)==null){ return; }
+        if(uniforms.get(name)==null) return;
         glUniform1f(uniforms.get(name), value);
     }
 
@@ -261,7 +276,7 @@ public class ShaderProgram {
      * @param value  vector data
      */
     public void setUniform(String name, Vector4f value) {
-        if(uniforms.get(name)==null){ return; }
+        if(uniforms.get(name)==null) return;
         glUniform4f(uniforms.get(name), value.x, value.y, value.z, value.w);
     }
 
@@ -271,8 +286,18 @@ public class ShaderProgram {
      * @param vec vector data
      */
     public void setUniform(String name, Vector3f vec){
-        if(uniforms.get(name)==null){ return; }
+        if(uniforms.get(name)==null) return;
         glUniform3f(uniforms.get(name), vec.x, vec.y, vec.z);
+    }
+
+    /**
+     * vec3 uniform (x,y,z)
+     * @param name  uniform name registered from addUniform
+     * @param vec vector data
+     */
+    public void setUniform(String name, Vector2f vec){
+        if(uniforms.get(name)==null) return;
+        glUniform2f(uniforms.get(name), vec.x, vec.y);
     }
 
     /**
@@ -281,7 +306,7 @@ public class ShaderProgram {
      * @param matrix  matrix data
      */
     public void setUniform(String name, Matrix4f matrix){
-        if(uniforms.get(name)==null){ return; }
+        if(uniforms.get(name)==null) return;
         try(MemoryStack stack = MemoryStack.stackPush()){
             FloatBuffer fb = stack.mallocFloat(16);
             matrix.get(fb);
@@ -301,9 +326,14 @@ public class ShaderProgram {
 
     public void updateUniforms(ModuleNode moduleNode){}
     public void updateUniforms(TextureObject textureObject){}
-    public void updateUniforms(TextureObject albedo, TextureObject position, TextureObject normal,
-           TextureObject metal, TextureObject rough, TextureObject depth,
-                               TextureObject scene){}
+
+    public void updateUniforms(float... floats){}
+
+    public void compute(){}
+    public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
+                               TextureObject metal, TextureObject rough, TextureObject depth,
+                               TextureObject scene, Vector3f lightdir){}
+
 
 
 

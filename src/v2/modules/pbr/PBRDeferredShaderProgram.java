@@ -17,23 +17,25 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         createComputeShader("res/shaders/pbr_deferred_lighting_comp.cs");
         link();
 
-        addUniform("cameraPos");
-        addUniform("lightDir");
+        addUniform("camera_Pos");
+        addUniform("light_Dir");
 
     }
 
-    public void render(TextureObject albedo, TextureObject position, TextureObject normal,
-       TextureObject metal, TextureObject rough, TextureObject depth, TextureObject scene, Vector3f lightDir){
+    @Override
+    public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
+                        TextureObject metal, TextureObject rough, TextureObject ao, TextureObject scene, Vector3f lightDir){
 
         bind();
-        setUniform("cameraPos", RenderEngine.instance().getMainCamera().getTranslation());
-        setUniform("lightDir", lightDir);
+        setUniform("camera_Pos", RenderEngine.instance().getMainCamera().getTranslation());
+        setUniform("light_Dir", lightDir);
         bindImage(0, albedo.getId(), GL_READ_ONLY, GL_RGBA16F);
         bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(3, metal.getId(), GL_READ_ONLY, GL_R16F);
         bindImage(4, rough.getId(), GL_READ_ONLY, GL_R16F);
-        bindImage(5, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
+        bindImage(5, rough.getId(), GL_READ_ONLY, GL_R16F);
+        bindImage(6, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
         compute(16,16);
         unbind();
     }

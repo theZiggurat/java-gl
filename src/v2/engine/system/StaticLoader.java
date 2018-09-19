@@ -29,6 +29,10 @@ import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 
 public class StaticLoader {
 
+    public static String absolutePath(String relativePath){
+        return StaticLoader.class.getClassLoader().getResource(relativePath).getPath().toString();
+    }
+
     /**
      * Utility for loading image bytebuffers.
      * @param filename image path with format "res/image/*"
@@ -68,7 +72,7 @@ public class StaticLoader {
      * @param filename image path with format "res/image/*"
      * @return texture object with width, height, and handle
      */
-    public static TextureObject loadTexture(String filename){
+    public static TextureObject loadTexture(String filename, boolean srgb){
 
         ByteBuffer buffer;
 
@@ -99,15 +103,18 @@ public class StaticLoader {
             if ((w.get(0) & 3) != 0) {
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w.get(0) & 1));
             }
-            ret.allocateImage2D(GL_RGB16F, GL_RGB, image);
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+            if(srgb)
+                ret.allocateImage2D(GL_SRGB8, GL_RGB);
+            else
+                ret.allocateImage2D(GL_RGB16F, GL_RGB, image);
         } else if (c.get(0) == 1){
             ret.allocateImage2D(GL_RED, GL_RED, image);
         } else {
-            ret.allocateImage2D(GL_SRGB8_ALPHA8, GL_RGBA, image);
-            //ret.allocateImage2D(GL_RGBA16F, GL_RGBA, image);
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-        }
+            if(srgb)
+                ret.allocateImage2D(GL_SRGB8_ALPHA8, GL_RGBA, image);
+            else
+                ret.allocateImage2D(GL_RGBA16F, GL_RGBA, image);
+    }
 
         stbi_image_free(image);
 

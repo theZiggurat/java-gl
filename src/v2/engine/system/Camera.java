@@ -19,10 +19,13 @@ public class Camera extends Transform<Camera> {
             );
 
     @Setter @Getter private double FOV;
-    @Getter @Setter private int speedLevel = 0;
+    @Getter @Setter private int speedLevel = 4;
     @Getter private final float ZNEAR = .01f;
     @Getter private final float ZFAR = 10000;
     @Setter @Getter private float mouseSens = 0.3f;
+
+    private Vector3f velocity;
+    float speedLimit = 10;
 
 
     public Camera(){
@@ -30,6 +33,7 @@ public class Camera extends Transform<Camera> {
         setTranslation(new Vector3f(0,0,-10));
         setRotation(new Vector3f(0,180,0));
         FOV = 85;
+        velocity = new Vector3f();
     }
 
     public Camera(Vector3f position){
@@ -37,8 +41,31 @@ public class Camera extends Transform<Camera> {
         translateTo(position);
     }
 
+
+
     public void update(){
+
         InputCore input = InputCore.instance();
+
+        if(input.isKeyHeld(GLFW_KEY_W)){
+            velocity.add(getForward().mul(speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_S)){
+            velocity.add(getForward().mul(-speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_A)){
+            velocity.add(getRight().mul(speedMod.apply(speedLevel)));
+        }
+        if(input.isKeyHeld(GLFW_KEY_D)){
+            velocity.add(getRight().mul(-speedMod.apply(speedLevel)));
+        }
+
+        if(velocity.length() > speedLimit){
+            velocity.normalize().mul(speedLimit);
+        }
+
+        translate(velocity);
+
 
         if(input.isButtonHeld(1)){ // right click
             rotate((float)input.getDisplacement().y * mouseSens,
@@ -46,8 +73,8 @@ public class Camera extends Transform<Camera> {
         }
 
         if(input.isButtonHeld(2)){ // middle click
-            translate(getUp().mul((float)input.getDisplacement().y * .05f * speedMod.apply(speedLevel-2)));
-            translate(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
+            velocity.add(getUp().mul((float)input.getDisplacement().y * .05f * speedMod.apply(speedLevel-2)));
+            velocity.add(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
         }
 
         if(input.isButtonPressed(0)) { // left click
@@ -63,18 +90,9 @@ public class Camera extends Transform<Camera> {
 
         FOV += input.getScrollAmount();
 
-        if(input.isKeyHeld(GLFW_KEY_W)){
-            translate(getForward().mul(speedMod.apply(speedLevel)));
-        }
-        if(input.isKeyHeld(GLFW_KEY_S)){
-            translate(getForward().mul(-speedMod.apply(speedLevel)));
-        }
-        if(input.isKeyHeld(GLFW_KEY_A)){
-            translate(getRight().mul(speedMod.apply(speedLevel)));
-        }
-        if(input.isKeyHeld(GLFW_KEY_D)){
-            translate(getRight().mul(-speedMod.apply(speedLevel)));
-        }
+        velocity.mul(.9f);
+
+
 
 
     }

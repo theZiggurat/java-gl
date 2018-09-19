@@ -85,7 +85,7 @@ public class Window {
         glfwShowWindow(handle);
 
         glClearColor(0f,0f,0f, 1f);
-        glFrontFace(GL_CCW);
+//        glFrontFace(GL_CCW);
 
        glEnable(GL_DEPTH_TEST);
 //       glEnable(GL_CULL_FACE);

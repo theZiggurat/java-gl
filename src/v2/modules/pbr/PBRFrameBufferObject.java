@@ -2,6 +2,7 @@ package v2.modules.pbr;
 
 import lombok.Getter;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.opengles.GLES30;
 import v2.engine.gldata.FrameBufferObject;
 import v2.engine.gldata.TextureObject;
 
@@ -31,7 +32,7 @@ import static org.lwjgl.opengles.GLES30.GL_RGBA32F;
 @Getter
 public class PBRFrameBufferObject extends FrameBufferObject {
 
-    TextureObject position, albedo, normal, metalness, roughness, depth;
+    TextureObject position, albedo, normal, metalness, roughness, ao, depth;
 
     public PBRFrameBufferObject(int width, int height, int samples){
 
@@ -62,17 +63,23 @@ public class PBRFrameBufferObject extends FrameBufferObject {
                 .allocateImage2D(GL_R16F, GL_RED)
                 .bilinearFilter();
 
+        ao = new TextureObject(
+                GL_TEXTURE_2D, width, height)
+                .allocateImage2D(GL_R16F, GL_RED)
+                .bilinearFilter();
+
         depth = new TextureObject(
                 GL_TEXTURE_2D, width, height)
                 .allocateDepth()
                 .bilinearFilter();
 
-        IntBuffer drawBuffers = BufferUtils.createIntBuffer(5);
+        IntBuffer drawBuffers = BufferUtils.createIntBuffer(6);
         drawBuffers.put(GL_COLOR_ATTACHMENT0);
         drawBuffers.put(GL_COLOR_ATTACHMENT1);
         drawBuffers.put(GL_COLOR_ATTACHMENT2);
         drawBuffers.put(GL_COLOR_ATTACHMENT3);
         drawBuffers.put(GL_COLOR_ATTACHMENT4);
+        drawBuffers.put(GL_COLOR_ATTACHMENT5);
         drawBuffers.flip();
 
         bind();
@@ -81,6 +88,7 @@ public class PBRFrameBufferObject extends FrameBufferObject {
         createColorTextureAttachment(getAlbedo().getId(), 2);
         createColorTextureAttachment(getMetalness().getId(), 3);
         createColorTextureAttachment(getRoughness().getId(), 4);
+        createColorTextureAttachment(getAo().getId(), 5);
         createDepthTextureAttatchment(getDepth().getId());
         setDrawBuffer(drawBuffers);
         checkStatus();

@@ -5,6 +5,7 @@ layout (location = 1) out vec4 norm_vbo;
 layout (location = 2) out vec4 albedo_vbo;
 layout (location = 3) out float metal_vbo;
 layout (location = 4) out float rough_vbo;
+layout (location = 5) out float ao_vbo;
 
 in VS_DATA {
     vec2 uv;
@@ -17,6 +18,7 @@ uniform sampler2D albedoMap;
 uniform sampler2D normalMap;
 uniform sampler2D roughnessMap;
 uniform sampler2D metalMap;
+uniform sampler2D aoMap;
 
 uniform vec3 randomVec = vec3(1,0,0);
 
@@ -46,5 +48,6 @@ void main(){
     //albedo_vbo = mix(vec4(uv_vs, 0, 1), albedo_vbo, .01);
     metal_vbo = texture(metalMap, vs.uv).r;
     rough_vbo = texture(roughnessMap, vs.uv).r;
+    ao_vbo = texture(aoMap, vs.uv).r;
 
 }

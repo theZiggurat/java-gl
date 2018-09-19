@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.lwjgl.assimp.AIScene;
+import org.lwjgl.assimp.Assimp;
 import v2.engine.system.StaticLoader;
 
 import java.nio.FloatBuffer;
@@ -34,6 +36,13 @@ public class MeshData {
 
     public IntBuffer indexBuffer(){
         return StaticBuffer.intBuffer(indices);
+    }
+
+    public static MeshData loadMeshAssimp(String filename){
+
+
+        //AIScene scene = Assimp.aiImportFile(StaticLoader.absolutePath(filename), AI_);
+        return null;
     }
 
     public static MeshData loadMesh(String filename) {

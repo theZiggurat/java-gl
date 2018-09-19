@@ -21,33 +21,41 @@ public class PBRModel extends ModuleNode {
      * @return
      */
     public static PBRModel quickModel(String meshFile, String texturePath,
-              String albedoFile, String normalFile, String roughnessFile, String metalFile){
+              String albedoFile, String normalFile, String roughnessFile, String metalFile, String aoFile, boolean srgb){
 
         TextureObject albedo = StaticLoader.loadTexture(
-                texturePath + albedoFile)
+                texturePath + albedoFile, srgb)
                 .bilinearFilter().wrap();
 
         TextureObject normal;
         if(normalFile != null) {
             normal = StaticLoader.loadTexture(
-                    texturePath + normalFile)
+                    texturePath + normalFile, srgb)
                     .bilinearFilter().wrap();
         } else {
             normal = TextureObject.emptyTexture();
         }
 
         TextureObject roughness = StaticLoader.loadTexture(
-                texturePath + roughnessFile)
+                texturePath + roughnessFile, srgb)
                 .bilinearFilter().wrap();
 
 
         TextureObject metal = StaticLoader.loadTexture(
-                texturePath + metalFile)
+                texturePath + metalFile, srgb)
                 .bilinearFilter().wrap();
+        TextureObject ao;
+        if(aoFile != null) {
+            ao = StaticLoader.loadTexture(
+                    texturePath + aoFile, srgb)
+                    .bilinearFilter().wrap();
+        } else {
+            ao = TextureObject.emptyTexture();
+        }
 
         VertexBufferObject mesh = new VertexBufferObject(MeshData.loadMesh(meshFile));
 
-        PBRMaterial material = new PBRMaterial(albedo, normal, roughness, metal, null);
+        PBRMaterial material = new PBRMaterial(albedo, normal, roughness, metal, ao);
 
         return new PBRModel(mesh, material);
     }
