@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.lwjgl.assimp.AIMesh;
 import org.lwjgl.assimp.AIScene;
 import org.lwjgl.assimp.Assimp;
 import v2.engine.system.StaticLoader;
@@ -12,7 +13,10 @@ import v2.engine.system.StaticLoader;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class MeshData {
@@ -38,12 +42,7 @@ public class MeshData {
         return StaticBuffer.intBuffer(indices);
     }
 
-    public static MeshData loadMeshAssimp(String filename){
 
-
-        //AIScene scene = Assimp.aiImportFile(StaticLoader.absolutePath(filename), AI_);
-        return null;
-    }
 
     public static MeshData loadMesh(String filename) {
         List<String> meshLines;
@@ -97,7 +96,7 @@ public class MeshData {
                     Face tri_face = new Face(tokens[1], tokens[2], tokens[3]);
                     faces.add(tri_face);
 
-                    if(tokens.length == 5){ // quad -> tri conversion
+                    if(tokens.length == 5){ // gui -> tri conversion
                         Face quad_patch = new Face(tokens[1], tokens[3], tokens[4]);
                         faces.add(quad_patch);
                     }
@@ -133,6 +132,7 @@ public class MeshData {
 
         // import position vectors into array
         float[] posArr = new float[posList.size()*3]; // 3 floats per vertex
+
         for(int i = 0; i<posList.size(); i++){
             posArr[i*3] = posList.get(i).x;
             posArr[i*3+1] = posList.get(i).y;

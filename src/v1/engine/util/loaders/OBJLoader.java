@@ -89,7 +89,7 @@ public class OBJLoader {
                     faces.add(tri_face);
                     faceIndex++;
 
-                    if(tokens.length == 5){ // quad -> tri conversion
+                    if(tokens.length == 5){ // gui -> tri conversion
                         Face quad_patch = new Face(tokens[1], tokens[3], tokens[4]);
                         faces.add(quad_patch);
                         faceIndex++;

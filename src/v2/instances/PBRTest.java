@@ -1,92 +1,133 @@
 package v2.instances;
 
+import lombok.Getter;
 import org.joml.Vector3f;
+import v2.engine.light.DirectionalLight;
+import v2.engine.light.LightManager;
+import v2.engine.light.PointLight;
 import v2.engine.scene.Node;
 import v2.engine.scene.Scenegraph;
+import v2.engine.system.Camera;
+import v2.engine.system.EngineCore;
 import v2.engine.system.EngineInterface;
-import v2.engine.system.InputCore;
-import v2.engine.system.RenderEngine;
-import v2.modules.pbr.PBRDeferredShaderProgram;
+import v2.engine.system.Input;
 import v2.modules.pbr.PBRModel;
+import v2.modules.pbr.PBRRenderEngine;
+import v2.modules.sky.Sky;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_R;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class PBRTest implements EngineInterface {
 
-    private Scenegraph scene;
+    @Getter
+    PBRRenderEngine pbrRenderEngine;
     Node object;
 
-    PBRModel model, model2, model3, model4;
+    Node model, model2, model3, model4;
+    PointLight light;
 
     @Override
     public void init(){
 
-//        model = PBRModel.quickModel("res/models/M4A1.obj",
-//                "res/images/streakmetal/", "albedo.png", null,
-//                "rough.png", "metal.png");
+        pbrRenderEngine = PBRRenderEngine.instance();
 
-//        model = PBRModel.quickModel("res/models/barrels.obj",
-//                "res/images/barrel2/", "albedo.png", "normal.png",
-//                "rough.png", "metal.png");
-
-//        model = PBRModel.quickModel("res/models/nightstand.obj",
-//        "res/images/nightstand/", "albedo.png", "normal.png",
-////                "rough.png", "metal.png");
-//        model.scale(5f);
-//        model.getWorldTransform().setTranslation(new Vector3f(0,1,0));
-
-        model2 = PBRModel.quickModel("res/models/quad.obj",
-                "res/images/wood_floor/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", "ao.png", false);
-        model2.translate(0,0,1).scaleTo(2f);
-
-        model3 = PBRModel.quickModel("res/models/quad.obj",
-                "res/images/chipped_paint/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", "ao.png", false);
-        model3.translateTo(5,0,1).scaleTo(2f);
-        model4 = PBRModel.quickModel("res/models/quad.obj",
-                "res/images/tiled_stone/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", "ao.png", false);
-        model4.translateTo(10,0,1).scaleTo(2f);
-        model = PBRModel.quickModel("res/models/quad.obj",
-                "res/images/plastic_squares/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", null, false);
-        model.translateTo(-5,0,1).scaleTo(2f);
-
-//        model3 = PBRModel.quickModel("res/models/doublebarrel.obj",
-//                "res/images/gun/", "albedo.jpg", "glnormal.jpg",
-//                "rough.jpg", "metal.jpg", null, false);
-//        model3.translate(200,0,10).scaleTo(20f);
-
-//        model4 = PBRModel.quickModel("res/models/m16.obj",
+        model3 = PBRModel.quickModel("res/models/rock.obj",
+                "res/images/rock/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", null, false, true);
+        model3.scale(.1f);
+        model4 = PBRModel.quickModel("res/models/doublebarrel.obj",
+                "res/images/gun/", "albedo.jpg", "glnormal.jpg",
+                "rough.jpg", "metal.jpg", null, false, false);
+        model4.translateTo(10f,0,1).scaleTo(1f);
+//        model4 = PBRModel.quickModel("res/models/sphere.obj",
 //                "res/images/streaked_metal/", "albedo.png", null,
-//                "rough.png", "metal.png");
-//        model4.translate(-200,0,10).scaleTo(5f);
+//                "rough.png", "metal.png", null, false, false);
+//        model4.translateTo(7.5f,0,1).scaleTo(2f);
+//        model = PBRModel.quickModel("res/models/dragon.obj",
+//                "res/images/plastic_squares/", "albedo.png", "normal.png",
+//                "rough.png", "metal.png", null, false, true);
+//        model.translateTo(-7.5f,0,1).scaleTo(1f);
 
+        light = new PointLight();
+        light.setColor(new Vector3f(1,1,1));
+        light.setTranslation(new Vector3f(0,0,0));
+        light.setIntensity(1f);
 
-        scene = RenderEngine.instance().getScenegraph();
+        LightManager.setSun(new DirectionalLight());
+        LightManager.getSun().setIntensity(.5f);
+        LightManager.getSun().setAmbientLight(new Vector3f(0.01f));
+
         object = new Node();
-        //object.addChild(model);
-        object.addChildren(model, model4, model3, model2);
-        scene.addChild(object);
+        object.addChildren(model4, model3, light);
 
+
+        object.addChild(light);
+
+        Scenegraph.instance().addChild(object);
     }
 
-    double time = 0;
+    double deg = 0;
 
     @Override
     public void update(double duration) {
 
-        if(InputCore.instance().isKeyHeld(GLFW_KEY_R)) {
-            if(InputCore.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
-                RenderEngine.instance().getLightDir().rotateY(-(float)duration*.1f);
+        if(Input.instance().isKeyHeld(GLFW_KEY_T)){
+            if(Input.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
+                light.setTranslation(light.getTranslation().add(new Vector3f(.01f, 0, 0)));
             } else {
-                RenderEngine.instance().getLightDir().rotateY((float) duration*.1f);
+                light.setTranslation(light.getTranslation().add(new Vector3f(-.01f, 0, 0)));
+            }
+
+        }
+
+        Camera camera = EngineCore.instance().getRenderEngine().getMainCamera();
+
+        if(Input.instance().isKeyHeld(GLFW_KEY_Q)) {
+            deg-=0.05;
+        }
+        if(Input.instance().isKeyHeld(GLFW_KEY_E)){
+            deg += 0.05;
+        }
+
+        camera.rotateAround(camera.getForward(), deg);
+
+        if(Input.instance().isKeyHeld(GLFW_KEY_R)) {
+            if(Input.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
+                LightManager.getSun().getRotation().rotateY(-(float)duration*.1f);
+            } else {
+                LightManager.getSun().getRotation().rotateY((float) duration*.1f);
             }
         }
 
+        if(Input.instance().isKeyPressed(GLFW_KEY_RIGHT_BRACKET)){
+            light.setIntensity(light.getIntensity()+1);
+        }
+        if(Input.instance().isKeyPressed(GLFW_KEY_LEFT_BRACKET)){
+            light.setIntensity(light.getIntensity()-1);
+        }
+
     }
+
+//    private void buildFloor(){
+//
+//        int amount = 10;
+//        float scale = 15;
+//
+//        PBRModel model;
+//
+//        TextureObject albedo = StaticLoader.loadTexture("res/images/wood_floor/albedo.png", false);
+//        TextureObject normal = StaticLoader.loadTexture("res/images/wood_floor/normal.png", false);
+//        TextureObject rough = StaticLoader.loadTexture("res/images/wood_floor/rough.png", false);
+//        TextureObject metal = StaticLoader.loadTexture("res/images/wood_floor/metal.png", false);
+//        for(int i = -amount/2; i<amount/2; i++){
+//            for(int j = -amount/2; j<amount/2; j++){
+//                model = new PBRModel(new VertexBufferObject(MeshData.loadMesh("res/models/gui.obj")),
+//                        new PBRMaterial(albedo, normal, rough, metal, null));
+//                model.translate(i*scale*2,-5,j*scale*2).scaleTo(scale).rotateTo(new Vector3f(90,0,0));
+//                object.addChild(model);
+//            }
+//        }
+//    }
 
     @Override
     public void cleanup() {

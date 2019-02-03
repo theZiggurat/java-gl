@@ -1,7 +1,7 @@
 package v1.engine.entity;
 
 import v1.engine.draw.mesh.Mesh3D;
-import v2.engine.system.InputCore;
+import v2.engine.system.Input;
 import v1.engine.util.Window;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -27,7 +27,7 @@ public class PanControllerEntity extends CameraEntity{
     }
 
     private void handleMouse(){
-        InputCore mouse = InputCore.instance();
+        Input mouse = Input.instance();
 
         if(mouse.isRightPressed()){
 

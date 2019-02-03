@@ -1,12 +1,60 @@
 package v2.engine.javadata;
 
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class StaticBuffer {
+
+
+    public static FloatBuffer positionBuffer(ArrayList<Vector3f> positions){
+        float [] ret = new float[positions.size()*3];
+        int i = 0;
+        for(Vector3f position: positions)
+        {
+            ret[i++] = position.x;
+            ret[i++] = position.y;
+            ret[i++] = position.z;
+        }
+        return floatBuffer(ret);
+    }
+
+    public static FloatBuffer UVBuffer(ArrayList<Vector2f> UVs){
+
+        float [] ret = new float[UVs.size()*2];
+        int i = 0;
+        for(Vector2f UV: UVs)
+        {
+            ret[i++] = UV.x;
+            ret[i++] = UV.y;
+        }
+        return floatBuffer(ret);
+    }
+
+    public static FloatBuffer normalBuffer(ArrayList<Vector3f> normals){
+
+        float [] ret = new float[normals.size()*3];
+        int i = 0;
+        for(Vector3f normal: normals)
+        {
+            ret[i++] = normal.x;
+            ret[i++] = normal.y;
+            ret[i++] = normal.z;
+        }
+        return floatBuffer(ret);
+    }
+
+    public static IntBuffer indiciesBuffer(ArrayList<Integer> indices){
+        return intBuffer(indices.parallelStream()
+                .mapToInt(i -> i)
+                .toArray());
+    }
 
     public static FloatBuffer floatBuffer(float... data){
         FloatBuffer ret = MemoryUtil.memAllocFloat(data.length);

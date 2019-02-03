@@ -1,11 +1,14 @@
 package v2.engine.scene;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Scenegraph extends Node {
 
 
     private static Scenegraph instance;
 
-    public static Scenegraph getInstance(){
+    public static Scenegraph instance(){
         if (instance == null){
             instance = new Scenegraph();
         }

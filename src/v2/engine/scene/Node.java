@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Node extends Transform<Node> {
 
+    private boolean activated = true;
+
     @Getter private boolean localRotation, localTranslation, localScaling;
 
     @Getter @Setter private Node parent;
@@ -71,6 +73,14 @@ public class Node extends Transform<Node> {
         }
     }
 
+    public ArrayList<Node> collect(){
+        ArrayList<Node> ret = new ArrayList<>();
+        ret.add(this);
+        for(Node child: children)
+            ret.addAll(child.collect());
+        return ret;
+    }
+
     public Node localizeRotation(boolean _localize){
         localRotation = _localize;
         return this;
@@ -88,20 +98,44 @@ public class Node extends Transform<Node> {
 
 
     public void update() {
-        children.forEach(child -> child.update());
+            children.forEach(child -> {
+                if (child.isActivated()) child.update();
+            });
     }
 
 
     public void render() {
-        children.forEach(child -> child.render());
+        children.forEach(child -> {
+            if (child.isActivated()) child.render();
+        });
     }
 
     public void renderWireframe() {
-        children.forEach(child -> child.renderWireframe());
+        children.forEach(child -> {
+            if (child.isActivated()) child.renderWireframe();
+        });
+    }
+
+    public void renderOverlay(){
+        children.forEach(child -> {
+            if (child.isActivated()) child.renderOverlay();
+        });
     }
 
     public void cleanup() {
         children.forEach(child -> child.cleanup());
+    }
+
+    public boolean isActivated(){
+        return activated;
+    }
+
+    public void activate(){
+        activated = true;
+    }
+
+    public void deactivate(){
+        activated = false;
     }
 
 }

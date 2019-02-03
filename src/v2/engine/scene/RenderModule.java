@@ -2,7 +2,7 @@ package v2.engine.scene;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import v2.engine.gldata.VertexBufferObject;
+import v2.engine.vbo.VertexBufferObject;
 import v2.engine.system.ShaderProgram;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -32,7 +32,7 @@ public class RenderModule extends Module {
     @Override
     public void renderWireframe() {
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_FACE, GL_LINE);
 
         shader.bind();
         shader.updateUniforms(getParent());
@@ -43,6 +43,12 @@ public class RenderModule extends Module {
 
     }
 
+    @Override
+    public void renderOverlay(){
+
+    }
+
+    @Override
     public void cleanup() {
 
         mesh.cleanup();

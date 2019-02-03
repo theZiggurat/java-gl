@@ -21,9 +21,9 @@ public class RandomKernel {
 
             randVec.normalize().mul(rand.nextFloat());
 
-            float scale = i/size;
-            scale = .1f + scale*scale*.9f;
-            randVec.mul(scale);
+//            float scale = i/size;
+//            scale = .1f + scale*scale*.9f;
+//            randVec.mul(scale);
 
             ret.add(randVec);
         }

@@ -1,10 +1,16 @@
 package v2.engine.system;
 
+import com.sun.istack.internal.NotNull;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.sql.SQLOutput;
+import java.util.HashMap;
+
 
 public class EngineCore implements Runnable {
 
-    public static final int TARGET_FPS = 144;
+    public static final int TARGET_FPS = 30;
 
     @Getter
     private float currentFPS;
@@ -13,9 +19,18 @@ public class EngineCore implements Runnable {
     private final Timer timer;
 
     @Getter private final Window window;
-    @Getter private final RenderEngine renderEngine;
+    @Setter @Getter private RenderEngine renderEngine;
+
+    @Getter
+    private HashMap<Class, RenderEngine> renderEngines;
     @Getter private final EngineInterface engineInterface;
-    @Getter private final InputCore input;
+    @Getter private final Input input;
+
+    private static EngineCore instance;
+
+    public static EngineCore instance(){
+        return instance;
+    }
 
     public EngineCore(EngineInterface engineInterface) {
 
@@ -23,9 +38,12 @@ public class EngineCore implements Runnable {
         this.window = Window.instance();
         this.engineInterface = engineInterface;
         this.timer = new Timer();
-        this.renderEngine = RenderEngine.instance();
-        this.input = InputCore.instance();
+
+        this.input = Input.instance();
         this.currentFPS = 0;
+
+        instance = this;
+
     }
 
     @Override
@@ -40,14 +58,33 @@ public class EngineCore implements Runnable {
         }
     }
 
-    protected void init() throws Exception{
+    protected void init(){
 
         // initialize core systems before initializing interface
         window.init();
+        input.init();
         timer.mark();
-        input.init(window);
 
-        renderEngine.init();
+        // initialize renderer from config
+        try {
+            renderEngine = EngineCore.class.getClassLoader().loadClass(
+                    Config.instance().getRenderEngine()).asSubclass(RenderEngine.class).newInstance();
+        }
+        catch(ClassNotFoundException e){
+            e.printStackTrace();
+            System.err.println("Render engine class does not exist: " + renderEngine);
+            System.exit(-1);
+        }
+        catch (InstantiationException e){
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        catch (IllegalAccessException e){
+            e.printStackTrace();
+            System.exit(-1);
+        }
+
+        // initialize engine implementation
         engineInterface.init();
     }
 
@@ -63,56 +100,47 @@ public class EngineCore implements Runnable {
         float frameLength = 1 / TARGET_FPS;
         double lastUpdate = timer.getTime();
 
-        int frameCounter = 0;
-        float timeTracker = (float) timer.getTime();
-        float toOne = 0;
-
         while(!window.shouldClose()){
 
-            if(toOne>=1){
-                toOne -= 1;
-                currentFPS = frameCounter;
-                frameCounter = 0;
-            }
+            timer.mark();
+            update((timer.getTime() - lastUpdate)/1000000000);
 
-            update(timer.getTime() - lastUpdate);
             lastUpdate = timer.getTime();
             render();
 
-            while( timer.getTimeToNext(frameLength) - timer.getTime() > -.001 &&
-                   timer.getTimeToNext(frameLength) - timer.getTime() < .001){
+            //System.out.println(timer.getTimeFromLast());
+
+            while( timer.getTimeToNext(frameLength) > 900){
                 try{ Thread.sleep(1);}
                 catch(InterruptedException e){}
             }
-            toOne += timer.getTime() - timeTracker;
-            timeTracker = (float) timer.getTime();
-            frameCounter++;
         }
 
     }
 
     protected void update(double interval){
 
-        /* mark timer at start of each update */
-        timer.mark();
-
         /* update input */
         input.update();
 
         /* call update code from interface */
         engineInterface.update(interval);
-        window.setTitle(currentFPS, RenderEngine.instance().getMainCamera());
+        window.setTitle(1/interval, renderEngine.getMainCamera());
 
     }
 
     protected void render(){
         window.update();
-        renderEngine.render();
+        renderEngine.draw();
     }
 
     void cleanup(){
         engineInterface.cleanup();
         renderEngine.cleanup();
+    }
+
+    public void addRenderer(@NotNull RenderEngine renderer){
+        renderEngines.put(renderer.getClass(), renderer);
     }
 
     /**
@@ -127,7 +155,7 @@ public class EngineCore implements Runnable {
          * @return time in seconds
          */
         public double getTime(){
-            return System.nanoTime()/1000_000_000.0;
+            return System.nanoTime();
         }
 
         /**
@@ -142,8 +170,8 @@ public class EngineCore implements Runnable {
          * @param interval time per frame (FPS)^-1
          * @return time til next next frame, or 0 if passed
          */
-        public double getTimeToNext(float interval){
-            double ret = interval - getTime() - lastLoopTime;
+        public double getTimeToNext(double interval){
+            double ret = (interval*1000000000) - getTime() - lastLoopTime;
             return ret < 0 ? ret : 0;
         }
 

@@ -1,12 +1,15 @@
 package v2.modules.pbr;
 
 import v2.engine.gldata.TextureObject;
-import v2.engine.gldata.VertexBufferObject;
-import v2.engine.javadata.MeshData;
+import v2.engine.vbo.Mesh3D;
+import v2.engine.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
+import v2.engine.scene.Node;
 import v2.engine.scene.RenderModule;
 import v2.engine.system.StaticLoader;
+
+import java.util.ArrayList;
 
 public class PBRModel extends ModuleNode {
 
@@ -20,44 +23,57 @@ public class PBRModel extends ModuleNode {
      * @param metalFile metal image texture with format "metal.png" for example
      * @return
      */
-    public static PBRModel quickModel(String meshFile, String texturePath,
-              String albedoFile, String normalFile, String roughnessFile, String metalFile, String aoFile, boolean srgb){
+    public static Node quickModel(String meshFile, String texturePath,
+                                  String albedoFile, String normalFile, String roughnessFile, String metalFile,
+                                  String aoFile, boolean srgb, boolean flipUV){
 
-        TextureObject albedo = StaticLoader.loadTexture(
-                texturePath + albedoFile, srgb)
-                .bilinearFilter().wrap();
+        PBRMaterial material = new PBRMaterial();
+        if(albedoFile!=null) {
+            TextureObject albedo = StaticLoader.loadTexture(
+                    texturePath + albedoFile, srgb)
+                    .bilinearFilter().wrap();
+            material.setAlbedoMap(albedo);
+            material.useAlbedoMap(true);
+        }
 
-        TextureObject normal;
+
         if(normalFile != null) {
-            normal = StaticLoader.loadTexture(
+            TextureObject normal = StaticLoader.loadTexture(
                     texturePath + normalFile, srgb)
                     .bilinearFilter().wrap();
-        } else {
-            normal = TextureObject.emptyTexture();
+            material.setNormalMap(normal);
+            material.useNormalMap(true);
         }
 
-        TextureObject roughness = StaticLoader.loadTexture(
-                texturePath + roughnessFile, srgb)
-                .bilinearFilter().wrap();
-
-
-        TextureObject metal = StaticLoader.loadTexture(
-                texturePath + metalFile, srgb)
-                .bilinearFilter().wrap();
-        TextureObject ao;
-        if(aoFile != null) {
-            ao = StaticLoader.loadTexture(
-                    texturePath + aoFile, srgb)
+        if(roughnessFile != null) {
+            TextureObject roughness = StaticLoader.loadTexture(
+                    texturePath + roughnessFile, srgb)
                     .bilinearFilter().wrap();
-        } else {
-            ao = TextureObject.emptyTexture();
+            material.setRoughnessMap(roughness);
+            material.useRoughnessMap(true);
         }
 
-        VertexBufferObject mesh = new VertexBufferObject(MeshData.loadMesh(meshFile));
+        if(metalFile != null){
+            TextureObject metal = StaticLoader.loadTexture(
+                    texturePath + metalFile, srgb)
+                    .bilinearFilter().wrap();
+            material.setMetalMap(metal);
+            material.useMetalMap(true);
+        }
 
-        PBRMaterial material = new PBRMaterial(albedo, normal, roughness, metal, ao);
+        Node ret = new Node();
+        ArrayList<Mesh3D> meshs = StaticLoader.loadMeshGroup(meshFile);
 
-        return new PBRModel(mesh, material);
+        for(Mesh3D mesh: meshs){
+            if(flipUV)
+                mesh.getUVs().stream().forEach(e -> {
+                e.x = 1-e.x;});
+
+            PBRModel model = new PBRModel(mesh, material);
+            ret.addChild(model);
+        }
+
+        return ret;
     }
 
     public PBRModel(VertexBufferObject mesh, PBRMaterial material){
@@ -65,20 +81,11 @@ public class PBRModel extends ModuleNode {
         super();
 
         RenderModule renderer = new RenderModule(
-                PBRShaderProgram.getInstance(), mesh);
+                PBRShaderProgram.instance(), mesh);
 
         addModule(ModuleType.RENDER_MODULE, renderer);
         addModule(ModuleType.MATERIAL, material);
 
 
-    }
-
-    public void update(){
-        super.update();
-    }
-
-    public void render(){
-        PBRShaderProgram.getInstance().updateUniforms(this);
-        super.render();
     }
 }

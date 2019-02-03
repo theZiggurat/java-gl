@@ -1,6 +1,6 @@
 package v1.engine;
 
-import v2.engine.system.InputCore;
+import v2.engine.system.Input;
 import v1.engine.util.Timer;
 import v1.engine.util.Window;
 import v1.engine.game.TutGameLogic;
@@ -14,7 +14,7 @@ public class GameEngine implements Runnable {
     private final Thread gameLoopThread;
     private final Timer timer;
     private final TutGameLogic logic_mgr;
-    private final InputCore mouseInput;
+    private final Input mouseInput;
 
 
     public GameEngine(String title, int width, int height,
@@ -24,7 +24,7 @@ public class GameEngine implements Runnable {
         window = new Window(title, width, height, vsync);
         this.logic_mgr = logic_mgr;
         timer = new Timer();
-        mouseInput = InputCore.instance();
+        mouseInput = Input.instance();
 
     }
 

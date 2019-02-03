@@ -1,3 +1,5 @@
+
+
 # version 430
 
 layout (location = 0) out vec4 pos_vbo;
@@ -10,44 +12,70 @@ layout (location = 5) out float ao_vbo;
 in VS_DATA {
     vec2 uv;
     vec3 norm;
-    vec3 pos;
+    vec3 pos_view;
     vec3 pos_world;
 } vs;
 
+
+uniform int map_albedo;
 uniform sampler2D albedoMap;
+uniform vec3 albedoConst;
+
+uniform int map_normal;
 uniform sampler2D normalMap;
+
+uniform int map_roughness;
 uniform sampler2D roughnessMap;
+uniform float roughnessConst;
+
+uniform int map_metal;
 uniform sampler2D metalMap;
-uniform sampler2D aoMap;
+uniform float metalConst;
+
+uniform mat4 viewMatrix;
 
 uniform vec3 randomVec = vec3(1,0,0);
+in mat3 tbn;
 
 
 void main(){
 
-    pos_vbo = vec4(vs.pos_world, 1);
+    //vec3 norm = (viewMatrix * vec4(vs.norm,0)).xyz;
+    vec3 norm = vs.norm;
 
-    /* TBN METHOD */
-    vec3 norm_sample = texture(normalMap, vs.uv).rgb;
-    if(length(norm_sample) <1){
-        norm_vbo = vec4(normalize(vs.norm),1.0);
+    vec2 uv = vec2(vs.uv.x,1-vs.uv.y);
+
+
+    vec3 norm_sample = texture(normalMap, uv).xyz;
+    if(map_normal == 1){
+        // gram-schmidt process to transform normals from tangent space to world space
+        vec3 tangent   = normalize(randomVec - norm * dot(randomVec, norm));
+        vec3 bitangent = cross(norm, tangent);
+        mat3 TBN       = mat3(tangent, bitangent, norm);
+
+        vec3 packed_norm = normalize(TBN * norm_sample) * 0.5 + 0.5;
+        norm_vbo = vec4(packed_norm,1);
+
     } else {
-        vec3 tangent   = normalize(randomVec - vs.norm * dot(randomVec, vs.norm));
-        vec3 bitangent = cross(vs.norm, tangent);
-        mat3 TBN       = mat3(tangent, bitangent, vs.norm);
-        norm_vbo = vec4(normalize(TBN * norm_sample),1);
+        // just use model normal
+        norm_vbo = vec4(normalize(norm),1.0);
     }
 
-    /* DIFF METHOD */
-    //vec3 diff = normalize(texture(normalMap, uv_vs).rgb*2-1) - vec3(0,0,1);
-    //norm_vbo = vec4(normalize(vs.norm + diff),1.0);
+    if(map_albedo == 1)
+        albedo_vbo = texture(albedoMap, uv);
+    else
+        albedo_vbo = vec4(albedoConst, 1);
 
-    /* NO MAP */
+    if(map_roughness == 1)
+        rough_vbo = texture(roughnessMap, uv).r;
+    else
+        rough_vbo = roughnessConst;
 
-    albedo_vbo = texture(albedoMap, vs.uv);
-    //albedo_vbo = mix(vec4(uv_vs, 0, 1), albedo_vbo, .01);
-    metal_vbo = texture(metalMap, vs.uv).r;
-    rough_vbo = texture(roughnessMap, vs.uv).r;
-    ao_vbo = texture(aoMap, vs.uv).r;
+    if(map_metal == 1)
+        metal_vbo = texture(metalMap, uv).r;
+    else
+        metal_vbo = metalConst;
+
+    pos_vbo = vec4(vs.pos_world, 1);
 
 }

@@ -1,26 +1,22 @@
 package v2.modules.pbr;
 
-import org.joml.Vector3f;
 import v2.engine.system.Camera;
-import v2.engine.system.RenderEngine;
 import v2.engine.system.ShaderProgram;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
 
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glBindTexture;
 import static org.lwjgl.opengl.GL13.*;
 
 public class PBRShaderProgram extends ShaderProgram {
 
     /**
      * -Buffers uv-maps from object tangent space to screen space
-     * Renders texture maps from objec
+     * Renders texture maps from object
      */
 
     private static PBRShaderProgram instance = null;
 
-    public static PBRShaderProgram getInstance(){
+    public static PBRShaderProgram instance(){
         if(instance == null){
             instance = new PBRShaderProgram();
         }
@@ -33,52 +29,77 @@ public class PBRShaderProgram extends ShaderProgram {
 
         createVertexShader("res/shaders/pbr_vertex.vs");
         createFragmentShader("res/shaders/pbr_fragment.fs");
-        //createGeometryShader("res/shaders/pbr_geometry.gs");
         link();
 
+        addUniform("map_albedo");
         addUniform("albedoMap");
+        addUniform("albedoConst");
+
+        addUniform("map_normal");
         addUniform("normalMap");
+
+        addUniform("map_roughness");
         addUniform("roughnessMap");
+        addUniform("roughnessConst");
+
+        addUniform("map_metal");
         addUniform("metalMap");
+        addUniform("metalConst");
 
         addUniform("modelMatrix");
         addUniform("viewMatrix");
         addUniform("projectionMatrix");
         //addUniform("invViewMatrix");
 
-        //addUniform("randomVec");
 
     }
 
     @Override
     public void updateUniforms(ModuleNode group){
 
-        Camera camera = RenderEngine.instance().getMainCamera();
+        Camera camera = PBRRenderEngine.instance().getMainCamera();
 
         PBRMaterial material = (PBRMaterial) group.getModules().
                                 get(ModuleType.MATERIAL);
 
-        glActiveTexture(GL_TEXTURE0);
-        material.getAlbedoMap().bind();
-        setUniform("albedoMap", 0);
+        if(material.isAlbedoMapped()) {
+            glActiveTexture(GL_TEXTURE0);
+            material.getAlbedoMap().bind();
+            setUniform("albedoMap", 0);
+            setUniform("map_albedo", 1);
+        } else {
+            setUniform("albedoConst", material.getAlbedoConst());
+            setUniform("map_albedo", 0);
+        }
 
-        glActiveTexture(GL_TEXTURE1);
-        material.getNormalMap().bind();
-        setUniform("normalMap", 1);
+        if(material.isNormalMapped()){
+            glActiveTexture(GL_TEXTURE1);
+            material.getNormalMap().bind();
+            setUniform("normalMap", 1);
+            setUniform("map_normal", 1);
+        } else {
+            setUniform("map_normal", 0);
+        }
 
-        glActiveTexture(GL_TEXTURE2);
-        material.getRoughnessMap().bind();
-        setUniform("roughnessMap", 2);
+        if(material.isRoughnessMapped()){
+            glActiveTexture(GL_TEXTURE2);
+            material.getRoughnessMap().bind();
+            setUniform("roughnessMap", 2);
+            setUniform("map_roughness", 1);
+        } else {
+            setUniform("roughnessConst", material.getRoughnessConst());
+            setUniform("map_roughness", 0);
+        }
 
-        glActiveTexture(GL_TEXTURE3);
-        material.getMetallicMap().bind();
-        setUniform("metalMap", 3);
-
-        glActiveTexture(GL_TEXTURE4);
-        material.getAoMap().bind();
-        setUniform("aoMap", 4);
-
-        //setUniform("randomVec", new Vector3f(1).normalize());
+        if(material.isMetalMapped()){
+            glActiveTexture(GL_TEXTURE3);
+            material.getMetalMap().bind();
+            setUniform("metalMap", 3);
+            setUniform("map_metal", 1);
+        } else {
+            setUniform("metalConst", material.getMetalConst());
+            setUniform("map_metal", 0);
+        }
 
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", group.getModelMatrix());

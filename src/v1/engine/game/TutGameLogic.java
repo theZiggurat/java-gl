@@ -9,7 +9,7 @@ import v1.engine.entity.FPSControllerEntity;
 import v1.engine.entity.PanControllerEntity;
 import v1.engine.enviorment.Scene;
 import v1.engine.util.Window;
-import v2.engine.system.InputCore;
+import v2.engine.system.Input;
 import v1.engine.util.State;
 import v1.engine.util.loaders.SceneLoader;
 import org.joml.Vector3f;
@@ -62,7 +62,7 @@ public class TutGameLogic implements GameLogic {
     float zRot = 0;
 
     @Override
-    public void update(double interval, Window window, InputCore mouseInput) {
+    public void update(double interval, Window window, Input mouseInput) {
 
         State.getInstance().update(interval);
         scene.getSceneLight().getSun().updateLight(State.getInstance().getSunTimer()*20);

@@ -4,9 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import v2.engine.scene.Node;
 import v2.engine.scene.Transform;
+import v2.modules.pbr.PBRModel;
+import v2.modules.pbr.PBRRenderEngine;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -31,7 +37,7 @@ public class Camera extends Transform<Camera> {
     public Camera(){
         super();
         setTranslation(new Vector3f(0,0,-10));
-        setRotation(new Vector3f(0,180,0));
+        setRotation(new Vector3f(0,0,180));
         FOV = 85;
         velocity = new Vector3f();
     }
@@ -45,7 +51,7 @@ public class Camera extends Transform<Camera> {
 
     public void update(){
 
-        InputCore input = InputCore.instance();
+        Input input = Input.instance();
 
         if(input.isKeyHeld(GLFW_KEY_W)){
             velocity.add(getForward().mul(speedMod.apply(speedLevel)));
@@ -68,18 +74,23 @@ public class Camera extends Transform<Camera> {
 
 
         if(input.isButtonHeld(1)){ // right click
-            rotate((float)input.getDisplacement().y * mouseSens,
+            rotate(-(float)input.getDisplacement().y * mouseSens,
                     (float)input.getDisplacement().x * mouseSens,  0);
         }
 
         if(input.isButtonHeld(2)){ // middle click
-            velocity.add(getUp().mul((float)input.getDisplacement().y * .05f * speedMod.apply(speedLevel-2)));
+            velocity.add(getUp().mul((float)input.getDisplacement().y * -.05f * speedMod.apply(speedLevel-2)));
             velocity.add(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
         }
 
         if(input.isButtonPressed(0)) { // left click
             float ssx = (float) (2 * (input.getCursorPos().x/ Window.instance().getWidth()) - 1);
             float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.instance().getHeight())));
+
+            ArrayList<Node> nodes = PBRRenderEngine.instance().getScenegraph().collect();
+            List<PBRModel> models = nodes.stream().filter(e -> e instanceof PBRModel)
+                                                  .map(e -> (PBRModel) e)
+                                                  .collect(Collectors.toList());
         }
 
         if(input.isKeyPressed(GLFW_KEY_MINUS)){
@@ -90,11 +101,15 @@ public class Camera extends Transform<Camera> {
 
         FOV += input.getScrollAmount();
 
-        velocity.mul(.9f);
+        velocity.mul(.95f);
 
 
 
 
+    }
+
+    public Matrix4f getViewProjectionMatrix(){
+        return getProjectionMatrix().mul(getViewMatrix());
     }
 
     public Matrix4f getProjectionMatrix() {

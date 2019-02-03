@@ -5,8 +5,6 @@ import v2.engine.system.EngineInterface;
 public class CellTest implements EngineInterface {
 
 
-
-
     @Override
     public void init() {
 

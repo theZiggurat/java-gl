@@ -6,6 +6,7 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLCapabilities;
 
 import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
@@ -34,8 +35,8 @@ public class Window {
 
     public Window(){
         this.title = Config.instance().getWindowName();
-        this.height = Config.instance().getHeight();
-        this.width = Config.instance().getWidth();
+        this.height = Config.instance().getWindowHeight();
+        this.width = Config.instance().getWindowWidth();
         spec_title = title;
     }
 
@@ -69,7 +70,7 @@ public class Window {
 
         glfwSetKeyCallback(handle, (window, key, scancode, action, mods) ->{
             if(key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
-                glfwSetWindowShouldClose(window, true);
+                close();
             }
         });
 
@@ -81,16 +82,16 @@ public class Window {
 
 
         glfwMakeContextCurrent(handle);
-        GL.createCapabilities();
+        GLCapabilities glCapabilities = GL.createCapabilities();
         glfwShowWindow(handle);
 
-        glClearColor(0f,0f,0f, 1f);
+        glClearColor(0,0,0, 1f);
 //        glFrontFace(GL_CCW);
 
        glEnable(GL_DEPTH_TEST);
-//       glEnable(GL_CULL_FACE);
-//       glCullFace(GL_BACK);
-       //glPolygonMode(GL_FRONT_FACE, GL_FILL);
+       //glEnable(GL_CULL_FACE);
+       //glCullFace(GL_BACK);
+       glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
        glLineWidth(1);
 
@@ -108,6 +109,10 @@ public class Window {
       */
     public boolean shouldClose(){
         return glfwWindowShouldClose(handle);
+    }
+
+    public void close(){
+        glfwSetWindowShouldClose(getHandle(), true);
     }
 
     /**
@@ -131,6 +136,7 @@ public class Window {
      */
     public void setTitle(double FPS, Camera camera){
         spec_title = title.concat(" | " +
+                new DecimalFormat("#.00000").format(1/FPS) + " S | " +
                 new DecimalFormat("#.0").format(FPS) + " FPS | " +
                 "Camera: " + camera.getTranslation().toString(new DecimalFormat("#.0")) +
                 " | Looking: " + camera.getForward().toString(new DecimalFormat("0.000")) +

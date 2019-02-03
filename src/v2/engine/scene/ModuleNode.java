@@ -34,6 +34,13 @@ public class ModuleNode extends Node {
         super.render();
     }
 
+    public void renderOverlay(){
+        if(modules.containsKey(ModuleType.RENDER_MODULE)){
+            modules.get(ModuleType.RENDER_MODULE).renderOverlay();
+        }
+        super.render();
+    }
+
     public void cleanup(){
         super.cleanup();
         modules.values().forEach(e->e.cleanup());

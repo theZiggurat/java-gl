@@ -12,6 +12,7 @@ import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.lwjgl.opengl.GL11.glFinish;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL20.*;
@@ -28,7 +29,7 @@ public class ShaderProgram {
 
     private final Map<String, Integer> uniforms;
 
-    public ShaderProgram(){
+    protected ShaderProgram(){
         this.programId = glCreateProgram();
         this.uniforms = new HashMap<>();
 
@@ -119,6 +120,8 @@ public class ShaderProgram {
             bind();
             glDispatchCompute(Window.instance().getWidth()/groupX,
                     Window.instance().getHeight()/groupY, 1);
+            glFinish();
+
         }
     }
 
@@ -133,6 +136,7 @@ public class ShaderProgram {
         if(computeShader != -1){
             bind();
             glDispatchCompute(sizeX/groupX, sizeY/groupY, 1);
+            glFinish();
         }
     }
 
@@ -237,7 +241,7 @@ public class ShaderProgram {
     public void addUniform(String uniform_name){
 
         int uniformLocation = glGetUniformLocation(programId, uniform_name);
-        System.out.println(uniform_name + " " + uniformLocation);
+        //System.out.println(uniform_name + " " + uniformLocation);
 
         if(uniformLocation == -1){
             System.err.println(this.getClass().getName() + " Error: Could not find uniform: " + uniform_name);
