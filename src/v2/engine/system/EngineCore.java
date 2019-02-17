@@ -18,13 +18,13 @@ public class EngineCore implements Runnable {
     private final Thread gameLoopThread;
     private final Timer timer;
 
-    @Getter private final Window window;
-    @Setter @Getter private RenderEngine renderEngine;
+    private final Window window;
+    @Getter private RenderEngine renderEngine;
+    private EngineInterface engineInterface;
 
-    @Getter
-    private HashMap<Class, RenderEngine> renderEngines;
-    @Getter private final EngineInterface engineInterface;
-    @Getter private final Input input;
+    //private HashMap<Class, RenderEngine> renderEngines;
+
+    private final Input input;
 
     private static EngineCore instance;
 
@@ -32,13 +32,11 @@ public class EngineCore implements Runnable {
         return instance;
     }
 
-    public EngineCore(EngineInterface engineInterface) {
+    public EngineCore() {
 
-        this.gameLoopThread = new Thread(this, "ENGINE_0");
+        this.gameLoopThread = new Thread(this, "ENGINE_MAIN");
         this.window = Window.instance();
-        this.engineInterface = engineInterface;
         this.timer = new Timer();
-
         this.input = Input.instance();
         this.currentFPS = 0;
 
@@ -67,8 +65,10 @@ public class EngineCore implements Runnable {
 
         // initialize renderer from config
         try {
-            renderEngine = EngineCore.class.getClassLoader().loadClass(
+            this.renderEngine = EngineCore.class.getClassLoader().loadClass(
                     Config.instance().getRenderEngine()).asSubclass(RenderEngine.class).newInstance();
+            this.engineInterface = EngineCore.class.getClassLoader().loadClass(
+                    Config.instance().getEngineInstance()).asSubclass(EngineInterface.class).newInstance();
         }
         catch(ClassNotFoundException e){
             e.printStackTrace();
@@ -139,9 +139,9 @@ public class EngineCore implements Runnable {
         renderEngine.cleanup();
     }
 
-    public void addRenderer(@NotNull RenderEngine renderer){
-        renderEngines.put(renderer.getClass(), renderer);
-    }
+//    public void addRenderer(@NotNull RenderEngine renderer){
+//        renderEngines.put(renderer.getClass(), renderer);
+//    }
 
     /**
      * Private class used to time the main loop

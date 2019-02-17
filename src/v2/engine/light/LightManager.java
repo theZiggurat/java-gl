@@ -21,6 +21,7 @@ public class LightManager {
     }
 
     public static Boolean registerLight(Light light){
+        instance();
         if(light instanceof DirectionalLight)
             return true;
         if(instance().sceneLights.size() < Config.instance().getNumLights()) {

@@ -6,7 +6,9 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryStack;
 import v2.engine.gldata.TextureObject;
+import v2.engine.light.Light;
 import v2.engine.scene.ModuleNode;
+import v2.engine.utils.Utils;
 
 import java.nio.FloatBuffer;
 import java.util.HashMap;
@@ -74,7 +76,7 @@ public class ShaderProgram {
 
     protected int createShader(String shaderPath, int shaderType) throws Exception {
 
-        String shaderCode = StaticLoader.loadResource(shaderPath);
+        String shaderCode = Utils.loadResource(shaderPath);
 
         int shaderId = glCreateShader(shaderType);
 
@@ -198,7 +200,7 @@ public class ShaderProgram {
 
     /**
      * Compute Shader
-     * @param shaderPath  path of shader code in "/res/shaders/*"
+     * @param shaderPath  path of shader code in "res/shaders/*"
      * @throws Error if shader is not found
      */
     public void createComputeShader(String shaderPath) {
@@ -330,13 +332,15 @@ public class ShaderProgram {
 
     public void updateUniforms(ModuleNode moduleNode){}
     public void updateUniforms(TextureObject textureObject){}
-
+    public void updateUniforms(Light light){}
     public void updateUniforms(float... floats){}
 
     public void compute(){}
     public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
-                               TextureObject metal, TextureObject rough, TextureObject depth,
-                               TextureObject scene, Vector3f lightdir){}
+                        TextureObject metal, TextureObject rough, TextureObject depth,
+                        TextureObject scene){}
+    public void compute(TextureObject scene,
+                        TextureObject overlay, TextureObject dest) {}
 
 
 

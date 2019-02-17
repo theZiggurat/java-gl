@@ -2,13 +2,13 @@ package v2;
 
 import v2.engine.system.EngineCore;
 import v2.instances.PBRTest;
+import v2.instances.PBRTest2;
 
 public class Main {
 
     public static void main(String... args){
         try {
-            PBRTest engineInterface = new PBRTest();
-            EngineCore engine = new EngineCore(engineInterface);
+            EngineCore engine = new EngineCore();
             engine.start();
         } catch(Exception e){
             e.printStackTrace();

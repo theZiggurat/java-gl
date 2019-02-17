@@ -7,6 +7,7 @@ import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
+import v2.engine.utils.ImageLoader;
 
 import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
@@ -121,7 +122,7 @@ public class Window {
      */
     public void setIcon(String path){
         GLFWImage.Buffer images = GLFWImage.malloc(1);
-        ByteBuffer buffer = StaticLoader.loadImage(path);
+        ByteBuffer buffer = ImageLoader.loadImage(path);
 
         GLFWImage icon = GLFWImage.malloc();
         icon.set(32,32,buffer);

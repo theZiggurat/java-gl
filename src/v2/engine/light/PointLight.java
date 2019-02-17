@@ -2,29 +2,25 @@ package v2.engine.light;
 
 import v2.engine.scene.ModuleType;
 import v2.engine.scene.RenderModule;
-import v2.engine.vbo.Meshs;
-import v2.modules.debug.OverlayShaderProgram;
-
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengles.GLES20.glDisable;
+import v2.engine.gldata.vbo.Meshs;
+import v2.modules.debug.LightOverlayShaderProgram;
 
 public class PointLight extends Light {
+
+    public PointLight(PointLight light){
+        this();
+        setColor(light.getColor());
+        setIntensity(light.getIntensity());
+    }
 
     public PointLight(){
         super();
 
         RenderModule debugRenderer = new RenderModule(
-                OverlayShaderProgram.instance(), Meshs.cube
+                LightOverlayShaderProgram.instance(), Meshs.sphere
         );
-        addModule(ModuleType.RENDER_MODULE, debugRenderer);
+        addModule(ModuleType.RENDER_MODULE_OVERLAY, debugRenderer);
+        addModule(ModuleType.RENDER_MODULE_SCENE, debugRenderer);
+        scale(.2f);
     }
-//
-//    @Override
-//    public void render(){
-//        //glDisable(GL_DEPTH_TEST);
-//        super.render();
-//        //glEnable(GL_DEPTH_TEST);
-//        System.out.println("Rendering Light");
-//    }
 }

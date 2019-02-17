@@ -2,8 +2,6 @@ package v2.engine.gldata;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import v2.engine.javadata.StaticBuffer;
-import v2.engine.rand.RandomKernel;
 import v2.engine.system.StaticLoader;
 
 
@@ -12,7 +10,6 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT32;
-import static org.lwjgl.opengl.GL30.GL_RGB16F;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 @Getter @AllArgsConstructor

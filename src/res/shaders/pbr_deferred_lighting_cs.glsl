@@ -104,7 +104,7 @@ void main(){
     ivec2 coord = ivec2(gl_GlobalInvocationID.xy);
     vec3 color;
 
-    vec3 normal = imageLoad(normal_image, coord).xyz * 2 - 1;
+    vec3 normal = imageLoad(normal_image, coord).rgb * 2 - 1;
     vec4 albedo = imageLoad(albedo_image, coord).rgba;
 
     if(length(normal) == 0)

@@ -1,15 +1,13 @@
-package v2.engine.vbo;
+package v2.engine.gldata.vbo;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import v2.engine.javadata.StaticBuffer;
+import v2.engine.utils.Buffer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Vector;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
@@ -56,7 +54,7 @@ public class Mesh3D implements VertexBufferObject {
         int vbo = glGenBuffers();
         vbos.add(vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, StaticBuffer.positionBuffer(positions), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, Buffer.positionBuffer(positions), GL_STATIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
 
@@ -64,21 +62,21 @@ public class Mesh3D implements VertexBufferObject {
         vbo = glGenBuffers();
         vbos.add(vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, StaticBuffer.UVBuffer(UVs), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, Buffer.UVBuffer(UVs), GL_STATIC_DRAW);
         glVertexAttribPointer(1, 2, GL_FLOAT, false, 0,0);
 
         // normal vbo
         vbo = glGenBuffers();
         vbos.add(vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, StaticBuffer.normalBuffer(normals), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, Buffer.normalBuffer(normals), GL_STATIC_DRAW);
         glVertexAttribPointer(2,3,GL_FLOAT, false, 0,0);
 
         // index vbo
         vbo = glGenBuffers();
         vbos.add(vbo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, StaticBuffer.indiciesBuffer(indices), GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, Buffer.indiciesBuffer(indices), GL_STATIC_DRAW);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);

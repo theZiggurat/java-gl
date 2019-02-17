@@ -27,8 +27,8 @@ public class PBRShaderProgram extends ShaderProgram {
 
         super();
 
-        createVertexShader("res/shaders/pbr_vertex.vs");
-        createFragmentShader("res/shaders/pbr_fragment.fs");
+        createVertexShader("res/shaders/pbr_vs.glsl");
+        createFragmentShader("res/shaders/pbr_fs.glsl");
         link();
 
         addUniform("map_albedo");

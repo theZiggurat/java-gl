@@ -71,17 +71,13 @@ public class PBRRenderEngine extends RenderEngine {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         pbrFBO.bind();
         glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        pbrFBO.unbind();
-
 
         // render scenegraph to obtain geometry data in the pbrFBO buffers
-        pbrFBO.bind();
         if(Input.instance().isKeyHeld(GLFW_KEY_DELETE)){
             scenegraph.renderWireframe();
         } else {
             scenegraph.render();
         }
-        LightManager.getSceneLights().forEach(e -> e.render());
         pbrFBO.unbind();
 
         // use buffer data to compute SSAO

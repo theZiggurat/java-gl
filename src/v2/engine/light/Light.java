@@ -1,11 +1,10 @@
 package v2.engine.light;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.joml.Vector3f;
 import v2.engine.scene.ModuleNode;
 
-@Getter @Setter
+@Getter
 public class Light extends ModuleNode {
 
     private Vector3f color;
@@ -22,16 +21,20 @@ public class Light extends ModuleNode {
         if(!LightManager.registerLight(this))
             this.deactivate();
 
-
-
     }
 
-    @Override
-    public void render(){
-        if(this.isActivated()){
-
-        }
+    public <T extends Light> T setIntensity(float intensity){
+        this.intensity = intensity;
+        return (T) this;
     }
 
+    public <T extends Light> T setColor(Vector3f color){
+        this.color = color;
+        return (T) this;
+    }
+
+    public <T extends Light> T setColor(float red, float green, float blue){
+        return setColor(new Vector3f(red, green, blue));
+    }
 
 }

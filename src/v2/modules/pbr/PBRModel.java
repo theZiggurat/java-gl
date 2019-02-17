@@ -1,13 +1,14 @@
 package v2.modules.pbr;
 
 import v2.engine.gldata.TextureObject;
-import v2.engine.vbo.Mesh3D;
-import v2.engine.vbo.VertexBufferObject;
+import v2.engine.utils.AssimpLoader;
+import v2.engine.utils.ImageLoader;
+import v2.engine.gldata.vbo.Mesh3D;
+import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
 import v2.engine.scene.Node;
 import v2.engine.scene.RenderModule;
-import v2.engine.system.StaticLoader;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class PBRModel extends ModuleNode {
 
         PBRMaterial material = new PBRMaterial();
         if(albedoFile!=null) {
-            TextureObject albedo = StaticLoader.loadTexture(
+            TextureObject albedo = ImageLoader.loadTexture(
                     texturePath + albedoFile, srgb)
                     .bilinearFilter().wrap();
             material.setAlbedoMap(albedo);
@@ -38,7 +39,7 @@ public class PBRModel extends ModuleNode {
 
 
         if(normalFile != null) {
-            TextureObject normal = StaticLoader.loadTexture(
+            TextureObject normal = ImageLoader.loadTexture(
                     texturePath + normalFile, srgb)
                     .bilinearFilter().wrap();
             material.setNormalMap(normal);
@@ -46,7 +47,7 @@ public class PBRModel extends ModuleNode {
         }
 
         if(roughnessFile != null) {
-            TextureObject roughness = StaticLoader.loadTexture(
+            TextureObject roughness = ImageLoader.loadTexture(
                     texturePath + roughnessFile, srgb)
                     .bilinearFilter().wrap();
             material.setRoughnessMap(roughness);
@@ -54,7 +55,7 @@ public class PBRModel extends ModuleNode {
         }
 
         if(metalFile != null){
-            TextureObject metal = StaticLoader.loadTexture(
+            TextureObject metal = ImageLoader.loadTexture(
                     texturePath + metalFile, srgb)
                     .bilinearFilter().wrap();
             material.setMetalMap(metal);
@@ -62,7 +63,7 @@ public class PBRModel extends ModuleNode {
         }
 
         Node ret = new Node();
-        ArrayList<Mesh3D> meshs = StaticLoader.loadMeshGroup(meshFile);
+        ArrayList<Mesh3D> meshs = AssimpLoader.loadMeshGroup(meshFile);
 
         for(Mesh3D mesh: meshs){
             if(flipUV)
@@ -83,7 +84,7 @@ public class PBRModel extends ModuleNode {
         RenderModule renderer = new RenderModule(
                 PBRShaderProgram.instance(), mesh);
 
-        addModule(ModuleType.RENDER_MODULE, renderer);
+        addModule(ModuleType.RENDER_MODULE_SCENE, renderer);
         addModule(ModuleType.MATERIAL, material);
 
 

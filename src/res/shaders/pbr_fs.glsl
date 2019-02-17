@@ -1,5 +1,3 @@
-
-
 # version 430
 
 layout (location = 0) out vec4 pos_vbo;
@@ -7,7 +5,6 @@ layout (location = 1) out vec4 norm_vbo;
 layout (location = 2) out vec4 albedo_vbo;
 layout (location = 3) out float metal_vbo;
 layout (location = 4) out float rough_vbo;
-layout (location = 5) out float ao_vbo;
 
 in VS_DATA {
     vec2 uv;
@@ -34,7 +31,7 @@ uniform float metalConst;
 
 uniform mat4 viewMatrix;
 
-uniform vec3 randomVec = vec3(1,0,0);
+uniform vec3 randomVec = normalize(vec3(.5,.5,.5));
 in mat3 tbn;
 
 
@@ -46,7 +43,7 @@ void main(){
     vec2 uv = vec2(vs.uv.x,1-vs.uv.y);
 
 
-    vec3 norm_sample = texture(normalMap, uv).xyz;
+    vec3 norm_sample = normalize(2*texture(normalMap, uv).rgb - 1);
     if(map_normal == 1){
         // gram-schmidt process to transform normals from tangent space to world space
         vec3 tangent   = normalize(randomVec - norm * dot(randomVec, norm));
@@ -58,6 +55,7 @@ void main(){
 
     } else {
         // just use model normal
+        norm = norm*0.5 + 0.5;
         norm_vbo = vec4(normalize(norm),1.0);
     }
 

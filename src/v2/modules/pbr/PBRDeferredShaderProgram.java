@@ -19,10 +19,8 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
     public PBRDeferredShaderProgram(){
         super();
 
-        createComputeShader("res/shaders/pbr_deferred_lighting_comp.cs");
+        createComputeShader("res/shaders/pbr_deferred_lighting_cs.glsl");
         link();
-
-        numLights = Config.instance().getNumLights();
 
         addUniform("camerapos");
         addUniform("numLights");
@@ -32,6 +30,8 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         addUniform("sun.intensity");
         addUniform("sun.direction");
         addUniform("sun.ambient");
+
+        numLights = Config.instance().getNumLights();
 
         for(int i = 0; i<numLights; i++){
             addUniform("lights["+i+"].color");
@@ -43,6 +43,7 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     }
 
+    @Override
     public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
                         TextureObject metal, TextureObject rough, TextureObject ao, TextureObject scene){
 

@@ -21,22 +21,22 @@ public class ModuleNode extends Node {
     }
 
     public void render(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE)){
-            modules.get(ModuleType.RENDER_MODULE).render();
+        if(modules.containsKey(ModuleType.RENDER_MODULE_SCENE)){
+            modules.get(ModuleType.RENDER_MODULE_SCENE).render();
         }
         super.render();
     }
 
-    public void renderWireframe(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE)){
-            modules.get(ModuleType.RENDER_MODULE).renderWireframe();
-        }
-        super.render();
-    }
+//    public void renderWireframe(){
+//        if(modules.containsKey(ModuleType.RENDER_MODULE_WIREFRAME)){
+//            modules.get(ModuleType.RENDER_MODULE_SCENE).renderWireframe();
+//        }
+//        super.render();
+//    }
 
     public void renderOverlay(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE)){
-            modules.get(ModuleType.RENDER_MODULE).renderOverlay();
+        if(modules.containsKey(ModuleType.RENDER_MODULE_OVERLAY)){
+            modules.get(ModuleType.RENDER_MODULE_OVERLAY).render();
         }
         super.render();
     }

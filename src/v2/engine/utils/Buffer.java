@@ -1,4 +1,4 @@
-package v2.engine.javadata;
+package v2.engine.utils;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
@@ -10,7 +10,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class StaticBuffer {
+public class Buffer {
 
 
     public static FloatBuffer positionBuffer(ArrayList<Vector3f> positions){

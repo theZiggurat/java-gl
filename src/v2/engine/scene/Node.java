@@ -32,10 +32,10 @@ public class Node extends Transform<Node> {
         Matrix4f ret = new Matrix4f();
         Vector3f rotate = getWorldRotation();
         ret.identity().translate(getWorldTranslation())
+                .scale(getWorldScaling())
                 .rotateX((float)Math.toRadians(-rotate.x))
                 .rotateY((float)Math.toRadians(-rotate.y))
-                .rotateZ((float)Math.toRadians(-rotate.z))
-                .scale(getWorldScaling());
+                .rotateZ((float)Math.toRadians(-rotate.z));
         return ret;
     }
 

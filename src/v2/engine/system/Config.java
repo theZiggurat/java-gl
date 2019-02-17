@@ -1,5 +1,6 @@
 package v2.engine.system;
 
+import com.sun.xml.internal.ws.api.pipe.Engine;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class Config {
     private String windowName;
     private boolean isvsync;
     private int multisamples;
-    private String renderEngine;
+    private String renderEngine, engineInstance;
     private int numLights;
 
     Properties properties;
@@ -58,6 +59,7 @@ public class Config {
         multisamples = Integer.valueOf(properties.getProperty("multisamples"));
 
         renderEngine = properties.getProperty("renderEngine");
+        engineInstance = properties.getProperty("engineInstance");
 
 
     }

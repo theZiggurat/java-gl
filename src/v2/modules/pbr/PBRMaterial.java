@@ -20,6 +20,13 @@ public class PBRMaterial extends Module {
 
     private Boolean is_albedo_map, is_normal_map, is_roughness_map, is_metal_map;
 
+    public PBRMaterial(float albedo_r, float albedo_g, float albedo_b,
+                       float roughness, float metal)
+    {
+        this(new Vector3f(albedo_r, albedo_g, albedo_b), roughness, metal);
+    }
+
+
     public PBRMaterial(Vector3f albedo, float roughness, float metal){
         this.albedoConst = albedo;
         this.roughnessConst = roughness;

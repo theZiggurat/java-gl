@@ -1,10 +1,10 @@
 package v2.modules.sky;
 
-import v2.engine.vbo.VertexBufferObject;
+import v2.engine.utils.AssimpLoader;
+import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
 import v2.engine.scene.RenderModule;
-import v2.engine.system.StaticLoader;
 
 import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_FRONT;
@@ -30,9 +30,9 @@ public class Sky extends ModuleNode {
         scaleTo(2800);
 
         shader = SkyShaderProgram.instance();
-        dome = StaticLoader.loadMeshGroup( "res/models/sphere.obj").get(0);
+        dome = AssimpLoader.loadMeshGroup( "res/models/sphere.obj").get(0);
 
-        addModule(ModuleType.RENDER_MODULE, new RenderModule(shader, dome));
+        addModule(ModuleType.RENDER_MODULE_SCENE, new RenderModule(shader, dome));
     }
 
     @Override

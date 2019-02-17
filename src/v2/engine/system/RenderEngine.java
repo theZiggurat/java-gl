@@ -3,8 +3,11 @@ package v2.engine.system;
 import lombok.Getter;
 import lombok.Setter;
 import v2.engine.gldata.TextureObject;
+import v2.engine.light.LightManager;
 import v2.engine.scene.Scenegraph;
 import v2.engine.gui.GLViewport;
+import v2.modules.debug.OverlayBlendingShaderProgram;
+import v2.modules.debug.OverlayFrameBufferObject;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.GL_RGBA16F;
@@ -17,6 +20,9 @@ public abstract class RenderEngine {
     // holds spatial relationship of all models & lights
     @Setter @Getter
     protected Scenegraph scenegraph;
+
+    private OverlayFrameBufferObject overlayFrameBufferObject;
+    private TextureObject overlayBlendedImage;
 
     // final texture to be displayed
     @Setter @Getter
@@ -35,6 +41,10 @@ public abstract class RenderEngine {
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
+        overlayBlendedImage = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
+                .allocateImage2D(GL_RGBA16F, GL_RGBA)
+                .bilinearFilter();
+        overlayFrameBufferObject = new OverlayFrameBufferObject();
         mainCamera = new Camera();
         screenQuad = new GLViewport();
         running = true;
@@ -58,13 +68,22 @@ public abstract class RenderEngine {
                     Window.instance().getHeight());
             Window.instance().setResized(false);
         }
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        overlayFrameBufferObject.bind();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        scenegraph.render();
+        overlayFrameBufferObject.unbind();
 
         // call child render method
         // that will populate the scene texture
         renderCamera();
 
+        OverlayBlendingShaderProgram.instance().compute(
+                sceneTexture, overlayFrameBufferObject.getOverlay(), overlayBlendedImage
+        );
+
         // render scene texture to the gui
-        screenQuad.setScreenTexture(sceneTexture);
+        screenQuad.setScreenTexture(overlayBlendedImage);
 
         screenQuad.render();
     }

@@ -2,10 +2,8 @@ package v2.engine.scene;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import v2.engine.vbo.VertexBufferObject;
+import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.system.ShaderProgram;
-
-import static org.lwjgl.opengl.GL11.*;
 
 @Getter @AllArgsConstructor
 public class RenderModule extends Module {
@@ -26,25 +24,6 @@ public class RenderModule extends Module {
         shader.updateUniforms(getParent());
         mesh.render();
         shader.unbind();
-
-    }
-
-    @Override
-    public void renderWireframe() {
-
-        glPolygonMode(GL_FRONT_FACE, GL_LINE);
-
-        shader.bind();
-        shader.updateUniforms(getParent());
-        mesh.render();
-        shader.unbind();
-
-        glPolygonMode(GL_FRONT_FACE, GL_FILL);
-
-    }
-
-    @Override
-    public void renderOverlay(){
 
     }
 

@@ -1,67 +1,66 @@
 package v2.instances;
 
-import lombok.Getter;
 import org.joml.Vector3f;
 import v2.engine.light.DirectionalLight;
 import v2.engine.light.LightManager;
 import v2.engine.light.PointLight;
 import v2.engine.scene.Node;
 import v2.engine.scene.Scenegraph;
-import v2.engine.system.Camera;
-import v2.engine.system.EngineCore;
-import v2.engine.system.EngineInterface;
-import v2.engine.system.Input;
+import v2.engine.system.*;
+import v2.engine.utils.AssimpLoader;
+import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
-import v2.modules.pbr.PBRRenderEngine;
-import v2.modules.sky.Sky;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class PBRTest implements EngineInterface {
 
-    @Getter
-    PBRRenderEngine pbrRenderEngine;
     Node object;
 
-    Node model, model2, model3, model4;
+    Node model3, model4, model5, model6;
     PointLight light;
 
     @Override
     public void init(){
 
-        pbrRenderEngine = PBRRenderEngine.instance();
+//        model3 = PBRModel.quickModel("res/models/sphere.obj",
+//                "res/images/misc/", "gare.jpg", null,
+//                null, null, null, false, false);
+//        model3.scale(5f);
+        model3 = PBRModel.quickModel("res/models/glock.obj",
+                "res/images/glock/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", null, false, false);
+        model3.translateTo(10f,0,1).scale(.2f);
 
-        model3 = PBRModel.quickModel("res/models/rock.obj",
-                "res/images/rock/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", null, false, true);
-        model3.scale(.1f);
-        model4 = PBRModel.quickModel("res/models/doublebarrel.obj",
-                "res/images/gun/", "albedo.jpg", "glnormal.jpg",
-                "rough.jpg", "metal.jpg", null, false, false);
-        model4.translateTo(10f,0,1).scaleTo(1f);
-//        model4 = PBRModel.quickModel("res/models/sphere.obj",
-//                "res/images/streaked_metal/", "albedo.png", null,
-//                "rough.png", "metal.png", null, false, false);
-//        model4.translateTo(7.5f,0,1).scaleTo(2f);
+
+        model4 = PBRModel.quickModel("res/models/sphere.obj",
+                "res/images/plastic_squares/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", null, false, false);
+        model4.translateTo(7.5f,0,1).scaleTo(2f);
 //        model = PBRModel.quickModel("res/models/dragon.obj",
 //                "res/images/plastic_squares/", "albedo.png", "normal.png",
 //                "rough.png", "metal.png", null, false, true);
 //        model.translateTo(-7.5f,0,1).scaleTo(1f);
 
+        model5 = new PBRModel(AssimpLoader.loadMeshGroup("res/models/sphere.obj").get(0),
+                new PBRMaterial(.4f, .3f, 1f, 1f, 1f));
+        model5.translate(4,0,1);
+
+        model6 = new PBRModel(AssimpLoader.loadMeshGroup("res/models/sphere.obj").get(0),
+                new PBRMaterial(0f, 1f, 1f, 0f, 0f));
+        model6.translate(2,0, 1);
+
         light = new PointLight();
         light.setColor(new Vector3f(1,1,1));
-        light.setTranslation(new Vector3f(0,0,0));
-        light.setIntensity(1f);
+        light.translate(new Vector3f(0,0,0));
+        light.setIntensity(2f);
 
         LightManager.setSun(new DirectionalLight());
-        LightManager.getSun().setIntensity(.5f);
+        LightManager.getSun().setIntensity(.8f);
         LightManager.getSun().setAmbientLight(new Vector3f(0.01f));
 
         object = new Node();
-        object.addChildren(model4, model3, light);
-
-
-        object.addChild(light);
+        object.addChildren(model4, model3, model6, model5, light);
 
         Scenegraph.instance().addChild(object);
     }
@@ -73,9 +72,9 @@ public class PBRTest implements EngineInterface {
 
         if(Input.instance().isKeyHeld(GLFW_KEY_T)){
             if(Input.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
-                light.setTranslation(light.getTranslation().add(new Vector3f(.01f, 0, 0)));
+                light.translate(light.getTranslation().add(new Vector3f(.01f, 0, 0)));
             } else {
-                light.setTranslation(light.getTranslation().add(new Vector3f(-.01f, 0, 0)));
+                light.translate(light.getTranslation().add(new Vector3f(-.01f, 0, 0)));
             }
 
         }

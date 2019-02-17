@@ -1,5 +1,6 @@
 package v2.engine.scene;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector3f;
@@ -14,9 +15,9 @@ public class Transform <T extends Transform> {
      */
 
     /** Data fields **/
-    @Setter protected Vector3f translation;
-    @Setter protected Vector3f rotation;
-    @Setter protected Vector3f scaling;
+    @Setter(AccessLevel.PROTECTED) protected Vector3f translation;
+    @Setter(AccessLevel.PROTECTED) protected Vector3f rotation;
+    @Setter(AccessLevel.PROTECTED) protected Vector3f scaling;
 
     public Transform(){
         translation = new Vector3f(0,0,0);

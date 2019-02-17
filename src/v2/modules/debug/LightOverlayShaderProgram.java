@@ -1,35 +1,38 @@
 package v2.modules.debug;
 
-import org.joml.Matrix4f;
-import v2.engine.scene.ModuleNode;
+import v2.engine.light.Light;
 import v2.engine.system.Camera;
 import v2.engine.system.EngineCore;
 import v2.engine.system.ShaderProgram;
 
-public class OverlayShaderProgram extends ShaderProgram {
+public class LightOverlayShaderProgram extends ShaderProgram {
 
-    private static OverlayShaderProgram instance;
-    public static OverlayShaderProgram instance(){
+    private static LightOverlayShaderProgram instance;
+    public static LightOverlayShaderProgram instance(){
         if(instance == null)
-            instance = new OverlayShaderProgram();
+            instance = new LightOverlayShaderProgram();
         return instance;
     }
 
-    private OverlayShaderProgram(){
+    private LightOverlayShaderProgram(){
+        super();
         createVertexShader("res/shaders/overlay_vs.glsl");
         createFragmentShader("res/shaders/overlay_fs.glsl");
         link();
 
+        addUniform("color");
         addUniform("projectionMatrix");
         addUniform("modelMatrix");
         addUniform("viewMatrix");
     }
 
     @Override
-    public void updateUniforms(ModuleNode parent){
+    public void updateUniforms(Light light){
+
         Camera camera = EngineCore.instance().getRenderEngine().getMainCamera();
         setUniform("projectionMatrix", camera.getProjectionMatrix());
-        setUniform("modelMatrix", parent.getModelMatrix());
+        setUniform("modelMatrix", light.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
+        setUniform("color", light.getColor());
     }
 }
