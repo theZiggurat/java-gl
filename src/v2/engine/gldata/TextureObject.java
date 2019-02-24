@@ -2,7 +2,7 @@ package v2.engine.gldata;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import v2.engine.system.StaticLoader;
+import lombok.Setter;
 
 
 import java.nio.ByteBuffer;
@@ -10,12 +10,24 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL14.GL_DEPTH_COMPONENT32;
+import static org.lwjgl.opengl.GL30.GL_RGBA16F;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
-@Getter @AllArgsConstructor
+@Getter
 public class TextureObject {
 
-    private int type, width, height, id;
+    private int type, id, internalFormat, format, dataType;
+    @Getter @Setter private int width, height;
+
+    public TextureObject(int type, int width, int height, int id){
+        this.type = type;
+        this.width = width;
+        this.height = height;
+        this.id = id;
+        this.dataType = GL_FLOAT;
+        this.internalFormat = GL_RGBA16F;
+        this.format = GL_RGBA;
+    }
 
     public TextureObject(int type, int width, int height){
         this(type, width, height, glGenTextures());
@@ -72,27 +84,49 @@ public class TextureObject {
     }
 
     public TextureObject allocateImage2D(int internalFormat, int format){
-        bind();
-        glTexImage2D(type, 0, internalFormat, width, height,
-                0, format, GL_FLOAT, (ByteBuffer) null);
-        unbind();
+        this.internalFormat = internalFormat;
+        this.format = format;
+        this.dataType = GL_FLOAT;
+        allocate();
         return this;
     }
 
     public TextureObject allocateImage2D(int internalFormat, int format, ByteBuffer buffer){
-        bind();
-        glTexImage2D(type, 0, internalFormat, width, height,
-                0, format, GL_UNSIGNED_BYTE, buffer);
-        unbind();
+        this.internalFormat = internalFormat;
+        this.format = format;
+        this.dataType = GL_UNSIGNED_BYTE;
+        allocate(buffer);
         return this;
     }
 
     public TextureObject allocateDepth(){
         bind();
-        glTexImage2D(type, 0, GL_DEPTH_COMPONENT32, width, height,
-                0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+        this.internalFormat = GL_DEPTH_COMPONENT32;
+        this.format = GL_DEPTH_COMPONENT;
+        this.dataType = GL_FLOAT;
+        allocate();
         unbind();
         return this;
+    }
+
+    public void resize(int xSize, int ySize){
+        this.width = xSize;
+        this.height = ySize;
+        allocate();
+    }
+
+    private void allocate(){
+        bind();
+        glTexImage2D(type, 0, internalFormat, width, height, 0,
+                format, dataType, 0);
+        unbind();
+    }
+
+    private void allocate(ByteBuffer buf){
+        bind();
+        glTexImage2D(type, 0, internalFormat, width, height, 0,
+                format, dataType, buf);
+        unbind();
     }
 
     public static TextureObject emptyTexture(){

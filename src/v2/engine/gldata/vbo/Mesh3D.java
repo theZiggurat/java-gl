@@ -20,26 +20,23 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glDeleteVertexArrays;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
-public class Mesh3D implements VertexBufferObject {
+public class Mesh3D extends VertexBufferObject {
 
-    @Getter
-    @Setter private ArrayList<Vector3f> positions;
+    @Getter @Setter private ArrayList<Vector3f> positions;
     @Getter @Setter private ArrayList<Vector3f> normals;
     @Getter @Setter private ArrayList<Vector2f> UVs;
     @Getter @Setter private ArrayList<Integer> indices;
 
-    private List<Integer> vbos;
-    private int vaoId;
 
     public Mesh3D(){
+
+        super();
 
         positions = new ArrayList<>();
         normals = new ArrayList<>();
         UVs = new ArrayList<>();
         indices = new ArrayList<>();
 
-        vbos = new ArrayList<>();
-        vaoId = glGenVertexArrays();
     }
 
     public void bind(){
@@ -100,15 +97,18 @@ public class Mesh3D implements VertexBufferObject {
 
     }
 
+    public float getLowest(){
+        float ret = Float.MAX_VALUE;
+        for(Vector3f pos: getPositions()){
+            if(pos.y < ret) ret = pos.y;
+        }
+        return ret;
+    }
+
     public int getVertexCount(){
         return indices.size();
     }
 
-    public void cleanup(){
-        glBindVertexArray(vaoId);
-        vbos.stream().forEach(i ->glDeleteBuffers(i));
-        glDeleteVertexArrays(vaoId);
-        glBindVertexArray(0);
-    }
+
 
 }

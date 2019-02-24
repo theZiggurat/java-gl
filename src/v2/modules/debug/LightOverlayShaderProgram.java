@@ -1,6 +1,7 @@
 package v2.modules.debug;
 
 import v2.engine.light.Light;
+import v2.engine.scene.ModuleNode;
 import v2.engine.system.Camera;
 import v2.engine.system.EngineCore;
 import v2.engine.system.ShaderProgram;
@@ -16,8 +17,8 @@ public class LightOverlayShaderProgram extends ShaderProgram {
 
     private LightOverlayShaderProgram(){
         super();
-        createVertexShader("res/shaders/overlay_vs.glsl");
-        createFragmentShader("res/shaders/overlay_fs.glsl");
+        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
+        createFragmentShader("res/shaders/overlay/overlay_fs.glsl");
         link();
 
         addUniform("color");
@@ -27,7 +28,9 @@ public class LightOverlayShaderProgram extends ShaderProgram {
     }
 
     @Override
-    public void updateUniforms(Light light){
+    public void updateUniforms(ModuleNode node){
+
+        Light light = (Light) node;
 
         Camera camera = EngineCore.instance().getRenderEngine().getMainCamera();
         setUniform("projectionMatrix", camera.getProjectionMatrix());

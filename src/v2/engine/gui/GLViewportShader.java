@@ -8,8 +8,8 @@ public class GLViewportShader extends ShaderProgram {
     public GLViewportShader(){
         super();
 
-        createVertexShader("res/shaders/fullscreen_vertex.vs");
-        createFragmentShader("res/shaders/fullscreen_fragment.fs");
+        createVertexShader("res/shaders/viewport/viewport_vs.glsl");
+        createFragmentShader("res/shaders/viewport/viewport_fs.glsl");
         link();
 
         addUniform("texture");

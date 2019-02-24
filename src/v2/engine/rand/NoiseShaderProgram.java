@@ -7,9 +7,11 @@ import v2.engine.scene.ModuleNode;
 import v2.engine.system.ShaderProgram;
 
 import static org.lwjgl.opengl.GL11.GL_RGB;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL15.GL_WRITE_ONLY;
 import static org.lwjgl.opengl.GL30.GL_RGB32F;
+import static org.lwjgl.opengl.GL30.GL_RGBA32F;
 
 public class NoiseShaderProgram extends ShaderProgram {
 
@@ -31,11 +33,11 @@ public class NoiseShaderProgram extends ShaderProgram {
 
         recalculateNoise();
         targetTexture = new TextureObject(GL_TEXTURE_2D,4,4)
-                            .allocateImage2D(GL_RGB32F, GL_RGB)
+                            .allocateImage2D(GL_RGBA32F, GL_RGBA)
                             .nofilter()
                             .wrap();
 
-        createComputeShader("res/shaders/noise_comp.glsl");
+        createComputeShader("res/shaders/ssao/noise_comp.glsl");
         link();
 
         for(int i = 0; i<16; i++){
@@ -55,7 +57,7 @@ public class NoiseShaderProgram extends ShaderProgram {
         for(int i = 0; i<32; i+=0){
             setUniform("noise_vec2["+i/2+"]", new Vector2f(noise_vec2[i++], noise_vec2[i++]));
         }
-        bindImage(0, targetTexture.getId(), GL_WRITE_ONLY, GL_RGB32F);
+        bindImage(0, targetTexture.getId(), GL_WRITE_ONLY, GL_RGBA32F);
 
         compute(1,1,4,4);
     }

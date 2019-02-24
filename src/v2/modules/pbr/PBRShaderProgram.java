@@ -1,6 +1,7 @@
 package v2.modules.pbr;
 
 import v2.engine.system.Camera;
+import v2.engine.system.EngineCore;
 import v2.engine.system.ShaderProgram;
 import v2.engine.scene.ModuleNode;
 import v2.engine.scene.ModuleType;
@@ -27,8 +28,8 @@ public class PBRShaderProgram extends ShaderProgram {
 
         super();
 
-        createVertexShader("res/shaders/pbr_vs.glsl");
-        createFragmentShader("res/shaders/pbr_fs.glsl");
+        createVertexShader("res/shaders/pbr/pbr_vs.glsl");
+        createFragmentShader("res/shaders/pbr/pbr_fs.glsl");
         link();
 
         addUniform("map_albedo");
@@ -57,7 +58,7 @@ public class PBRShaderProgram extends ShaderProgram {
     @Override
     public void updateUniforms(ModuleNode group){
 
-        Camera camera = PBRRenderEngine.instance().getMainCamera();
+        Camera camera = EngineCore.instance().getRenderEngine().getMainCamera();
 
         PBRMaterial material = (PBRMaterial) group.getModules().
                                 get(ModuleType.MATERIAL);
@@ -104,7 +105,7 @@ public class PBRShaderProgram extends ShaderProgram {
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", group.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
-        setUniform("invViewMatrix",group.getModelMatrix().mul(camera.getViewMatrix()).invert() );
+        //setUniform("invViewMatrix",group.getModelMatrix().mul(camera.getViewMatrix()).invert() );
     }
 
 }

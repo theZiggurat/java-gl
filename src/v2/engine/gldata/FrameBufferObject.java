@@ -10,7 +10,7 @@ import static org.lwjgl.opengl.GL32.GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS;
 import static org.lwjgl.opengl.GL32.GL_TEXTURE_2D_MULTISAMPLE;
 import static org.lwjgl.opengl.GL32.glFramebufferTexture;
 
-public class FrameBufferObject {
+public abstract class FrameBufferObject {
 
     /** Class credited to Fynn Flugge of Oreon Engine - GLFramebuffer
      *
@@ -78,6 +78,8 @@ public class FrameBufferObject {
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index,
                 GL_TEXTURE_2D_MULTISAMPLE, textureId, 0);
     }
+
+    public abstract void resize(int x, int y);
 
     /**
      * Checks all openGL framebuffer errors

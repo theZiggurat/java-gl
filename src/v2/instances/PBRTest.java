@@ -1,6 +1,7 @@
 package v2.instances;
 
 import org.joml.Vector3f;
+import v2.engine.gldata.vbo.Meshs;
 import v2.engine.light.DirectionalLight;
 import v2.engine.light.LightManager;
 import v2.engine.light.PointLight;
@@ -27,26 +28,22 @@ public class PBRTest implements EngineInterface {
 //                "res/images/misc/", "gare.jpg", null,
 //                null, null, null, false, false);
 //        model3.scale(5f);
-        model3 = PBRModel.quickModel("res/models/glock.obj",
-                "res/images/glock/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", null, false, false);
+        model3 = new PBRModel(AssimpLoader.loadMeshGroup("res/models/glock.obj"),
+                new PBRMaterial("res/images/glock/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", false));
         model3.translateTo(10f,0,1).scale(.2f);
 
 
-        model4 = PBRModel.quickModel("res/models/sphere.obj",
-                "res/images/plastic_squares/", "albedo.png", "normal.png",
-                "rough.png", "metal.png", null, false, false);
+        model4 = new PBRModel(Meshs.sphere,
+                new PBRMaterial("res/images/plastic_squares/", "albedo.png", "normal.png",
+                "rough.png", "metal.png", false));
         model4.translateTo(7.5f,0,1).scaleTo(2f);
-//        model = PBRModel.quickModel("res/models/dragon.obj",
-//                "res/images/plastic_squares/", "albedo.png", "normal.png",
-//                "rough.png", "metal.png", null, false, true);
-//        model.translateTo(-7.5f,0,1).scaleTo(1f);
 
-        model5 = new PBRModel(AssimpLoader.loadMeshGroup("res/models/sphere.obj").get(0),
+        model5 = new PBRModel(Meshs.sphere,
                 new PBRMaterial(.4f, .3f, 1f, 1f, 1f));
         model5.translate(4,0,1);
 
-        model6 = new PBRModel(AssimpLoader.loadMeshGroup("res/models/sphere.obj").get(0),
+        model6 = new PBRModel(Meshs.sphere,
                 new PBRMaterial(0f, 1f, 1f, 0f, 0f));
         model6.translate(2,0, 1);
 
@@ -92,9 +89,9 @@ public class PBRTest implements EngineInterface {
 
         if(Input.instance().isKeyHeld(GLFW_KEY_R)) {
             if(Input.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL)){
-                LightManager.getSun().getRotation().rotateY(-(float)duration*.1f);
+                LightManager.getSun().getRotation().rotateY(-(float)duration*.4f);
             } else {
-                LightManager.getSun().getRotation().rotateY((float) duration*.1f);
+                LightManager.getSun().getRotation().rotateY((float) duration*.4f);
             }
         }
 

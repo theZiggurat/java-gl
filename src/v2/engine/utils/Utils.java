@@ -1,6 +1,7 @@
 package v2.engine.utils;
 
 import org.lwjgl.BufferUtils;
+import sun.misc.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +19,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utils {
-
 
     /**
      * Utility for loading string resources
@@ -101,5 +101,10 @@ public class Utils {
                 relativePath = relativePath.substring(1);
         return Utils.class.getClassLoader().getResource(relativePath).getPath().substring(1)
                 .replaceAll("out/production/CVX1.0%20FPSEngine", "src");
+    }
+
+    private static int UUID = 0;
+    public static int generateNewUUID(){
+        return UUID++;
     }
 }

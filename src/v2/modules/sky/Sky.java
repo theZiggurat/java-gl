@@ -1,5 +1,6 @@
 package v2.modules.sky;
 
+import v2.engine.gldata.vbo.Meshs;
 import v2.engine.utils.AssimpLoader;
 import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
@@ -12,11 +13,7 @@ import static org.lwjgl.opengl.GL11.glCullFace;
 
 public class Sky extends ModuleNode {
 
-    private SkyShaderProgram shader;
-    VertexBufferObject dome;
-
     private static Sky instance;
-
     public static Sky instance(){
         if (instance == null){
             instance = new Sky();
@@ -29,10 +26,9 @@ public class Sky extends ModuleNode {
 
         scaleTo(2800);
 
-        shader = SkyShaderProgram.instance();
-        dome = AssimpLoader.loadMeshGroup( "res/models/sphere.obj").get(0);
-
-        addModule(ModuleType.RENDER_MODULE_SCENE, new RenderModule(shader, dome));
+        addModule(ModuleType.RENDER_MODULE_SCENE, new RenderModule(
+                SkyShaderProgram.instance(), Meshs.dome
+        ));
     }
 
     @Override

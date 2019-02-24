@@ -120,12 +120,14 @@ public class EngineCore implements Runnable {
 
     protected void update(double interval){
 
-        /* update input */
-        input.update();
 
         /* call update code from interface */
         engineInterface.update(interval);
         window.setTitle(1/interval, renderEngine.getMainCamera());
+
+        /* update input */
+        input.update();
+
 
     }
 

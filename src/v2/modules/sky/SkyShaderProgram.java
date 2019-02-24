@@ -17,8 +17,8 @@ public class SkyShaderProgram extends ShaderProgram {
 
     private SkyShaderProgram(){
 
-        createVertexShader("res/shaders/sky_vert.glsl");
-        createFragmentShader("res/shaders/sky_frag.glsl");
+        createVertexShader("res/shaders/sky/sky_vert.glsl");
+        createFragmentShader("res/shaders/sky/sky_frag.glsl");
         link();
 
         addUniform("viewProjectionMatrix");

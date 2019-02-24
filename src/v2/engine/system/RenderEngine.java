@@ -50,6 +50,11 @@ public abstract class RenderEngine {
         running = true;
     }
 
+    public void onResize(){
+        overlayFrameBufferObject.resize(Window.instance().getWidth(), Window.instance().getHeight());
+        overlayBlendedImage.resize(Window.instance().getWidth(), Window.instance().getHeight());
+    }
+
     public void prepare3D(){
 
     }
@@ -66,24 +71,33 @@ public abstract class RenderEngine {
         if(Window.instance().isResized()){
             glViewport(0,0, Window.instance().getWidth(),
                     Window.instance().getHeight());
+            onResize();
             Window.instance().setResized(false);
         }
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        overlayFrameBufferObject.bind();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        scenegraph.render();
-        overlayFrameBufferObject.unbind();
 
-        // call child render method
+        // call sub-render method
         // that will populate the scene texture
         renderCamera();
 
-        OverlayBlendingShaderProgram.instance().compute(
-                sceneTexture, overlayFrameBufferObject.getOverlay(), overlayBlendedImage
-        );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // render scene texture to the gui
-        screenQuad.setScreenTexture(overlayBlendedImage);
+        if(Config.instance().isDebugLayer()) {
+
+            overlayFrameBufferObject.bind();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            scenegraph.renderOverlay();
+            overlayFrameBufferObject.unbind();
+
+            OverlayBlendingShaderProgram.instance().compute(
+                    sceneTexture, overlayFrameBufferObject.getOverlay(), overlayBlendedImage
+            );
+
+            // render scene texture to the gui
+            screenQuad.setScreenTexture(overlayBlendedImage);
+        }
+        else
+            screenQuad.setScreenTexture(sceneTexture);
+
 
         screenQuad.render();
     }

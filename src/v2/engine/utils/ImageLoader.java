@@ -61,7 +61,9 @@ public class ImageLoader {
         try{
             buffer = Utils.ioResourceToBuffer(filename, 128*128);
         } catch(IOException e){
-            throw new RuntimeException(e);
+            return TextureObject.emptyTexture();
+        } catch(NullPointerException e){
+            return TextureObject.emptyTexture();
         }
 
         IntBuffer w = BufferUtils.createIntBuffer(1);

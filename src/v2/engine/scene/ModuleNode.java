@@ -27,12 +27,19 @@ public class ModuleNode extends Node {
         super.render();
     }
 
-//    public void renderWireframe(){
-//        if(modules.containsKey(ModuleType.RENDER_MODULE_WIREFRAME)){
-//            modules.get(ModuleType.RENDER_MODULE_SCENE).renderWireframe();
-//        }
-//        super.render();
-//    }
+    public void renderWireframe(){
+        if(modules.containsKey(ModuleType.RENDER_MODULE_WIREFRAME)){
+            modules.get(ModuleType.RENDER_MODULE_WIREFRAME).render();
+        }
+        super.render();
+    }
+
+    public void renderShadow(){
+        if(modules.containsKey(ModuleType.RENDER_MODULE_SHADOW)){
+            modules.get(ModuleType.RENDER_MODULE_SHADOW).render();
+        }
+        super.render();
+    }
 
     public void renderOverlay(){
         if(modules.containsKey(ModuleType.RENDER_MODULE_OVERLAY)){

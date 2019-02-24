@@ -17,10 +17,9 @@ public class PointLight extends Light {
         super();
 
         RenderModule debugRenderer = new RenderModule(
-                LightOverlayShaderProgram.instance(), Meshs.sphere
+                LightOverlayShaderProgram.instance(), Meshs.cube
         );
         addModule(ModuleType.RENDER_MODULE_OVERLAY, debugRenderer);
-        addModule(ModuleType.RENDER_MODULE_SCENE, debugRenderer);
         scale(.2f);
     }
 }

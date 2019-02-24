@@ -18,7 +18,7 @@ public class OverlayBlendingShaderProgram extends ShaderProgram {
 
     public OverlayBlendingShaderProgram(){
         super();
-        createComputeShader("res/shaders/overlay_blend_cs.glsl");
+        createComputeShader("res/shaders/overlay/overlay_blend_cs.glsl");
         link();
 
     }

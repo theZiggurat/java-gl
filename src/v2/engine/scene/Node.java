@@ -4,12 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import v2.engine.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
-public class Node extends Transform<Node> {
+ public class Node extends Transform<Node> {
+
+    @Getter private int UUID;
 
     private boolean activated = true;
 
@@ -20,12 +24,8 @@ public class Node extends Transform<Node> {
 
     public Node() {
         super();
+        UUID = Utils.generateNewUUID();
         this.children = new ArrayList<>();
-    }
-
-    public Node(Node _parent) {
-        this();
-        this.parent = _parent;
     }
 
     public Matrix4f getModelMatrix(){
@@ -119,6 +119,12 @@ public class Node extends Transform<Node> {
     public void renderOverlay(){
         children.forEach(child -> {
             if (child.isActivated()) child.renderOverlay();
+        });
+    }
+
+    public void renderShadow(){
+        children.forEach(child -> {
+            if (child.isActivated()) child.renderShadow();
         });
     }
 

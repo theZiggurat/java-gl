@@ -95,4 +95,14 @@ public class PBRFrameBufferObject extends FrameBufferObject {
         unbind();
 
     }
+
+    public void resize(int x, int y){
+        position.resize(x, y);
+        normal.resize(x,y);
+        albedo.resize(x,y);
+        metalness.resize(x,y);
+        roughness.resize(x,y);
+        ao.resize(x,y);
+        depth.resize(x,y);
+    }
 }

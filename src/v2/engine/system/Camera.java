@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.joml.Vector4f;
 import v2.engine.scene.Node;
 import v2.engine.scene.Transform;
+import v2.engine.utils.Interpolation;
 import v2.modules.pbr.PBRModel;
 import v2.modules.pbr.PBRRenderEngine;
 
@@ -14,6 +16,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static java.lang.Float.NaN;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Camera extends Transform<Camera> {
@@ -28,10 +31,14 @@ public class Camera extends Transform<Camera> {
     @Getter @Setter private int speedLevel = 4;
     @Getter private final float ZNEAR = .01f;
     @Getter private final float ZFAR = 10000;
-    @Setter @Getter private float mouseSens = 0.3f;
+
+    private final float DEF_MOUSE_SENS = 0.3f;
+    @Setter @Getter private float mouseSens = DEF_MOUSE_SENS;
 
     private Vector3f velocity;
     float speedLimit = 10;
+
+    private boolean focused = false;
 
 
     public Camera(){
@@ -47,7 +54,7 @@ public class Camera extends Transform<Camera> {
         translateTo(position);
     }
 
-
+    float t = 0;
 
     public void update(){
 
@@ -72,20 +79,31 @@ public class Camera extends Transform<Camera> {
 
         translate(velocity);
 
-
+        // look
         if(input.isButtonHeld(1)){ // right click
             rotate(-(float)input.getDisplacement().y * mouseSens,
                     (float)input.getDisplacement().x * mouseSens,  0);
         }
 
+        // view-space pan
         if(input.isButtonHeld(2)){ // middle click
             velocity.add(getUp().mul((float)input.getDisplacement().y * -.05f * speedMod.apply(speedLevel-2)));
             velocity.add(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
         }
 
+
+
+        // zoom
         if(input.isButtonPressed(0)) { // left click
-            float ssx = (float) (2 * (input.getCursorPos().x/ Window.instance().getWidth()) - 1);
-            float ssy = (float) (1 - (2 * (input.getCursorPos().y/ Window.instance().getHeight())));
+            float ssx = (float) ((2 * input.getCursorPos().x)/ Window.instance().getWidth() - 1);
+            float ssy = (float) (1 - (2 * input.getCursorPos().y/ Window.instance().getHeight()));
+            Vector3f ray_nds = new Vector3f(ssx, ssy, 1f);
+
+            Vector4f ray_clip = new Vector4f(ray_nds.x, ray_nds.y, -1.0f, 1.0f);
+
+            Vector4f ray_eye = ray_clip.mul(getProjectionMatrix().invert());
+            ray_eye.z = -1f; ray_eye.w = 0f;
+
 
             ArrayList<Node> nodes = PBRRenderEngine.instance().getScenegraph().collect();
             List<PBRModel> models = nodes.stream().filter(e -> e instanceof PBRModel)
@@ -99,7 +117,18 @@ public class Camera extends Transform<Camera> {
             speedLevel++;
         }
 
-        FOV += input.getScrollAmount();
+        if(input.isKeyHeld(GLFW_KEY_Q))
+            t += 0.01f;
+
+        else
+            t -= 0.01f;
+
+
+        if(t < 0) t = 0;
+        if(t > 1) t = 1;
+
+        FOV = (double) Interpolation.smootherstep(85, 15, t);
+        mouseSens = DEF_MOUSE_SENS/(1+t);
 
         velocity.mul(.95f);
 
@@ -118,6 +147,22 @@ public class Camera extends Transform<Camera> {
         Matrix4f ret = new Matrix4f();
         ret.identity();
         ret.perspective((float)Math.toRadians(FOV), apectRatio, ZNEAR, ZFAR);
+        return ret;
+    }
+
+    public Matrix4f getOrthoProjectionMatrix() {
+        Matrix4f ret = new Matrix4f();
+        ret.identity();
+        ret.ortho(-20, 20, -20, 20, 0.0001f, 100f);
+        return ret;
+    }
+
+    public Matrix4f getProjectionMatrixLH() {
+        float apectRatio = (float) Window.instance().getWidth() /
+                (float) Window.instance().getHeight();
+        Matrix4f ret = new Matrix4f();
+        ret.identity();
+        ret.perspectiveLH((float)Math.toRadians(FOV), apectRatio, ZNEAR, ZFAR);
         return ret;
     }
 

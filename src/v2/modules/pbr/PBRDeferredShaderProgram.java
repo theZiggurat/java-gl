@@ -14,13 +14,15 @@ import static org.lwjgl.opengl.GL30.*;
 public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     int numLights;
-    Vector3f clearColor = new Vector3f(.4f,.15f,.15f);
+    Vector3f clearColor = new Vector3f(0f,0f,0f);
 
     public PBRDeferredShaderProgram(){
         super();
 
-        createComputeShader("res/shaders/pbr_deferred_lighting_cs.glsl");
+        createComputeShader("res/shaders/pbr/pbr_deferred_lighting_cs.glsl");
         link();
+
+        addUniform("ssao");
 
         addUniform("camerapos");
         addUniform("numLights");
@@ -31,12 +33,15 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
         addUniform("sun.direction");
         addUniform("sun.ambient");
 
+        addUniform("lightDepthMap");
+        addUniform("lightSpaceMatrix");
+
         numLights = Config.instance().getNumLights();
 
         for(int i = 0; i<numLights; i++){
             addUniform("lights["+i+"].color");
             addUniform("lights["+i+"].intensity");
-            addUniform("lights["+i+"].location");
+            addUniform("lights["+i+"].position");
             addUniform("lights["+i+"].activated");
         }
 
@@ -45,14 +50,21 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     @Override
     public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
-                        TextureObject metal, TextureObject rough, TextureObject ao, TextureObject scene){
+                        TextureObject metal, TextureObject rough, TextureObject ao, TextureObject lightDepth, TextureObject scene){
 
         bind();
 
-        setUniform("sun.color", LightManager.getSun().getColor());
-        setUniform("sun.intensity", LightManager.getSun().getIntensity());
-        setUniform("sun.direction", LightManager.getSun().getWorldRotation());
-        setUniform("sun.ambient", LightManager.getSun().getAmbientLight());
+        if(Config.instance().isSsao())
+            setUniform("ssao", 1);
+        else
+            setUniform("ssao", 0);
+
+        if(LightManager.getSun() != null) {
+            setUniform("sun.color", LightManager.getSun().getColor());
+            setUniform("sun.intensity", LightManager.getSun().getIntensity());
+            setUniform("sun.direction", LightManager.getSun().getWorldRotation());
+            setUniform("sun.ambient", LightManager.getSun().getAmbientLight());
+        }
 
         int currlights = LightManager.getSceneLights().size();
 
@@ -63,7 +75,7 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
                 setUniform("lights["+i+"].activated",0);
                 setUniform("lights["+i+"].color", new Vector3f(0,0,0));
                 setUniform("lights["+i+"].intensity",0f);
-                setUniform("lights["+i+"].location",new Vector3f(0,0,0));
+                setUniform("lights["+i+"].position",new Vector3f(0,0,0));
             }
             else
             {
@@ -73,11 +85,17 @@ public class  PBRDeferredShaderProgram extends ShaderProgram {
                         currLight.getColor());
                 setUniform("lights["+i+"].intensity",
                         currLight.getIntensity());
-                setUniform("lights["+i+"].location",
+                setUniform("lights["+i+"].position",
                         currLight.getWorldTranslation());
             }
 
         }
+
+        activeTexture(0);
+        lightDepth.bind();
+        setUniform("lightDepthMap", 0);
+        setUniform("lightSpaceMatrix", LightManager.getSun().getLightSpaceMatrix());
+
 
         setUniform("clearColor", clearColor);
         setUniform("numLights", currlights);

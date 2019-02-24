@@ -14,10 +14,20 @@ public class Config {
     private int windowWidth;
     private int windowHeight;
     private String windowName;
-    private boolean isvsync;
+    private boolean vsync;
     private int multisamples;
     private String renderEngine, engineInstance;
     private int numLights;
+    private float zfar;
+
+    private int shadowBufferWidth;
+    private int shadowBufferHeight;
+
+    private boolean ssao;
+    private float ssaoRadius;
+    private int ssaoSamples;
+
+    private boolean debugLayer;
 
     Properties properties;
 
@@ -50,17 +60,30 @@ public class Config {
             e.printStackTrace();
         }
 
+        // max lights
         numLights = Integer.valueOf(properties.getProperty("numLights"));
 
+        // window settings
         windowWidth = Integer.valueOf(properties.getProperty("windowWidth"));
         windowHeight = Integer.valueOf(properties.getProperty("windowHeight"));
         windowName = properties.getProperty("windowName");
-        isvsync = properties.getProperty("isvsync").equalsIgnoreCase("true");
+        vsync = properties.getProperty("isvsync").equalsIgnoreCase("true");
         multisamples = Integer.valueOf(properties.getProperty("multisamples"));
 
+        // engine instance
         renderEngine = properties.getProperty("renderEngine");
         engineInstance = properties.getProperty("engineInstance");
 
+        shadowBufferWidth = Integer.valueOf(properties.getProperty("shadow_buffer_x"));
+        shadowBufferHeight = Integer.valueOf(properties.getProperty("shadow_buffer_y"));
+
+        // SSAO settings
+        ssao = Boolean.valueOf(properties.getProperty("ssao"));
+        ssaoRadius = Float.valueOf(properties.getProperty("ssao_radius"));
+        ssaoSamples = Integer.valueOf(properties.getProperty("ssao_samples"));
+
+        // debug layer
+        debugLayer = Boolean.valueOf(properties.getProperty("debug_layer"));
 
     }
 }

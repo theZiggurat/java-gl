@@ -5,6 +5,7 @@ import org.joml.Vector3f;
 import v2.engine.gldata.TextureObject;
 import v2.engine.rand.NoiseShaderProgram;
 import v2.engine.rand.RandomKernel;
+import v2.engine.system.Config;
 import v2.engine.system.ShaderProgram;
 import v2.engine.system.Window;
 import v2.modules.pbr.PBRRenderEngine;
@@ -19,68 +20,72 @@ import static org.lwjgl.opengl.GL30.GL_RGBA32F;
 
 public class SSAOShaderProgram extends ShaderProgram {
 
-    private TextureObject noise;
     private List<Vector3f> samples;
+    private Vector3f[] randvec;
 
     @Getter private TextureObject targetTexture;
-
-    private final int numSamples = 64;
 
     public SSAOShaderProgram(){
 
         targetTexture = new TextureObject(Window.instance().getWidth(), Window.instance().getHeight())
                             .allocateImage2D(GL_RGBA32F, GL_RGBA)
                             .nofilter();
-        noise = NoiseShaderProgram.instance().make().getTargetTexture();
-        samples = RandomKernel.generate3fHemisphere(numSamples);
 
-        createComputeShader("res/shaders/ssao_comp.glsl");
+        randvec = new Vector3f[16];
+        float [] random = RandomKernel.generateXYNoise(16);
+        for(int i = 0; i < 32;){
+            randvec[i/2] = new Vector3f(random[i++], random[i++], 0);
+        }
+
+        samples = RandomKernel.generate3fHemisphere(Config.instance().getSsaoSamples());
+
+        createComputeShader("res/shaders/ssao/ssao_comp.glsl");
         link();
 
-//        addUniform("resX");
-//        addUniform("resY");
+        addUniform("resX");
+        addUniform("resY");
+        addUniform("radius");
 
         addUniform("numSamples");
-
+//
         addUniform("viewMatrix");
         addUniform("projectionMatrix");
-
-//        addUniform("depthMap");
-
-        //addUniform("z_far");
-        for(int i = 0; i<numSamples; i++){
+        for(int i = 0; i<Config.instance().getSsaoSamples(); i++){
             addUniform("samples["+i+"]");
+        }
+
+        for(int i = 0; i < 16; i++){
+            addUniform("randvec["+i+"]");
         }
     }
 
-    public void compute(TextureObject world_position, TextureObject normal, TextureObject depth){
+    public void compute(TextureObject world_position, TextureObject normal){
+
 
         bind();
-        setUniform("numSamples", numSamples);
-
+        setUniform("numSamples", Config.instance().getSsaoSamples());
+        setUniform("radius", Config.instance().getSsaoRadius());
+//
         setUniform("resX", Window.instance().getWidth());
         setUniform("resY", Window.instance().getHeight());
-
+//
         setUniform("viewMatrix", PBRRenderEngine.instance().getMainCamera().getViewMatrix());
         setUniform("projectionMatrix", PBRRenderEngine.instance().getMainCamera().getProjectionMatrix());
-
-        setUniform("z_far", PBRRenderEngine.instance().getMainCamera().getZFAR());
-
-        for(int i = 0; i<numSamples; i++){
+//
+//
+        for(int i = 0; i<Config.instance().getSsaoSamples(); i++){
             setUniform("samples["+i+"]", samples.get(i));
         }
 
-        activeTexture(0);
-        depth.bind();
-        setUniform("depthMap", 0);
-
+        for(int i = 0; i < 16; i++){
+            setUniform("randvec["+i+"]", randvec[i]);
+        }
 
         bindImage(0, world_position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(1, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
-        bindImage(2, noise.getId(), GL_READ_ONLY, GL_RGB32F);
-        bindImage(3, targetTexture.getId(), GL_WRITE_ONLY, GL_RGBA32F);
+        bindImage(2, targetTexture.getId(), GL_WRITE_ONLY, GL_RGBA32F);
 
-        compute(32,32);
+        compute(16,16);
         unbind();
 
     }

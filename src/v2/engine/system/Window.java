@@ -90,13 +90,13 @@ public class Window {
 //        glFrontFace(GL_CCW);
 
        glEnable(GL_DEPTH_TEST);
-       //glEnable(GL_CULL_FACE);
-       //glCullFace(GL_BACK);
+       glEnable(GL_CULL_FACE);
+       glCullFace(GL_BACK);
        glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
        glLineWidth(1);
 
-       //setIcon("res/images/icon.png");
+       setIcon("res/images/icon.png");
     }
 
     public void update(){

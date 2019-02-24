@@ -36,4 +36,8 @@ public class OverlayFrameBufferObject extends FrameBufferObject {
         checkStatus();
         unbind();
     }
+
+    public void resize(int x, int y){
+        overlay.resize(x,y);
+    }
 }

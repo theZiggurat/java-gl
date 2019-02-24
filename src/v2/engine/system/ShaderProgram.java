@@ -119,10 +119,14 @@ public class ShaderProgram {
      */
     public void compute(int groupX, int groupY){
         if(computeShader != -1){
+
+            int numX, numY;
+            numX = (int)(Math.ceil((double)Window.instance().getWidth()/(double)groupX));
+            numY = (int)(Math.ceil((double)Window.instance().getHeight()/(double)groupY));
+
             bind();
-            glDispatchCompute(Window.instance().getWidth()/groupX,
-                    Window.instance().getHeight()/groupY, 1);
-            glFinish();
+            glDispatchCompute(numX, numY, 1);
+            //glFinish();
 
         }
     }
@@ -337,7 +341,7 @@ public class ShaderProgram {
 
     public void compute(){}
     public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
-                        TextureObject metal, TextureObject rough, TextureObject depth,
+                        TextureObject metal, TextureObject rough, TextureObject depth, TextureObject lightDepth,
                         TextureObject scene){}
     public void compute(TextureObject scene,
                         TextureObject overlay, TextureObject dest) {}

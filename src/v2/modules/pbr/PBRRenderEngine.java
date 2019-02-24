@@ -5,10 +5,13 @@ import lombok.Setter;
 import org.joml.Vector3f;
 import v2.engine.gldata.TextureObject;
 import v2.engine.light.LightManager;
+import v2.engine.system.Config;
 import v2.engine.system.Input;
 import v2.engine.system.RenderEngine;
 import v2.engine.system.Window;
+import v2.modules.post.ssao.SSAOBlurShaderProgram;
 import v2.modules.post.ssao.SSAOShaderProgram;
+import v2.modules.shadow.ShadowFrameBufferObject;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -31,6 +34,10 @@ public class PBRRenderEngine extends RenderEngine {
     /** WIP SSAO shader pass */
     private SSAOShaderProgram ssaoPass;
 
+    private SSAOBlurShaderProgram ssaoBlurPass;
+
+    private ShadowFrameBufferObject shadowFBO;
+
     /** Output of PBR lighting pass compute shader */
     private TextureObject litTexture;
 
@@ -49,7 +56,11 @@ public class PBRRenderEngine extends RenderEngine {
         // create shaders and frame buffer
         pbrFBO = new PBRFrameBufferObject(window.getWidth(), window.getHeight(),1);
         lightingPass = new PBRDeferredShaderProgram();
+
+        shadowFBO = new ShadowFrameBufferObject();
+
         ssaoPass = new SSAOShaderProgram();
+        ssaoBlurPass = new SSAOBlurShaderProgram();
 
         // RGBA texture that will be mapped to the full screen gui
         litTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
@@ -63,15 +74,36 @@ public class PBRRenderEngine extends RenderEngine {
     }
 
     @Override
+    public void onResize(){
+        super.onResize();
+        pbrFBO.resize(Window.instance().getWidth(), Window.instance().getHeight());
+        litTexture.resize(Window.instance().getWidth(), Window.instance().getHeight());
+    }
+
+    @Override
     protected void renderCamera(){
 
         mainCamera.update();
 
-        // clear render buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        pbrFBO.bind();
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        shadowFBO.bind();
+        //glCullFace(GL_FRONT);
+        glDisable(GL_CULL_FACE);
+        glViewport(0,0, Config.instance().getShadowBufferWidth(),
+                Config.instance().getShadowBufferHeight());
+        glClear(GL_DEPTH_BUFFER_BIT);
+        scenegraph.renderShadow();
+        glEnable(GL_CULL_FACE);
+        //glCullFace(GL_BACK);
+        shadowFBO.unbind();
 
+
+        // clear render buffers
+
+
+        pbrFBO.bind();
+        glViewport(0,0, Window.instance().getWidth(),
+                Window.instance().getHeight());
+        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // render scenegraph to obtain geometry data in the pbrFBO buffers
         if(Input.instance().isKeyHeld(GLFW_KEY_DELETE)){
             scenegraph.renderWireframe();
@@ -81,32 +113,37 @@ public class PBRRenderEngine extends RenderEngine {
         pbrFBO.unbind();
 
         // use buffer data to compute SSAO
-        //ssaoPass.compute(pbrFBO.getPosition(), pbrFBO.getNormal(), pbrFBO.getDepth());
+        ssaoPass.compute(pbrFBO.getPosition(), pbrFBO.getNormal());
+        ssaoBlurPass.compute(ssaoPass.getTargetTexture());
 
         // using buffer data to compute lit color
         lightingPass.compute(pbrFBO.getAlbedo(),
                 pbrFBO.getPosition(), pbrFBO.getNormal(),
                 pbrFBO.getMetalness(), pbrFBO.getRoughness(),
-                ssaoPass.getTargetTexture(), litTexture);
+                ssaoBlurPass.getTargetTexture(), shadowFBO.getDepth(), litTexture);
 
-        // poll which texture to render
-        if (Input.instance().isKeyPressed(GLFW_KEY_2)) {
-            sceneTexture = pbrFBO.getAlbedo();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_3)){
-            sceneTexture = pbrFBO.getNormal();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_4)){
-            sceneTexture = pbrFBO.getMetalness();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_5)){
-            sceneTexture = pbrFBO.getRoughness();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_7)){
-            sceneTexture = pbrFBO.getDepth();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_1)){
-            sceneTexture = litTexture;
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_6)){
-            sceneTexture = pbrFBO.getPosition();
-        } else if (Input.instance().isKeyPressed(GLFW_KEY_8)){
-            sceneTexture = ssaoPass.getTargetTexture();
+        if (Input.instance().isKeyPressed(GLFW_KEY_7)) {
+            sceneTexture = shadowFBO.getDepth();
+        } else {
+            glViewport(0,0,Window.instance().getWidth(), Window.instance().getHeight());
+            // poll which texture to render
+            if (Input.instance().isKeyPressed(GLFW_KEY_2)) {
+                sceneTexture = pbrFBO.getAlbedo();
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_3)){
+                sceneTexture = pbrFBO.getNormal();
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_4)){
+                sceneTexture = pbrFBO.getMetalness();
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_5)){
+                sceneTexture = pbrFBO.getRoughness();
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_1)){
+                sceneTexture = litTexture;
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_6)){
+                sceneTexture = pbrFBO.getPosition();
+            } else if (Input.instance().isKeyPressed(GLFW_KEY_8)){
+                sceneTexture = ssaoPass.getTargetTexture();
+            }
         }
+
 
     }
 }
