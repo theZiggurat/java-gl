@@ -14,7 +14,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class  PBRDeferredShaderProgram extends ShaderProgram {
 
     int numLights;
-    Vector3f clearColor = new Vector3f(0f,0f,0f);
+    Vector3f clearColor = new Vector3f(.05f,.05f,.1f);
 
     public PBRDeferredShaderProgram(){
         super();

@@ -1,18 +1,18 @@
 # LWJGL Engine - V2
-OpenGL 3D engine using LWJGL (mostly GLFW and openGL java bindings). Purely for self teaching and interest.
-A visual demo of the engine in its current state is [here (youtube)].
+OpenGL 3D engine using LWJGL (specifically OpenGL, GLFW, Assimp). 
+Created out of great interest for high fidelity real-time renderers such as Unreal Engine 4 and Blender Eevee
 
-Very good references for learning openGL and LWJGL:
-  * [Oreon Engine] by Fynn Flügge - Massive help with java class structuring and learning about compute shaders
-  * [Learn OpenGL] by Joey de Vries - Taught me openGL state machine and many of openGL's functions
-  * [LWJGL Gitbook] by ahbejarano - Concise beginner tutorials with LWJGL
+___Demos___:
+   * [September 2018]
+   * [Febuary 2019]
 
-Implemented features:
-  * Physically based rendering
+___Implemented features___:
+  * Physically based rendering (metalness workflow)
       * Cook-Torrance BDRF
+  * Shadow mapping (sun only)
+  * ASSIMP model loading
   * Fully deferred render pipeline
-      * Screen quad
-      * Support for post-processing effects
+      * Position, normal, albedo, roughness, and metal attatchments
   * GLSL vertex, fragment, geometry, and compute shader creation
       * Attribute bindings
       * Uniform variables
@@ -21,38 +21,41 @@ Implemented features:
      * WASD to traverse
      * Right mouse to rotate view
      * Middle mouse to pan along screen tangent
+     * Q to zoom
+  * Dynamic window resizing
+     * Auto resizing FBO attachments and textures
   
-WIP features (in no particular order):
-  * Proper lighting system
-      * Light picking/moving
-      * Runtime property changing
+___WIP features___:
+  * More advanced shadow mapping
+      * Parallel split shadow maps
+           * Ortho-frustum fitting
+      * Perspective cube maps (for point light shadows)
   * Uniform block bindings
-  * Much better model loader
-      * Normal/tangent/bitangent offline computation
-      * ASSIMP support
-      * Per face shading values
+  * Multisampling
+  * Tone mapping
   * GUI
-      * Buttons
+      * Buttons, sliders and fields
       * Static and dynamic text
       * Billboards
       * Cursor object picking
-      * Object movement/rotation/scaling control
-  * Skybox/skysphere
-      * Image based rendering (reflections will take color values from skymap)
-      * HDR Maps
+           * UUID picking
+           * Object outline
+      * Object property control
+      * Engine console
+  * Image based lighting
+  * Height mapping
+      * Parralax occlusion mapping
   * Post-processing
       * Screen space ambient occlusion + blur
       * Bloom
-      * Motion blur (just a little bit)
+      * Depth of field
       * Screen space reflections
-  * Smooth camera
   
-Future features:
+___Future features___:
+  * Modular shader creation
   * Runtime material editing
   * Water/Ocean generation
   * Terrain generation
-
-[Oreon Engine]: https://github.com/oreonengine/oreon-engine/tree/2fa7843fd09898723833d0d998e56f62ff537775
-[Learn OpenGL]: https://learnopengl.com/Introduction
-[LWJGL Gitbook]: https://github.com/lwjglgamedev/lwjglbook
-[here (youtube)]: https://www.youtube.com/watch?v=jU0Dm78wGI0&feature=youtu.be
+  
+[September 2018]: https://www.youtube.com/watch?v=jU0Dm78wGI0&feature=youtu.be
+[Febuary 2019]: https://www.youtube.com/watch?v=-DDIFM3aZWM&feature=youtu.be

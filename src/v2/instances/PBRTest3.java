@@ -24,7 +24,6 @@ import static org.lwjgl.glfw.GLFW.*;
 public class PBRTest3 implements EngineInterface {
 
     Node object, lights;
-    PBRModel cube;
 
     @Override
     public void init() {
@@ -35,10 +34,10 @@ public class PBRTest3 implements EngineInterface {
         Mesh3D mesh = AssimpLoader.loadMeshGroup("res/models/dragon.obj").get(0);
 
         PBRModel dragon1 = new PBRModel(mesh, new PBRMaterial(
-                0f,0f,0f,1f, 0f
+                0f,0f,0f,0.9f, 0f
         ));
         PBRModel dragon2 = new PBRModel(mesh, new PBRMaterial(
-                .5f,0f,0f,0.5f, 0f
+                .9f,.7f,.8f,0.1f, 0f
         ));
         dragon1.scaleTo(.8f).translate(-7.5f,0,-15);
         dragon2.scaleTo(.8f).translate(-22.5f,0,-15).rotateTo((float)(Math.PI),0,0);
@@ -47,29 +46,51 @@ public class PBRTest3 implements EngineInterface {
         buildFloor();
         buildWalls();
 
-        cube = new PBRModel(Meshs.cube, new PBRMaterial(
-                "res/images/plastic_squares/", false
-        ));
-        cube.scale(3f).translate(-3,3f,10);
-
         PBRModel s1 = new PBRModel(Meshs.sphere, new PBRMaterial(
-                0,0,0,0.3f,0
+                1,1,1,0.1f,0
         ));
         PBRModel s2 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                1,1,1,0.3f,0
+        ));
+        PBRModel s3 = new PBRModel(Meshs.sphere, new PBRMaterial(
                 1,1,1,0.5f,0
         ));
-        s1.translate(0,1,-15f);
-        s2.translate(0,1,-13f);
+        PBRModel s4 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                1,1,1,0.5f,0
+        ));
+        s1.translate(0,2,-5f);
+        s2.translate(2,2,-5f);
+        s3.translate(4,2,-5f);
+        s4.translate(6,2,-5f);
+
+        PBRModel s5 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                0.5f,0.5f,0.5f,0.1f,1
+        ));
+        PBRModel s6 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                0.5f,0.5f,0.5f,0.3f,1
+        ));
+        PBRModel s7 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                0.5f,0.5f,0.5f,0.5f,1
+        ));
+        PBRModel s8 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                0.5f,0.5f,0.5f,0.5f,1
+        ));
+        s5.translate(0,2,0f);
+        s6.translate(2,2,0f);
+        s7.translate(4,2,0f);
+        s8.translate(6,2,0f);
+
+
 
         PBRModel nightstand = new PBRModel(AssimpLoader.loadMeshGroup("res/models/Nightstand.obj").get(0),
                 new PBRMaterial("res/images/night_stand/", "albedo.png", "normal.png", "rough.png", "metal.png", true));
         nightstand.translate(7,-nightstand.getMesh().getLowest(),-15).scaleTo(8f);
 
-        object.addChildren(cube, s1, s2, nightstand);
+        object.addChildren(s1, s2, s3, s4, s5, s6, s7, s8, nightstand);
 
         object.translate(0,0,3);
 
-        PointLight light = new PointLight().setColor(0,.7f,1).setIntensity(7f).translate(-10,0,-10);
+        PointLight light = new PointLight().setColor(0,.7f,1).setIntensity(20f).translate(-10,0,-10);
         lights.addChildren(light, new PointLight(light).translateTo(-10, 0 ,-20),
                                   new PointLight(light).translateTo(-20, 0 ,-20),
                                   new PointLight(light).translateTo(-20, 0 ,-10));
@@ -81,10 +102,11 @@ public class PBRTest3 implements EngineInterface {
         LightManager.setSun(new DirectionalLight().setIntensity(1.1f).rotateTo(0,-1,0));
 
         Scenegraph.instance().addChildren(object, Sky.instance());
-        PBRRenderEngine.instance().getMainCamera().translateTo(-14,3,-9);
+        PBRRenderEngine.instance().getMainCamera().translateTo(-10,7,15);
     }
 
-    double t;
+    double t, q;
+    boolean move = false;
 
     @Override
     public void update(double duration) {
@@ -97,11 +119,13 @@ public class PBRTest3 implements EngineInterface {
         if(Input.instance().isKeyPressed(GLFW_KEY_F2))
             Config.instance().setDebugLayer(!Config.instance().isDebugLayer());
 
-//        if(Input.instance().isKeyHeld(GLFW_KEY_Q))
-//            cube.rotate(0.05f, 0,0);
+        if(Input.instance().isKeyPressed(GLFW_KEY_E))
+            move = !move;
 
-        if(Input.instance().isKeyHeld(GLFW_KEY_E))
-            cube.rotate(0, 0.05f,0);
+        if(move)
+            q+=duration;
+
+        lights.translateTo((float) (Math.sin(q) * 12)+ 5f,1.5f,0);
 
         if(Input.instance().isKeyHeld(GLFW_KEY_T)){
             if(Input.instance().isKeyHeld(GLFW_KEY_LEFT_CONTROL))

@@ -127,8 +127,8 @@ public class Camera extends Transform<Camera> {
         if(t < 0) t = 0;
         if(t > 1) t = 1;
 
-        FOV = (double) Interpolation.smootherstep(85, 15, t);
-        mouseSens = DEF_MOUSE_SENS/(1+t);
+        FOV = (double) Interpolation.smootherstep(85, 25, t);
+        mouseSens = DEF_MOUSE_SENS/(1+t*2);
 
         velocity.mul(.95f);
 
