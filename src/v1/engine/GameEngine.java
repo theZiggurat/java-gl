@@ -30,14 +30,6 @@ public class GameEngine implements Runnable {
 
     @Override
     public void run(){
-        try{
-            init();
-            loop();
-        } catch(Exception e){
-            e.printStackTrace();
-        } finally {
-            cleanup();
-        }
     }
 
     protected void init() throws Exception{

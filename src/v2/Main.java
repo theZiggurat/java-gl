@@ -1,14 +1,12 @@
 package v2;
 
-import v2.engine.system.EngineCore;
-import v2.instances.PBRTest;
-import v2.instances.PBRTest2;
+import v2.engine.system.Core;
 
 public class Main {
 
     public static void main(String... args){
         try {
-            EngineCore engine = new EngineCore();
+            Core engine = new Core();
             engine.start();
         } catch(Exception e){
             e.printStackTrace();

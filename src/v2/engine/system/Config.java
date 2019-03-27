@@ -4,6 +4,7 @@ import com.sun.xml.internal.ws.api.pipe.Engine;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.joml.Vector3f;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -28,6 +29,9 @@ public class Config {
     private int ssaoSamples;
 
     private boolean debugLayer;
+
+    private boolean isWireframe;
+    private Vector3f wireframeColor;
 
     Properties properties;
 
@@ -82,8 +86,11 @@ public class Config {
         ssaoRadius = Float.valueOf(properties.getProperty("ssao_radius"));
         ssaoSamples = Integer.valueOf(properties.getProperty("ssao_samples"));
 
-        // debug layer
+        // generic layer
         debugLayer = Boolean.valueOf(properties.getProperty("debug_layer"));
+
+        isWireframe = Boolean.valueOf(properties.getProperty("isWireframe"));
+        wireframeColor = new Vector3f(0.2f, 0.8f, 0.2f);
 
     }
 }

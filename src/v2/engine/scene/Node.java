@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
  public class Node extends Transform<Node> {
 
     @Getter private int UUID;
 
     private boolean activated = true;
+    @Getter private boolean selected = false;
+    @Setter private String debugName;
 
     @Getter private boolean localRotation, localTranslation, localScaling;
 
@@ -42,6 +45,14 @@ import java.util.UUID;
     public void addChild(Node child) {
         child.setParent(this);
         children.add(child);
+    }
+
+    public String getName(){
+        if(debugName == null)
+            return this.getClass().getSimpleName() + "#" + UUID;
+        else
+            return debugName;
+
     }
 
     public void addChildren(Node... children){
@@ -81,6 +92,10 @@ import java.util.UUID;
         return ret;
     }
 
+    public Stream<Node> stream(){
+        return collect().stream();
+    }
+
     public Node localizeRotation(boolean _localize){
         localRotation = _localize;
         return this;
@@ -103,30 +118,19 @@ import java.util.UUID;
             });
     }
 
-
-    public void render() {
+    public void render(RenderType type) {
         children.forEach(child -> {
-            if (child.isActivated()) child.render();
+            if (child.isActivated())
+                child.render(type);
         });
     }
 
-    public void renderWireframe() {
-        children.forEach(child -> {
-            if (child.isActivated()) child.renderWireframe();
-        });
-    }
-
-    public void renderOverlay(){
-        children.forEach(child -> {
-            if (child.isActivated()) child.renderOverlay();
-        });
-    }
-
-    public void renderShadow(){
-        children.forEach(child -> {
-            if (child.isActivated()) child.renderShadow();
-        });
-    }
+     public void render(RenderType type, Condition condition) {
+         children.forEach(child -> {
+             if (child.isActivated() && condition.isvalid(child))
+                 child.render(type, condition);
+         });
+     }
 
     public void cleanup() {
         children.forEach(child -> child.cleanup());
@@ -144,4 +148,13 @@ import java.util.UUID;
         activated = false;
     }
 
+    public void setSelected(boolean selected){
+        this.selected = selected;
+        for(Node child: children) child.setSelected(selected);
+    }
+
+    @FunctionalInterface
+    public interface Condition {
+        boolean isvalid(Node node);
+    }
 }

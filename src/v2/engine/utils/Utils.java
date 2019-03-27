@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Utils {
 
@@ -103,8 +104,8 @@ public class Utils {
                 .replaceAll("out/production/CVX1.0%20FPSEngine", "src");
     }
 
-    private static int UUID = 0;
+    private static AtomicInteger UUID = new AtomicInteger();
     public static int generateNewUUID(){
-        return UUID++;
+        return UUID.getAndIncrement();
     }
 }

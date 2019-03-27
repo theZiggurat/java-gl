@@ -1,6 +1,9 @@
 package v2.engine.gldata;
 
+import org.lwjgl.BufferUtils;
+
 import java.nio.IntBuffer;
+import java.util.ArrayList;
 
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.glDrawBuffer;
@@ -16,6 +19,8 @@ public abstract class FrameBufferObject {
      *
      */
 
+    private ArrayList<TextureObject> attatchments;
+
     /** Framebuffer ID **/
     private int id;
 
@@ -24,6 +29,7 @@ public abstract class FrameBufferObject {
      */
     public FrameBufferObject(){
         id = glGenFramebuffers();
+        attatchments = new ArrayList<>();
     }
 
     /**
@@ -79,7 +85,32 @@ public abstract class FrameBufferObject {
                 GL_TEXTURE_2D_MULTISAMPLE, textureId, 0);
     }
 
-    public abstract void resize(int x, int y);
+    public void addAttatchments(TextureObject... textures){
+        IntBuffer drawBuffers = BufferUtils.createIntBuffer(textures.length);
+
+        int i = 0;
+        bind();
+        for (TextureObject attatchment: textures){
+            attatchments.add(attatchment);
+
+            if(attatchment.isDepth())
+                createDepthTextureAttatchment(attatchment.getId());
+            else {
+                createColorTextureAttachment(attatchment.getId(), i);
+                drawBuffers.put(GL_COLOR_ATTACHMENT0 + i);
+                i++;
+            }
+
+        }
+        drawBuffers.flip();
+        setDrawBuffer(drawBuffers);
+        unbind();
+    }
+
+    public void resize(int xsize, int ysize){
+        for (TextureObject attatchement: attatchments)
+            attatchement.resize(xsize, ysize);
+    }
 
     /**
      * Checks all openGL framebuffer errors

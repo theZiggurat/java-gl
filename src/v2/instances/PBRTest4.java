@@ -1,16 +1,15 @@
 package v2.instances;
 
 import v2.engine.gldata.vbo.Meshs;
-import v2.engine.light.DirectionalLight;
-import v2.engine.light.LightManager;
-import v2.engine.light.PointLight;
+import v2.engine.scene.light.DirectionalLight;
+import v2.engine.scene.light.LightManager;
+import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
-import v2.engine.scene.Scenegraph;
-import v2.engine.system.EngineInterface;
+import v2.engine.system.Context;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
 
-public class PBRTest4 implements EngineInterface {
+public class PBRTest4 extends Context {
 
     @Override
     public void init() {
@@ -28,7 +27,7 @@ public class PBRTest4 implements EngineInterface {
 
         LightManager.setSun(new DirectionalLight().setIntensity(0f).rotateTo(0,-1,0));
 
-        Scenegraph.instance().addChild(node);
+        scene.addChild(node);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class Meshs {
     public final static Mesh3D quad = AssimpLoader.loadMeshGroup(path + "quad.obj").get(0);
     public final static Mesh3D cube = AssimpLoader.loadMeshGroup(path + "cube.obj").get(0);
     public final static Mesh3D dome = AssimpLoader.loadMeshGroup(path + "dome.obj").get(0);
+    public final static Mesh3D posquad = AssimpLoader.loadMeshGroup(path + "posquad.obj").get(0);
     public static Mesh3DLine line = new Mesh3DLine();
 
     static{

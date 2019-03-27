@@ -3,8 +3,6 @@
 layout (location = 0) out vec4 pos_vbo;
 layout (location = 1) out vec4 norm_vbo;
 layout (location = 2) out vec4 albedo_vbo;
-layout (location = 3) out float metal_vbo;
-layout (location = 4) out float rough_vbo;
 
 in VS_DATA {
     vec2 uv;
@@ -53,23 +51,30 @@ void main(){
         norm = normalize(norm);
     }
 
-    norm_vbo = vec4(norm,1);
-
-    if(map_albedo == 1)
-        albedo_vbo = texture(albedoMap, uv);
-    else
-        albedo_vbo = vec4(albedoConst, 1);
-
-    if(map_roughness == 1)
-        rough_vbo = texture(roughnessMap, uv).r;
-    else
-        rough_vbo = roughnessConst;
+    float metal_vbo, rough_vbo;
 
     if(map_metal == 1)
         metal_vbo = texture(metalMap, uv).r;
     else
         metal_vbo = metalConst;
 
-    pos_vbo = vec4(vs.pos, 1);
+    if(map_roughness == 1)
+        rough_vbo = texture(roughnessMap, uv).r;
+    else
+        rough_vbo = roughnessConst;
+
+    norm_vbo = vec4(norm, metal_vbo);
+    pos_vbo = vec4(vs.pos, rough_vbo);
+
+    if(map_albedo == 1)
+        albedo_vbo = texture(albedoMap, uv);
+    else
+        albedo_vbo = vec4(albedoConst, 1);
+
+
+
+
+
+
 
 }

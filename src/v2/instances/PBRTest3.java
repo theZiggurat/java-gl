@@ -2,26 +2,23 @@ package v2.instances;
 
 import v2.engine.gldata.vbo.Mesh3D;
 import v2.engine.gldata.vbo.Meshs;
-import v2.engine.light.DirectionalLight;
-import v2.engine.light.LightManager;
-import v2.engine.light.PointLight;
+import v2.engine.scene.light.DirectionalLight;
+import v2.engine.scene.light.LightManager;
+import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
-import v2.engine.scene.Scenegraph;
 import v2.engine.system.Config;
-import v2.engine.system.EngineInterface;
+import v2.engine.system.Context;
+import v2.engine.system.Core;
 import v2.engine.system.Input;
 import v2.engine.utils.AssimpLoader;
-import v2.engine.utils.ImageLoader;
-import v2.modules.debug.Line;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
-import v2.modules.pbr.PBRRenderEngine;
+import v2.modules.pbr.PBRPipeline;
 import v2.modules.sky.Sky;
-import v2.modules.sky.SkyShaderProgram;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class PBRTest3 implements EngineInterface {
+public class PBRTest3 extends Context {
 
     Node object, lights;
 
@@ -34,7 +31,7 @@ public class PBRTest3 implements EngineInterface {
         Mesh3D mesh = AssimpLoader.loadMeshGroup("res/models/dragon.obj").get(0);
 
         PBRModel dragon1 = new PBRModel(mesh, new PBRMaterial(
-                0f,0f,0f,0.9f, 0f
+                .4f,0f,0f,0.5f, 0f
         ));
         PBRModel dragon2 = new PBRModel(mesh, new PBRMaterial(
                 .9f,.7f,.8f,0.1f, 0f
@@ -56,12 +53,16 @@ public class PBRTest3 implements EngineInterface {
                 1,1,1,0.5f,0
         ));
         PBRModel s4 = new PBRModel(Meshs.sphere, new PBRMaterial(
-                1,1,1,0.5f,0
+                1,1,1,0.8f,0
+        ));
+        PBRModel s10 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                1,1,1,1f,0
         ));
         s1.translate(0,2,-5f);
         s2.translate(2,2,-5f);
         s3.translate(4,2,-5f);
         s4.translate(6,2,-5f);
+        s10.translate(8,2,-5f);
 
         PBRModel s5 = new PBRModel(Meshs.sphere, new PBRMaterial(
                 0.5f,0.5f,0.5f,0.1f,1
@@ -73,24 +74,28 @@ public class PBRTest3 implements EngineInterface {
                 0.5f,0.5f,0.5f,0.5f,1
         ));
         PBRModel s8 = new PBRModel(Meshs.sphere, new PBRMaterial(
-                0.5f,0.5f,0.5f,0.5f,1
+                0.5f,0.5f,0.5f,0.8f,1
+        ));
+        PBRModel s9 = new PBRModel(Meshs.sphere, new PBRMaterial(
+                0.5f,0.5f,0.5f,1f,1
         ));
         s5.translate(0,2,0f);
         s6.translate(2,2,0f);
         s7.translate(4,2,0f);
         s8.translate(6,2,0f);
+        s9.translate(8,2,0f);
 
 
 
-        PBRModel nightstand = new PBRModel(AssimpLoader.loadMeshGroup("res/models/Nightstand.obj").get(0),
-                new PBRMaterial("res/images/night_stand/", "albedo.png", "normal.png", "rough.png", "metal.png", true));
-        nightstand.translate(7,-nightstand.getMesh().getLowest(),-15).scaleTo(8f);
+        PBRModel mat_test = new PBRModel(AssimpLoader.loadMeshGroup("res/models/mat_test.obj").get(0),
+                new PBRMaterial(0.8f, 0.9f, 1.0f, 0.1f, 0f));
+        mat_test.translate(7,-mat_test.getMesh().getLowest(),-15).scaleTo(2f);
 
-        object.addChildren(s1, s2, s3, s4, s5, s6, s7, s8, nightstand);
+        object.addChildren(s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, mat_test);
 
         object.translate(0,0,3);
 
-        PointLight light = new PointLight().setColor(0,.7f,1).setIntensity(20f).translate(-10,0,-10);
+        PointLight light = new PointLight().setColor(1f,.2f,0.2f).setIntensity(20f).translate(-10,0,-10);
         lights.addChildren(light, new PointLight(light).translateTo(-10, 0 ,-20),
                                   new PointLight(light).translateTo(-20, 0 ,-20),
                                   new PointLight(light).translateTo(-20, 0 ,-10));
@@ -101,8 +106,8 @@ public class PBRTest3 implements EngineInterface {
 
         LightManager.setSun(new DirectionalLight().setIntensity(1.1f).rotateTo(0,-1,0));
 
-        Scenegraph.instance().addChildren(object, Sky.instance());
-        PBRRenderEngine.instance().getMainCamera().translateTo(-10,7,15);
+        scene.addChildren(object, Sky.instance());
+        camera.translateTo(-10,7,15);
     }
 
     double t, q;
@@ -114,7 +119,7 @@ public class PBRTest3 implements EngineInterface {
         LightManager.getSun().update();
 
         if(Input.instance().isKeyPressed(GLFW_KEY_F1))
-            Config.instance().setSsao(!Config.instance().isSsao());
+            Config.instance().setWireframe(!Config.instance().isWireframe());
 
         if(Input.instance().isKeyPressed(GLFW_KEY_F2))
             Config.instance().setDebugLayer(!Config.instance().isDebugLayer());

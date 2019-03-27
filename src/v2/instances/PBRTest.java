@@ -2,11 +2,10 @@ package v2.instances;
 
 import org.joml.Vector3f;
 import v2.engine.gldata.vbo.Meshs;
-import v2.engine.light.DirectionalLight;
-import v2.engine.light.LightManager;
-import v2.engine.light.PointLight;
+import v2.engine.scene.light.DirectionalLight;
+import v2.engine.scene.light.LightManager;
+import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
-import v2.engine.scene.Scenegraph;
 import v2.engine.system.*;
 import v2.engine.utils.AssimpLoader;
 import v2.modules.pbr.PBRMaterial;
@@ -14,14 +13,13 @@ import v2.modules.pbr.PBRModel;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class PBRTest implements EngineInterface {
+public class PBRTest extends Context {
 
     Node object;
 
     Node model3, model4, model5, model6;
     PointLight light;
 
-    @Override
     public void init(){
 
 //        model3 = PBRModel.quickModel("res/models/sphere.obj",
@@ -59,7 +57,7 @@ public class PBRTest implements EngineInterface {
         object = new Node();
         object.addChildren(model4, model3, model6, model5, light);
 
-        Scenegraph.instance().addChild(object);
+        scene.addChild(object);
     }
 
     double deg = 0;
@@ -76,7 +74,7 @@ public class PBRTest implements EngineInterface {
 
         }
 
-        Camera camera = EngineCore.instance().getRenderEngine().getMainCamera();
+        Camera camera = Core.camera();
 
         if(Input.instance().isKeyHeld(GLFW_KEY_Q)) {
             deg-=0.05;

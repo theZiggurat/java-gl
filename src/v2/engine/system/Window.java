@@ -106,7 +106,7 @@ public class Window {
     }
 
     /**
-     *  Window poll for EngineCore.loop()
+     *  Window poll for Core.loop()
       */
     public boolean shouldClose(){
         return glfwWindowShouldClose(handle);

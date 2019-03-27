@@ -1,11 +1,9 @@
 package v2.modules.sky;
 
 import v2.engine.gldata.vbo.Meshs;
-import v2.engine.utils.AssimpLoader;
-import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
-import v2.engine.scene.ModuleType;
 import v2.engine.scene.RenderModule;
+import v2.engine.scene.RenderType;
 
 import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_FRONT;
@@ -26,15 +24,15 @@ public class Sky extends ModuleNode {
 
         scaleTo(2800);
 
-        addModule(ModuleType.RENDER_MODULE_SCENE, new RenderModule(
-                SkyShaderProgram.instance(), Meshs.dome
+        addModule(RenderType.TYPE_SCENE, new RenderModule(
+                SkyShader.instance(), Meshs.dome
         ));
     }
 
     @Override
-    public void render(){
+    public void render(RenderType type){
         glCullFace(GL_FRONT);
-        super.render();
+        super.render(type);
         glCullFace(GL_BACK);
     }
 

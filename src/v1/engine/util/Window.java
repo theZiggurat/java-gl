@@ -91,7 +91,7 @@ public class Window {
         return glfwGetKey(windowHandle, keyCode) == GLFW_PRESS;
     }
 
-    // Window poll for EngineCore.loop()
+    // Window poll for Core.loop()
     public boolean shouldClose(){
 
         return glfwWindowShouldClose(windowHandle);

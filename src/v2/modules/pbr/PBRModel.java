@@ -1,41 +1,54 @@
 package v2.modules.pbr;
 
 import lombok.Getter;
-import lombok.Setter;
-import v2.engine.gldata.TextureObject;
-import v2.engine.utils.AssimpLoader;
-import v2.engine.utils.ImageLoader;
 import v2.engine.gldata.vbo.Mesh3D;
-import v2.engine.gldata.vbo.VertexBufferObject;
 import v2.engine.scene.ModuleNode;
-import v2.engine.scene.ModuleType;
-import v2.engine.scene.Node;
 import v2.engine.scene.RenderModule;
-import v2.modules.shadow.ShadowShaderProgram;
+import v2.engine.scene.RenderType;
+import v2.modules.generic.DepthShader;
+import v2.modules.generic.UUIDShader;
+import v2.modules.shadow.ShadowShader;
+import v2.modules.generic.WireframeShader;
 
 import java.util.ArrayList;
 
 public class PBRModel extends ModuleNode {
 
     @Getter Mesh3D mesh;
+    @Getter PBRMaterial material;
 
     public PBRModel(Mesh3D mesh, PBRMaterial material){
 
         super();
 
         this.mesh = mesh;
+        this.material = material;
 
         RenderModule scenerenderer = new RenderModule(
-                PBRShaderProgram.instance(), mesh);
-
-        RenderModule shadowrenderer = new RenderModule(
-                ShadowShaderProgram.instance(), mesh
+                PBRShader.instance(), mesh
         );
 
-        addModule(ModuleType.RENDER_MODULE_SCENE, scenerenderer);
-        addModule(ModuleType.RENDER_MODULE_SHADOW, shadowrenderer);
-        addModule(ModuleType.MATERIAL, material);
+        RenderModule shadowrenderer = new RenderModule(
+                ShadowShader.instance(), mesh
+        );
 
+        RenderModule wireframerenderer = new RenderModule(
+                WireframeShader.instance(), mesh
+        );
+
+        RenderModule UUIDrenderer = new RenderModule(
+                UUIDShader.instance(), mesh
+        );
+
+        RenderModule depthrenderer = new RenderModule(
+                DepthShader.instance(), mesh
+        );
+
+        addModule(RenderType.TYPE_SCENE, scenerenderer);
+        addModule(RenderType.TYPE_SHADOW, shadowrenderer);
+        addModule(RenderType.TYPE_WIREFRAME, wireframerenderer);
+        addModule(RenderType.TYPE_UUID, UUIDrenderer);
+        addModule(RenderType.TYPE_DEPTH, depthrenderer);
 
     }
 

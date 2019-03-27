@@ -8,11 +8,12 @@ import java.util.Map;
 public class ModuleNode extends Node {
 
     @Getter
-    private Map<ModuleType, Module> modules;
+    private Map<RenderType, Module> modules;
 
     public ModuleNode(){
         super();
         modules = new HashMap<>();
+
     }
 
     public void update(){
@@ -20,32 +21,18 @@ public class ModuleNode extends Node {
         modules.values().forEach(e->e.update());
     }
 
-    public void render(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE_SCENE)){
-            modules.get(ModuleType.RENDER_MODULE_SCENE).render();
+    public void render(RenderType type){
+        if(modules.containsKey(type)){
+            modules.get(type).render();
         }
-        super.render();
+        super.render(type);
     }
 
-    public void renderWireframe(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE_WIREFRAME)){
-            modules.get(ModuleType.RENDER_MODULE_WIREFRAME).render();
+    public void render(RenderType type, Condition condition) {
+        if(modules.containsKey(type)){
+            modules.get(type).render();
         }
-        super.render();
-    }
-
-    public void renderShadow(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE_SHADOW)){
-            modules.get(ModuleType.RENDER_MODULE_SHADOW).render();
-        }
-        super.render();
-    }
-
-    public void renderOverlay(){
-        if(modules.containsKey(ModuleType.RENDER_MODULE_OVERLAY)){
-            modules.get(ModuleType.RENDER_MODULE_OVERLAY).render();
-        }
-        super.render();
+        super.render(type, condition);
     }
 
     public void cleanup(){
@@ -53,7 +40,7 @@ public class ModuleNode extends Node {
         modules.values().forEach(e->e.cleanup());
     }
 
-    public void addModule(ModuleType type, Module module){
+    public void addModule(RenderType type, Module module){
         module.setParent(this);
         modules.put(type, module);
     }

@@ -3,7 +3,7 @@ package v2.engine.scene;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import v2.engine.gldata.vbo.VertexBufferObject;
-import v2.engine.system.ShaderProgram;
+import v2.engine.system.Shader;
 
 @Getter @AllArgsConstructor
 public class RenderModule extends Module {
@@ -14,7 +14,7 @@ public class RenderModule extends Module {
         attach a shader and VBO model.
      */
 
-    private ShaderProgram shader;
+    private Shader shader;
     private VertexBufferObject mesh;
 
     @Override

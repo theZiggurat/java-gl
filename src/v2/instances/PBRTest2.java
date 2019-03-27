@@ -1,26 +1,23 @@
 package v2.instances;
 
-import v2.engine.light.DirectionalLight;
-import v2.engine.light.LightManager;
-import v2.engine.light.PointLight;
+import v2.engine.scene.light.DirectionalLight;
+import v2.engine.scene.light.LightManager;
+import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
-import v2.engine.scene.Scenegraph;
-import v2.engine.system.EngineInterface;
+import v2.engine.system.Context;
 import v2.engine.gldata.vbo.Meshs;
 import v2.engine.system.Input;
-import v2.engine.utils.ImageLoader;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 
-public class PBRTest2 implements EngineInterface {
+public class PBRTest2 extends Context {
 
-    PointLight light1, light2, light3, light4;
+    PointLight light1;
     Node object, lights;
 
 
-    @Override
     public void init() {
 
 
@@ -58,17 +55,16 @@ public class PBRTest2 implements EngineInterface {
         //light3 = new PointLight(light1).translate(2,-2,-2);
         //light4 = new PointLight(light1).translate(2,-2,2);
 
-        LightManager.setSun(new DirectionalLight().setIntensity(0f).rotateTo(0,-1,0));
+        LightManager.setSun(new DirectionalLight().setIntensity(1f).rotateTo(0,-1,0));
 
         lights.addChildren(light1);
 
-        Scenegraph.instance().addChild(object);
+        scene.addChild(object);
     }
 
     double time = 0;
     boolean rotate;
 
-    @Override
     public void update(double duration) {
 
         if(Input.instance().isKeyHeld(GLFW_KEY_SPACE))
@@ -80,7 +76,6 @@ public class PBRTest2 implements EngineInterface {
         }
     }
 
-    @Override
     public void cleanup() {
 
     }

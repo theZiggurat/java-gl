@@ -8,15 +8,9 @@ import org.joml.Vector4f;
 import v2.engine.scene.Node;
 import v2.engine.scene.Transform;
 import v2.engine.utils.Interpolation;
-import v2.modules.pbr.PBRModel;
-import v2.modules.pbr.PBRRenderEngine;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
-import static java.lang.Float.NaN;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Camera extends Transform<Camera> {
@@ -95,20 +89,11 @@ public class Camera extends Transform<Camera> {
 
         // zoom
         if(input.isButtonPressed(0)) { // left click
-            float ssx = (float) ((2 * input.getCursorPos().x)/ Window.instance().getWidth() - 1);
-            float ssy = (float) (1 - (2 * input.getCursorPos().y/ Window.instance().getHeight()));
-            Vector3f ray_nds = new Vector3f(ssx, ssy, 1f);
-
-            Vector4f ray_clip = new Vector4f(ray_nds.x, ray_nds.y, -1.0f, 1.0f);
-
-            Vector4f ray_eye = ray_clip.mul(getProjectionMatrix().invert());
-            ray_eye.z = -1f; ray_eye.w = 0f;
-
-
-            ArrayList<Node> nodes = PBRRenderEngine.instance().getScenegraph().collect();
-            List<PBRModel> models = nodes.stream().filter(e -> e instanceof PBRModel)
-                                                  .map(e -> (PBRModel) e)
-                                                  .collect(Collectors.toList());
+            Node selected = Core.picking().pick();
+            if(selected != null) {
+                Core.selectionManager().clear();
+                Core.selectionManager().addSelection(selected);
+            }
         }
 
         if(input.isKeyPressed(GLFW_KEY_MINUS)){
