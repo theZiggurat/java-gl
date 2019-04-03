@@ -5,8 +5,6 @@ import v2.engine.system.Core;
 import v2.engine.system.Shader;
 import v2.engine.scene.ModuleNode;
 
-import static org.lwjgl.opengl.GL13.*;
-
 public class PBRShader extends Shader {
 
     /**
@@ -62,8 +60,7 @@ public class PBRShader extends Shader {
         PBRMaterial material = ((PBRModel)group).getMaterial();
 
         if(material.isAlbedoMapped()) {
-            glActiveTexture(GL_TEXTURE0);
-            material.getAlbedoMap().bind();
+            activeTexture(material.albedoMap, 0);
             setUniform("albedoMap", 0);
             setUniform("map_albedo", 1);
         } else {
@@ -72,8 +69,7 @@ public class PBRShader extends Shader {
         }
 
         if(material.isNormalMapped()){
-            glActiveTexture(GL_TEXTURE1);
-            material.getNormalMap().bind();
+            activeTexture(material.normalMap, 1);
             setUniform("normalMap", 1);
             setUniform("map_normal", 1);
         } else {
@@ -81,8 +77,7 @@ public class PBRShader extends Shader {
         }
 
         if(material.isRoughnessMapped()){
-            glActiveTexture(GL_TEXTURE2);
-            material.getRoughnessMap().bind();
+            activeTexture(material.roughnessMap, 2);
             setUniform("roughnessMap", 2);
             setUniform("map_roughness", 1);
         } else {
@@ -91,8 +86,7 @@ public class PBRShader extends Shader {
         }
 
         if(material.isMetalMapped()){
-            glActiveTexture(GL_TEXTURE3);
-            material.getMetalMap().bind();
+            activeTexture(material.metalMap, 3);
             setUniform("metalMap", 3);
             setUniform("map_metal", 1);
         } else {
@@ -103,7 +97,7 @@ public class PBRShader extends Shader {
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", group.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
-        //setUniform("invViewMatrix",group.getModelMatrix().mul(camera.getViewMatrix()).invert() );
+
     }
 
 }

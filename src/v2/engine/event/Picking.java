@@ -1,14 +1,12 @@
 package v2.engine.event;
 
 import lombok.Getter;
-import org.joml.Vector2d;
 import org.joml.Vector3f;
-import v2.engine.gldata.FrameBufferObject;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.fbo.FrameBufferObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.scene.Node;
 import v2.engine.scene.RenderType;
 import v2.engine.system.Context;
-import v2.engine.system.Input;
 import v2.engine.system.Window;
 
 import java.nio.ByteBuffer;
@@ -26,17 +24,15 @@ public class Picking {
         this.UUIDmap = new UUIDFrameBufferObject();
     }
 
-    public Node pick(){
+    public Node pick(int x, int y){
 
         updateMap();
         ByteBuffer rgb = ByteBuffer.allocateDirect(4);
-        Vector2d pos = Input.instance().getCursorPos();
-
         glFinish();
 
         UUIDmap.bind();
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glReadPixels((int) pos.x, (int) pos.y, 1, 1,
+        glReadPixels(x, y, 1, 1,
                 GL_RGBA, GL_UNSIGNED_BYTE, rgb);
         UUIDmap.unbind();
 

@@ -2,12 +2,11 @@ package v2.modules.post.ssao;
 
 import lombok.Getter;
 import org.joml.Vector3f;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.system.Config;
 import v2.engine.system.Core;
 import v2.engine.system.Shader;
 import v2.engine.system.Window;
-import v2.modules.pbr.PBRPipeline;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package v2.modules.pbr;
 
 import org.joml.Vector3f;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.scene.light.Light;
 import v2.engine.scene.light.LightManager;
 import v2.engine.system.Config;
@@ -91,12 +91,10 @@ public class PBRDeferredShader extends Shader {
 
         }
 
-        activeTexture(0);
-        lightDepth.bind();
+        activeTexture(lightDepth, 0);
         setUniform("lightDepthMap", 0);
+
         setUniform("lightSpaceMatrix", LightManager.getSun().getLightSpaceMatrix());
-
-
         setUniform("clearColor", clearColor);
         setUniform("numLights", currlights);
         setUniform("camerapos", Core.camera().getTranslation());

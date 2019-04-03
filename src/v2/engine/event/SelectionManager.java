@@ -19,6 +19,11 @@ public class SelectionManager {
         selected.add(node);
     }
 
+    public void remove(Node node){
+        node.setSelected(false);
+        selected.remove(node);
+    }
+
     public void clear(){
         selected.forEach(e -> e.setSelected(false));
         selected.clear();

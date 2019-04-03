@@ -3,7 +3,7 @@ package v2.modules.pbr;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector3f;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.scene.Module;
 import v2.engine.utils.ImageLoader;
 

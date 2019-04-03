@@ -1,7 +1,7 @@
 package v2.engine.utils;
 
 import org.lwjgl.BufferUtils;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

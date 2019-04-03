@@ -8,12 +8,10 @@ import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
 import v2.engine.system.Config;
 import v2.engine.system.Context;
-import v2.engine.system.Core;
-import v2.engine.system.Input;
+import v2.engine.event.Input;
 import v2.engine.utils.AssimpLoader;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
-import v2.modules.pbr.PBRPipeline;
 import v2.modules.sky.Sky;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -24,6 +22,7 @@ public class PBRTest3 extends Context {
 
     @Override
     public void init() {
+
         object = new Node();
         lights = new Node();
         object.addChild(lights);

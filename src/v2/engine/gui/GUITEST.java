@@ -4,7 +4,7 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import v2.engine.gldata.vbo.Meshs;
 import v2.engine.gldata.vbo.VertexBufferObject;
-import v2.engine.system.Input;
+import v2.engine.event.Input;
 import v2.engine.system.Shader;
 import v2.engine.utils.Coordinates;
 
@@ -45,7 +45,7 @@ public class GUITEST {
         glEnable(GL_DEPTH_TEST);
     }
 
-    private class GUITESTShader extends Shader {
+    public class GUITESTShader extends Shader {
 
         private GUITESTShader(){
             super();

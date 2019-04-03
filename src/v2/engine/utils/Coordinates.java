@@ -36,11 +36,10 @@ public class Coordinates {
     /**
      *
      * @param box representing area in opengl NDC coordinates
-     * @param screenCoords screen pixel coordinates
+     * @param ndc ndc pixel coordinates
      * @return whether or not the coord is within the box
      */
-    public static boolean insideBox(Box box, Vector2d screenCoords){
-        Vector2f ndc = screenToNDC(screenCoords);
+    public static boolean insideBox(Box box, Vector2d ndc){
         float left = box.getX();
         float bottom = box.getY();
         float right = left + box.getWidth();

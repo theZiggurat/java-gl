@@ -36,7 +36,7 @@ public class Mesh3DLine extends VertexBufferObject{
         int vbo = glGenBuffers();
         vbos.add(vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, Buffer.positionBuffer(positions), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, Buffer.buffer3f(positions), GL_STATIC_DRAW);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 
         // index vbo

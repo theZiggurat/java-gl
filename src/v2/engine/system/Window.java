@@ -99,6 +99,10 @@ public class Window {
        setIcon("res/images/icon.png");
     }
 
+    public void hideMouse(boolean hide){
+        glfwSetInputMode(handle, GLFW_CURSOR, hide ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL);
+    }
+
     public void update(){
         glfwSwapBuffers(handle);
         glfwPollEvents();

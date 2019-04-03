@@ -1,9 +1,11 @@
 package v2.engine.system;
 
 import lombok.Getter;
+import v2.engine.event.EventManager;
+import v2.engine.event.Input;
 import v2.engine.event.Picking;
 import v2.engine.event.SelectionManager;
-import v2.engine.gui.GLViewport;
+import v2.engine.gui.element.DynamicPanel;
 import v2.engine.scene.Scenegraph;
 
 
@@ -19,6 +21,7 @@ public class Core implements Runnable {
 
     private final Window window;
     private Context context;
+    private EventManager eventManager;
 
     //private HashMap<Class, Pipeline> renderEngines;
 
@@ -32,6 +35,7 @@ public class Core implements Runnable {
         this.window = Window.instance();
         this.timer = new Timer();
         this.input = Input.instance();
+        this.eventManager = new EventManager();
         this.currentFPS = 0;
 
         if (instance == null) instance = this;
@@ -58,7 +62,6 @@ public class Core implements Runnable {
         // initialize core systems before initializing interface
         window.init();
         input.init();
-        timer.mark();
 
         // initialize pipeline from config
         try {
@@ -83,6 +86,8 @@ public class Core implements Runnable {
         // initialize engine implementation
 
         context.init();
+        eventManager.init(context);
+        timer.mark();
     }
 
     /**
@@ -128,6 +133,7 @@ public class Core implements Runnable {
         /* update input */
         input.update();
 
+        eventManager.update();
 
     }
 
@@ -147,7 +153,7 @@ public class Core implements Runnable {
     /**
      * Private class used to time the main loop
      */
-    private class Timer {
+    public class Timer {
 
         private double lastLoopTime;
 
@@ -157,6 +163,9 @@ public class Core implements Runnable {
          */
         public double getTime(){
             return System.nanoTime();
+        }
+        public double getTimeMS(){
+            return System.nanoTime()/1_000_000;
         }
 
         /**
@@ -197,10 +206,10 @@ public class Core implements Runnable {
     }
 
     /**
-     * Macro to this current context's active viewport
-     * @return this current context's active viewport
+     * Macro to this current context's active dynamicpanel
+     * @return this current context's active dynamicpanel
      */
-    public static GLViewport viewport(){
+    public static DynamicPanel viewport(){
         return instance.context.getViewport();
     }
 
@@ -231,5 +240,11 @@ public class Core implements Runnable {
      * @return this current context's active picking
      */
     public static SelectionManager selectionManager(){ return instance.context.getSelectionManager();}
+
+    /**
+     * Macro to this current context's active event handler
+     * @return this current context's active event handler
+     */
+    public static EventManager events(){return instance.eventManager;}
 
 }

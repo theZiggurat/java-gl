@@ -1,7 +1,7 @@
 package v2.modules.post.ssao;
 
 import lombok.Getter;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.system.Shader;
 import v2.engine.system.Window;
 

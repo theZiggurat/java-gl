@@ -13,7 +13,7 @@ import java.util.Vector;
 public class Buffer {
 
 
-    public static FloatBuffer positionBuffer(ArrayList<Vector3f> positions){
+    public static FloatBuffer buffer3f(ArrayList<Vector3f> positions){
         float [] ret = new float[positions.size()*3];
         int i = 0;
         for(Vector3f position: positions)
@@ -25,7 +25,7 @@ public class Buffer {
         return floatBuffer(ret);
     }
 
-    public static FloatBuffer UVBuffer(ArrayList<Vector2f> UVs){
+    public static FloatBuffer buffer2f(ArrayList<Vector2f> UVs){
 
         float [] ret = new float[UVs.size()*2];
         int i = 0;
@@ -33,19 +33,6 @@ public class Buffer {
         {
             ret[i++] = UV.x;
             ret[i++] = UV.y;
-        }
-        return floatBuffer(ret);
-    }
-
-    public static FloatBuffer normalBuffer(ArrayList<Vector3f> normals){
-
-        float [] ret = new float[normals.size()*3];
-        int i = 0;
-        for(Vector3f normal: normals)
-        {
-            ret[i++] = normal.x;
-            ret[i++] = normal.y;
-            ret[i++] = normal.z;
         }
         return floatBuffer(ret);
     }

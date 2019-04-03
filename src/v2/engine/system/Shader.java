@@ -2,7 +2,7 @@ package v2.engine.system;
 
 import org.joml.*;
 import org.lwjgl.system.MemoryStack;
-import v2.engine.gldata.TextureObject;
+import v2.engine.gldata.tex.TextureObject;
 import v2.engine.scene.light.Light;
 import v2.engine.scene.ModuleNode;
 import v2.engine.utils.Utils;
@@ -246,6 +246,15 @@ public class Shader {
         glUniform1i(uniforms.get(name), value);
     }
 
+    /**
+     * vec2i uniform (x,y)
+     * @param name  uniform name registered from addUniform
+     * @param vec vector data
+     */
+    public void setUniform(String name, Vector2i vec){
+        if(uniforms.get(name)==null) return;
+        glUniform2i(uniforms.get(name), vec.x, vec.y);
+    }
 
     /**
      * single float uniform (f)
@@ -258,13 +267,13 @@ public class Shader {
     }
 
     /**
-     * vec4 uniform (x,y,z,w)
+     * vec2 uniform (x,y)
      * @param name  uniform name registered from addUniform
-     * @param value  vector data
+     * @param vec vector data
      */
-    public void setUniform(String name, Vector4f value) {
+    public void setUniform(String name, Vector2f vec){
         if(uniforms.get(name)==null) return;
-        glUniform4f(uniforms.get(name), value.x, value.y, value.z, value.w);
+        glUniform2f(uniforms.get(name), vec.x, vec.y);
     }
 
     /**
@@ -278,13 +287,27 @@ public class Shader {
     }
 
     /**
-     * vec3 uniform (x,y,z)
+     * vec4 uniform (x,y,z,w)
      * @param name  uniform name registered from addUniform
-     * @param vec vector data
+     * @param value  vector data
      */
-    public void setUniform(String name, Vector2f vec){
+    public void setUniform(String name, Vector4f value) {
         if(uniforms.get(name)==null) return;
-        glUniform2f(uniforms.get(name), vec.x, vec.y);
+        glUniform4f(uniforms.get(name), value.x, value.y, value.z, value.w);
+    }
+
+    /**
+     * matrix uniform (mat3)
+     * @param name  uniform nname registered from addUniform
+     * @param matrix  matrix data
+     */
+    public void setUniform(String name, Matrix3f matrix){
+        if(uniforms.get(name)==null) return;
+        try(MemoryStack stack = MemoryStack.stackPush()){
+            FloatBuffer fb = stack.mallocFloat(9);
+            matrix.get(fb);
+            glUniformMatrix4fv(uniforms.get(name), false, fb);
+        }
     }
 
     /**
@@ -301,21 +324,13 @@ public class Shader {
         }
     }
 
-    public void setUniform(String name, Matrix3f matrix){
-        if(uniforms.get(name)==null) return;
-        try(MemoryStack stack = MemoryStack.stackPush()){
-            FloatBuffer fb = stack.mallocFloat(9);
-            matrix.get(fb);
-            glUniformMatrix4fv(uniforms.get(name), false, fb);
-        }
-    }
-
     /**
      * Calls glActiveTexture with arg GL_TEXTURE0 + index
      * @param index of texture
      */
-    public void activeTexture(int index){
+    public void activeTexture(TextureObject texture, int index){
         glActiveTexture(GL_TEXTURE0 + index);
+        texture.bind();
     }
 
     /** UPDATE INTERFACE **/

@@ -2,11 +2,12 @@ package v2.engine.system;
 
 import lombok.Getter;
 import lombok.Setter;
-import v2.engine.gldata.TextureObject;
-import v2.engine.gui.GLViewport;
+import v2.engine.gldata.tex.TextureObject;
+import v2.engine.gui.element.DynamicPanel;
+import v2.engine.gui.GUITEST;
 import v2.engine.scene.RenderType;
 import v2.modules.generic.OverlayBlendingShader;
-import v2.modules.generic.OverlayFrameBufferObject;
+import v2.engine.gldata.fbo.OverlayFrameBufferObject;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.GL_RGBA16F;
@@ -25,21 +26,16 @@ public abstract class Pipeline {
 
     /** TODO: refactor with camera controller **/
 
-
-//    private GUITEST gui1, gui2;
-
     protected Pipeline(){
         Window window = Window.instance();
         sceneTexture = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
-                .bilinearFilter();
+                .trilinearFilter();
         overlayBlendedImage = new TextureObject(GL_TEXTURE_2D, window.getWidth(), window.getHeight())
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
         overlayFrameBufferObject = new OverlayFrameBufferObject();
         running = true;
-//        gui1 = new GUITEST(-1f, -1f, 0.5f, 0.5f);
-//        gui2 = new GUITEST(-1f, -1f, 0.4f, 0.4f);
     }
 
     public void onResize(){
@@ -47,19 +43,12 @@ public abstract class Pipeline {
         overlayBlendedImage.resize(Window.instance().getWidth(), Window.instance().getHeight());
     }
 
-    public void prepare3D(){
-
-    }
-
-    public void prepare2D(){
-
-    }
-
     protected abstract void renderScene(Context context);
+    protected abstract TextureObject getDepth();
 
-    void draw(GLViewport viewport, Context context){
+    void draw(DynamicPanel viewport, Context context){
 
-        // adjust viewport size
+        // adjust dynamicpanel size
         if(Window.instance().isResized()){
             glViewport(0,0, Window.instance().getWidth(),
                     Window.instance().getHeight());
@@ -76,12 +65,28 @@ public abstract class Pipeline {
         if(Config.instance().isDebugLayer()) {
 
             overlayFrameBufferObject.bind();
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            context.getScene().render(RenderType.TYPE_OVERLAY);
+            {
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glClear(GL_DEPTH_BUFFER_BIT);
+                context.getScene().render(RenderType.TYPE_OVERLAY);
+
+                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                glLineWidth(1f);
+                context.getSelectionManager().renderSelected(RenderType.TYPE_WIREFRAME);
+                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+//            context.getScene()
+//                    .stream()
+//                    .filter(e -> e instanceof ModuleNode && !(e.getParent() instanceof ModuleNode))
+//                    .map(e -> (ModuleNode)e)
+//                    .filter(e -> e.getModules().containsKey(RenderType.TYPE_SCENE))
+
+            }
             overlayFrameBufferObject.unbind();
 
             OverlayBlendingShader.instance().compute(
-                    sceneTexture, overlayFrameBufferObject.getOverlay(), overlayBlendedImage
+                    sceneTexture, overlayFrameBufferObject.getOverlay(),
+                    overlayBlendedImage, getDepth(), overlayFrameBufferObject.getDepth()
             );
 
             // render scene texture to the gui
@@ -90,8 +95,7 @@ public abstract class Pipeline {
         else
             viewport.setScreenTexture(sceneTexture);
 
-
-        viewport.render();
+        viewport.setChanged(true);
     }
 
     public void cleanup(){

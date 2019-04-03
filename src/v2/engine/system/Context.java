@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import v2.engine.event.Picking;
 import v2.engine.event.SelectionManager;
-import v2.engine.gui.Element;
-import v2.engine.gui.GLViewport;
+import v2.engine.gui.element.DynamicWindow;
+import v2.engine.gui.element.Element;
+import v2.engine.gui.element.DynamicPanel;
+import v2.engine.gui.element.RootElement;
 import v2.engine.scene.Scenegraph;
 
 /**
@@ -16,7 +18,7 @@ import v2.engine.scene.Scenegraph;
 public abstract class Context {
 
     // root UI element
-    private Element root;
+    @Getter private Element root;
 
     @Getter private Picking picking;
 
@@ -26,8 +28,8 @@ public abstract class Context {
     // uses scene to create texture of 3D scene
     @Getter private Pipeline pipeline;
 
-    // viewport UI element that displays 3D scene texture
-    @Getter private GLViewport viewport;
+    // dynamicpanel UI element that displays 3D scene texture
+    @Getter private DynamicPanel viewport;
 
     @Getter private SelectionManager selectionManager;
 
@@ -35,9 +37,9 @@ public abstract class Context {
     protected Camera camera;
 
     protected Context() {
-        this.root = new Element() {};
-        this.viewport = new GLViewport();
-        this.root.getChildren().add(viewport);
+        this.root = new RootElement();
+        this.viewport = new DynamicPanel();
+        this.root.addChild(new DynamicWindow(viewport));
         this.scene = new Scenegraph();
         this.camera = new Camera();
         this.picking = new Picking(this);

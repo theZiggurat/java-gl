@@ -4,6 +4,9 @@ import v2.engine.scene.RenderModule;
 import v2.engine.gldata.vbo.Meshs;
 import v2.engine.scene.RenderType;
 import v2.modules.generic.LightOverlayShader;
+import v2.modules.generic.UUIDShader;
+
+import java.util.UUID;
 
 public class PointLight extends Light {
 
@@ -19,7 +22,12 @@ public class PointLight extends Light {
         RenderModule debugRenderer = new RenderModule(
                 LightOverlayShader.instance(), Meshs.cube
         );
+
+        RenderModule UUIDrenderer = new RenderModule(
+                UUIDShader.instance(), Meshs.cube
+        );
         addModule(RenderType.TYPE_OVERLAY, debugRenderer);
+        addModule(RenderType.TYPE_UUID, UUIDrenderer);
         scale(.2f);
     }
 }

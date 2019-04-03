@@ -3,8 +3,9 @@ package v2.engine.system;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.Matrix4f;
+import org.joml.Vector2d;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
+import v2.engine.event.Input;
 import v2.engine.scene.Node;
 import v2.engine.scene.Transform;
 import v2.engine.utils.Interpolation;
@@ -80,7 +81,7 @@ public class Camera extends Transform<Camera> {
         }
 
         // view-space pan
-        if(input.isButtonHeld(2)){ // middle click
+        if(input.isButtonHeld(2)&&input.isMod(GLFW_MOD_CONTROL)){ // middle click
             velocity.add(getUp().mul((float)input.getDisplacement().y * -.05f * speedMod.apply(speedLevel-2)));
             velocity.add(getRight().mul((float)input.getDisplacement().x * -.05f * speedMod.apply(speedLevel-2)));
         }
@@ -89,10 +90,16 @@ public class Camera extends Transform<Camera> {
 
         // zoom
         if(input.isButtonPressed(0)) { // left click
-            Node selected = Core.picking().pick();
+            Vector2d pos = Input.instance().getCursorPos();
+            Node selected = Core.picking().pick((int)pos.x, (int)pos.y);
             if(selected != null) {
-                Core.selectionManager().clear();
-                Core.selectionManager().addSelection(selected);
+                if(selected.isSelected())
+                    Core.selectionManager().remove(selected);
+                else {
+                    if(!input.isMod(GLFW_MOD_CONTROL))
+                        Core.selectionManager().clear();
+                    Core.selectionManager().addSelection(selected);
+                }
             }
         }
 

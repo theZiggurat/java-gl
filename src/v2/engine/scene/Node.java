@@ -9,7 +9,6 @@ import v2.engine.utils.Utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Stream;
 
  public class Node extends Transform<Node> {
@@ -96,21 +95,6 @@ import java.util.stream.Stream;
         return collect().stream();
     }
 
-    public Node localizeRotation(boolean _localize){
-        localRotation = _localize;
-        return this;
-    }
-
-    public Node localizeTranslation(boolean _localize){
-        localTranslation = _localize;
-        return this;
-    }
-
-    public Node localizeScaling(boolean _localize){
-        localScaling = _localize;
-        return this;
-    }
-
 
     public void update() {
             children.forEach(child -> {
@@ -157,4 +141,20 @@ import java.util.stream.Stream;
     public interface Condition {
         boolean isvalid(Node node);
     }
+
+
+     public Node localizeRotation(boolean _localize){
+         localRotation = _localize;
+         return this;
+     }
+
+     public Node localizeTranslation(boolean _localize){
+         localTranslation = _localize;
+         return this;
+     }
+
+     public Node localizeScaling(boolean _localize){
+         localScaling = _localize;
+         return this;
+     }
 }

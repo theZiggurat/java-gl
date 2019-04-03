@@ -6,7 +6,7 @@ import v2.engine.scene.light.PointLight;
 import v2.engine.scene.Node;
 import v2.engine.system.Context;
 import v2.engine.gldata.vbo.Meshs;
-import v2.engine.system.Input;
+import v2.engine.event.Input;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
 

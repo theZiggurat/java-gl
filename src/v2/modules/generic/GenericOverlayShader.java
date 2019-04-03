@@ -5,6 +5,8 @@ import v2.engine.system.Camera;
 import v2.engine.system.Core;
 import v2.engine.system.Shader;
 
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+
 public class GenericOverlayShader extends Shader {
 
     private static GenericOverlayShader instance;
@@ -23,6 +25,10 @@ public class GenericOverlayShader extends Shader {
         addUniform("projectionMatrix");
         addUniform("modelMatrix");
         addUniform("viewMatrix");
+
+
+
+
     }
 
     @Override
