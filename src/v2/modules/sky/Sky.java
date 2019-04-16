@@ -1,9 +1,9 @@
 package v2.modules.sky;
 
-import v2.engine.gldata.vbo.Meshs;
-import v2.engine.scene.ModuleNode;
-import v2.engine.scene.RenderModule;
-import v2.engine.scene.RenderType;
+import v2.engine.glapi.vbo.Meshs;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.scene.node.RenderModule;
+import v2.engine.scene.node.RenderType;
 
 import static org.lwjgl.opengl.GL11.GL_BACK;
 import static org.lwjgl.opengl.GL11.GL_FRONT;
@@ -22,7 +22,7 @@ public class Sky extends ModuleNode {
     private Sky(){
         super();
 
-        scaleTo(2800);
+        transform.scaleTo(2800);
 
         addModule(RenderType.TYPE_SCENE, new RenderModule(
                 SkyShader.instance(), Meshs.dome

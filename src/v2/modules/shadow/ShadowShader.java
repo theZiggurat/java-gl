@@ -1,7 +1,7 @@
 package v2.modules.shadow;
 
 import v2.engine.scene.light.LightManager;
-import v2.engine.scene.ModuleNode;
+import v2.engine.scene.node.ModuleNode;
 import v2.engine.system.Shader;
 
 public class ShadowShader extends Shader {

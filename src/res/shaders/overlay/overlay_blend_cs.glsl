@@ -2,12 +2,11 @@
 
 layout (local_size_x = 16, local_size_y = 16) in;
 
-layout (binding = 0, rgba16f) uniform readonly image2D scene_image;
-layout (binding = 1, rgba16f) uniform readonly image2D overlay_image;
+layout (binding = 0, rgba16f) uniform restrict readonly image2D scene_image;
+layout (binding = 1, rgba16f) uniform restrict readonly image2D overlay_image;
 layout (binding = 2, rgba16f) uniform writeonly image2D dest_image;
 
-uniform int resX = 1280;
-uniform int resY = 720;
+uniform ivec2 resolution;
 
 uniform sampler2D depth_s;
 uniform sampler2D depth_o;
@@ -31,7 +30,7 @@ void main() {
     vec3 dest;
 
     ivec2 coord = ivec2(gl_GlobalInvocationID.xy);
-    vec2 uv = vec2(float(coord.x)/float(resX), float(coord.y)/float(resY));
+    vec2 uv = vec2(float(coord.x)/float(resolution.x), float(coord.y)/float(resolution.y));
 
     float depth_scene = texture(depth_s, uv).x;
     float depth_overlay = texture(depth_o, uv).x;

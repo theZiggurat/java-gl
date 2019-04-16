@@ -1,10 +1,8 @@
 package v2.modules.sky;
 
 import org.joml.Matrix4f;
-import v2.engine.scene.ModuleNode;
-import v2.engine.system.Core;
+import v2.engine.scene.node.ModuleNode;
 import v2.engine.system.Shader;
-import v2.modules.pbr.PBRPipeline;
 
 public class SkyShader extends Shader {
 
@@ -31,7 +29,7 @@ public class SkyShader extends Shader {
     @Override
     public void updateUniforms(ModuleNode skyNode) {
         setUniform("viewProjectionMatrix",
-                new Matrix4f(Core.camera().getViewProjectionMatrix()));
+                new Matrix4f(boundContext.getCamera().getViewProjectionMatrix()));
         setUniform("modelMatrix",
                 new Matrix4f(skyNode.getModelMatrix()));
         setUniform("scale", skyNode.getWorldScaling().y);

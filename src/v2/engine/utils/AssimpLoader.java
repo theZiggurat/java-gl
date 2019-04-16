@@ -3,7 +3,7 @@ package v2.engine.utils;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.assimp.*;
-import v2.engine.gldata.vbo.Mesh3D;
+import v2.engine.glapi.vbo.Mesh3D;
 
 import java.nio.IntBuffer;
 import java.util.ArrayList;

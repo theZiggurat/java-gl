@@ -25,15 +25,16 @@ public class DirectionalLight extends Light {
                 0,0,0,
                 0,1,0
         );
-        this.ambientLight = new Vector3f(0.03f);
+        this.ambientLight = new Vector3f(0.002f);
     }
 
     @Override
     public void update(){
         super.update();
-        Vector3f rot = new Vector3f(getWorldRotation()).normalize().mul(1.0f);
+        Vector3f rot = new Vector3f(getWorldRotation()).normalize();
         lightView = new Matrix4f().lookAt(
-              rot, new Vector3f(0,0,0),  new Vector3f(0,1,0)
+              rot, new Vector3f(0,0,0),
+                new Vector3f(0,1,0)
         );
     }
 

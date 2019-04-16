@@ -1,44 +1,32 @@
 package v2.modules.post.ssao;
 
-import lombok.Getter;
-import v2.engine.gldata.tex.TextureObject;
+import v2.engine.glapi.tex.TextureObject;
 import v2.engine.system.Shader;
-import v2.engine.system.Window;
 
-import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL15.GL_READ_ONLY;
 import static org.lwjgl.opengl.GL15.GL_WRITE_ONLY;
-import static org.lwjgl.opengl.GL30.GL_RGBA32F;
+import static org.lwjgl.opengl.GL30.GL_R16F;
 
 public class SSAOBlurShader extends Shader {
 
-    @Getter private TextureObject targetTexture;
 
     public SSAOBlurShader(){
-
-        targetTexture = new TextureObject(
-                Window.instance().getWidth(),
-                Window.instance().getHeight())
-                .allocateImage2D(GL_RGBA32F, GL_RGBA)
-                .nofilter();
 
         createComputeShader("res/shaders/ssao/ssao_blur_comp.glsl");
         link();
 
-        addUniform("resX");
-        addUniform("resY");
+        addUniform("resolution");
     }
 
-    public void compute(TextureObject ssao){
+    public void compute(TextureObject preBlur, TextureObject target){
 
         bind();
-        setUniform("resX", Window.instance().getWidth());
-        setUniform("resY", Window.instance().getHeight());
+        setUniform("resolution", boundContext.getResolution());
 
-        bindImage(0, ssao.getId(), GL_READ_ONLY, GL_RGBA32F);
-        bindImage(1, targetTexture.getId(), GL_WRITE_ONLY, GL_RGBA32F);
+        bindImage(0, preBlur.getId(), GL_READ_ONLY, GL_R16F);
+        bindImage(1, target.getId(), GL_WRITE_ONLY, GL_R16F);
 
-        compute(16,16);
+        compute(16,16, boundContext.getResolution());
         unbind();
     }
 }

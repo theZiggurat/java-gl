@@ -1,12 +1,5 @@
 #version 430
 
-layout (local_size_x = 16, local_size_y = 16) in;
-
-layout (binding = 0, rgba16f) uniform readonly image2D albedo_image;
-layout (binding = 1, rgba32f) uniform readonly image2D position_image;
-layout (binding = 2, rgba32f) uniform readonly image2D normal_image;
-layout (binding = 3) uniform writeonly image2D scene;
-
 struct DirectionalLight {
     vec3 color;
     vec3 ambient;
@@ -21,30 +14,29 @@ struct Light {
     int activated;
 };
 
-// position of camera
+layout (local_size_x = 16, local_size_y = 16) in;
+layout (binding = 0, rgba16f) uniform restrict readonly image2DMS albedo_image;
+layout (binding = 1, rgba32f) uniform restrict readonly image2DMS position_image;
+layout (binding = 2, rgba32f) uniform restrict readonly image2DMS normal_image;
+layout (binding = 3, r16f) uniform restrict readonly image2D ssao_image;
+layout (binding = 4) uniform restrict writeonly image2DMS scene;
+
 uniform vec3 camerapos;
 
-// lights
-uniform DirectionalLight sun;
 uniform Light[20] lights;
-
-// color to render if no geometry info
-uniform vec3 clearColor;
-
-// shadow map (as rendered from sun)
-uniform sampler2D lightDepthMap;
-
-// shadow view and ortho projection matrix
-uniform mat4 lightSpaceMatrix;
-
-// bias to counter shadow acne
-const float shadowBias = 0.003f;
-
-// 1: ssao on, 2: ssao off
-uniform int ssao;
-
-// total number of lights (excluding sun)
 uniform int numLights;
+
+uniform DirectionalLight sun;
+uniform sampler2D shadowDepthMap;
+uniform mat4 shadowSpaceMatrix;
+
+const float shadowBias = 0.0015f;
+uniform int isShadow = 1;
+
+uniform int ssao;
+uniform float ssaoPower;
+
+uniform int multisamples = 0;
 
 const float PI = 3.14159265359;
 
@@ -83,8 +75,8 @@ vec3 FresnelSchlick(float cosTheta, vec3 F0)
     return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
-vec3 diffuseSpecular(vec4 albedo, vec3 N, vec3 V, vec3 F0,
-                    float metal, float rough, vec3 lightDir, float intensity, vec3 color){
+vec3 diffuseSpecular(vec4 albedo, vec3 N, vec3 V, vec3 F0, float metal,
+    float rough, float ao, vec3 lightDir, float lightIntensity, vec3 lightColor){
 
     vec3 L = normalize(lightDir);
     vec3 H = normalize(V+L);
@@ -104,31 +96,27 @@ vec3 diffuseSpecular(vec4 albedo, vec3 N, vec3 V, vec3 F0,
     vec3 numerator    =  G * NDF * F;
     float denominator = 4 * NdotV * NdotL;
     vec3 specular     = numerator / max(denominator, 0.001);
+
     float len = length(lightDir);
+    vec3 diffuse = kD * albedo.rgb * ao / PI;
 
-    vec3 ret;
-
-    if(ssao == 1) ret =  (kD * albedo.rgb  / PI + specular)* NdotL * intensity * color/ (len*len);
-    else ret = (kD * albedo.rgb / PI + specular)* NdotL * intensity * color/ (len*len);
-
-    return ret;
-    //return mix(vec3(G), ret, .00000001f);
+    return (diffuse + specular) * NdotL * lightIntensity * lightColor / (len*len);
 }
 
 float shadowFactor(vec3 position){
 
-    vec4 lightSpaceCoord = lightSpaceMatrix * vec4(position,1.0);
-    vec3 projCoords = lightSpaceCoord.xyz / lightSpaceCoord.w;
+    vec4 shadowSpaceCoord = shadowSpaceMatrix * vec4(position,1.0);
+    vec3 projCoords = shadowSpaceCoord.xyz / shadowSpaceCoord.w;
     projCoords = projCoords * 0.5 + 0.5;
 
     float currDepth = projCoords.z;
 
     float shadow = 0.0;
-    vec2 texelSize = 1.0/textureSize(lightDepthMap, 0);
+    vec2 texelSize = 1.0/textureSize(shadowDepthMap, 0);
 
     for(int i = -1; i <= 1; i++){
         for(int j = -1; j <= 1; j++){
-            float pcfDepth = texture(lightDepthMap, projCoords.xy + vec2(i,j) * texelSize).r;
+            float pcfDepth = texture(shadowDepthMap, projCoords.xy + vec2(i,j) * texelSize).r;
             shadow += currDepth - shadowBias > pcfDepth ? 0.0 : 1.0;
         }
     }
@@ -140,65 +128,62 @@ float shadowFactor(vec3 position){
 void main(){
 
     ivec2 coord = ivec2(gl_GlobalInvocationID.xy);
-    vec3 color;
 
-    vec4 normal_and_metal = imageLoad(normal_image, coord);
-    vec4 position_and_roughness = imageLoad(position_image, coord);
+    // OUT COLOR
+    vec3 color = vec3(0);
+    int i, samples = multisamples == 0 ? 1: multisamples;
+    float ssao_factor = ssao == 1 ?
+        pow(imageLoad(ssao_image, coord).r, ssaoPower) : 1;
 
-    vec3 normal = normal_and_metal.rgb;
-    vec4 albedo = imageLoad(albedo_image, coord).rgba;
-
-    if(normal.x < 0.1 && normal.x > -0.1 &&
-    normal.y < 0.1 && normal.y > -0.1 &&
-    normal.z < 0.1 && normal.z > -0.1 )
+    for(i = 0; i < samples; i++)
     {
-        if(length(albedo.rgb) == 0) color = clearColor;
-        else {
-            color = albedo.rgb;
-            color = color / (color + vec3(1.0));
-            color = pow(color, vec3(1.0/2.2));
+        vec4 normal_and_metal = imageLoad(normal_image, coord, i);
+        vec3 normal = normal_and_metal.rgb;
+
+        if(normal == vec3(0))
+        {
+            color = imageLoad(albedo_image, coord, 0).rgb;
+            break;
         }
-    }
-    else
-    {
-        vec3 position = position_and_roughness.rgb;
-        float rough = position_and_roughness.a;
-        float metal = normal_and_metal.a;
+        else
+        {
+            vec4 albedo = imageLoad(albedo_image, coord, i);
+            vec4 position_and_roughness = imageLoad(position_image, coord, i);
+            vec3 position = position_and_roughness.rgb;
+            float rough = position_and_roughness.a;
+            float metal = normal_and_metal.a;
 
-        //vec3 ao = imageLoad(ao_image, coord).rgb;
+            //vec3 ao = imageLoad(ao_image, coord).rgb;
 
-        if(rough < 0.02)
-            rough = 0.02;
+            if(rough < 0.02)
+                rough = 0.02;
 
-        vec3 N = normalize(normal);
-        vec3 V = normalize(camerapos - position);
+            vec3 N = normalize(normal);
+            vec3 V = normalize(camerapos - position);
 
-        vec3 F0 = vec3(.05);
-        F0 = mix(F0, albedo.rgb, metal);
+            vec3 F0 = vec3(.03);
+            F0 = mix(F0, albedo.rgb, metal);
 
-        float shadow = shadowFactor(position);
+            float shadow = isShadow == 1 ? shadowFactor(position) : 1.;
+            vec3 Lo = shadow * diffuseSpecular(albedo, N, V, F0, metal, rough, ssao_factor,
+                                    normalize(sun.direction), sun.intensity, sun.color);
 
-        vec3 Lo = shadow * diffuseSpecular(albedo, N, V, F0, metal, rough,
-                                normalize(sun.direction), sun.intensity, sun.color);
+            for(int q = 0; q<numLights; q++){
+                if(lights[q].activated == 1)
+                    Lo += diffuseSpecular( albedo, N, V, F0, metal, rough, ssao_factor,
+                    lights[q].position - position , lights[q].intensity, lights[q].color);
 
-        for(int i = 0; i<numLights; i++){
-            if(lights[i].activated == 1)
-                Lo += diffuseSpecular( albedo, N, V, F0, metal, rough,
-                lights[i].position - position , lights[i].intensity, lights[i].color);
+            }
 
+            vec3 ambient = sun.ambient * albedo.rgb;
+            color += Lo + ambient;
         }
-
-        vec3 ambient = sun.ambient * albedo.rgb;
-        //vec3 ambient = 0.0000001 * sun.ambient * albedo.rgb;
-        color = Lo + ambient;
-
         color = color / (color + vec3(1.0));
-        color = pow(color, vec3(1.0/2.2));
+        color = pow(color, vec3(1.0/2.15));
 
-        //color = mix(color, diffuseSpecular(albedo, N, V, F0, ao.r, metal, rough,
-         //                                                  normalize(sun.direction), sun.intensity, sun.color), .99f);
+        //color = mix(color, imageLoad(albedo_image, coord, 0).rgb, 0.99);
+        //color = mix(color, vec3(float(multisamples)/float(8)), 0.99f);
+
+        imageStore(scene, coord, i, vec4(color, 1));
     }
-
-    imageStore(scene, coord, vec4(color, 1));
-
  }

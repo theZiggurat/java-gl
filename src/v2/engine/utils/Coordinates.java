@@ -2,7 +2,7 @@ package v2.engine.utils;
 
 import org.joml.Vector2d;
 import org.joml.Vector2f;
-import v2.engine.gui.Box;
+import v2.engine.application.layout.Box;
 import v2.engine.system.Window;
 
 public class Coordinates {
@@ -37,7 +37,7 @@ public class Coordinates {
      *
      * @param box representing area in opengl NDC coordinates
      * @param ndc ndc pixel coordinates
-     * @return whether or not the coord is within the box
+     * @return whether or not the coord is relativeTo the box
      */
     public static boolean insideBox(Box box, Vector2d ndc){
         float left = box.getX();
@@ -45,9 +45,7 @@ public class Coordinates {
         float right = left + box.getWidth();
         float top = bottom + box.getHeight();
 
-        if(ndc.x >= left && ndc.x <= right &&
-                ndc.y >= bottom && ndc.y <= top)
-            return true;
-        return false;
+        return ndc.x >= left && ndc.x <= right &&
+                ndc.y >= bottom && ndc.y <= top;
     }
 }

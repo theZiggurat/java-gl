@@ -2,9 +2,11 @@ package v2.engine.system;
 
 import org.joml.*;
 import org.lwjgl.system.MemoryStack;
-import v2.engine.gldata.tex.TextureObject;
+import v2.engine.glapi.tex.TextureObject;
+import v2.engine.scene.SceneContext;
 import v2.engine.scene.light.Light;
-import v2.engine.scene.ModuleNode;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.utils.Color;
 import v2.engine.utils.Utils;
 
 import java.lang.Math;
@@ -22,6 +24,8 @@ import static org.lwjgl.opengl.GL43.glDispatchCompute;
 import static org.lwjgl.opengl.GL42.glBindImageTexture;
 
 public class Shader {
+
+    protected static SceneContext boundContext = null;
 
     private final int programId;
     private int vertexShader = -1, fragmentShader = -1,
@@ -57,7 +61,7 @@ public class Shader {
         int shaderId = glCreateShader(shaderType);
 
         if(shaderId == 0){
-            throw new Exception("Error creating shader. Type: " +glGetShaderInfoLog(shaderId, 1024));
+            throw new Exception("Error creating shader. Type: " + glGetShaderInfoLog(shaderId, 1024));
         }
 
         glShaderSource(shaderId, shaderCode);
@@ -102,7 +106,6 @@ public class Shader {
 
             bind();
             glDispatchCompute(numX, numY, 1);
-            //glFinish();
 
         }
     }
@@ -114,11 +117,11 @@ public class Shader {
      * @param sizeX total size x
      * @param sizeY total size y
      */
-    public void compute(int groupX, int groupY, int sizeX, int sizeY){
+    public void compute(int groupX, int groupY, Vector2i resolution){
         if(computeShader != -1){
             bind();
-            glDispatchCompute(sizeX/groupX, sizeY/groupY, 1);
-            glFinish();
+            glDispatchCompute((int)Math.ceil((double)resolution.x/(double)groupX),
+            (int)Math.ceil((double)resolution.y/(double)groupY), 1);
         }
     }
 
@@ -324,6 +327,16 @@ public class Shader {
         }
     }
 
+    public void setUniform(String name, Color color){
+        if(uniforms.get(name)==null) return;
+        glUniform3f(uniforms.get(name), color.redf(), color.greenf(), color.bluef());
+    }
+
+    public void setUniform(String name, Vector4i vec){
+        if(uniforms.get(name)==null) return;
+        glUniform4i(uniforms.get(name), vec.x, vec.y, vec.z, vec.w);
+    }
+
     /**
      * Calls glActiveTexture with arg GL_TEXTURE0 + index
      * @param index of texture
@@ -344,6 +357,13 @@ public class Shader {
                         TextureObject overlay, TextureObject dest) {}
 
 
+    public static void setBoundContext(SceneContext context){
+        boundContext = context;
+    }
+
+    static SceneContext getBoundContext(){
+        return boundContext;
+    }
 
 
 }

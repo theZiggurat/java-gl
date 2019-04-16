@@ -1,11 +1,8 @@
 package v2.modules.generic;
 
-import v2.engine.scene.ModuleNode;
-import v2.engine.system.Camera;
-import v2.engine.system.Core;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
-
-import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 
 public class GenericOverlayShader extends Shader {
 
@@ -34,7 +31,7 @@ public class GenericOverlayShader extends Shader {
     @Override
     public void updateUniforms(ModuleNode node){
 
-        Camera camera = Core.camera();
+        Camera camera = boundContext.getCamera();
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", node.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());

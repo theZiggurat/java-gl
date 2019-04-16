@@ -1,9 +1,8 @@
 package v2.modules.pbr;
 
-import v2.engine.system.Camera;
-import v2.engine.system.Core;
+import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
-import v2.engine.scene.ModuleNode;
+import v2.engine.scene.node.ModuleNode;
 
 public class PBRShader extends Shader {
 
@@ -47,6 +46,8 @@ public class PBRShader extends Shader {
         addUniform("modelMatrix");
         addUniform("viewMatrix");
         addUniform("projectionMatrix");
+
+        addUniform("UVscale");
         //addUniform("invViewMatrix");
 
 
@@ -55,7 +56,7 @@ public class PBRShader extends Shader {
     @Override
     public void updateUniforms(ModuleNode group){
 
-        Camera camera = Core.camera();
+        Camera camera = boundContext.getCamera();
 
         PBRMaterial material = ((PBRModel)group).getMaterial();
 
@@ -97,6 +98,8 @@ public class PBRShader extends Shader {
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", group.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
+
+        setUniform("UVscale", ((PBRModel)group).getUVscalar());
 
     }
 

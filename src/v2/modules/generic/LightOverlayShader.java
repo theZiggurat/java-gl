@@ -1,9 +1,8 @@
 package v2.modules.generic;
 
 import v2.engine.scene.light.Light;
-import v2.engine.scene.ModuleNode;
-import v2.engine.system.Camera;
-import v2.engine.system.Core;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
 
 public class LightOverlayShader extends Shader {
@@ -32,7 +31,7 @@ public class LightOverlayShader extends Shader {
 
         Light light = (Light) node;
 
-        Camera camera = Core.camera();
+        Camera camera = boundContext.getCamera();
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", light.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());

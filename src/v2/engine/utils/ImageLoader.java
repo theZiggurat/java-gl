@@ -1,7 +1,7 @@
 package v2.engine.utils;
 
 import org.lwjgl.BufferUtils;
-import v2.engine.gldata.tex.TextureObject;
+import v2.engine.glapi.tex.TextureObject;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -18,7 +18,7 @@ public class ImageLoader {
     /**
      * Utility for loading image bytebuffers.
      * @param filename image path with format "res/image/*"
-     * @return flipped byte gldata with image data
+     * @return flipped byte glapi with image data
      */
     public static ByteBuffer loadImage(String filename){
 
@@ -36,7 +36,7 @@ public class ImageLoader {
 
         if(!stbi_info_from_memory(buffer, w, h, c)){
             throw new RuntimeException("Failed to read image info: " + stbi_failure_reason());
-        };
+        }
 
         ByteBuffer image = stbi_load_from_memory(buffer, w, h, c, 0);
 
@@ -88,7 +88,7 @@ public class ImageLoader {
                 glPixelStorei(GL_UNPACK_ALIGNMENT, 2 - (w.get(0) & 1));
             }
             if(srgb)
-                ret.allocateImage2D(GL_SRGB8, GL_RGB);
+                ret.allocateImage2D(GL_SRGB8, GL_RGB, image);
             else
                 ret.allocateImage2D(GL_RGB16F, GL_RGB, image);
         } else if (c.get(0) == 1){

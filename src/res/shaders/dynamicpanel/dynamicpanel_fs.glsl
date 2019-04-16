@@ -10,6 +10,12 @@ uniform int isDepth;
 const float zNear = 0.01f;
 const float zFar = 100f;
 
+uniform ivec2 resolution;
+
+uniform vec3 borderColor;
+uniform int borderSize;
+uniform int border;
+
 float linearize_depth(float d)
 {
     return (2.0 * zNear) / (zFar + zNear - d * (zFar - zNear));
@@ -21,4 +27,8 @@ void main(){
         fragColor = texture2D(texture, tex);
     else
         fragColor = vec4(vec3(linearize_depth(texture2D(texture, tex).r)), 1);
+
+
+
+    //fragColor = mix(fragColor, vec4(uv, 0,1), .99);
 }

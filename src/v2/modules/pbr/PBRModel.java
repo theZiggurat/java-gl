@@ -1,10 +1,11 @@
 package v2.modules.pbr;
 
 import lombok.Getter;
-import v2.engine.gldata.vbo.Mesh3D;
-import v2.engine.scene.ModuleNode;
-import v2.engine.scene.RenderModule;
-import v2.engine.scene.RenderType;
+import lombok.Setter;
+import v2.engine.glapi.vbo.Mesh3D;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.scene.node.RenderModule;
+import v2.engine.scene.node.RenderType;
 import v2.modules.generic.DepthShader;
 import v2.modules.generic.UUIDShader;
 import v2.modules.shadow.ShadowShader;
@@ -16,6 +17,8 @@ public class PBRModel extends ModuleNode {
 
     @Getter Mesh3D mesh;
     @Getter PBRMaterial material;
+
+    @Getter @Setter private float UVscalar = 1f;
 
     public PBRModel(Mesh3D mesh, PBRMaterial material){
 

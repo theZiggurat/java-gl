@@ -1,9 +1,8 @@
 package v2.modules.generic;
 
 import org.joml.Vector3f;
-import v2.engine.scene.ModuleNode;
-import v2.engine.system.Camera;
-import v2.engine.system.Core;
+import v2.engine.scene.node.ModuleNode;
+import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
 
 public class PlainColorShader extends Shader {
@@ -28,7 +27,7 @@ public class PlainColorShader extends Shader {
     private PlainColorShader(){
         super();
         createVertexShader("res/shaders/wireframe/wire_vs.glsl");
-        createFragmentShader("shaders/gui/generic_color_fs.glsl");
+        createFragmentShader("shaders/gui/panel_fs.glsl");
         link();
 
         addUniform("modelMatrix");
@@ -40,7 +39,7 @@ public class PlainColorShader extends Shader {
 
     @Override
     public void updateUniforms(ModuleNode node) {
-        Camera camera = Core.camera();
+        Camera camera = boundContext.getCamera();
 
         setUniform("projectionMatrix", camera.getProjectionMatrix());
         setUniform("modelMatrix", node.getModelMatrix());

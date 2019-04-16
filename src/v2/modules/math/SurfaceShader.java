@@ -1,6 +1,6 @@
 package v2.modules.math;
 
-import v2.engine.scene.ModuleNode;
+import v2.engine.scene.node.ModuleNode;
 import v2.engine.system.Shader;
 
 public class SurfaceShader extends Shader {

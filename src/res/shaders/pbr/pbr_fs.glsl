@@ -27,6 +27,8 @@ uniform int map_metal;
 uniform sampler2D metalMap;
 uniform float metalConst;
 
+uniform float UVscale;
+
 uniform vec3 basis = normalize(vec3(.5,.5,.5));
 
 
@@ -34,7 +36,7 @@ void main(){
 
     vec3 norm = vs.norm;
 
-    vec2 uv = vec2(vs.uv.x,1-vs.uv.y);
+    vec2 uv = vec2(vs.uv.x,1-vs.uv.y) * UVscale;
 
 
     vec3 norm_sample = normalize(2*texture(normalMap, uv).rgb - 1);

@@ -2,11 +2,10 @@
 
 layout (local_size_x = 16, local_size_y = 16) in;
 
-layout (binding = 0, rgba32f) uniform readonly image2D ssao_image;
+layout (binding = 0, r16f) uniform readonly image2D ssao_image;
 layout (binding = 1) uniform writeonly image2D out_image;
 
-uniform int resX;
-uniform int resY;
+uniform ivec2 resolution;
 
 const int blurSize = 4;
 
@@ -24,7 +23,7 @@ void main() {
             ivec2 sampleCoord = offset + coord;
 
             if(sampleCoord.x >= 0 && sampleCoord.y >= 0 &&
-            sampleCoord.x < resX && sampleCoord.y < resY )
+            sampleCoord.x < resolution.x && sampleCoord.y < resolution.y )
                 result += imageLoad(ssao_image, sampleCoord).r;
              else
                 kernelSize--;
@@ -32,7 +31,7 @@ void main() {
         }
     }
 
-    result=result/kernelSize;
+    result/=kernelSize;
     imageStore(out_image, coord, vec4(vec3(result), 1));
 
 }

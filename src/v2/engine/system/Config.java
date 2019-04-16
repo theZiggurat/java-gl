@@ -1,6 +1,5 @@
 package v2.engine.system;
 
-import com.sun.xml.internal.ws.api.pipe.Engine;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,12 +20,14 @@ public class Config {
     private int numLights;
     private float zfar;
 
+    boolean shadows;
     private int shadowBufferWidth;
     private int shadowBufferHeight;
 
     private boolean ssao;
     private float ssaoRadius;
     private int ssaoSamples;
+    private float ssaoPower;
 
     private boolean debugLayer;
 
@@ -78,13 +79,15 @@ public class Config {
         renderEngine = properties.getProperty("renderEngine");
         engineInstance = properties.getProperty("engineInstance");
 
+        shadows = Boolean.valueOf(properties.getProperty("shadows"));
         shadowBufferWidth = Integer.valueOf(properties.getProperty("shadow_buffer_x"));
         shadowBufferHeight = Integer.valueOf(properties.getProperty("shadow_buffer_y"));
 
         // SSAO settings
         ssao = Boolean.valueOf(properties.getProperty("ssao"));
-        ssaoRadius = Float.valueOf(properties.getProperty("ssao_radius"));
-        ssaoSamples = Integer.valueOf(properties.getProperty("ssao_samples"));
+        ssaoRadius = Float.valueOf(properties.getProperty("ssaoRadius"));
+        ssaoSamples = Integer.valueOf(properties.getProperty("ssaoSamples"));
+        ssaoPower = Float.valueOf(properties.getProperty("ssaoPower"));
 
         // generic layer
         debugLayer = Boolean.valueOf(properties.getProperty("debug_layer"));

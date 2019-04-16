@@ -2,9 +2,8 @@ package v2.modules.post.ssao;
 
 import lombok.Getter;
 import org.joml.Vector3f;
-import v2.engine.gldata.tex.TextureObject;
+import v2.engine.glapi.tex.TextureObject;
 import v2.engine.system.Config;
-import v2.engine.system.Core;
 import v2.engine.system.Shader;
 import v2.engine.system.Window;
 
@@ -13,20 +12,14 @@ import java.util.List;
 import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL15.GL_READ_ONLY;
 import static org.lwjgl.opengl.GL15.GL_WRITE_ONLY;
-import static org.lwjgl.opengl.GL30.GL_RGBA32F;
+import static org.lwjgl.opengl.GL30.*;
 
 public class SSAOShader extends Shader {
 
     private List<Vector3f> samples;
     private Vector3f[] randvec;
 
-    @Getter private TextureObject targetTexture;
-
     public SSAOShader(){
-
-        targetTexture = new TextureObject(Window.instance().getWidth(), Window.instance().getHeight())
-                            .allocateImage2D(GL_RGBA32F, GL_RGBA)
-                            .nofilter();
 
         randvec = new Vector3f[16];
         float [] random = RandomKernel.generateXYNoise(16);
@@ -34,17 +27,17 @@ public class SSAOShader extends Shader {
             randvec[i/2] = new Vector3f(random[i++], random[i++], 0);
         }
 
-        samples = RandomKernel.generate3fHemisphere(Config.instance().getSsaoSamples());
+        samples = RandomKernel.generate3fHemisphere(
+                Config.instance().getSsaoSamples()
+        );
 
         createComputeShader("res/shaders/ssao/ssao_comp.glsl");
         link();
 
-        addUniform("resX");
-        addUniform("resY");
+        addUniform("resolution");
         addUniform("radius");
-
         addUniform("numSamples");
-//
+
         addUniform("viewMatrix");
         addUniform("projectionMatrix");
         for(int i = 0; i<Config.instance().getSsaoSamples(); i++){
@@ -56,33 +49,28 @@ public class SSAOShader extends Shader {
         }
     }
 
-    public void compute(TextureObject world_position, TextureObject normal){
-
+    public void compute(TextureObject worldPos, TextureObject normal, TextureObject target){
 
         bind();
+
         setUniform("numSamples", Config.instance().getSsaoSamples());
         setUniform("radius", Config.instance().getSsaoRadius());
 
-        setUniform("resX", Window.instance().getWidth());
-        setUniform("resY", Window.instance().getHeight());
+        setUniform("resolution", boundContext.getResolution());
+        setUniform("viewMatrix", boundContext.getCamera().getViewMatrix());
+        setUniform("projectionMatrix", boundContext.getCamera().getProjectionMatrix());
 
-        setUniform("viewMatrix", Core.camera().getViewMatrix());
-        setUniform("projectionMatrix", Core.camera().getProjectionMatrix());
-
-
-        for(int i = 0; i<Config.instance().getSsaoSamples(); i++){
+        for(int i = 0; i<Config.instance().getSsaoSamples(); i++)
             setUniform("samples["+i+"]", samples.get(i));
-        }
 
-        for(int i = 0; i < 16; i++){
+        for(int i = 0; i < 16; i++)
             setUniform("randvec["+i+"]", randvec[i]);
-        }
 
-        bindImage(0, world_position.getId(), GL_READ_ONLY, GL_RGBA32F);
+        bindImage(0, worldPos.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(1, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
-        bindImage(2, targetTexture.getId(), GL_WRITE_ONLY, GL_RGBA32F);
+        bindImage(2, target.getId(), GL_WRITE_ONLY, GL_R16F);
 
-        compute(16,16);
+        compute(16,16, boundContext.getResolution());
         unbind();
 
     }

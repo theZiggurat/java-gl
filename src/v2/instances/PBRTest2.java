@@ -3,16 +3,16 @@ package v2.instances;
 import v2.engine.scene.light.DirectionalLight;
 import v2.engine.scene.light.LightManager;
 import v2.engine.scene.light.PointLight;
-import v2.engine.scene.Node;
-import v2.engine.system.Context;
-import v2.engine.gldata.vbo.Meshs;
-import v2.engine.event.Input;
+import v2.engine.scene.node.Node;
+import v2.engine.scene.SceneContext;
+import v2.engine.glapi.vbo.Meshs;
+import v2.engine.application.event.InputManager;
 import v2.modules.pbr.PBRMaterial;
 import v2.modules.pbr.PBRModel;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 
-public class PBRTest2 extends Context {
+public class PBRTest2 extends SceneContext {
 
     PointLight light1;
     Node object, lights;
@@ -42,20 +42,21 @@ public class PBRTest2 extends Context {
                 PBRModel model = new PBRModel(Meshs.sphere,
                         new PBRMaterial(0f, 0f, 0f,
                                 (float)i/(float)matrixdim, (float)j/(float)matrixdim));
-                model.translate(0, 2*(i-matrixdim/2), 2*(j-matrixdim/2));
+                model.transform.translate(0, 2*(i-matrixdim/2), 2*(j-matrixdim/2));
                 object.addChild(model);
             }
         }
 
         light1 = new PointLight();
         light1.setIntensity(5f);
-        light1.translate(2,2,2);
+        light1.transform.translate(2,2,2);
 
         //light2 = new PointLight(light1).translate(2,2,-2);
         //light3 = new PointLight(light1).translate(2,-2,-2);
         //light4 = new PointLight(light1).translate(2,-2,2);
 
-        LightManager.setSun(new DirectionalLight().setIntensity(1f).rotateTo(0,-1,0));
+        LightManager.setSun(new DirectionalLight());
+        LightManager.getSun().setIntensity(1f).transform.rotateTo(0,-1,0);
 
         lights.addChildren(light1);
 
@@ -67,12 +68,12 @@ public class PBRTest2 extends Context {
 
     public void update(double duration) {
 
-        if(Input.instance().isKeyHeld(GLFW_KEY_SPACE))
+        if(InputManager.instance().isKeyHeld(GLFW_KEY_SPACE))
             rotate = !rotate;
 
         if(rotate) {
             time += duration;
-            lights.translateTo(0, (float) (2 * Math.cos(time)) - 2, (float) (2 * Math.sin(time)));
+            lights.transform.translateTo(0, (float) (2 * Math.cos(time)) - 2, (float) (2 * Math.sin(time)));
         }
     }
 
