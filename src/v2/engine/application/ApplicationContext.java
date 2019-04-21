@@ -3,15 +3,23 @@ package v2.engine.application;
 import lombok.Getter;
 import lombok.Setter;
 import v2.engine.application.element.*;
+import v2.engine.application.event.InputManager;
+import v2.engine.application.event.mouse.HoverLostEvent;
+import v2.engine.application.event.mouse.HoverStartEvent;
+import v2.engine.application.layout.Box;
+import v2.engine.application.layout.DivideLayout;
 import v2.engine.scene.light.LightManager;
+import v2.engine.scene.node.Node;
 import v2.engine.system.Config;
 import v2.engine.system.Core;
 import v2.engine.scene.SceneContext;
 import v2.engine.system.Window;
+import v2.engine.utils.Color;
 import v2.modules.pbr.PBRPipeline;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_F1;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
@@ -77,24 +85,26 @@ public class ApplicationContext {
     // TEMPORARY FOR TESTING
     private void __init__ui(){
 
-        //panel = new Panel();
-        //root.addChild(panel);
-        root.addChild(new SceneViewport(sceneContext));
-
-        root.addChild(new PBRDEBUGViewport((PBRPipeline) sceneContext.getPipeline()));
-
+        SceneViewport sceneViewport = new SceneViewport(sceneContext);
         PlainViewport viewport = new PlainViewport();
+        root.addChildren(viewport, sceneViewport);
 
-        Button button = new Button();
-        button.addListener(e -> {
-            Config.instance().setSsao(!Config.instance().isSsao());
-        });
-        viewport.getChildren().get(1).addChild(button);
-        root.addChild(viewport);
-        //panel.setColor(new Color(0xaa00aa));
-        //panel.setBox(new Box(0.05f, 0.05f, 0.15f, 0.7f));
+        sceneViewport.setBox(new Box(0.3f, 0.1f, 0.65f, 0.8f));
+        viewport.setBox(new Box(0.05f, 0.1f, 0.2f, 0.8f));
 
-        root.setTop(root.getChildren().get(0));
+        Button button = new Button(), up = new Button(), down = new Button();
+        button.addListener(e -> Config.instance().setSsao(!Config.instance().isSsao()));
+        up.addListener(e -> Config.instance().setSsaoPower(Config.instance().getSsaoPower()+1));
+        down.addListener(e -> Config.instance().setSsaoPower(Config.instance().getSsaoPower()-1));
+
+        Button ssrToggle = new Button();
+        //ssrToggle.addListener(e -> Config.instance().set);
+
+
+        viewport.getChildren().get(1).addChildren(button, up, down);
+        viewport.getChildren().get(1).setLayout(new DivideLayout(viewport.getChildren().get(1)));
+
+        root.setTop(sceneViewport);
         root.forceLayout();
     }
 
@@ -107,6 +117,9 @@ public class ApplicationContext {
         elementManager.update();
         sceneContext.update();
         root.update();
+
+        if(InputManager.instance().isKeyPressed(GLFW_KEY_F1))
+            Config.instance().loadFromConfigFile();
 
     }
 

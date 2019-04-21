@@ -28,10 +28,8 @@ public class SkyShader extends Shader {
 
     @Override
     public void updateUniforms(ModuleNode skyNode) {
-        setUniform("viewProjectionMatrix",
-                new Matrix4f(boundContext.getCamera().getViewProjectionMatrix()));
-        setUniform("modelMatrix",
-                new Matrix4f(skyNode.getModelMatrix()));
+        setUniform("viewProjectionMatrix", boundContext.getCamera().getViewProjectionMatrix());
+        setUniform("modelMatrix", skyNode.getModelMatrix());
         setUniform("scale", skyNode.getWorldScaling().y);
 
     }

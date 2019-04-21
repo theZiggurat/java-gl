@@ -17,6 +17,9 @@ import java.lang.Math;
 import java.util.function.Function;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_HELD;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_RELEASED;
 
 public class Camera extends Element {
 
@@ -60,6 +63,14 @@ public class Camera extends Element {
                 if(k.getAction() == KeyboardEvent.KEY_PRESSED){
                     if(k.getKey() == GLFW_KEY_MINUS) speedLevel--;
                     if(k.getKey() == GLFW_KEY_EQUAL) speedLevel++;
+
+                    if(k.getKey() == GLFW_KEY_H){
+                        if((k.getMods() & GLFW_MOD_CONTROL)!=0){
+
+                        } else {
+
+                        }
+                    }
                 }
             }
 
@@ -68,16 +79,13 @@ public class Camera extends Element {
 
                 Window window = Window.instance();
 
-                if(m.getAction() == MouseClickEvent.BUTTON_CLICK){
+                if(m.getAction() == BUTTON_CLICK){
 
+
+                    // PICKING
                     if(m.getKey() == GLFW_MOUSE_BUTTON_1){
 
-                        Box sceneBox = context.getParent().getAbsoluteBox();
-                        Vector2f pos = sceneBox.within(m.getScreenPos());
-                        Vector2i resolution = sceneBox.resolution();
-
-                        Vector2i point = new Vector2i((int)(pos.x*resolution.x), (int)((1-pos.y)*resolution.y));
-                        Node selected = context.getPicking().pick(point.x, point.y);
+                        Node selected = pick(m.getScreenPos());
 
                         if(selected != null) {
                             if(selected.isSelected())
@@ -101,7 +109,7 @@ public class Camera extends Element {
 
                 }
 
-                if(m.getAction() == MouseClickEvent.BUTTON_HELD){
+                if(m.getAction() == BUTTON_HELD){
 
                     //  CAMERA ROTATE HOLD
                     if(m.getKey() == GLFW_MOUSE_BUTTON_2){
@@ -117,7 +125,7 @@ public class Camera extends Element {
 
                 }
 
-                if(m.getAction() == MouseClickEvent.BUTTON_RELEASED){
+                if(m.getAction() == BUTTON_RELEASED){
 
                     // CAMERA ROTATE END
                     if(m.getKey() == GLFW_MOUSE_BUTTON_2|| m.getKey() == GLFW_MOUSE_BUTTON_3){
@@ -234,6 +242,15 @@ public class Camera extends Element {
         ret.y = -viewMatrix.m10();
         ret.z = -viewMatrix.m20();
         return ret;
+    }
+
+    private Node pick(Vector2f screenpos){
+        Box sceneBox = context.getParent().getAbsoluteBox();
+        Vector2f pos = sceneBox.within(screenpos);
+        Vector2i resolution = sceneBox.resolution();
+
+        Vector2i point = new Vector2i((int)(pos.x*resolution.x), (int)((1-pos.y)*resolution.y));
+        return context.getPicking().pick(point.x, point.y);
     }
 
 }

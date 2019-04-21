@@ -21,6 +21,9 @@ import static org.lwjgl.glfw.GLFW.GLFW_VRESIZE_CURSOR;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glDisable;
 import static org.lwjgl.opengl.GL11.glEnable;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_HELD;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_RELEASED;
 
 /**
  * Contains functionality akin to a window in an OS
@@ -74,7 +77,7 @@ public class Viewport extends Element {
                 MouseClickEvent m = (MouseClickEvent) e;
 
                 // resize window start
-                if ((m.getAction() == MouseClickEvent.BUTTON_CLICK)) {
+                if ((m.getAction() == BUTTON_CLICK)) {
 
                     if(dragEdge != -1) {
                         ApplicationContext.instance().getElementManager().setFocused(this);
@@ -84,7 +87,7 @@ public class Viewport extends Element {
                 }
 
                 // resize window end
-                else if ((m.getAction() == MouseClickEvent.BUTTON_RELEASED) && activeDrag) {
+                else if ((m.getAction() == BUTTON_RELEASED) && activeDrag) {
 
                     if(activeDrag) {
                         ApplicationContext.instance().getElementManager().resetFocused();
@@ -102,7 +105,7 @@ public class Viewport extends Element {
 
                 // move window
                 MouseClickEvent m = (MouseClickEvent)e;
-                if(m.getAction()==MouseClickEvent.BUTTON_HELD){
+                if(m.getAction()==BUTTON_HELD){
                     getRelativeBox().translate(m.getScreenDelta());
                     getParent().layoutChildren();
                 }

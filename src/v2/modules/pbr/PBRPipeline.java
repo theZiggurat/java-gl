@@ -2,19 +2,17 @@ package v2.modules.pbr;
 
 import lombok.Getter;
 import org.joml.Vector3f;
-import org.lwjgl.BufferUtils;
 import v2.engine.glapi.fbo.PBRFrameBufferObject;
 import v2.engine.scene.SceneContext;
 import v2.engine.scene.node.RenderType;
 import v2.engine.system.*;
 import v2.engine.glapi.fbo.ShadowFrameBufferObject;
+import v2.modules.post.bloom.Bloom;
 import v2.modules.post.ssao.SSAO;
-import v2.modules.post.ssao.SSAOShader;
-
-import java.nio.IntBuffer;
+import v2.modules.post.ssr.SSR;
+import v2.modules.post.tonemap.Tonemap;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL13.GL_SAMPLE_BUFFERS;
 
 /**
  * This pipeline will be for realistic renderering with PBRModel objects
@@ -22,14 +20,23 @@ import static org.lwjgl.opengl.GL13.GL_SAMPLE_BUFFERS;
  */
 public class PBRPipeline extends Pipeline {
 
-    // main lighting pass
-    @Getter private PBRDeferredShader lightingPass;
+
     // render component buffer (albedo, position, normal, etc)
     @Getter private PBRFrameBufferObject pbrFBO;
     // fbo needed to calculate shadow factor for main lighting pass
     @Getter private ShadowFrameBufferObject shadowFBO;
+
+    /** PASSES **/
+    // main lighting pass
+    @Getter private PBRDeferredShader lightingPass;
     // screen space ambient occlusion pass
     @Getter private SSAO ssaoPass;
+    // screen space reflection pass
+    @Getter private SSR ssrPass;
+    // bloom pass
+    @Getter private Bloom bloomPass;
+    // tone mapping
+    @Getter private Tonemap tonemap;
 
     public PBRPipeline(SceneContext context) {
 
@@ -38,16 +45,12 @@ public class PBRPipeline extends Pipeline {
         lightingPass = new PBRDeferredShader();
         pbrFBO = new PBRFrameBufferObject(this);
         shadowFBO = new ShadowFrameBufferObject();
+
         ssaoPass = new SSAO(this);
+        ssrPass = new SSR(this);
 
-        pbrFBO.bind(() ->{
-            IntBuffer ret = BufferUtils.createIntBuffer(16);
-            glGetIntegerv(GL_SAMPLE_BUFFERS, ret);
-            if(ret.get(0) == 1){
-                System.out.println("HEYYYYYYYy");
-            }
-        });
-
+        bloomPass = new Bloom();
+        tonemap = new Tonemap();
     }
 
     @Override
@@ -96,7 +99,11 @@ public class PBRPipeline extends Pipeline {
                 context.getScene().render(RenderType.TYPE_SCENE, e -> !e.isSelected());
             });
 
-            ssaoPass.compute(pbrFBO.getPosition(), pbrFBO.getNormal());
+            // calculate ssao
+            if(Config.instance().isSsao())
+                ssaoPass.compute(
+                        pbrFBO.getPosition(),
+                        pbrFBO.getNormal());
 
             // using buffer data to compute lit color
             lightingPass.compute(
@@ -107,6 +114,14 @@ public class PBRPipeline extends Pipeline {
                     ssaoPass.getTargetTexture(),
                     getSceneBuffer());
 
+            // calculate reflections
+            if(Config.instance().isSsr())
+                ssrPass.compute(
+                        pbrFBO.getPosition(),
+                        pbrFBO.getNormal(),
+                        ssaoPass.getTargetTexture());
+
+            // reset viewport to window size
             Window.instance().resetViewport();
         }
 

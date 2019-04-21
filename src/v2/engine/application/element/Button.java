@@ -11,6 +11,8 @@ import v2.engine.utils.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
+
 public class Button extends Panel {
 
     @Getter private boolean hover = false;
@@ -21,8 +23,8 @@ public class Button extends Panel {
 
         listeners = new ArrayList<>();
 
-        setRounding(12);
-        setColor(new Color(0x606060));
+        setRounding(2);
+
         relativeBox = new Box( 0.1f, 0.1f, 0.8f, 0.8f);
 
         onEvent(e -> {
@@ -31,7 +33,7 @@ public class Button extends Panel {
                 MouseClickEvent m = (MouseClickEvent)e;
 
                 // button activated
-                if(m.getAction()==MouseClickEvent.BUTTON_CLICK  && m.getKey() == 0){
+                if(m.getAction()==BUTTON_CLICK  && m.getKey() == 0){
 
                     ActionEvent action = new ActionEvent();
                     Iterator<ActionEvent.ActionHandler> listens = listeners.iterator();
@@ -43,12 +45,16 @@ public class Button extends Panel {
             }
 
             if(e instanceof HoverStartEvent)
-                hover = true;
+                setColor(new Color(0xFF));
             else if(e instanceof HoverLostEvent)
-                hover = false;
+                setColor(new Color(0x606060));
 
         });
 
+    }
+
+    @Override
+    public void update(){
     }
 
     public void addListener(ActionEvent.ActionHandler e){

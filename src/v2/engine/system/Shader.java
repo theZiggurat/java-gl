@@ -353,7 +353,7 @@ public class Shader {
     public void updateUniforms(Light light){}
     public void updateUniforms(float... floats){}
 
-    public void compute(TextureObject scene,
+    void compute(TextureObject scene,
                         TextureObject overlay, TextureObject dest) {}
 
 

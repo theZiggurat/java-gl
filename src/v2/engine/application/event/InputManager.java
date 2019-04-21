@@ -13,6 +13,9 @@ import v2.engine.system.Window;
 import java.util.HashSet;
 
 import static org.lwjgl.glfw.GLFW.*;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_HELD;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_RELEASED;
 
 
 /**
@@ -116,14 +119,14 @@ public class InputManager {
 
             if(action == GLFW_PRESS){
                 pressedButtons.add(button);
-                _action = MouseClickEvent.BUTTON_CLICK;
+                _action = BUTTON_CLICK;
             }
             else if (action == GLFW_RELEASE){
                 this.mods = 0;
                 releasedButtons.add(button);
                 heldButtons.remove(button);
                 pressedButtons.remove(button);
-                _action = MouseClickEvent.BUTTON_RELEASED;
+                _action = BUTTON_RELEASED;
             }
 
 
@@ -214,27 +217,16 @@ public class InputManager {
         displacement.x = cursorPos.x - prevPos.x;
         displacement.y = cursorPos.y - prevPos.y;
 
-//        context.getEventManager().fire(new MouseMoveEvent(
-//            new Vector2f(
-//                (float) cursorPos.x / (float) Window.instance().getWidth(),
-//                1f - (float) cursorPos.y / (float) Window.instance().getHeight()
-//            ), new Vector2f(
-//                    (float) displacement.x / (float)Window.instance().getWidth(),
-//                    - (float) displacement.y / (float) Window.instance().getHeight()
-//            )
-//        ));
-
         prevPos.x = cursorPos.x;
         prevPos.y = cursorPos.y;
 
         for(Integer k: pressedButtons){
-            ElementManager.instance().fire(new MouseClickEvent(
-                    k, MouseClickEvent.BUTTON_HELD, mods, new Vector2f (
-                    (float)cursorPos.x/(float)Window.instance().getWidth(),
-                    1f-(float)cursorPos.y/(float)Window.instance().getHeight())
-                    , new Vector2f (
-                    (float)displacement.x/(float)Window.instance().getWidth(),
-                    -(float)displacement.y/(float)Window.instance().getHeight())
+            ElementManager.instance().fire(new MouseClickEvent(k, BUTTON_HELD, mods, new Vector2f (
+                (float)cursorPos.x/(float)Window.instance().getWidth(),
+                1f-(float)cursorPos.y/(float)Window.instance().getHeight())
+                , new Vector2f (
+                (float)displacement.x/(float)Window.instance().getWidth(),
+                -(float)displacement.y/(float)Window.instance().getHeight())
             ));
         }
 

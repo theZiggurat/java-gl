@@ -7,6 +7,18 @@ import v2.engine.system.Pipeline;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.GL_R16F;
 
+/**
+ *  SCREEN-SPACED AMBIENT OCCLUSION
+ *
+ *  Quickly approximates shadow facets based on
+ *  position and normal screen data
+ *
+ *  Parameters (found in Config)
+ *      * ssao - boolean: enable/disables ssao
+ *      * ssaoSamples - int: number of samples per pixel
+ *      * ssaoRadius - float: length of sample vector
+ *      * ssaoPower - float: strength of effect
+ */
 public class SSAO {
 
     @Getter private TextureObject targetTexture;

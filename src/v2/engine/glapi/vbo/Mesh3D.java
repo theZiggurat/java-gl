@@ -56,18 +56,23 @@ public class Mesh3D extends VertexBufferObject {
 
 
         // uv vbo
-        vbo = glGenBuffers();
-        vbos.add(vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, Buffer.buffer2f(UVs), GL_STATIC_DRAW);
-        glVertexAttribPointer(1, 2, GL_FLOAT, false, 0,0);
+        if(UVs.size()>0) {
+            vbo = glGenBuffers();
+            vbos.add(vbo);
+            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+            glBufferData(GL_ARRAY_BUFFER, Buffer.buffer2f(UVs), GL_STATIC_DRAW);
+            glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+        }
+
 
         // normal vbo
-        vbo = glGenBuffers();
-        vbos.add(vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, Buffer.buffer3f(normals), GL_STATIC_DRAW);
-        glVertexAttribPointer(2,3,GL_FLOAT, false, 0,0);
+        if(normals.size()>0) {
+            vbo = glGenBuffers();
+            vbos.add(vbo);
+            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+            glBufferData(GL_ARRAY_BUFFER, Buffer.buffer3f(normals), GL_STATIC_DRAW);
+            glVertexAttribPointer(2, 3, GL_FLOAT, false, 0, 0);
+        }
 
         // index vbo
         vbo = glGenBuffers();

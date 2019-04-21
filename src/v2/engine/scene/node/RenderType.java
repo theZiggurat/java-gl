@@ -5,6 +5,5 @@ public enum RenderType {
     TYPE_SHADOW,
     TYPE_UUID,
     TYPE_WIREFRAME,
-    TYPE_OVERLAY,
-    TYPE_DEPTH
+    TYPE_OVERLAY
 }

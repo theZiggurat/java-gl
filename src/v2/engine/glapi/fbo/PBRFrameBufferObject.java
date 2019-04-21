@@ -58,7 +58,7 @@ public class PBRFrameBufferObject extends PipelineFrameBufferObject {
                 .allocateImage2D(GL_RGBA16F, GL_RGBA)
                 .bilinearFilter();
 
-        addAttatchments(position, normal, albedo, getSceneBuffer(), getDepthBuffer());
+        addAttatchments(position, normal, albedo, getScene(), getDepth());
         checkStatus();
 
     }

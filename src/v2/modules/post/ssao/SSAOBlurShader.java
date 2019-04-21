@@ -10,15 +10,15 @@ import static org.lwjgl.opengl.GL30.GL_R16F;
 public class SSAOBlurShader extends Shader {
 
 
-    public SSAOBlurShader(){
+    SSAOBlurShader(){
 
-        createComputeShader("res/shaders/ssao/ssao_blur_comp.glsl");
+        createComputeShader("shaders/ssao/ssao_blur_cs.glsl");
         link();
 
         addUniform("resolution");
     }
 
-    public void compute(TextureObject preBlur, TextureObject target){
+    void compute(TextureObject preBlur, TextureObject target){
 
         bind();
         setUniform("resolution", boundContext.getResolution());

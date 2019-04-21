@@ -26,22 +26,15 @@ public class Picking {
     public Node pick(int x, int y){
 
         UUIDmap.bind();
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        Window.instance().resizeViewport(context.getResolution());
-        context.getScene().render(RenderType.TYPE_UUID);
-        Window.instance().resetViewport();
+            glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            Window.instance().resizeViewport(context.getResolution());
+            context.getScene().render(RenderType.TYPE_UUID, e -> !e.isSelected());
+            Window.instance().resetViewport();
+            ByteBuffer rgb = ByteBuffer.allocateDirect(4);
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            glReadPixels(x, y, 1, 1,
+                    GL_RGBA, GL_UNSIGNED_BYTE, rgb);
         UUIDmap.unbind();
-        ByteBuffer rgb = ByteBuffer.allocateDirect(4);
-        glFinish();
-
-        UUIDmap.bind();
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glReadPixels(x, y, 1, 1,
-                GL_RGBA, GL_UNSIGNED_BYTE, rgb);
-        UUIDmap.unbind();
-
-
-        //System.out.println("r: " + rgb.get(0) +"|g: " + rgb.get(1) + "|b: " + rgb.get(2));
 
         int r, g, b;
         r = (int)rgb.get(0);

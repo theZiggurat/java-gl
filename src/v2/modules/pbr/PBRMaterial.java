@@ -46,22 +46,22 @@ public class PBRMaterial extends Module {
 
         TextureObject albedo = ImageLoader.loadTexture(
                 texturePath + albedoFile, srgb)
-                .bilinearFilter().wrap();
+                .trilinearFilter().wrap();
         setAlbedoMap(albedo);
 
         TextureObject normal = ImageLoader.loadTexture(
                 texturePath + normalFile, srgb)
-                .bilinearFilter().wrap();
+                .trilinearFilter().wrap();
         setNormalMap(normal);
 
         TextureObject roughness = ImageLoader.loadTexture(
                 texturePath + roughnessFile, srgb)
-                .bilinearFilter().wrap();
+                .trilinearFilter().wrap();
         setRoughnessMap(roughness);
 
         TextureObject metal = ImageLoader.loadTexture(
                 texturePath + metalFile, srgb)
-                .bilinearFilter().wrap();
+                .trilinearFilter().wrap();
         setMetalMap(metal);
 
         useAllMaps(true);

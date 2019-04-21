@@ -26,7 +26,7 @@ public class PlainColorShader extends Shader {
 
     private PlainColorShader(){
         super();
-        createVertexShader("res/shaders/wireframe/wire_vs.glsl");
+        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
         createFragmentShader("shaders/gui/panel_fs.glsl");
         link();
 

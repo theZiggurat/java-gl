@@ -5,8 +5,11 @@ import v2.engine.application.element.RootElement;
 import v2.engine.application.event.Event;
 import v2.engine.application.event.InputManager;
 import v2.engine.application.event.mouse.*;
+import v2.engine.system.Window;
 
 import java.util.ArrayList;
+
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
 
 public class ElementManager {
 
@@ -54,7 +57,7 @@ public class ElementManager {
             //         flag forces any refocusing to go through it first
             if(e instanceof MouseClickEvent){
                 MouseClickEvent m = (MouseClickEvent)e;
-                if(m.getAction() == MouseClickEvent.BUTTON_CLICK){
+                if(m.getAction() == BUTTON_CLICK){
 
                     // if were focus locked, we only want to look at elements
                     // deeper in the element tree than the focus element.
@@ -98,18 +101,18 @@ public class ElementManager {
         events.clear();
 
         Element elem;
-        if(focusLock)
-            elem = focused;
-        else if(top.getAbsoluteBox().isWithin(InputManager.instance().getCursorPos()))
-            elem = top;
-        else
-            elem = root.findAtPos(InputManager.instance().getCursorPos());
+        if(focusLock || Window.instance().isHidden())
+            return;
+
+        elem = root.findAtPos(InputManager.instance().getCursorPos());
 
         // update if the element being hovered over changed
         if(elem != hovered){
             hovered.handle(new HoverLostEvent());
             hovered = elem;
             elem.handle(new HoverStartEvent());
+        } else {
+
         }
 
     }

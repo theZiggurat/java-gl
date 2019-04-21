@@ -1,4 +1,7 @@
 # LWJGL Engine - V2
+
+![](https://media.giphy.com/media/61Y9uDxnLjrJGmKcZx/giphy.gif)
+
 OpenGL 3D engine using LWJGL (specifically OpenGL, GLFW, Assimp). 
 Created out of great interest for high fidelity real-time renderers such as Unreal Engine 4 and Blender Eevee
 

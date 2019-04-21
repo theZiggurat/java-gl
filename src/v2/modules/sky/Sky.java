@@ -25,7 +25,7 @@ public class Sky extends ModuleNode {
         transform.scaleTo(2800);
 
         addModule(RenderType.TYPE_SCENE, new RenderModule(
-                SkyShader.instance(), Meshs.dome
+                SkyShader.instance(), Meshs.cube
         ));
     }
 
@@ -36,9 +36,10 @@ public class Sky extends ModuleNode {
         glCullFace(GL_BACK);
     }
 
-
     @Override
-    public void update(){
-        super.update();
+    public void render(RenderType type, Condition condition){
+        glCullFace(GL_FRONT);
+        super.render(type, condition);
+        glCullFace(GL_BACK);
     }
 }

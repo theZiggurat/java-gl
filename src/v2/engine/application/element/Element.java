@@ -47,6 +47,8 @@ public abstract class Element {
 
     @Getter private int UUID;
 
+    @Getter protected int minWidth, minHeight, preferredWidth, preferredHeight;
+
     protected Element(){
         children = new ArrayList<>(5);
         handlers = new ArrayList<>(2);
@@ -151,19 +153,31 @@ public abstract class Element {
      * @return true if box changed, false if it didn't
      */
     public boolean setBox(Box newRelative){
+
         boolean ret = true;
-        if(getRelativeBox().equals(newRelative)) ret = false;
-        else this.relativeBox.set(newRelative);
-        Box newAbsolute = relativeBox.relativeTo(parent.absoluteBox);
-        if(!getAbsoluteBox().equals(newAbsolute)) ret = true;
-        this.absoluteBox.set(newAbsolute);
+
+        if(getRelativeBox().equals(newRelative))
+            ret = false;
+        else
+            this.relativeBox.set(newRelative);
+
+        if(parent == null)
+            absoluteBox.set(relativeBox);
+        else {
+            Box newAbsolute = relativeBox.relativeTo(parent.absoluteBox);
+            if (!getAbsoluteBox().equals(newAbsolute)) ret = true;
+            absoluteBox.set(newAbsolute);
+        }
+
         return ret;
     }
 
     public boolean setAbsoluteBox(Box newAbsolute){
-        if(!attached) return false;
-        if(this.absoluteBox.equals(newAbsolute)) return false;
-        this.absoluteBox.set(newAbsolute);
+        if(!attached)
+            return false;
+        if(absoluteBox.equals(newAbsolute))
+            return false;
+        absoluteBox.set(newAbsolute);
         return true;
     }
 
@@ -196,6 +210,23 @@ public abstract class Element {
         while(!leaf){
 
             if(ret.isControlling()&&ret!=this) break;
+            leaf = true;
+            for(Element element: ret.getChildren()){
+                if(element.getAbsoluteBox().isWithin(pos)){
+                    ret = element;
+                    leaf = false;
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
+    public Element findAtPosForced(Vector2f pos){
+        Element ret = this;
+        boolean leaf = false;
+        while(!leaf){
+
             leaf = true;
             for(Element element: ret.getChildren()){
                 if(element.getAbsoluteBox().isWithin(pos)){

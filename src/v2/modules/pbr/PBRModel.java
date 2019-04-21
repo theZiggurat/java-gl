@@ -6,7 +6,6 @@ import v2.engine.glapi.vbo.Mesh3D;
 import v2.engine.scene.node.ModuleNode;
 import v2.engine.scene.node.RenderModule;
 import v2.engine.scene.node.RenderType;
-import v2.modules.generic.DepthShader;
 import v2.modules.generic.UUIDShader;
 import v2.modules.shadow.ShadowShader;
 import v2.modules.generic.PlainColorShader;
@@ -43,15 +42,10 @@ public class PBRModel extends ModuleNode {
                 UUIDShader.instance(), mesh
         );
 
-        RenderModule depthrenderer = new RenderModule(
-                DepthShader.instance(), mesh
-        );
-
         addModule(RenderType.TYPE_SCENE, scenerenderer);
         addModule(RenderType.TYPE_SHADOW, shadowrenderer);
         addModule(RenderType.TYPE_WIREFRAME, wireframerenderer);
         addModule(RenderType.TYPE_UUID, UUIDrenderer);
-        addModule(RenderType.TYPE_DEPTH, depthrenderer);
 
     }
 

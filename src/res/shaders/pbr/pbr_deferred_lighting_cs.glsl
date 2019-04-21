@@ -2,7 +2,7 @@
 
 struct DirectionalLight {
     vec3 color;
-    vec3 ambient;
+    float ambient;
     vec3 direction;
     float intensity;
 };
@@ -142,7 +142,7 @@ void main(){
 
         if(normal == vec3(0))
         {
-            color = imageLoad(albedo_image, coord, 0).rgb;
+            color = vec3(1);//imageLoad(albedo_image, coord, 0).rgb;
             break;
         }
         else
@@ -175,7 +175,7 @@ void main(){
 
             }
 
-            vec3 ambient = sun.ambient * albedo.rgb;
+            vec3 ambient = sun.ambient * albedo.rgb * ssao_factor;
             color += Lo + ambient;
         }
         color = color / (color + vec3(1.0));

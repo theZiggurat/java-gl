@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector3f;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -29,12 +31,19 @@ public class Config {
     private int ssaoSamples;
     private float ssaoPower;
 
+    private boolean ssr;
+    private int ssrRaymarchSteps;
+    private int ssrBinarySearchSteps;
+    private float ssrRayStepLen;
+    private float ssrFalloff;
+    private int ssrSamples;
+
     private boolean debugLayer;
 
     private boolean isWireframe;
     private Vector3f wireframeColor;
 
-    Properties properties;
+    private float ambientLight;
 
 
     @Setter(AccessLevel.NONE)
@@ -50,17 +59,19 @@ public class Config {
 
 
     public Config(){
-        properties = new Properties();
-        init();
+        loadFromConfigFile();
     }
 
-    public void init(){
+    public void loadFromConfigFile(){
+
+        Properties properties = new Properties();
 
         try{
-            InputStream str = Config.class.getClassLoader().getResourceAsStream("res/config.properties");
-            properties.load(str);
-            str.close();
+            String path = System.getProperty("user.dir") + "\\src\\res\\config.properties";
+            FileInputStream fs = new FileInputStream(path);
 
+            properties.load(fs);
+            fs.close();
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -79,6 +90,7 @@ public class Config {
         renderEngine = properties.getProperty("renderEngine");
         engineInstance = properties.getProperty("engineInstance");
 
+        // shadow settings
         shadows = Boolean.valueOf(properties.getProperty("shadows"));
         shadowBufferWidth = Integer.valueOf(properties.getProperty("shadow_buffer_x"));
         shadowBufferHeight = Integer.valueOf(properties.getProperty("shadow_buffer_y"));
@@ -89,8 +101,18 @@ public class Config {
         ssaoSamples = Integer.valueOf(properties.getProperty("ssaoSamples"));
         ssaoPower = Float.valueOf(properties.getProperty("ssaoPower"));
 
+        // SSR settings
+        ssr = Boolean.valueOf(properties.getProperty("ssr"));
+        ssrRaymarchSteps = Integer.valueOf(properties.getProperty("ssrRaymarchSteps"));
+        ssrBinarySearchSteps = Integer.valueOf(properties.getProperty("ssrBinarySearchSteps"));
+        ssrRayStepLen = Float.valueOf(properties.getProperty("ssrRayStepLen"));
+        ssrFalloff = Float.valueOf(properties.getProperty("ssrFalloff"));
+        ssrSamples = Integer.valueOf(properties.getProperty("ssrSamples"));
+
         // generic layer
         debugLayer = Boolean.valueOf(properties.getProperty("debug_layer"));
+
+        ambientLight = Float.valueOf(properties.getProperty("ambientLight"));
 
         isWireframe = Boolean.valueOf(properties.getProperty("isWireframe"));
         wireframeColor = new Vector3f(0.2f, 0.8f, 0.2f);

@@ -1,15 +1,12 @@
 package v2.modules.post.ssao;
 
-import lombok.Getter;
 import org.joml.Vector3f;
 import v2.engine.glapi.tex.TextureObject;
 import v2.engine.system.Config;
 import v2.engine.system.Shader;
-import v2.engine.system.Window;
 
 import java.util.List;
 
-import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL15.GL_READ_ONLY;
 import static org.lwjgl.opengl.GL15.GL_WRITE_ONLY;
 import static org.lwjgl.opengl.GL30.*;
@@ -19,7 +16,7 @@ public class SSAOShader extends Shader {
     private List<Vector3f> samples;
     private Vector3f[] randvec;
 
-    public SSAOShader(){
+    SSAOShader(){
 
         randvec = new Vector3f[16];
         float [] random = RandomKernel.generateXYNoise(16);
@@ -31,7 +28,7 @@ public class SSAOShader extends Shader {
                 Config.instance().getSsaoSamples()
         );
 
-        createComputeShader("res/shaders/ssao/ssao_comp.glsl");
+        createComputeShader("shaders/ssao/ssao_cs.glsl");
         link();
 
         addUniform("resolution");
@@ -49,9 +46,13 @@ public class SSAOShader extends Shader {
         }
     }
 
-    public void compute(TextureObject worldPos, TextureObject normal, TextureObject target){
+
+    void compute(TextureObject worldPos, TextureObject normal, TextureObject target){
 
         bind();
+
+        if(samples.size() != Config.instance().getSsaoSamples())
+            samples = RandomKernel.generate3fHemisphere(Config.instance().getSsaoSamples());
 
         setUniform("numSamples", Config.instance().getSsaoSamples());
         setUniform("radius", Config.instance().getSsaoRadius());

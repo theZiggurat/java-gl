@@ -15,10 +15,7 @@ import static org.lwjgl.opengl.GL32.GL_TEXTURE_2D_MULTISAMPLE;
 
 public abstract class Pipeline {
 
-    private PipelineFrameBufferObject overlayFrameBufferObject;
-    private TextureObject overlayBlendedImage;
-
-    private OverlayBlendingShader overlayBlendingShader;
+    @Getter private PipelineFrameBufferObject pipelineBuffer;
 
     @Getter private SceneContext context;
 
@@ -47,14 +44,13 @@ public abstract class Pipeline {
                     .allocateDepth()
                     .bilinearFilter();
 
-        overlayFrameBufferObject = new PipelineFrameBufferObject(this, true);
-        overlayBlendingShader = new OverlayBlendingShader(context);
+        pipelineBuffer = new PipelineFrameBufferObject(this, true);
 
     }
 
     // explicitly update the resolution of pipeline fields
     public void resize(){
-        overlayFrameBufferObject.resize(getResolution());
+        pipelineBuffer.resize(getResolution());
     }
 
     public Vector2i getResolution(){
@@ -73,7 +69,7 @@ public abstract class Pipeline {
 
         if(Config.instance().isDebugLayer()) {
 
-            overlayFrameBufferObject.bind(()-> {
+            pipelineBuffer.bind(()-> {
 
                 context.getScene().render(RenderType.TYPE_OVERLAY);
                 glPolygonMode(GL_FRONT, GL_LINE);

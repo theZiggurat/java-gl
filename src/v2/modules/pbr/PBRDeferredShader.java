@@ -1,5 +1,6 @@
 package v2.modules.pbr;
 
+import lombok.Getter;
 import v2.engine.glapi.tex.TextureObject;
 import v2.engine.scene.light.Light;
 import v2.engine.scene.light.LightManager;
@@ -13,6 +14,7 @@ import static org.lwjgl.opengl.GL30.*;
 public class PBRDeferredShader extends Shader {
 
     int numLights;
+    @Getter public TextureObject targetTexture;
 
     public PBRDeferredShader(){
         super();
@@ -47,7 +49,7 @@ public class PBRDeferredShader extends Shader {
     }
 
     public void compute(TextureObject albedo, TextureObject position, TextureObject normal,
-                        TextureObject lightDepth, TextureObject ssao, TextureObject scene){
+                        TextureObject lightDepth, TextureObject ssao, TextureObject out){
 
         bind();
 
@@ -70,7 +72,7 @@ public class PBRDeferredShader extends Shader {
             setUniform("sun.color", LightManager.getSun().getColor());
             setUniform("sun.intensity", LightManager.getSun().getIntensity());
             setUniform("sun.direction", LightManager.getSun().getWorldRotation());
-            setUniform("sun.ambient", LightManager.getSun().getAmbientLight());
+            setUniform("sun.ambient", Config.instance().getAmbientLight());
         }
 
         setUniform("ssao", Config.instance().isSsao() ? 1 : 0);
@@ -90,7 +92,7 @@ public class PBRDeferredShader extends Shader {
         bindImage(1, position.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(2, normal.getId(), GL_READ_ONLY, GL_RGBA32F);
         bindImage(3, ssao.getId(), GL_READ_ONLY, GL_R16F);
-        bindImage(4, scene.getId(), GL_WRITE_ONLY, GL_RGBA16F);
+        bindImage(4, out.getId(), GL_WRITE_ONLY, GL_RGBA16F);
         compute(16,16, boundContext.getResolution());
         unbind();
     }

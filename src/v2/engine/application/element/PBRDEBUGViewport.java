@@ -6,6 +6,7 @@ import v2.engine.glapi.tex.TextureObject;
 import v2.modules.pbr.PBRPipeline;
 
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_1;
+import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
 
 public class PBRDEBUGViewport extends TextureViewport {
 
@@ -31,7 +32,7 @@ public class PBRDEBUGViewport extends TextureViewport {
             if(e instanceof MouseClickEvent){
                 MouseClickEvent m = (MouseClickEvent)e;
                 if(mainPanel.getAbsoluteBox().isWithin(m.getScreenPos())){
-                    if(m.getKey() == GLFW_MOUSE_BUTTON_1 && m.getAction() == MouseClickEvent.BUTTON_CLICK){
+                    if(m.getKey() == GLFW_MOUSE_BUTTON_1 && m.getAction() == BUTTON_CLICK){
                         index = (index+1)%5;
                         mainPanel.setImageBuffer(refs[index]);
                     }

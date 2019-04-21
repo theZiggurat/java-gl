@@ -15,11 +15,11 @@ import java.util.stream.Stream;
 
     @Getter private int UUID;
 
-    private boolean activated = true;
-    @Getter private boolean selected = false;
-    @Setter private String debugName;
+    @Getter @Setter private boolean activated = true;
+    @Getter @Setter private boolean selected = false;
+    @Getter @Setter private boolean hidden = false;
 
-    @Getter private boolean localRotation, localTranslation, localScaling;
+    @Setter private String debugName;
 
     @Getter @Setter private Node parent;
     @Getter private List<Node> children;
@@ -59,11 +59,12 @@ import java.util.stream.Stream;
 
     public void addChildren(Node... children){
         getChildren().addAll(Arrays.asList(children));
-        Arrays.stream(children).forEach(e -> e.setParent(this));
+        for(Node child: children)
+            child.setParent(this);
     }
 
     public Vector3f getWorldTranslation(){
-        if(parent != null && !localTranslation) {
+        if(parent != null) {
             return transform.getTranslation().add(parent.getWorldTranslation());
         } else {
             return transform.getTranslation();
@@ -71,7 +72,7 @@ import java.util.stream.Stream;
     }
 
     public Vector3f getWorldRotation(){
-        if(parent != null && !localRotation) {
+        if(parent != null) {
             return transform.getRotation().add( parent.getWorldRotation());
         } else {
             return transform.getRotation();
@@ -79,7 +80,7 @@ import java.util.stream.Stream;
     }
 
     public Vector3f getWorldScaling(){
-        if(parent != null && !localScaling) {
+        if(parent != null) {
             return transform.getScaling().mul(parent.getWorldScaling());
         } else {
             return transform.getScaling();
@@ -94,29 +95,21 @@ import java.util.stream.Stream;
         return ret;
     }
 
-    public Stream<Node> stream(){
-        return collect().stream();
-    }
-
-
     public void update() {
-        children.forEach(child -> {
+        for(Node child: children)
             if (child.isActivated()) child.update();
-        });
     }
 
     public void render(RenderType type) {
-        children.forEach(child -> {
-            if (child.isActivated())
-                child.render(type);
-        });
+        for(Node child: children)
+            if (child.isActivated()&&!child.isHidden()) child.render(type);
     }
 
      public void render(RenderType type, Condition condition) {
-         children.forEach(child -> {
+         for(Node child: children) {
              if (child.isActivated() && condition.isvalid(child))
                  child.render(type, condition);
-         });
+         }
      }
 
     public void cleanup() {
@@ -145,19 +138,4 @@ import java.util.stream.Stream;
         boolean isvalid(Node node);
     }
 
-
-     public Node localizeRotation(boolean _localize){
-         localRotation = _localize;
-         return this;
-     }
-
-     public Node localizeTranslation(boolean _localize){
-         localTranslation = _localize;
-         return this;
-     }
-
-     public Node localizeScaling(boolean _localize){
-         localScaling = _localize;
-         return this;
-     }
 }
