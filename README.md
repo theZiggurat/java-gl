@@ -6,20 +6,19 @@ OpenGL 3D engine using LWJGL (specifically OpenGL, GLFW, Assimp).
 Created out of great interest for high fidelity real-time renderers such as Unreal Engine 4 and Blender Eevee
 
 ___Demos___:
-   * [September 2018]
    * [Febuary 2019]
+   * [September 2018]
 
 ___Implemented features___:
   * Physically based rendering (metalness workflow)
-      * Cook-Torrance BDRF
-  * Shadow mapping (sun only)
-  * ASSIMP model loading
+      * Cook-Torrance BRDF
   * Fully deferred render pipeline
       * Position, normal, albedo, roughness, and metal attatchments
-  * GLSL vertex, fragment, geometry, and compute shader creation
-      * Attribute bindings
-      * Uniform variables
-      * Framebuffer bindings
+  * Shadow mapping (sun only)
+  * ASSIMP model loading
+  * Advanced post-processing
+      * SSAO: Screen space ambient occlusion
+      * SSR: Screen space reflections
   * Full 3D movement/rotation
      * WASD to traverse
      * Right mouse to rotate view
@@ -27,15 +26,22 @@ ___Implemented features___:
      * Q to zoom
   * Dynamic window resizing
      * Auto resizing FBO attachments and textures
+  * GUI (early stages)
+     * Movable/Resizable viewports
+     * Basic buttons
+     * Event system
+  * Cursor object picking
+     * Unique identifier map for pixel perfect picking
   
 ___WIP features___:
   * More advanced shadow mapping
-      * Parallel split shadow maps
-           * Ortho-frustum fitting
-      * Perspective cube maps (for point light shadows)
+      * Improve on sun shadow mapping
+          * Parallel split shadow maps
+          * Ortho-frustum fitting
+      * Perspective shadow maps for point and spot lights
   * Uniform block bindings
-  * Multisampling
-  * Tone mapping
+  * Proper serialization
+      * Load engine behavior instead of hard-coding it
   * GUI
       * Buttons, sliders and fields
       * Static and dynamic text
@@ -49,16 +55,10 @@ ___WIP features___:
   * Height mapping
       * Parralax occlusion mapping
   * Post-processing
-      * Screen space ambient occlusion + blur
       * Bloom
       * Depth of field
-      * Screen space reflections
-  
-___Future features___:
-  * Modular shader creation
-  * Runtime material editing
-  * Water/Ocean generation
-  * Terrain generation
+      * HDR tone mapping
+      * FXAA (fast approximate anti-aliasing)
   
 [September 2018]: https://www.youtube.com/watch?v=jU0Dm78wGI0&feature=youtu.be
 [Febuary 2019]: https://www.youtube.com/watch?v=-DDIFM3aZWM&feature=youtu.be
