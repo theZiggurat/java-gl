@@ -1,13 +1,13 @@
 package v2.modules.generic;
 
-import org.joml.Vector3f;
 import v2.engine.scene.node.ModuleNode;
 import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
+import v2.engine.utils.Color;
 
 public class PlainColorShader extends Shader {
 
-    private static Vector3f color = new Vector3f(1,1,1);
+    private static Color color = new Color(0xe28c0b);
 
     private static PlainColorShader instance;
     public static PlainColorShader instance(){
@@ -16,12 +16,8 @@ public class PlainColorShader extends Shader {
         return instance;
     }
 
-    public static void setColor(Vector3f _color){
+    public static void setColor(Color _color){
          color = _color;
-    }
-
-    public static void setColor(float r, float g, float b){
-        setColor(new Vector3f(r, g, b));
     }
 
     private PlainColorShader(){

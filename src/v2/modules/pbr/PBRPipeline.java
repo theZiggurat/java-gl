@@ -84,7 +84,7 @@ public class PBRPipeline extends Pipeline {
                 shadowFBO.bind(() -> {
                     glDisable(GL_CULL_FACE);
                     glViewport(0, 0, Config.instance().getShadowBufferWidth(),
-                            Config.instance().getShadowBufferHeight());
+                        Config.instance().getShadowBufferHeight());
                     glClear(GL_DEPTH_BUFFER_BIT);
                     context.getScene().render(RenderType.TYPE_SHADOW, e -> !e.isSelected());
                     glEnable(GL_CULL_FACE);
@@ -93,33 +93,33 @@ public class PBRPipeline extends Pipeline {
 
             pbrFBO.bind(()-> {
                 Window.instance().resizeViewport(context.getResolution());
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
                 // render scenegraph to obtain geometry data in the pbrFBO buffers
-                context.getScene().render(RenderType.TYPE_SCENE, e -> !e.isSelected());
+                context.getScene().render(RenderType.TYPE_SCENE);
             });
 
             // calculate ssao
             if(Config.instance().isSsao())
                 ssaoPass.compute(
-                        pbrFBO.getPosition(),
-                        pbrFBO.getNormal());
+                pbrFBO.getPosition(),
+                pbrFBO.getNormal());
 
             // using buffer data to compute lit color
             lightingPass.compute(
-                    pbrFBO.getAlbedo(),
-                    pbrFBO.getPosition(),
-                    pbrFBO.getNormal(),
-                    shadowFBO.getDepth(),
-                    ssaoPass.getTargetTexture(),
-                    getSceneBuffer());
+                pbrFBO.getAlbedo(),
+                pbrFBO.getPosition(),
+                pbrFBO.getNormal(),
+                shadowFBO.getDepth(),
+                ssaoPass.getTargetTexture(),
+                getSceneBuffer());
 
             // calculate reflections
             if(Config.instance().isSsr())
                 ssrPass.compute(
-                        pbrFBO.getPosition(),
-                        pbrFBO.getNormal(),
-                        ssaoPass.getTargetTexture());
+                pbrFBO.getPosition(),
+                pbrFBO.getNormal(),
+                ssaoPass.getTargetTexture());
 
             // reset viewport to window size
             Window.instance().resetViewport();

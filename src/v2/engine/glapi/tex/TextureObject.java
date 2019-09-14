@@ -22,7 +22,7 @@ import static org.lwjgl.opengl.GL32.glTexImage2DMultisample;
 public class TextureObject {
 
     private int type, id, internalFormat, format, dataType;
-    private boolean isDepth = false;
+    private boolean isDepth = false, isStencil = false;
     @Getter @Setter private int width, height;
 
     public TextureObject(int type, int width, int height, int id){
@@ -148,6 +148,7 @@ public class TextureObject {
         this.dataType = GL_FLOAT;
         allocate();
         isDepth = true;
+        isStencil = true;
         return this;
     }
 

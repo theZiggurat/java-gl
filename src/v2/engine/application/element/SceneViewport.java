@@ -8,9 +8,9 @@ import v2.engine.scene.SceneContext;
 
 public class SceneViewport extends Viewport {
 
-    @Getter @Setter private int borderSize = 4;
+    @Getter @Setter private int borderSize = 8;
 
-    private SceneContext context;
+    @Getter private SceneContext context;
 
     public SceneViewport(SceneContext sceneContext){
 

@@ -11,5 +11,5 @@ public abstract class Layout {
         this.parent = parent;
     }
 
-    public abstract Box findRelativeTransform(Element e, int index);
+    public abstract Box findRelativeTransform(Element e, final int index);
 }

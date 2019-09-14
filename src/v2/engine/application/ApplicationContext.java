@@ -20,9 +20,7 @@ import v2.modules.pbr.PBRPipeline;
 import java.lang.reflect.InvocationTargetException;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_F1;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.*;
 
 public class ApplicationContext {
 
@@ -45,35 +43,35 @@ public class ApplicationContext {
         renderElement = root;
         elementManager = ElementManager.instance();
 
-        // initialize pipeline from config
-        try {
-
-            this.sceneContext = Core.class.getClassLoader().loadClass(
-                    Config.instance().getEngineInstance()).asSubclass(SceneContext.class).newInstance();
-            sceneContext.loadRenderer();
-        }
-        catch(ClassNotFoundException e){
-            e.printStackTrace();
-            System.err.println("Render engine class does not exist: " + Config.instance().getRenderEngine());
-            System.exit(-1);
-        }
-        catch (InstantiationException e){
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        catch (IllegalAccessException e){
-            e.printStackTrace();
-            System.exit(-1);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            System.err.println("Render engine does not take SceneContext in its constructor: " + Config.instance().getRenderEngine());
-            System.exit(-1);
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        // initialize engine implementation
-
-        sceneContext.init();
+//        // initialize pipeline from config
+//        try {
+//
+//            this.sceneContext = Core.class.getClassLoader().loadClass(
+//                    Config.instance().getEngineInstance()).asSubclass(SceneContext.class).newInstance();
+//            sceneContext.loadRenderer();
+//        }
+//        catch(ClassNotFoundException e){
+//            e.printStackTrace();
+//            System.err.println("Render engine class does not exist: " + Config.instance().getRenderEngine());
+//            System.exit(-1);
+//        }
+//        catch (InstantiationException e){
+//            e.printStackTrace();
+//            System.exit(-1);
+//        }
+//        catch (IllegalAccessException e){
+//            e.printStackTrace();
+//            System.exit(-1);
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//            System.err.println("Render engine does not take SceneContext in its constructor: " + Config.instance().getRenderEngine());
+//            System.exit(-1);
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+//        // initialize engine implementation
+//
+//        sceneContext.init();
         elementManager.init(this);
 
         // replace with application load protocol
@@ -85,11 +83,11 @@ public class ApplicationContext {
     // TEMPORARY FOR TESTING
     private void __init__ui(){
 
-        SceneViewport sceneViewport = new SceneViewport(sceneContext);
+        //SceneViewport sceneViewport = new SceneViewport(sceneContext);
         PlainViewport viewport = new PlainViewport();
-        root.addChildren(viewport, sceneViewport);
+        root.addChildren(viewport);//, sceneViewport);
 
-        sceneViewport.setBox(new Box(0.3f, 0.1f, 0.65f, 0.8f));
+//        sceneViewport.setBox(new Box(0.3f, 0.1f, 0.65f, 0.8f));
         viewport.setBox(new Box(0.05f, 0.1f, 0.2f, 0.8f));
 
         Button button = new Button(), up = new Button(), down = new Button();
@@ -98,13 +96,13 @@ public class ApplicationContext {
         down.addListener(e -> Config.instance().setSsaoPower(Config.instance().getSsaoPower()-1));
 
         Button ssrToggle = new Button();
-        //ssrToggle.addListener(e -> Config.instance().set);
+        ssrToggle.addListener(e -> Config.instance().setSsr(!Config.instance().isSsr()));
 
 
-        viewport.getChildren().get(1).addChildren(button, up, down);
-        viewport.getChildren().get(1).setLayout(new DivideLayout(viewport.getChildren().get(1)));
+        viewport.getChildren().get(1).addChildren(button, up, down, ssrToggle);
+        //viewport.getChildren().get(1).setLayout(new DivideLayout(viewport.getChildren().get(1)));
 
-        root.setTop(sceneViewport);
+        //root.setTop(sceneViewport);
         root.forceLayout();
     }
 
@@ -115,7 +113,7 @@ public class ApplicationContext {
         }
 
         elementManager.update();
-        sceneContext.update();
+        //sceneContext.update();
         root.update();
 
         if(InputManager.instance().isKeyPressed(GLFW_KEY_F1))
@@ -125,9 +123,10 @@ public class ApplicationContext {
 
     public void draw(){
         Window.instance().setBlending(false);
-        sceneContext.render();
+        //sceneContext.render();
         Window.instance().setBlending(true);
         glDisable(GL_DEPTH_TEST);
+        glClear(GL_COLOR_BUFFER_BIT);
         renderElement.render();
         glEnable(GL_DEPTH_TEST);
     }

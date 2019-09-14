@@ -103,6 +103,10 @@ public class Window {
         glCullFace(GL_BACK);
         glPolygonMode(GL_FRONT_FACE, GL_FILL);
 
+        glEnable(GL_STENCIL_TEST);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF); // Set any stencil to 1
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

@@ -26,7 +26,8 @@ public abstract class Pipeline {
 
     /**
      * Base class of the pipeline which provides the following functionality:
-     *  1. Overlay rendering (outlines, debug scene objects, )
+     *  1. Overlay rendering (outlines, debug scene objects)
+     *  2. Render target texture and depth target texture
      * @param context 3D context for pipleline to run for
      */
     protected Pipeline(SceneContext context){
@@ -65,19 +66,25 @@ public abstract class Pipeline {
         // that will populate the scene texture
         renderScene(context);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT| GL_STENCIL_BUFFER_BIT);
 
         if(Config.instance().isDebugLayer()) {
 
             pipelineBuffer.bind(()-> {
 
+                Window.instance().resizeViewport(getResolution());
+
                 context.getScene().render(RenderType.TYPE_OVERLAY);
                 glPolygonMode(GL_FRONT, GL_LINE);
-                glDepthFunc(GL_EQUAL);
-                glLineWidth(1f);
+                glDepthFunc(GL_LEQUAL);
+                glPolygonOffset(0.1f, 0);
+                glLineWidth(2f);
                 context.getSelectionManager().renderSelected(RenderType.TYPE_WIREFRAME);
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+                glPolygonOffset(0, 0);
                 glDepthFunc(GL_LESS);
+
+                Window.instance().resetViewport();
             });
         }
     }

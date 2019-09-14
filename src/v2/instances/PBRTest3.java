@@ -110,7 +110,7 @@ public class PBRTest3 extends SceneContext {
 
 
         LightManager.setSun(new DirectionalLight());
-        LightManager.getSun().setIntensity(2f).transform.rotateTo(0,-1,0);
+        LightManager.getSun().setIntensity(0.1f).transform.rotateTo(0,-1,0);
 
         scene.addChildren(object, Sky.instance());
         camera.transform.translateTo(-10,7,15);

@@ -4,7 +4,7 @@ import v2.engine.application.element.Element;
 
 public class AbsoluteLayout extends Layout {
 
-    public AbsoluteLayout(Element e){
+    public AbsoluteLayout(Element e) {
         super(e);
     }
 
@@ -16,7 +16,7 @@ public class AbsoluteLayout extends Layout {
      * @return Box where element conforms to
      */
     @Override
-    public Box findRelativeTransform(Element e, int index) {
+    public Box findRelativeTransform(Element e, final int index) {
         return e.getRelativeBox();
     }
 }

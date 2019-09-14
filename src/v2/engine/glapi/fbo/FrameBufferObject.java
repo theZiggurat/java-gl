@@ -68,6 +68,10 @@ public abstract class FrameBufferObject {
         glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, textureId, 0);
     }
 
+    public void createDepthStencilTextureAttatchment(int textureId){
+        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, textureId, 0);
+    }
+
     public void createDepthTextureMultisampleAttatchment(int textureId){
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, textureId, 0);
     }
@@ -100,8 +104,12 @@ public abstract class FrameBufferObject {
                 if (attatchment.isDepth()) {
                     if(attatchment.isMultisample())
                         createDepthTextureMultisampleAttatchment(attatchment.getId());
-                    else
-                        createDepthTextureAttatchment(attatchment.getId());
+                    else {
+                        if (attatchment.isStencil())
+                            createDepthStencilTextureAttatchment(attatchment.getId());
+                        else
+                            createDepthTextureAttatchment(attatchment.getId());
+                    }
                 }
                 else if(attatchment.isMultisample()) {
                     createColorTextureMultisampleAttatchment(attatchment.getId(), i);

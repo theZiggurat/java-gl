@@ -44,6 +44,9 @@ public class Viewport extends Element {
     // size in pixels the mouse can hover over to start a resize event
     private int edgeSize = 5;
 
+    protected float minWidth = 40;
+    protected float minHeight = 40;
+
     // child panels
     protected Panel topBar;
     @Setter(AccessLevel.PROTECTED)
@@ -132,26 +135,27 @@ public class Viewport extends Element {
             Box box = new Box(getRelativeBox());
             switch(dragEdge){
                 case 0: {   // left
-                    box.width -= delta.x;
-                    box.x += delta.x;
-                    setBox(box);
+                    if (box.width - delta.x >= minWidth) {
+                        box.width -= delta.x;
+                        box.x += delta.x;
+                        System.out.println(box.width);
+                    }
                     break;
                 } case 1: { // top
-                    box.height -= delta.y;
-                    setBox(box);
+                    if (box.height - delta.y >= minHeight)
+                        box.height -= delta.y;
                     break;
                 } case 2: { // right
                     box.width += delta.x;
-                    setBox(box);
                     break;
                 } case 3: { // bottom
                     box.height += delta.y;
                     box.y -= delta.y;
-                    setBox(box);
                     break;
                 }
 
             }
+            setBox(box);
             forceTreeLayout();
         }
         else {
