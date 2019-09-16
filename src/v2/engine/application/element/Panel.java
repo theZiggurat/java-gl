@@ -2,17 +2,17 @@ package v2.engine.application.element;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.joml.Vector2i;
 import org.joml.Vector4i;
 import v2.engine.glapi.tex.TextureObject;
 import v2.engine.glapi.vbo.Meshs;
 import v2.engine.application.layout.Box;
 import v2.engine.system.Config;
 import v2.engine.system.Shader;
+import v2.engine.system.Window;
 import v2.engine.utils.Color;
 
-import static org.lwjgl.opengl.GL11.GL_FILL;
-import static org.lwjgl.opengl.GL11.GL_FRONT;
-import static org.lwjgl.opengl.GL11.glPolygonMode;
+import static org.lwjgl.opengl.GL11.*;
 
 public class Panel extends Element {
 
@@ -32,6 +32,8 @@ public class Panel extends Element {
     @Setter private boolean drawBorder;
     @Setter private Color borderColor;
     @Getter @Setter private int borderSize;
+
+    @Getter @Setter private boolean scissor = true;
 
     // defines corner rounding for each corner in pixels
     // x: top-left, y: top-right, z: bottom-left, w: bottom-right
@@ -59,10 +61,18 @@ public class Panel extends Element {
         glPolygonMode(GL_FRONT, GL_FILL);
         instance().bind();
         instance().updateUniforms(this);
-        Meshs.posquad.render();
+        if (isScissor()) {
+            glEnable(GL_SCISSOR_TEST);
+            Vector4i pix = this.getAbsoluteBox().pixelDimensions(Window.instance().getResolution());
+            glScissor(pix.x, pix.y, pix.z + 2, pix.w + 2);
+            Meshs.posquad.render();
+            super.render();
+            glDisable(GL_SCISSOR_TEST);
+        } else {
+            Meshs.posquad.render();
+            super.render();
+        }
         instance().unbind();
-
-        super.render();
 
     }
 

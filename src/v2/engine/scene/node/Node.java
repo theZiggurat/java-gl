@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 
     public Node() {
         super();
-        UUID = Utils.generateNewUUID();
+        UUID = Utils.generateNewUUID_3D();
         this.transform = new Transform();
         this.children = new ArrayList<>();
     }

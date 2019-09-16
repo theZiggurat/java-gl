@@ -7,12 +7,14 @@ import org.joml.Vector2i;
 import v2.engine.application.event.*;
 import v2.engine.application.event.mouse.MouseClickEvent;
 import v2.engine.application.layout.Box;
+import v2.engine.application.layout.Inset;
 import v2.engine.application.layout.Layout;
 import v2.engine.application.layout.AbsoluteLayout;
 import v2.engine.system.Window;
 import v2.engine.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public abstract class Element {
 
@@ -49,13 +51,16 @@ public abstract class Element {
 
     @Getter protected int minWidth, minHeight, preferredWidth, preferredHeight;
 
+    @Setter @Getter protected Inset inset;
+
     protected Element(){
         children = new ArrayList<>(5);
         handlers = new ArrayList<>(2);
         layout = new AbsoluteLayout(this);
         relativeBox = new Box(0,0,0,0);
         absoluteBox = new Box(0,0,0,0);
-        UUID = Utils.generateNewUUID();
+        UUID = Utils.generateNewUUID_GUI();
+        inset = new Inset(0);
     }
 
     /**
@@ -85,7 +90,7 @@ public abstract class Element {
      * root)
      *
      *  1. Layout information and resize events
-     *  2. Ordered rendering (parent renders before child)
+     *  2. Ordered rendering (owner renders before child)
      *  3. Registered for event traversal
      *  4. Registered for render traversal
      * @param e event to add
@@ -111,10 +116,13 @@ public abstract class Element {
      * laid out based on rules set by each element's Layout object
      */
     protected void layoutChildren(){
+        layout.update();
         int i = 0;
         for(Element child: children){
             if(child.isAttached()) continue;
-            if(child.setBox(layout.findRelativeTransform(child, i++))) {
+
+            Optional<Box> relative = layout.findRelativeTransform(child, i++);
+            if(relative.isPresent() && child.setBox(relative.get())) {
 
                 child.handle(new ResizeEvent());
                 child.layoutChildren();
@@ -125,9 +133,11 @@ public abstract class Element {
     protected void forceTreeLayout(){
         int i = 0;
         for(Element child: children){
-            if(child.isAttached()) continue;
-            child.setBox(layout.findRelativeTransform(child, i++));
-            child.handle(new ResizeEvent());
+            //if(child.isAttached()) continue;
+            Optional<Box> relative = layout.findRelativeTransform(child, i++);
+            if (relative.isPresent())
+                if (child.setBox(relative.get()))
+                    child.handle(new ResizeEvent());
             child.forceTreeLayout();
         }
     }
@@ -144,9 +154,17 @@ public abstract class Element {
         return ret;
     }
 
+    public Vector2i getPixelSizeForRelative(Box within){
+        Vector2i ret = new Vector2i();
+        Box box = within.relativeTo(getAbsoluteBox());
+        ret.x = (int) (Window.instance().getWidth() * box.getWidth());
+        ret.y = (int) (Window.instance().getHeight() * box.getHeight());
+        return ret;
+    }
+
     /**
      * Sets new relative based on input relative box
-     * Also sets absolute box by using data from parent element
+     * Also sets absolute box by using data from owner element
      * if either of these were changed, method returns true
      * such that the caller can know if they need to update or render
      * @param newRelative relative box this element will be set to
@@ -158,14 +176,15 @@ public abstract class Element {
 
         if(getRelativeBox().equals(newRelative))
             ret = false;
-        else
-            this.relativeBox.set(newRelative);
 
         if(parent == null)
             absoluteBox.set(relativeBox);
         else {
-            Box newAbsolute = relativeBox.relativeTo(parent.absoluteBox);
-            if (!getAbsoluteBox().equals(newAbsolute)) ret = true;
+            Box newAbsolute = newRelative.relativeTo(parent.absoluteBox);
+            if(newAbsolute.width * Window.instance().getWidth() >= minWidth &&
+                    newAbsolute.height * Window.instance().getHeight() >= minHeight)
+                    relativeBox.set(newRelative);
+            if (getAbsoluteBox().equals(newAbsolute)) ret = true;
             absoluteBox.set(newAbsolute);
         }
 
@@ -242,6 +261,11 @@ public abstract class Element {
 
     public void cleanup(){
         children.stream().forEach(e -> e.cleanup());
+    }
+
+    public void setChildrenInset(Inset inset) {
+        for(Element child: this.getChildren())
+            child.setInset(inset);
     }
 
 //    @Override

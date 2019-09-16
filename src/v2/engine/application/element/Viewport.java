@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
+import org.joml.Vector4i;
 import v2.engine.application.layout.Box;
 import v2.engine.application.event.InputManager;
 import v2.engine.application.event.ResizeEvent;
@@ -18,9 +19,7 @@ import v2.engine.utils.Color;
 import static org.lwjgl.glfw.GLFW.GLFW_ARROW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_HRESIZE_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_VRESIZE_CURSOR;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.*;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_HELD;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_RELEASED;
@@ -62,6 +61,7 @@ public class Viewport extends Element {
 
         edgeBox = new Box[4];
         setControlling(true);
+        _setEdgeBox();
 
 
         // update viewport state
@@ -110,7 +110,7 @@ public class Viewport extends Element {
                 MouseClickEvent m = (MouseClickEvent)e;
                 if(m.getAction()==BUTTON_HELD){
                     getRelativeBox().translate(m.getScreenDelta());
-                    getParent().layoutChildren();
+                    getParent().forceTreeLayout();
                 }
             }
         });
@@ -123,6 +123,7 @@ public class Viewport extends Element {
 
         // add sub panels as children
         addChild(topBar);
+        setAttached(true);
     }
 
     @Override
@@ -135,15 +136,11 @@ public class Viewport extends Element {
             Box box = new Box(getRelativeBox());
             switch(dragEdge){
                 case 0: {   // left
-                    if (box.width - delta.x >= minWidth) {
-                        box.width -= delta.x;
-                        box.x += delta.x;
-                        System.out.println(box.width);
-                    }
+                    box.width -= delta.x;
+                    box.x += delta.x;
                     break;
                 } case 1: { // top
-                    if (box.height - delta.y >= minHeight)
-                        box.height -= delta.y;
+                    box.height -= delta.y;
                     break;
                 } case 2: { // right
                     box.width += delta.x;
@@ -188,14 +185,20 @@ public class Viewport extends Element {
                 }
             }
         }
+
+        super.update();
     }
 
     @Override
     public void render(){
         topBar.render();
         glDisable(GL_DEPTH_TEST);
-        mainPanel.render();
+        if (mainPanel != null) {
+            mainPanel.render();
+        }
         glEnable(GL_DEPTH_TEST);
+
+
     }
 
     private void _setEdgeBox(){

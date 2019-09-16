@@ -1,11 +1,13 @@
 package v2.engine.application.element;
 
 import lombok.Getter;
+import org.joml.Vector4i;
 import v2.engine.application.event.ActionEvent;
 import v2.engine.application.event.mouse.HoverLostEvent;
 import v2.engine.application.event.mouse.HoverStartEvent;
 import v2.engine.application.event.mouse.MouseClickEvent;
 import v2.engine.application.layout.Box;
+import v2.engine.system.Window;
 import v2.engine.utils.Color;
 
 import java.util.ArrayList;
@@ -19,13 +21,10 @@ public class Button extends Panel {
     private ArrayList<ActionEvent.ActionHandler> listeners;
 
     public Button() {
-        super();
+        super(new Color(0x0000FF), new Vector4i(5,5,5,5));
 
         listeners = new ArrayList<>();
-
-        setRounding(2);
-
-        relativeBox = new Box( 0.1f, 0.1f, 0.8f, 0.8f);
+        setScissor(false);
 
         onEvent(e -> {
 
@@ -55,6 +54,14 @@ public class Button extends Panel {
 
     @Override
     public void update(){
+
+        if (this.getAbsoluteBox().isWithin(Window.instance().getCursorPosf())){
+            setColor(new Color(0xFF));
+        } else {
+            setColor(new Color(0x606060));
+        }
+
+        super.update();
     }
 
     public void addListener(ActionEvent.ActionHandler e){

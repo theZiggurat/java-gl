@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import v2.engine.application.element.Element;
 
+import java.util.Optional;
+
 public class VerticalSplitLayout extends Layout{
 
     @Setter @Getter int heightTop;
@@ -13,13 +15,17 @@ public class VerticalSplitLayout extends Layout{
         super(parent);
     }
 
-    public Box findRelativeTransform(Element e, int index){
-        float factorTop = (float)heightTop/(float)parent.getAbsoluteBox().resolution().y;
-        float factorBottom = (float)heightBottom/(float)parent.getAbsoluteBox().resolution().y;
+    public void update() {
+
+    }
+
+    public Optional<Box> findRelativeTransform(Element e, int index){
+        float factorTop = (float)heightTop/(float) owner.getAbsoluteBox().resolution().y;
+        float factorBottom = (float)heightBottom/(float) owner.getAbsoluteBox().resolution().y;
         if(index == 0){
-            return new Box(0, 1-factorTop, 1, factorTop);
+            return Optional.of(new Box(0, 1-factorTop, 1, factorTop));
         } else if (index == 1){
-            return new Box(0, 0, 1, 1-factorBottom);
+            return Optional.of(new Box(0, 0, 1, 1-factorBottom));
         }
         return null;
     }

@@ -4,20 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import v2.engine.application.element.*;
 import v2.engine.application.event.InputManager;
-import v2.engine.application.event.mouse.HoverLostEvent;
-import v2.engine.application.event.mouse.HoverStartEvent;
 import v2.engine.application.layout.Box;
-import v2.engine.application.layout.DivideLayout;
-import v2.engine.scene.light.LightManager;
-import v2.engine.scene.node.Node;
+import v2.engine.application.layout.VerticalLayout;
+import v2.engine.application.layout.Inset;
 import v2.engine.system.Config;
-import v2.engine.system.Core;
 import v2.engine.scene.SceneContext;
 import v2.engine.system.Window;
-import v2.engine.utils.Color;
-import v2.modules.pbr.PBRPipeline;
-
-import java.lang.reflect.InvocationTargetException;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_F1;
 import static org.lwjgl.opengl.GL11.*;
@@ -84,23 +76,24 @@ public class ApplicationContext {
     private void __init__ui(){
 
         //SceneViewport sceneViewport = new SceneViewport(sceneContext);
-        PlainViewport viewport = new PlainViewport();
-        root.addChildren(viewport);//, sceneViewport);
+
 
 //        sceneViewport.setBox(new Box(0.3f, 0.1f, 0.65f, 0.8f));
-        viewport.setBox(new Box(0.05f, 0.1f, 0.2f, 0.8f));
 
-        Button button = new Button(), up = new Button(), down = new Button();
+
+        Button button = new Button(), up = new Button(), down = new Button(), ssrToggle = new Button();
         button.addListener(e -> Config.instance().setSsao(!Config.instance().isSsao()));
+        button.addListener(e -> System.out.println("Pressed SSAO button"));
         up.addListener(e -> Config.instance().setSsaoPower(Config.instance().getSsaoPower()+1));
+        up.addListener(e -> System.out.println("Pressed SSAO UP button"));
         down.addListener(e -> Config.instance().setSsaoPower(Config.instance().getSsaoPower()-1));
-
-        Button ssrToggle = new Button();
+        down.addListener(e -> System.out.println("Pressed SSAO DOWN button"));
         ssrToggle.addListener(e -> Config.instance().setSsr(!Config.instance().isSsr()));
+        ssrToggle.addListener(e -> System.out.println("Pressed SSR button"));
 
-
-        viewport.getChildren().get(1).addChildren(button, up, down, ssrToggle);
-        //viewport.getChildren().get(1).setLayout(new DivideLayout(viewport.getChildren().get(1)));
+        VerticalViewport viewport = new VerticalViewport(40, 100, 100, button, up, down, ssrToggle);
+        root.addChildren(viewport);//, sceneViewport);
+        viewport.setBox(new Box(0.25f, 0.1f, 0.5f, 0.5f));
 
         //root.setTop(sceneViewport);
         root.forceLayout();

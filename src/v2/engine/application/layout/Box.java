@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
+import org.joml.Vector4i;
 import v2.engine.system.Window;
 
 @Getter @Setter @AllArgsConstructor
@@ -94,6 +95,15 @@ public class Box {
     public void translate(Vector2f translation){
         translateX(translation.x);
         translateY(translation.y);
+    }
+
+    public Vector4i pixelDimensions(Vector2i dimensions) {
+        return new Vector4i(
+                (int)(dimensions.x * this.x),
+                (int)(dimensions.y * this.y),
+                (int)(dimensions.x * this.width),
+                (int)(dimensions.y * this.height)
+        );
     }
 
 

@@ -1,5 +1,6 @@
 package v2.engine.application;
 
+import jdk.internal.util.xml.impl.Input;
 import v2.engine.application.element.Element;
 import v2.engine.application.element.RootElement;
 import v2.engine.application.event.Event;
@@ -111,8 +112,6 @@ public class ElementManager {
             hovered.handle(new HoverLostEvent());
             hovered = elem;
             elem.handle(new HoverStartEvent());
-        } else {
-
         }
 
     }

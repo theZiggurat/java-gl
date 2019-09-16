@@ -104,8 +104,13 @@ public class Utils {
                 .replaceAll("out/production/CVX1.0%20FPSEngine", "src");
     }
 
-    private static AtomicInteger UUID = new AtomicInteger();
-    public static int generateNewUUID(){
-        return UUID.getAndIncrement();
+    private static AtomicInteger UUID_3D = new AtomicInteger();
+    private static AtomicInteger UUID_GUI = new AtomicInteger();
+    public static int generateNewUUID_3D(){
+        return UUID_3D.getAndIncrement();
+    }
+
+    public static int generateNewUUID_GUI(){
+        return UUID_GUI.getAndIncrement();
     }
 }
