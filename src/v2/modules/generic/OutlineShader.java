@@ -5,25 +5,27 @@ import v2.engine.scene.Camera;
 import v2.engine.system.Shader;
 import v2.engine.utils.Color;
 
-public class PlainColorShader extends Shader {
+public class OutlineShader extends Shader {
 
     private static Color color = new Color(0xe28c0b);
+    private static float offset = 0.0f;
 
-    private static PlainColorShader instance;
-    public static PlainColorShader instance(){
+    private static OutlineShader instance;
+    public static OutlineShader instance(){
         if (instance == null)
-            instance = new PlainColorShader();
+            instance = new OutlineShader();
         return instance;
     }
 
     public static void setColor(Color _color){
          color = _color;
     }
+    public static void setOffset(float _offset) { offset = _offset; }
 
-    private PlainColorShader(){
+    private OutlineShader(){
         super();
-        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
-        createFragmentShader("shaders/gui/panel_fs.glsl");
+        createVertexShader("res/shaders/outline/outline_vs.glsl");
+        createFragmentShader("res/shaders/outline/outline_fs.glsl");
         link();
 
         addUniform("modelMatrix");
@@ -31,6 +33,7 @@ public class PlainColorShader extends Shader {
         addUniform("projectionMatrix");
 
         addUniform("color");
+        addUniform("offset");
     }
 
     @Override
@@ -41,5 +44,7 @@ public class PlainColorShader extends Shader {
         setUniform("modelMatrix", node.getModelMatrix());
         setUniform("viewMatrix", camera.getViewMatrix());
         setUniform("color", color);
+        setUniform("offset", offset);
+        //setUniform("scaling", node.transform.getScaling());
     }
 }

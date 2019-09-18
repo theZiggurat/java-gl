@@ -3,6 +3,7 @@ package v2.engine.scene;
 import lombok.Getter;
 import lombok.Setter;
 import org.joml.*;
+import v2.engine.application.ElementManager;
 import v2.engine.application.layout.Box;
 import v2.engine.application.element.Element;
 import v2.engine.application.event.InputManager;
@@ -105,6 +106,7 @@ public class Camera extends Element {
                         window.hideCursor(true);
                         window.lockCursor(true);
                         window.lockCursor(false);
+                        ElementManager.instance().setEventHog(this);
                     }
 
                 }
@@ -132,6 +134,7 @@ public class Camera extends Element {
                         if(window.isHidden()){
                             window.hideCursor(false);
                             window.setCursorPos(window.getLockedcursorPos());
+                            ElementManager.instance().resetEventHog();
                         }
                     }
 

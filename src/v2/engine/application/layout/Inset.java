@@ -18,4 +18,8 @@ public class Inset {
         this.right = right;
     }
 
+    public static Inset empty() {
+        return new Inset(0);
+    }
+
 }

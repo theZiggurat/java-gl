@@ -1,10 +1,11 @@
-package v2.engine.application.element;
+package v2.engine.application.element.viewport;
 
-import lombok.AccessLevel;
-import lombok.Setter;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
-import org.joml.Vector4i;
+import v2.engine.application.element.Element;
+import v2.engine.application.element.panel.Panel;
 import v2.engine.application.layout.Box;
 import v2.engine.application.event.InputManager;
 import v2.engine.application.event.ResizeEvent;
@@ -12,14 +13,14 @@ import v2.engine.application.event.mouse.HoverLostEvent;
 import v2.engine.application.event.mouse.HoverStartEvent;
 import v2.engine.application.event.mouse.MouseClickEvent;
 import v2.engine.application.ApplicationContext;
-import v2.engine.application.layout.VerticalSplitLayout;
+import v2.engine.application.layout.Inset;
+import v2.engine.application.layout.ViewportLayout;
 import v2.engine.system.Window;
 import v2.engine.utils.Color;
 
 import static org.lwjgl.glfw.GLFW.GLFW_ARROW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_HRESIZE_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_VRESIZE_CURSOR;
-import static org.lwjgl.opengl.GL11.*;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_HELD;
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_RELEASED;
@@ -48,27 +49,35 @@ public class Viewport extends Element {
 
     // child panels
     protected Panel topBar;
-    @Setter(AccessLevel.PROTECTED)
+    protected Panel edgePanel;
     protected Panel mainPanel;
 
-    protected Viewport(){
+    private ViewportSettings viewportSettings;
+
+    protected Viewport(ViewportSettings vs){
 
         super();
 
+        this.viewportSettings = vs;
+
         this.topBar = new Panel();
-        topBar.setColor(new Color(0x353535));
-        topBar.setRounding(5,5,0,0);
+        topBar.setColor(vs.getTopBarColor());
+        topBar.setRounding(vs.getRounding().x, vs.getRounding().y, 0, 0);
+
+        this.edgePanel = new Panel();
+        edgePanel.setColor(vs.getBorderColor());
+        edgePanel.setRounding(0,0,vs.getRounding().z, vs.getRounding().w);
 
         edgeBox = new Box[4];
         setControlling(true);
-        _setEdgeBox();
+        setEdgeBoxs();
 
 
         // update viewport state
         onEvent(e -> {
 
             if(e instanceof ResizeEvent)
-                _setEdgeBox();
+                setEdgeBoxs();
 
             else if(e instanceof HoverStartEvent)
                 hover = true;
@@ -98,6 +107,10 @@ public class Viewport extends Element {
                         e.consume();
                     }
                 }
+
+                if (!e.isConsumed() && mainPanel.getAbsoluteBox().isWithin(m.getScreenPos())){
+                    mainPanel.handle(e);
+                }
             }
         });
 
@@ -112,18 +125,27 @@ public class Viewport extends Element {
                     getRelativeBox().translate(m.getScreenDelta());
                     getParent().forceTreeLayout();
                 }
+                e.consume();
             }
         });
 
         // create window layout
-        VerticalSplitLayout vsp = new VerticalSplitLayout(this);
-        vsp.setHeightBottom(24);
-        vsp.setHeightTop(24);
+        ViewportLayout vsp = new ViewportLayout(this);
+        vsp.setTopBarHeight(vs.getTopBarSize());
         setLayout(vsp);
 
         // add sub panels as children
-        addChild(topBar);
+        addChildren(topBar, edgePanel);
         setAttached(true);
+    }
+
+    public void setMainPanel(Panel mainPanel) {
+        this.mainPanel = mainPanel;
+        mainPanel.setColor(viewportSettings.getPanelColor());
+        mainPanel.setRounding(0, 0, viewportSettings.getRounding().z, viewportSettings.getRounding().w);
+        int bs = viewportSettings.getBorderSize();
+        mainPanel.setInset(new Inset(bs/2, bs, bs, bs));
+        addChild(mainPanel);
     }
 
     @Override
@@ -189,22 +211,10 @@ public class Viewport extends Element {
         super.update();
     }
 
-    @Override
-    public void render(){
-        topBar.render();
-        glDisable(GL_DEPTH_TEST);
-        if (mainPanel != null) {
-            mainPanel.render();
-        }
-        glEnable(GL_DEPTH_TEST);
-
-
-    }
-
-    private void _setEdgeBox(){
+    private void setEdgeBoxs(){
         Vector2i res = getPixelSize();
-        float xFactor = (float) edgeSize/res.x;
-        float yFactor = (float) edgeSize/res.y;
+        float xFactor = (float) viewportSettings.getBorderSize()/res.x;
+        float yFactor = (float) viewportSettings.getBorderSize()/res.y;
         // left right top bottom
         edgeBox[0] = new Box(-xFactor,0,2*xFactor, 1);
         edgeBox[1] = new Box(0,1-yFactor,1, 2*yFactor);

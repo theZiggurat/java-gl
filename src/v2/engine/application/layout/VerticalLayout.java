@@ -31,15 +31,8 @@ public class VerticalLayout extends Layout {
 
         Box outer = new Box(0, 1 - heightRelativeY - sizeRelativeY,
                 1,  sizeRelativeY);
-
         Inset inset = owner.getChildren().get(index).getInset();
-        Vector2i outerPixelSize = owner.getPixelSizeForRelative(outer);
-        float x = (float) inset.left / (float) outerPixelSize.x;
-        float y = (float) inset.bottom / (float) outerPixelSize.y;
-        float width = 1 - ((float) inset.right / (float) outerPixelSize.x) - x;
-        float height = 1 - ((float) inset.top / (float) outerPixelSize.y) - y;
-        Box inner = new Box(x, y, width, height);
 
-        return Optional.of(inner.relativeTo(outer));
+        return Optional.of(applyInset(outer, inset));
     }
 }

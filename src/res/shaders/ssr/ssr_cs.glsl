@@ -75,7 +75,7 @@ void main() {
     float ao = imageLoad(aoImage, coord, 0).r;
 
     vec3 currColor = imageLoad(outImage, coord, 0).rgb;
-    vec3 color = mix(currColor, ssrColor, normal_metal.w * reflectionFac)*ao;
+    vec3 color = mix(currColor, ssrColor, normal_metal.w * reflectionFac) * ao;
     //color = mix(color, vec3(reflectionMult), 0.999);
     imageStore(outImage, coord, 0, vec4(color,1));
 

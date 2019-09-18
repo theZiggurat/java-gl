@@ -1,5 +1,6 @@
 package v2.engine.scene;
 
+import lombok.Getter;
 import v2.engine.scene.node.Node;
 import v2.engine.scene.node.RenderType;
 
@@ -8,7 +9,7 @@ import java.util.stream.Stream;
 
 public class SelectionManager {
 
-    private ArrayList<Node> selected;
+    @Getter private ArrayList<Node> selected;
 
     public SelectionManager(){
         selected = new ArrayList<>();

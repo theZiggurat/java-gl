@@ -8,7 +8,7 @@ import v2.engine.scene.node.RenderModule;
 import v2.engine.scene.node.RenderType;
 import v2.modules.generic.UUIDShader;
 import v2.modules.shadow.ShadowShader;
-import v2.modules.generic.PlainColorShader;
+import v2.modules.generic.OutlineShader;
 
 import java.util.ArrayList;
 
@@ -34,8 +34,8 @@ public class PBRModel extends ModuleNode {
                 ShadowShader.instance(), mesh
         );
 
-        RenderModule wireframerenderer = new RenderModule(
-                PlainColorShader.instance(), mesh
+        RenderModule outlinerenderer = new RenderModule(
+                OutlineShader.instance(), mesh
         );
 
         RenderModule UUIDrenderer = new RenderModule(
@@ -44,7 +44,7 @@ public class PBRModel extends ModuleNode {
 
         addModule(RenderType.TYPE_SCENE, scenerenderer);
         addModule(RenderType.TYPE_SHADOW, shadowrenderer);
-        addModule(RenderType.TYPE_WIREFRAME, wireframerenderer);
+        addModule(RenderType.TYPE_OUTLINE, outlinerenderer);
         addModule(RenderType.TYPE_UUID, UUIDrenderer);
 
     }

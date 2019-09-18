@@ -16,11 +16,12 @@ public class RootElement extends Element{
         forceTreeLayout();
     }
 
-    // pls dont look at this too long
-    public void setTop(Element e){
+    @Override
+    public void render() {
         Collections.reverse(getChildren());
-        getChildren().remove(e);
-        getChildren().add(0, e);
+        getChildren().stream()
+                .filter(e -> e.isActivated())
+                .forEach(e -> e.render());
         Collections.reverse(getChildren());
     }
 

@@ -15,8 +15,8 @@ public class GenericOverlayShader extends Shader {
 
     private GenericOverlayShader(){
         super();
-        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
-        createFragmentShader("res/shaders/overlay/overlay_fs.glsl");
+        createVertexShader("res/shaders/overlay/outline_vs.glsl");
+        createFragmentShader("res/shaders/overlay/outline_fs.glsl");
         link();
 
         addUniform("projectionMatrix");

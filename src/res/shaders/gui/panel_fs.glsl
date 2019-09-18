@@ -31,7 +31,6 @@ void main(){
 
     float x_disp = float(rounding.x)/float(resolution.x);
     float y_disp = float(rounding.x)/float(resolution.y);
-
     vec2 center = vec2(0,1) + vec2(x_disp, -y_disp);
     if(uv.x < center.x && uv.y > center.y && rounding.x > 0){
     // top left
@@ -42,6 +41,8 @@ void main(){
         alpha = min(alpha, 1);
     }
 
+    x_disp = float(rounding.y)/float(resolution.x);
+    y_disp = float(rounding.y)/float(resolution.y);
     center = vec2(1,1) + vec2(-x_disp, -y_disp);
     if(uv.x > center.x && uv.y > center.y &&  rounding.y > 0){
     // top right
@@ -52,6 +53,8 @@ void main(){
         alpha = min(alpha, 1);
     }
 
+    x_disp = float(rounding.z)/float(resolution.x);
+    y_disp = float(rounding.z)/float(resolution.y);
     center = vec2(0,0) + vec2(x_disp, y_disp);
     if(uv.x < center.x && uv.y < center.y && rounding.z > 0){
     // bottom left
@@ -62,6 +65,8 @@ void main(){
         alpha = min(alpha, 1);
     }
 
+    x_disp = float(rounding.w)/float(resolution.x);
+    y_disp = float(rounding.w)/float(resolution.y);
     center = vec2(1,0) + vec2(-x_disp, y_disp);
     if(uv.x > center.x && uv.y < center.y && rounding.w > 0){
          // bottom right

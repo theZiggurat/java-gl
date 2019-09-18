@@ -11,21 +11,13 @@ import static org.lwjgl.opengl.GL11.glCullFace;
 
 public class Sky extends ModuleNode {
 
-    private static Sky instance;
-    public static Sky instance(){
-        if (instance == null){
-            instance = new Sky();
-        }
-        return instance;
-    }
-
-    private Sky(){
+    public Sky(){
         super();
 
         transform.scaleTo(2800);
 
         addModule(RenderType.TYPE_SCENE, new RenderModule(
-                SkyShader.instance(), Meshs.cube
+                SkyShader.instance(), Meshs.sphere
         ));
     }
 

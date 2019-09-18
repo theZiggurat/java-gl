@@ -63,67 +63,53 @@ public class PBRPipeline extends Pipeline {
     @Override
     protected void renderScene(SceneContext context) {
 
-        if (Config.instance().isWireframe()) {
-
-            pbrFBO.bind();
-            {
-                Window.instance().resizeViewport(context.getResolution());
-                glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                Config.instance().setWireframeColor(new Vector3f(0.2f, 0.8f, 0.2f));
-                glLineWidth(1f);
-                context.getScene().render(RenderType.TYPE_WIREFRAME);
-                glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-                Window.instance().resetViewport();
-            }
-            pbrFBO.unbind();
-
-        } else {
-
-            if(Config.instance().isShadows()) {
-                shadowFBO.bind(() -> {
-                    glDisable(GL_CULL_FACE);
-                    glViewport(0, 0, Config.instance().getShadowBufferWidth(),
-                        Config.instance().getShadowBufferHeight());
-                    glClear(GL_DEPTH_BUFFER_BIT);
-                    context.getScene().render(RenderType.TYPE_SHADOW, e -> !e.isSelected());
-                    glEnable(GL_CULL_FACE);
-                });
-            }
-
-            pbrFBO.bind(()-> {
-                Window.instance().resizeViewport(context.getResolution());
-                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-                // render scenegraph to obtain geometry data in the pbrFBO buffers
-                context.getScene().render(RenderType.TYPE_SCENE);
+        if(Config.instance().isShadows()) {
+            shadowFBO.bind(() -> {
+                glDisable(GL_CULL_FACE);
+                glViewport(0, 0, Config.instance().getShadowBufferWidth(),
+                    Config.instance().getShadowBufferHeight());
+                glClear(GL_DEPTH_BUFFER_BIT);
+                context.getScene().render(RenderType.TYPE_SHADOW);
+                glEnable(GL_CULL_FACE);
             });
-
-            // calculate ssao
-            if(Config.instance().isSsao())
-                ssaoPass.compute(
-                pbrFBO.getPosition(),
-                pbrFBO.getNormal());
-
-            // using buffer data to compute lit color
-            lightingPass.compute(
-                pbrFBO.getAlbedo(),
-                pbrFBO.getPosition(),
-                pbrFBO.getNormal(),
-                shadowFBO.getDepth(),
-                ssaoPass.getTargetTexture(),
-                getSceneBuffer());
-
-            // calculate reflections
-            if(Config.instance().isSsr())
-                ssrPass.compute(
-                pbrFBO.getPosition(),
-                pbrFBO.getNormal(),
-                ssaoPass.getTargetTexture());
-
-            // reset viewport to window size
-            Window.instance().resetViewport();
         }
+
+        pbrFBO.bind(()-> {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT| GL_STENCIL_BUFFER_BIT);
+            Window.instance().resizeViewport(context.getResolution());
+
+            // render scenegraph to obtain geometry data in the pbrFBO buffers
+            context.getScene().render(RenderType.TYPE_SCENE);
+        });
+
+        // calculate ssao
+        if(Config.instance().isSsao())
+            ssaoPass.compute(
+            pbrFBO.getPosition(),
+            pbrFBO.getNormal());
+
+        // using buffer data to compute lit color
+        lightingPass.compute(
+            pbrFBO.getAlbedo(),
+            pbrFBO.getPosition(),
+            pbrFBO.getNormal(),
+            shadowFBO.getDepth(),
+            ssaoPass.getTargetTexture(),
+            getSceneBuffer());
+
+        // calculate reflections
+        if(Config.instance().isSsr())
+            ssrPass.compute(
+            pbrFBO.getPosition(),
+            pbrFBO.getNormal(),
+            ssaoPass.getTargetTexture());
+
+        pbrFBO.bind(() -> {
+            context.getScene().getSky().render(RenderType.TYPE_SCENE);
+        });
+
+        // reset viewport to window size
+        Window.instance().resetViewport();
 
     }
 }

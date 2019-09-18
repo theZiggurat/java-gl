@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector3f;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Properties;
 
 @Getter @Setter
@@ -87,7 +85,7 @@ public class Config {
         multisamples = Integer.valueOf(properties.getProperty("multisamples"));
 
         // engine instance
-        renderEngine = properties.getProperty("renderEngine");
+        renderEngine = properties.getProperty("pipeline");
         engineInstance = properties.getProperty("engineInstance");
 
         // shadow settings

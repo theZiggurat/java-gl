@@ -1,9 +1,9 @@
-package v2.engine.application.element;
+package v2.engine.application.element.panel;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.joml.Vector2i;
 import org.joml.Vector4i;
+import v2.engine.application.element.Element;
 import v2.engine.glapi.tex.TextureObject;
 import v2.engine.glapi.vbo.Meshs;
 import v2.engine.application.layout.Box;
@@ -62,12 +62,10 @@ public class Panel extends Element {
         instance().bind();
         instance().updateUniforms(this);
         if (isScissor()) {
-            glEnable(GL_SCISSOR_TEST);
-            Vector4i pix = this.getAbsoluteBox().pixelDimensions(Window.instance().getResolution());
-            glScissor(pix.x, pix.y, pix.z + 2, pix.w + 2);
+            Window.instance().setScissor(getAbsoluteBox());
             Meshs.posquad.render();
             super.render();
-            glDisable(GL_SCISSOR_TEST);
+            Window.instance().disableScissor();
         } else {
             Meshs.posquad.render();
             super.render();
@@ -138,6 +136,10 @@ public class Panel extends Element {
             setUniform("borderSize", e.borderSize);
             setUniform("borderColor", e.borderColor);
         }
+    }
+
+    public void setRounding(Vector4i rounding) {
+        setRounding(rounding.x, rounding.y, rounding.z, rounding.w);
     }
 
     public void setRounding(int rounding){

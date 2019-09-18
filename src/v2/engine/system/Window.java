@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
+import org.joml.Vector4i;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWImage;
@@ -12,6 +13,8 @@ import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
 import v2.engine.application.ApplicationContext;
+import v2.engine.application.layout.Box;
+import v2.engine.glapi.vbo.Meshs;
 import v2.engine.utils.Color;
 import v2.engine.utils.ImageLoader;
 
@@ -210,6 +213,16 @@ public class Window {
             glEnable(GL_BLEND);
         else
             glDisable(GL_BLEND);
+    }
+
+    public void setScissor(Box box) {
+        glEnable(GL_SCISSOR_TEST);
+        Vector4i pix = box.pixelDimensions(getResolution());
+        glScissor(pix.x, pix.y, pix.z + 2, pix.w + 2);
+    }
+
+    public void disableScissor() {
+        glDisable(GL_SCISSOR_TEST);
     }
 
     public Vector2i getResolution(){

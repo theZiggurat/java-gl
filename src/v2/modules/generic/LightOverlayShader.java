@@ -16,14 +16,14 @@ public class LightOverlayShader extends Shader {
 
     private LightOverlayShader(){
         super();
-        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
-        createFragmentShader("res/shaders/overlay/overlay_fs.glsl");
-        link();
-
-        addUniform("color");
-        addUniform("projectionMatrix");
-        addUniform("modelMatrix");
-        addUniform("viewMatrix");
+//        createVertexShader("res/shaders/overlay/overlay_vs.glsl");
+//        createFragmentShader("res/shaders/overlay/outline_fs.glsl");
+//        link();
+//
+//        addUniform("color");
+//        addUniform("projectionMatrix");
+//        addUniform("modelMatrix");
+//        addUniform("viewMatrix");
     }
 
     @Override

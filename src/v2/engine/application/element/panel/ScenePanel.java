@@ -1,7 +1,8 @@
-package v2.engine.application.element;
+package v2.engine.application.element.panel;
 
 import org.joml.Vector2i;
 import v2.engine.application.ElementManager;
+import v2.engine.application.element.panel.Panel;
 import v2.engine.application.layout.Box;
 import v2.engine.application.event.KeyboardEvent;
 import v2.engine.application.event.ResizeEvent;
@@ -9,6 +10,7 @@ import v2.engine.application.ApplicationContext;
 import v2.engine.scene.SceneContext;
 import v2.engine.system.Window;
 import v2.engine.utils.Color;
+import v2.modules.pbr.PBRPipeline;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_F11;
 
@@ -17,16 +19,15 @@ public class ScenePanel extends Panel {
     private SceneContext context;
 
 
-    public ScenePanel(SceneContext context) {
+    public ScenePanel(SceneContext _context) {
 
         super();
-        this.context = context;
+        this.context = _context;
         context.setParent(this);
-        relativeBox = new Box(0,0,1,1);
 
-        setDrawBorder(true);
-        setBorderColor(new Color(0x202020));
-        setBorderSize(2);
+//        setDrawBorder(true);
+//        setBorderColor(new Color(0x202020));
+//        setBorderSize(2);
 
 
         setImageBuffer(context.getPipeline().getSceneBuffer());
@@ -49,8 +50,8 @@ public class ScenePanel extends Panel {
                         ((KeyboardEvent) e).getAction()==KeyboardEvent.KEY_PRESSED){
 
                     // set fullscreen
-                    if(!attached){
-                        attached = true;
+                    if(!isAttached()){
+                        setAttached(true);
                         ApplicationContext.instance().setRenderElement(this);
                         ElementManager.instance().setFocused(this);
                         if(setAbsoluteBox(new Box(0,0,1,1))) {
@@ -65,8 +66,8 @@ public class ScenePanel extends Panel {
                         setDrawBorder(true);
                         ApplicationContext.instance().resetRenderElement();
                         ElementManager.instance().resetFocused();
-                        attached = false;
-                        getParent().layoutChildren();
+                        setAttached(false);
+                        layoutChildren();
                     }
                     e.consume();
                 }

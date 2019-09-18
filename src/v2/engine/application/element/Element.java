@@ -4,8 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
+import v2.engine.application.ElementManager;
+import v2.engine.application.element.viewport.Viewport;
 import v2.engine.application.event.*;
-import v2.engine.application.event.mouse.MouseClickEvent;
 import v2.engine.application.layout.Box;
 import v2.engine.application.layout.Inset;
 import v2.engine.application.layout.Layout;
@@ -115,7 +116,7 @@ public abstract class Element {
      * This element and downwards on the graph, the element tree is spatially
      * laid out based on rules set by each element's Layout object
      */
-    protected void layoutChildren(){
+     public void layoutChildren(){
         layout.update();
         int i = 0;
         for(Element child: children){
@@ -130,7 +131,7 @@ public abstract class Element {
         }
     }
 
-    protected void forceTreeLayout(){
+    public void forceTreeLayout(){
         int i = 0;
         for(Element child: children){
             //if(child.isAttached()) continue;
@@ -266,6 +267,29 @@ public abstract class Element {
     public void setChildrenInset(Inset inset) {
         for(Element child: this.getChildren())
             child.setInset(inset);
+    }
+
+    public Viewport getViewport() {
+        if(Viewport.class.isInstance(this)){
+            return (Viewport) this;
+        } else if (this.getParent() != null) {
+            return getParent().getViewport();
+        }
+        return null;
+    }
+
+    public boolean isFocused() {
+        return ElementManager.instance().isFocused(this);
+    }
+
+    public boolean isMouseOver() {
+        return ElementManager.instance().isMouseOver(getViewport());
+    }
+
+    public boolean isMouseOverAndTop() {
+        Viewport _vp = getViewport();
+        return ElementManager.instance().isMouseOver(_vp)
+                && ElementManager.instance().isTop(_vp);
     }
 
 //    @Override

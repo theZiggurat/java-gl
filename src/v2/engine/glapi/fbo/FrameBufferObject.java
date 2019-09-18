@@ -125,6 +125,14 @@ public abstract class FrameBufferObject {
         });
     }
 
+    public void drawDepthOnly(boolean depth) {
+        if (depth) {
+            glColorMaski(this.id, false, false, false, false);
+        } else {
+            glColorMaski(this.id, true, true, true, true);
+        }
+    }
+
     public void resize(int xsize, int ysize){
         for (TextureObject attatchement: attatchments)
             attatchement.resize(xsize, ysize);

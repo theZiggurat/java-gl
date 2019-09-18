@@ -1,14 +1,13 @@
 package v2.engine.application;
 
-import jdk.internal.util.xml.impl.Input;
 import v2.engine.application.element.Element;
-import v2.engine.application.element.RootElement;
 import v2.engine.application.event.Event;
 import v2.engine.application.event.InputManager;
 import v2.engine.application.event.mouse.*;
 import v2.engine.system.Window;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import static v2.engine.application.event.mouse.MouseClickEvent.BUTTON_CLICK;
 
@@ -17,6 +16,7 @@ public class ElementManager {
     private ArrayList<Event> events;
 
     private Element hovered, root, focused, top, lastAccepted;
+    public Optional<Element> eventHog;
     private boolean focusLock;
 
     private static ElementManager instance;
@@ -39,6 +39,7 @@ public class ElementManager {
         this.focused = root;
         this.hovered = root;
         this.lastAccepted = root;
+        this.eventHog = Optional.empty();
     }
 
     /**
@@ -49,6 +50,9 @@ public class ElementManager {
         if(top == null) top = root.getChildren().get(0);
 
         for(Event e: events){
+
+            if (eventHog.isPresent())
+                eventHog.get().handle(e);
 
             // if event is mouse event, the event could be pointing at something
             // further down the element tree. We must first pass the event to the
@@ -75,9 +79,8 @@ public class ElementManager {
                     else {
                         prev = root.findAtPos(m.getScreenPos());
                         if (prev == root) continue;
-                        top = prev;
+                        setTop(prev);
                         top.handle(e);
-                        ((RootElement)root).setTop(top);
                     }
 
                     while(!e.isConsumed()) {
@@ -127,6 +130,11 @@ public class ElementManager {
         System.out.println("Focused: " + focused);
     }
 
+    public boolean isFocused(Element maybeFocused) {
+        if (this.focused == maybeFocused) return true;
+        return false;
+    }
+
     /**
      * Resets the focused element to the root of the element tree
      */
@@ -137,12 +145,46 @@ public class ElementManager {
         System.out.println("Focused: " + focused);
     }
 
+    public void setEventHog(Element e){
+        if (e != null) eventHog = Optional.of(e);
+    }
+
+    public void resetEventHog() {
+        eventHog = Optional.empty();
+    }
+
     /**
      * Add event to the queue of events
      * @param e event
      */
     public void fire(Event e){
         events.add(e);
+    }
+
+    /**
+     * pushes element to front of root list
+     */
+    public void setTop(Element element) {
+        if (root.getChildren().contains(element)) {
+            root.getChildren().remove(element);
+        }
+        root.getChildren().add(0, element);
+        this.top = element;
+    }
+
+    public boolean isMouseOver(Element _element) {
+        for (Element elem: root.getChildren()) {
+            if (elem.getAbsoluteBox().isWithin(Window.instance().getCursorPosf())) {
+                if (_element == elem) return true;
+                else return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean isTop(Element _element) {
+        if (_element == this.top) return true;
+        else return false;
     }
 
 }

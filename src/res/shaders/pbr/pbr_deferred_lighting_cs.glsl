@@ -140,9 +140,9 @@ void main(){
         vec4 normal_and_metal = imageLoad(normal_image, coord, i);
         vec3 normal = normal_and_metal.rgb;
 
-        if(normal == vec3(0))
+        if(normal_and_metal == vec4(0, 0, 0, 0))
         {
-            color = vec3(1);//imageLoad(albedo_image, coord, 0).rgb;
+            color = vec3(1, 0, 0);//imageLoad(albedo_image, coord, i).rgb;
             break;
         }
         else
@@ -181,7 +181,7 @@ void main(){
         color = color / (color + vec3(1.0));
         color = pow(color, vec3(1.0/2.15));
 
-        //color = mix(color, imageLoad(albedo_image, coord, 0).rgb, 0.99);
+        //color = mix(color, imageLoad(normal_image, coord, 0).rgb, 0.99);
         //color = mix(color, vec3(float(multisamples)/float(8)), 0.99f);
 
         imageStore(scene, coord, i, vec4(color, 1));
