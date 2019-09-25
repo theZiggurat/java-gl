@@ -1,0 +1,10 @@
+# Intellij
+.idea/
+java-gl.iml
+
+# build
+.out/
+src/META-INF
+
+# libraries
+.libs/

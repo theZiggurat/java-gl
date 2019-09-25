@@ -1,17 +1,16 @@
 # version 430
 
-// very good atmospheric shaders provided by
-// https://github.com/benanders/Hosek-Wilkie/blob/master/src/shaders/frag.glsl
-
 layout (location = 3) out vec4 scene_vbo;
 
 in vec3 fragPos;
-//uniform float scale;
+in float height;
+uniform float scale;
+
 
 void main(){
 
-//    float red =  0.15 * (pos_world.y+1600) / scale;
-//	float green =  0.23 * (pos_world.y+1600) / scale;
-//	float blue =  0.8 * (pos_world.y+1600) / scale;
-    scene_vbo = vec4(fragPos, 1);
+    float red =  0.15 * (height+1400) / scale + 0.12;
+	float green =  0.23 * (height+1400) / scale + 0.25;
+	float blue =  0.5 * (height+1400) / scale + 0.47;
+    scene_vbo = mix(vec4(fragPos, 1), vec4(red, green, blue, 1), 0.99);
 }

@@ -2,7 +2,7 @@
   <artifact type="jar" name="Smoothie">
     <output-path>$PROJECT_DIR$/out/artifacts/Smoothie</output-path>
     <root id="archive" name="CVX1.0 FPSEngine.jar">
-      <element id="module-output" name="CVX1.0 FPSEngine" />
+      <element id="module-output" name="java-gl" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-lmdb/lwjgl-lmdb.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-lmdb/lwjgl-lmdb-javadoc.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/lwjgl-lmdb/lwjgl-lmdb-sources.jar" path-in-jar="/" />

@@ -1,13 +1,14 @@
-# LWJGL Engine - V2
+# java-gl - OpenGL Engine
 
 ![](https://media.giphy.com/media/61Y9uDxnLjrJGmKcZx/giphy.gif)
 
-OpenGL 3D engine using LWJGL (specifically OpenGL, GLFW, Assimp). 
-Created out of great interest for high fidelity real-time renderers such as Unreal Engine 4 and Blender Eevee
+OpenGL 3D engine using LWJGL (specifically OpenGL, GLFW, Assimp, STBI). 
+Created out of interest for high fidelity real-time renderers such as Unreal Engine 4 and Blender Eevee
 
 ___Demos___:
    * [September 2018]
    * [Febuary 2019]
+   * [September 2019]
 
 ___Implemented features___:
   * Physically based rendering (metalness workflow)
@@ -62,3 +63,4 @@ ___Future features___:
   
 [September 2018]: https://www.youtube.com/watch?v=jU0Dm78wGI0&feature=youtu.be
 [Febuary 2019]: https://www.youtube.com/watch?v=-DDIFM3aZWM&feature=youtu.be
+[September 2019]: https://www.youtube.com/watch?v=Yf84O_FdyaQ
